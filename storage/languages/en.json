@@ -1,0 +1,4 @@
+{
+    "framework" : "Dynamic Framework",
+    "features"  : ["pretty URLs, database Layer, Exceptions Handler, Localization Ready"]
+}
