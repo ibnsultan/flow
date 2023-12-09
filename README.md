@@ -5,3 +5,14 @@ Flow - Your all-in-one SAAS starter kit, empowering your platform with seamless 
 <img src="https://raw.githubusercontent.com/ibnsultan/flow/8bbb403b537ca99ff7a602e1dc6eab5802c8d6a1/storage/uploads/brand/banner.svg">
 
 **NOTE**: Flow is currently under active development and is not ready for use for any kind of project
+
+
+## Checklist
+
+- [ ] Authentication
+- [ ] User and Orgs mangement
+- [ ] Billing & Payments
+- [ ] Announcements and Notification
+- [ ] Blogging & Content creation
+- [ ] API & developer tools
+- [ ] Storage & File management
