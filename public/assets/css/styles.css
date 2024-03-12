@@ -1,0 +1,139 @@
+body {
+    background-color: #f3f4f6;
+    color: #012a35;
+    font-family: DM Sans, sans-serif;
+    font-size: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='lightgray'/%3E%3C/svg%3E");
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+    font-size: 18px;
+}
+.flex {
+    display: flex;
+}
+.center-all {
+    justify-content: center;
+    align-items: center;
+}
+.center-between {
+    justify-content: space-between;
+    align-items: center;
+}
+.center-start {
+    justify-content: flex-start;
+    align-items: center;
+}
+.h-screen {
+    height: 100vh;
+}
+img {
+    height: 35px;
+    margin-right: 15px;
+}
+p {
+    color: #012a35;
+}
+.mt-1 {
+    margin-top: 10px;
+}
+.mt-2 {
+    margin-top: 20px;
+}
+.mt-3 {
+    margin-top: 30px;
+}
+.ml-1 {
+    margin-left: 10px;
+}
+.ml-2 {
+    margin-left: 20px;
+}
+.ml-3 {
+    margin-left: 30px;
+}
+.mr-1 {
+    margin-right: 10px;
+}
+.mr-2 {
+    margin-right: 20px;
+}
+.mr-3 {
+    margin-right: 30px;
+}
+.container {
+    max-width: 900px;
+    padding: 20px;
+}
+.card {
+    background: white;
+    padding: 0px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+.green,
+a {
+    color: #44be6d;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+ion-icon {
+    font-size: 24px;
+    width: 100px;
+}
+
+@media only screen and (max-width: 500px) {
+    .flex.card {
+        flex-wrap: wrap;
+    }
+    .flex.card > * {
+        width: 100% !important;
+    }
+}
+
+header{
+	position: absolute;
+	bottom: 25px;
+	width: 99%;
+	text-align: center;
+}
+
+nav{
+	max-width: 340px;
+    background: #012a35;
+    padding: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+    margin: auto;
+}
+
+nav>ul>li{
+	display: inline;
+	margin-right: 20px;
+}
+
+nav>ul>li:first-child{
+	margin-left: -20px;
+}
+
+nav>ul>li:not(:last-child){
+	border-right: 1px solid #44be6d;
+	padding-right: 20px;
+}
+
+nav>ul>li>a{
+	text-decoration: none;
+	color: #44be6d;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+nav>ul>li>a:hover{
+    color: #0ca23e;
+    text-decoration: none !important;
+}
+
