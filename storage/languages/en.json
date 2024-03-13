@@ -38,5 +38,17 @@
     "Allow_notification": "Allow_notification",
     "Allow notifications": "Allow notifications",
     "Admin Settings": "Admin Settings",
-    "Visible Sidebar": "Visible Sidebar"
+    "Visible Sidebar": "Visible Sidebar",
+    "About Me": "About Me",
+    "Full Name": "Full Name",
+    "Email address": "Email address",
+    "Phone": "Phone",
+    "Edit Personal Information": "Edit Personal Information",
+    "Email": "Email",
+    "Bio": "Bio",
+    "API Tokens": "API Tokens",
+    "Security": "Security",
+    "Profile": "Profile",
+    "Personal Details": "Personal Details",
+    "Notifications": "Notifications"
 }
