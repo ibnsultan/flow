@@ -45,7 +45,6 @@
 		<script src="/assets/js/pcoded.js"></script>
 		<script src="/assets/js/plugins/feather.min.js"></script>
         <script src="/assets/js/plugins/sweetalert2.all.min.js"></script>
-        <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
 
 		<script>
 			function togglePassword(e) {
