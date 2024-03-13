@@ -79,128 +79,67 @@
                         </svg>
                     </a>
                 </li>
+                
+                
+                @php // Notifications Section
+                    $notifications = new App\Controllers\App\NotificationsController();
+                    $notificationCount = count($notifications->userNotifications());
+                @endphp
                 <li class="dropdown pc-h-item">
-                    <a
-                        class="pc-head-link dropdown-toggle arrow-none me-0"
-                        data-bs-toggle="dropdown"
-                        href="javascript:void(0)"
-                        role="button"
-                        aria-haspopup="false"
-                        aria-expanded="false"
-                        >
+                    <a class="pc-head-link dropdown-toggle arrow-none me-0"
+                        data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" >
                         <svg class="pc-icon">
                             <use xlink:href="#custom-notification"></use>
                         </svg>
-                        <span class="badge bg-success pc-h-badge">3</span>
+                        <span class="badge bg-success pc-h-badge">{{ $notificationCount }}</span>
                     </a>
+
                     <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                         <div class="dropdown-header d-flex align-items-center justify-content-between">
-                            <h5 class="m-0">Notifications</h5>
-                            <a href="javascript:void(0)" class="btn btn-link btn-sm">Mark all read</a>
+                            <h5 class="m-0">{{_('Notifications')}}</h5>
+                            @if( $notificationCount )
+                                <a href="javascript:void(0)" class="btn btn-link btn-sm">Mark all read</a>
+                            @endif
                         </div>
                         <div class="dropdown-body text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
-                            <p class="text-span">Today</p>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-layer"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">2 min ago</span>
-                                            <h5 class="text-body mb-2">UI/UX Design</h5>
-                                            <p class="mb-0"
-                                                >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                                                type and scrambled it to make a type
-                                            </p
-                                                >
+
+                            @if( $notificationCount )
+
+                                @foreach ($notifications->userNotifications() as $notification)
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <span class="float-end text-sm text-muted">{{ $notification->created_at->diffForHumans() }}</span>
+                                                    <h5 class="text-body mb-2">{{ $notification->title }}</h5>
+                                                    <p class="mb-0">{{ $notification->message }} </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                @endforeach
+
+                            @else
+
+                                <div class="text-center py-2">
+                                    <p class="text-muted">No new notifications</p>
                                 </div>
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-sms"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">1 hour ago</span>
-                                            <h5 class="text-body mb-2">Message</h5>
-                                            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-span">Yesterday</p>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-document-text"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">2 hour ago</span>
-                                            <h5 class="text-body mb-2">Forms</h5>
-                                            <p class="mb-0"
-                                                >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                                                type and scrambled it to make a type
-                                            </p
-                                                >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-user-bold"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">12 hour ago</span>
-                                            <h5 class="text-body mb-2">Challenge invitation</h5>
-                                            <p class="mb-2"><span class="text-dark">Jonny aber</span> invites to join the challenge</p>
-                                            <button class="btn btn-sm btn-outline-secondary me-2">Decline</button>
-                                            <button class="btn btn-sm btn-primary">Accept</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
-                                            <svg class="pc-icon text-primary">
-                                                <use xlink:href="#custom-security-safe"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <span class="float-end text-sm text-muted">5 hour ago</span>
-                                            <h5 class="text-body mb-2">Security</h5>
-                                            <p class="mb-0"
-                                                >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                                                type and scrambled it to make a type
-                                            </p
-                                                >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            @endif
+
+                            
+
                         </div>
                         <div class="text-center py-2">
                             <a href="javascript:void(0)" class="link-danger">Clear all Notifications</a>
                         </div>
                     </div>
+                    
                 </li>
+
+                <!-- user profile section -->
                 <li class="dropdown pc-h-item header-user-profile">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
                         href="javascript:void(0)" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false" >
@@ -223,7 +162,7 @@
                                 </div>
                                 <hr class="border-secondary border-opacity-50" />
                                 
-                                <a href="javascript:void(0)" class="dropdown-item">
+                                <a href="/app/profile/view" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-user text-muted me-2"></i>
                                         <span>{{_('My Profile')}}</span>
