@@ -15,6 +15,8 @@ app()->group('auth', function(){
     app()->post('reset', 'AuthController@reset');
     app()->post('register', 'AuthController@register');
 
+    app()->get('/logout', 'AuthController@logout');
+
 });
 
 app()->group('api', function(){
