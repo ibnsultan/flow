@@ -3,19 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\Users;
+use App\Models\Notifications;
 
-/**
- * This is the base controller for your Leaf MVC Project.
- * You can initialize packages or define methods here to use
- * them across all your other controllers which extend this one.
- */
+
 class Controller extends \Leaf\Controller
 {
 
     protected $users;
+    protected $notifications;
 
     public function __construct()
     {
         $this->users = new Users();
+        $this->notifications = new Notifications();
     }
 }
