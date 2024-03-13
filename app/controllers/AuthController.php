@@ -10,14 +10,27 @@ class AuthController extends Controller
         parent::__construct();
     }
 
+    /**
+     * @method signin
+     * @return void
+     */
     public function signin(){
         response()->markup(view('auth.login'));
     }
 
+    /**
+     * @method signup
+     * @return void
+     */
     public function signup(){
         response()->markup(view('auth.register'));
     }
 
+    /**
+     * @method login
+     * @param bool $api
+     * @return void
+     */
     public static function login($api = false){
         $data = auth()->login([
             'email' => request()->get('email'),
@@ -36,6 +49,10 @@ class AuthController extends Controller
         response()->json($message);
     }
 
+    /**
+     * @method register
+     * @return void
+     */
     public static function register(){
         $data = auth()->register([
             'email' => request()->get('email'),
@@ -52,8 +69,17 @@ class AuthController extends Controller
         response()->json($message);
     }
 
+    /**
+     * @method logout
+     * @return void
+     */
+    public static function logout(){
+        auth()->logout();
+        response()->redirect('/');
+    }
+
     public function reset(){
-        response()->plain('Hey there, were u expecting something ðŸ˜‚');
+        response()->plain('Hey there, were u expecting something');
     }
 
 
