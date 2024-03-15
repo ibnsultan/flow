@@ -69,4 +69,21 @@ class Helpers{
         }
     }
 
+    public static function encode($data){
+
+        $data = bin2hex($data.'.'.date('d'));
+        return (new \Hashids\Hashids)->encodeHex( $data);
+    }
+
+    public static function decode($data){
+        $data = (new \Hashids\Hashids)->decodeHex( $data );
+
+        $data = explode('.', hex2bin($data));
+        return $data[0];
+    }
+
+    // preview api key, strpad(first 4 digits, *), last 4 digits
+    public static function previewKey($key){
+        return str_pad(substr($key, 0, 6), 40, '*') . substr($key, -6);
+    }
 }
