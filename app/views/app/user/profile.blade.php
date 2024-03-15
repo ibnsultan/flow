@@ -40,23 +40,15 @@
                                             </div>
                                             <div class="text-center mt-3">
                                                 <div class="chat-avtar d-inline-flex mx-auto">
-                                                    <img class="rounded-circle img-fluid wid-70" src="{{ auth()->user()['avatar'] }}" alt="User image">
+                                                    <img class="rounded-circle img-fluid w-100" src="{{ auth()->user()['avatar'] }}" alt="User image">
                                                 </div>
-                                                <h5 class="mb-0">{{ auth()->user()['fullname'] }}</h5>
-                                                <p class="text-muted text-sm">{{ auth()->user()['role'] }}</p>
 
                                                 <hr class="my-3 border border-secondary-subtle">
                                                 
                                                 <div class="align-items-center justify-content-start w-100 mb-3">
                                                     
-                                                    <h3> {{ _('About Me') }} </h3>
-
-                                                    <p>{{ auth()->user()['about'] ?? '' }}</p>
-
-                                                    @if( auth()->user()['about'] == '' )
-                                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters
-                                                    @endif
-                                                    
+                                                    <h3 class="mb-0">{{ auth()->user()['fullname'] }}</h3>
+                                                    <p class="text-muted text-sm">{{ auth()->user()['role'] }}</p>
                                                     
                                                 </div>
                                             </div>
@@ -95,7 +87,16 @@
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item px-0">
-                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p class="mb-1 text-muted">{{_('About Me')}}</p>
+                                                            <p class="mb-0">
+                                                                @if( auth()->user()['about'] == '' )
+                                                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
