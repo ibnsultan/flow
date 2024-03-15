@@ -50,7 +50,7 @@
 		<script src="/assets/js/fonts/custom-font.js"></script>
 		<script src="/assets/js/pcoded.js"></script>
 		<script src="/assets/js/plugins/feather.min.js"></script>
-        <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
+        <script src="/assets/js/plugins/sweetalert2.all.min.js"></script>
 
 		<script>
 			function change_theme_color(color){
@@ -65,6 +65,8 @@
 		<script>layout_caption_change('true');</script>
 		<script>layout_rtl_change('{{_("rtl")}}');</script>
 		<script>preset_change("preset-3");</script>
+
+		@yield('scripts')
 
 	</body>
 </html>
