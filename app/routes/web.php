@@ -12,8 +12,17 @@ app()->group('app', function(){
     app()->group('profile', function(){
 
         app()->get('view', 'App\UserController@display');
-        app()->get('edit', 'App\UserController@edit');
+        app()->post('update', 'App\UserController@update');
+        app()->post('password/update', 'App\UserController@updatePassword');
 
+    });
+    
+
+    app()->group('apiKey', function(){
+
+        app()->get('view', 'App\ApiController@index');
+        app()->post('create', 'App\ApiController@issueKey');    
+        
     });
 
 
