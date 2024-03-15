@@ -17,28 +17,49 @@ class ApiController extends Controller
         $this->apiKeys = new ApiKeys();
     }
 
+    public function index(){
+
+        $data = [
+            'title' => 'API Key Management',
+            'apiKeys' => $this->apiKeys->user(auth()->id())
+        ];
+
+        response()->markup(view('app.api.index', $data));
+
+    }
+
     public function issueKey(){
+        
+        $apiName = request()->get('api_name');
+        $secretKey = \Leaf\Helpers\Password::hash(request()->get('api_secret'));
 
-        $key = hex2bin(time());
-        $expiration = request()->get('end_date');
+        try{
 
-        $token = Authentication::generateToken([
-            'iat' => time(),
-            'exp' => strtotime($expiration) ?? strtotime("+1 year"),
-            'user_id' => auth()->id(),
-            'iss' => 'localhost'
-        ], getenv('app_key'));
+            $token = \Leaf\Helpers\Authentication::generateToken(
+                [
+                    'iat' => time(),
+                    'exp' => strtotime('+1 year'),
+                    'iss' => 'localhost',
+                    'user_id' => auth()->id()
+                ],
+                $secretKey
+            );
 
-        // expration to dateTime ?? 1 year
-        $expiration = date("Y-m-d H:i:s", strtotime($expiration) ?? strtotime("+1 year"));
+            $this->apiKeys->create([
+                'name' => $apiName,
+                'user_id' => auth()->id(),
+                'token' => $token,
+                'secret' => $secretKey
+            ]);
 
-        // insert token into db
-        $this->apiKeys->create([
-            'user_id' => auth()->id(),
-            'key' => $key,
-            'token' => $token,
-            'expiration' => $expiration
-        ]);
+            response()->json(['status' => 'success', 'message'=> $token]);
+
+        } catch (\Exception $e) {
+
+            (getenv('app_debug') == "true")? $message = $e->getMessage() : $message = "Failed to generate an Api key";
+            response()->json(['status' => 'error', 'message' => $message]);
+        }
+        
 
     }
 
@@ -49,6 +70,21 @@ class ApiController extends Controller
 
     public function userKeys(){
         return $this->apiKeys->user(auth()->id());
+    }
+
+    public function activity($id){
+        
+        $apiKeyID = \App\Helpers\Helpers::decode($id);
+
+        if($apiKeyID == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
+        
+        $data = [
+            'title' => 'Api Activity',
+            'apiKey' => $this->apiKeys->find($apiKeyID)
+        ];
+
+        response()->markup(view('app.api.activity', $data));
+        
     }
 
 }
