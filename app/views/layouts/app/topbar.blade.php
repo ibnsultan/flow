@@ -15,14 +15,8 @@
                     </a>
                 </li>
                 <li class="dropdown pc-h-item">
-                    <a
-                        class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search"
-                        data-bs-toggle="dropdown"
-                        href="javascript:void(0)"
-                        role="button"
-                        aria-haspopup="false"
-                        aria-expanded="false"
-                        >
+                    <a class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search"
+                       data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
                             <use xlink:href="#custom-search-normal-1"></use>
                         </svg>
@@ -168,7 +162,7 @@
                                 </a>
 
                                 @if(settings->get('allow_apis') == 'true')
-                                <a href="/app/api" class="dropdown-item">
+                                <a href="/app/api/manage" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-code"></i>
                                         <span>{{_('API Settings')}}</span>
