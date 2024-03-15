@@ -20,11 +20,6 @@
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#profile-3" role="tab" aria-selected="false" tabindex="-1">
-                                    <i class="ti ti-id me-2"></i>{{ _('API Tokens') }}
-                                    </a>
-                                </li>
-                                <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="profile-tab-4" data-bs-toggle="tab" href="#profile-4" role="tab" aria-selected="false" tabindex="-1">
                                     <i class="ti ti-lock me-2"></i>{{_('Security')}}
                                     </a>
@@ -58,7 +53,7 @@
 
                                                     <p>{{ auth()->user()['about'] ?? '' }}</p>
 
-                                                    @if( is_null(auth()->user()['about']) )
+                                                    @if( auth()->user()['about'] == '' )
                                                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters
                                                     @endif
                                                     
@@ -118,104 +113,52 @@
                                                 <h5>{{_('Edit Personal Information')}}</h5>
                                             </div>
                                             <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-12 text-center mb-3">
-                                                        <div class="user-upload wid-75">
-                                                            <img src="{{ auth()->user()['avatar'] }}" alt="img" id="imagePreview" class="img-fluid">
-                                                            <label for="uplfile" class="img-avtar-upload">
-                                                                <i class="ti ti-camera f-24 mb-1"></i>
-                                                                <span>Upload</span>
-                                                            </label>
-                                                            <input type="file" id="avatar" name="avatar" class="d-none">
+                                                <form name="updateProfileDetails" method='post' enctype="multiart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 text-center mb-3">
+                                                            <div class="user-upload wid-75">
+                                                                <img src="{{ auth()->user()['avatar'] }}" alt="img" id="imagePreview" class="img-fluid">
+                                                                <label for="avatar" id="avatarUpload" class="img-avtar-upload">
+                                                                    <i class="ti ti-camera f-24 mb-1"></i>
+                                                                    <span>Upload</span>
+                                                                </label>
+                                                                <input type="file" id="avatar" name="avatar" class="d-none">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">{{_('Full Name')}}</label>
+                                                                <input type="text" name="name" class="form-control" value="{{ auth()->user()['fullname'] }}" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">{{_('Email')}}</label>
+                                                                <input type="text" name="email" class="form-control" value="{{ auth()->user()['email'] }}" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">{{_('Phone')}}</label>
+                                                                <input type="text" name="phone" class="form-control" value="{{ auth()->user()['phone'] }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">{{_('Bio')}}</label>
+                                                                <textarea class="form-control" name="bio">{{ auth()->user()['about'] }}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="form-label">{{_('Full Name')}}</label>
-                                                            <input type="text" name="name" class="form-control" value="{{ auth()->user()['fullname'] }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label">{{_('Email')}}</label>
-                                                            <input type="text" name="email" class="form-control" value="{{ auth()->user()['email'] }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label">{{_('Phone')}}</label>
-                                                            <input type="text" name="phone" class="form-control" value="{{ auth()->user()['phone'] }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="form-label">{{_('Bio')}}</label>
-                                                            <textarea class="form-control" name="bio">{{ auth()->user()['about'] }}</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center btn-page">
-                                        <div class="btn btn-primary rounded w-25">Update Profile</div>
+                                        <button type="submit" class="btn btn-primary rounded w-25">{{_('Update Profile')}}</button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-
-                        <div class="tab-pane" id="profile-3" role="tabpanel" aria-labelledby="profile-tab-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header position-relative">
-                                            <h5>General Settings</h5>
-                                            <button class="btn btn-primary position-absolute" style="top:0.8rem;right:2rem;">Create Key</button>
-                                        </div>
-                                        <div class="card-body">
-                                        
-                                            @if(count($apiKeys))
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">API Key</th>
-                                                                <th scope="col">Created At</th>
-                                                                <th scope="col">Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach($apiKeys as $key)
-                                                            <tr>
-                                                                <td>{{ $key['key'] }}</td>
-                                                                <td>{{ $key['created_at'] }}</td>
-                                                                <td>
-                                                                    <div class="btn-group">
-                                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            Action
-                                                                        </button>
-                                                                        <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">View</a>
-                                                                            <a class="dropdown-item" href="#">Delete</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            @else
-                                                <div class="alert alert-light" role="alert">
-                                                    <h4 class="alert-heading">No API Key Found</h4>
-                                                    <p>It seems you have not created any API Key yet. You can create one by clicking the button below.</p>
-                                                </div>
-                                            @endif
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="tab-pane" id="profile-4" role="tabpanel" aria-labelledby="profile-tab-4">
@@ -223,48 +166,47 @@
                                 <div class="card-header">
                                     <h5>Change Password</h5>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Old Password</label>
-                                                <input type="password" class="form-control">
+                                <form name="updatePassword" method="post">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Old Password</label>
+                                                    <input type="password" name="old_password" placeholder="••••••••••••" class="form-control" required>
+                                                </div>
+                                                <div class="form-group position-relative">
+                                                    <label class="form-label">New Password</label>
+                                                    <input type="password" name="new_password" placeholder="••••••••••••" class="form-control" required>
+                                                    <i class="fa fa-eye pass-view" onclick="togglePassword(this)" style="top:3rem;right:1.5rem;"></i>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="form-label">New Password</label>
-                                                <input type="password" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Confirm Password</label>
-                                                <input type="password" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h5>New password must contain:</h5>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 8
-                                                    characters
-                                                </li>
-                                                <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
-                                                    lower letter (a-z)
-                                                </li>
-                                                <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
-                                                    uppercase letter(A-Z)
-                                                </li>
-                                                <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
-                                                    number (0-9)
-                                                </li>
-                                                <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
-                                                    special characters
-                                                </li>
-                                            </ul>
+                                            <!--div class="col-sm-6">
+                                                <h5>New password must contain:</h5>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 8
+                                                        characters
+                                                    </li>
+                                                    <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
+                                                        lower letter (a-z)
+                                                    </li>
+                                                    <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
+                                                        uppercase letter(A-Z)
+                                                    </li>
+                                                    <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
+                                                        number (0-9)
+                                                    </li>
+                                                    <li class="list-group-item"><i class="ti ti-circle-check text-success f-16 me-2"></i> At least 1
+                                                        special characters
+                                                    </li>
+                                                </ul>
+                                            </div-->
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer text-end btn-page">
-                                    <div class="btn btn-outline-secondary">Cancel</div>
-                                    <div class="btn btn-primary">Update Profile</div>
-                                </div>
+                                    <div class="card-footer text-end btn-page">
+                                        <button type="submit" class="btn btn-primary">Update Password</div>
+                                    </div>
+                                
+                                </form>
                             </div>
                         </div>
 
@@ -274,4 +216,128 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+    
+        // form submission profile details
+        document.forms.updateProfile.onsubmit = async function(e) {
+            e.preventDefault();
+
+            // disable btn and is loading
+            $('button[type="submit"]').attr('disabled', true).html('Updating...');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/app/profile/update',
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire(
+                            'Success',
+                            response.message,
+                            'success'
+                        )
+
+                        location.reload();
+                    }else{
+                        Swal.fire(
+                            'Error',
+                            response.message,
+                            'error'
+                        )
+
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }
+                },
+                error: function(err) {
+                    Swal.fire(
+                        'Error',
+                        'An error occurred while processing your request',
+                        'error'
+                    )
+
+                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                }
+            });
+
+        }
+
+        // image avatar upload input and preview
+        $('#avatarUpload').click(function(){
+            $('#avatar').click();
+        });
+
+        document.getElementById('avatar').onchange = function(e) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+
+        // toggle password visibility
+        function togglePassword(e) {
+            if(e.previousElementSibling.type == 'password') {
+                e.previousElementSibling.type = 'text';
+                e.classList.add('fa-eye-slash');
+                e.classList.remove('fa-eye');
+            } else {
+                e.previousElementSibling.type = 'password';
+                e.classList.add('fa-eye');
+                e.classList.remove('fa-eye-slash');
+            }
+        }
+
+        // change password
+        document.forms.updatePassword.onsubmit = async function(e) {
+            e.preventDefault();
+
+            // disable btn and is loading
+            $('button[type="submit"]').attr('disabled', true).html('Updating...');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/app/profile/password/update',
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire(
+                            'Success',
+                            response.message,
+                            'success'
+                        )
+
+                        location.reload();
+                    }else{
+                        Swal.fire(
+                            'Error',
+                            response.message,
+                            'error'
+                        )
+
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }
+                },
+                error: function(err) {
+                    Swal.fire(
+                        'Error',
+                        'An error occurred while processing your request',
+                        'error'
+                    )
+
+                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                }
+            });
+
+        }
+    </script>
 @endsection
