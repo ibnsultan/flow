@@ -51,6 +51,21 @@ function delete_dir($dirPath) {
 
 /*
 |--------------------------------------------------------------------------
+| Require Multiple Files
+|--------------------------------------------------------------------------
+| This function is used to require multiple files at once
+| 
+*/
+
+function require_files(){
+    foreach(func_get_args() as $file){
+        require_once($file);
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
 | Localizations and Translations
 |--------------------------------------------------------------------------
 |
