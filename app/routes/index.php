@@ -75,6 +75,8 @@ app()->setNamespace('\App\Controllers');
 | it here like so:
 |
 */
-require_once 'web.php';
-require_once 'api.php';
-require_once 'auth.php';
+require_files(
+    getcwd().'/app/routes/web.php',
+    getcwd().'/app/routes/api.php',
+    getcwd().'/app/routes/auth.php'
+);
