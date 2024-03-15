@@ -7,7 +7,7 @@ class ApiActivities extends Model{
     protected $table = 'api_activities';
 
     protected $fillable = [
-        'request_uri', 'payload', 'apiID', 'status', 'user_id'
+        'request_uri', 'payload', 'apiID', 'status'
     ];
 
     public $timestamps = true;
