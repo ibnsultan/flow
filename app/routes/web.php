@@ -18,9 +18,11 @@ app()->group('app', function(){
     });
     
 
-    app()->group('apiKey', function(){
+    app()->group('api', function(){
 
-        app()->get('view', 'App\ApiController@index');
+        app()->get('manage', 'App\ApiController@index');
+        app()->get('activity/{id}', 'App\ApiController@activity');
+
         app()->post('create', 'App\ApiController@issueKey');    
         
     });
