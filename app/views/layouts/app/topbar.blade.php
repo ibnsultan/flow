@@ -129,8 +129,6 @@
 
                             @endif
 
-                            
-
                         </div>
                         <div class="text-center py-2">
                             <a href="javascript:void(0)" class="link-danger">Clear all Notifications</a>
@@ -168,6 +166,15 @@
                                         <span>{{_('My Profile')}}</span>
                                     </span>
                                 </a>
+
+                                @if(settings->get('allow_apis') == 'true')
+                                <a href="/app/api" class="dropdown-item">
+                                    <span>
+                                        <i class="ti ti-code"></i>
+                                        <span>{{_('API Settings')}}</span>
+                                    </span>
+                                </a>
+                                @endif
 
                                 @if(\App\Helpers\Helpers::isAdmin())
                                 <a href="javascript:void(0)" class="dropdown-item">
