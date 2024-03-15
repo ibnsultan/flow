@@ -3,6 +3,7 @@
 namespace App\Middleware;
 
 use App\Models\Users;
+use App\Models\ApiKeys;
 use Leaf\Helpers\Authentication;
 
 class Auth
@@ -12,6 +13,7 @@ class Auth
     protected $user;
     protected $users;
     protected $errors;
+    protected $apiKeys;
 
     protected $home = 'app/home';
     protected $login = 'auth/login';
@@ -22,11 +24,10 @@ class Auth
     {
      
         $this->users = new Users();
+        $this->apiKeys = new ApiKeys();
         
-        $this->uri = ltrim($_SERVER['REQUEST_URI'], '/');
-
         $this->user = auth()->user() ?? null;
-        
+        $this->uri = ltrim($_SERVER['REQUEST_URI'], '/');
         $this->uriRules = require_once getcwd() . '/app/routes/guard.php';
         
     }
@@ -70,7 +71,15 @@ class Auth
 
     public function authenticateApi()
     {
-        $data = Authentication::validateToken(getenv('app_key'));
+
+        $bearerToken = $_SERVER['HTTP_AUTHORIZATION'] ?? null;
+
+        if($bearerToken) $bearerToken = explode(' ', $bearerToken)[1];
+        
+        // get secret key from token
+        $key = $this->apiKeys->getSecret($bearerToken)->secret ?? getenv('app_key');
+
+        $data = Authentication::validateToken($key);
 
         if (!$data) {
             $errors = Authentication::errors();
@@ -130,6 +139,5 @@ class Auth
             }
         }
     }
-
 
 }
