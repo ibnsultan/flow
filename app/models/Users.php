@@ -7,7 +7,7 @@ class Users extends Model
     protected $table = 'users';
     
     protected $fillable = [
-        'fullname', 'email', 'password', 'avatar', 'role'
+        'fullname', 'email', 'password', 'avatar', 'role', 'phone', 'about'
     ];
 
 
@@ -22,4 +22,9 @@ class Users extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function updateDetails($user, $columns){
+        return $this->where('id', $user)->update($columns);
+    }
+
 }
