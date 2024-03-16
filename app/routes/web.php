@@ -6,6 +6,7 @@ app()->get('/', fn() => render('welcome'));
 app()->group('app', function(){
 
     app()->get('home', 'App\HomeController@home');
+    app()->get('start', fn() => render('app.start'));
 
 
     # Profile routes
@@ -23,7 +24,8 @@ app()->group('app', function(){
         app()->get('manage', 'App\ApiController@index');
         app()->get('activity/{id}', 'App\ApiController@activity');
 
-        app()->post('create', 'App\ApiController@issueKey');    
+        app()->post('copy', 'App\ApiController@copy');
+        app()->post('create', 'App\ApiController@issueKey');  
         
     });
 
