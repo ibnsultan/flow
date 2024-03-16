@@ -14,7 +14,7 @@
                             <button class="btn btn-primary position-absolute" 
                                 style="top:0.8rem;right:2rem;" 
                                  data-bs-toggle="modal" data-bs-target="#copyApiKey">
-                                Copy Key
+                                Get Key
                             </button>             
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         <div class="card-body">
                             @if(count($activities) > 0)
                                 <div class="table table-responsive">
-                                    <table class="table">
+                                    <table class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th></th>
