@@ -53,5 +53,12 @@
     "Notifications": "Notifications",
     "API Settings": "API Settings",
     "Update Profile": "Update Profile",
-    "What's New": "What's New"
+    "What's New": "What's New",
+    "Template": "Template",
+    "Copy Key": "Copy Key",
+    "Status": "Status",
+    "Handler": "Handler",
+    "Origin": "Origin",
+    "Payload": "Payload",
+    "Time": "Time"
 }
