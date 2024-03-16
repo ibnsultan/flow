@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table table-responsive">
-                                <table id="apiTable" class="table table-striped" style="width:100%">
+                                <table id="apiTable" class="table table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
