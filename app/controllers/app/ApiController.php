@@ -108,4 +108,15 @@ class ApiController extends Controller
         response()->json(['status' => 'success', 'message' => $api->token]);
     }
 
+    public function logActivity($apiID, $status='pass'){
+
+        $this->apiActivities->create([
+            'handler' => $_SERVER['REQUEST_URI'],
+            'origin' => $_SERVER['REMOTE_ADDR'],
+            'payload' => $_REQUEST,
+            'status' => $status,
+            'apiID' => $apiID
+        ]);
+    }
+
 }
