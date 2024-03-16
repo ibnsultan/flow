@@ -19,7 +19,7 @@ class ApiActivities extends Model{
     ];
 
     public function activities($id){
-        return $this->where('apiID', $id)->get();
+        return $this->where('apiID', $id)->orderBy('created_at', 'desc')->get();
     }
     
 }
