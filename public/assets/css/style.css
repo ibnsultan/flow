@@ -28405,3 +28405,13 @@ File: style.css
   color: gainsboro;
   cursor: pointer;
 }
+
+.table > :not(:last-child) > :last-child > * {
+  border-bottom-color: #e7eaee;
+  border-top: none;
+  background: transparent;
+}
+
+table>tbody>tr:last-child, table>tbody>tr:last-child>td{
+  border-bottom: none;
+}
