@@ -46,7 +46,7 @@
                                 <use xlink:href="#custom-notification-status"></use>
                             </svg>
                         </span>
-                        <span class="pc-mtext">{{_('Starter Template')}}</span>
+                        <span class="pc-mtext">{{_('Template')}}</span>
                     </a>
                 </li>
 
