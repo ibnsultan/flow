@@ -15,8 +15,9 @@ class CreateApiActivities extends Database
         if (!static::$capsule::schema()->hasTable('api_activities')) :
             static::$capsule::schema()->create('api_activities', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('request_uri', 100);
-                $table->json('payload');
+                $table->string('handler', 300);
+                $table->string('origin', 100);
+                $table->json('payload')->nullable();
                 $table->string('apiID', 100);
                 $table->string('status', 100);
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
