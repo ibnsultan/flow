@@ -7,7 +7,7 @@ class ApiActivities extends Model{
     protected $table = 'api_activities';
 
     protected $fillable = [
-        'request_uri', 'payload', 'apiID', 'status'
+        'handler', 'origin', 'payload', 'apiID', 'status'
     ];
 
     public $timestamps = true;
@@ -17,5 +17,9 @@ class ApiActivities extends Model{
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function activities($id){
+        return $this->where('apiID', $id)->get();
+    }
     
 }
