@@ -4,7 +4,9 @@ namespace App\Middleware;
 
 use App\Models\Users;
 use App\Models\ApiKeys;
+
 use Leaf\Helpers\Authentication;
+use App\Controllers\App\ApiController;
 
 class Auth
 {
@@ -19,6 +21,7 @@ class Auth
     protected $login = 'auth/login';
 
     protected $uriRules;
+    protected $apiMonitor;
 
     public function __construct()
     {
@@ -29,6 +32,8 @@ class Auth
         $this->user = auth()->user() ?? null;
         $this->uri = ltrim($_SERVER['REQUEST_URI'], '/');
         $this->uriRules = require_once getcwd() . '/app/routes/guard.php';
+
+        $this->apiMonitor = new ApiController();
         
     }
 
@@ -37,7 +42,16 @@ class Auth
         $rules = $this->getExpressionRules();
         
         if(strpos($this->uri, 'api/') === 0) {
-            $this->apiRequestAccess($rules);
+            $response = $this->apiRequestAccess($rules);
+
+            if(isset($response['apiId']) && $response['apiId'] !== false)
+                $this->recordApiActivity($response);
+            
+            if(isset($response['apiId'])) unset($response['apiId']);
+
+            if(isset($response['status']) and $response['status'] == 'error')
+                exit(response()->json($response));
+
         } else {
             $this->webRequestAccess($rules);
         }
@@ -88,8 +102,11 @@ class Auth
             return null;
         }
 
-        # get user data
-        return $this->users->find($data->user_id);
+        # get user data and apiId if available
+        return [ 
+            'user'=>$this->users->find($data->user_id),
+            'apiId'=>$this->apiKeys->getSecret($bearerToken)->id ?? false
+        ];
     }
 
     protected function webRequestAccess($rules) :void
@@ -116,28 +133,51 @@ class Auth
     }
 
     # applicable to only api requests stating with 'api/'
-    protected function apiRequestAccess($rules) :void
+    protected function apiRequestAccess($rules, $apiID=0) 
     {
         
         if(!$rules['session']) {
             return;
         }
 
-        $this->user = $this->authenticateApi();
+        $meta = $this->authenticateApi();
+
+        $this->user = $meta['user'] ?? null;
 
         if ($rules['session'] && !$this->user) {
-            die ( response()->json($this->errors) );
+            $response = $this->errors;
         }
 
         if (is_array($rules['access'])) {
-            if ($this->user && !in_array($this->user->role, $rules['access'])) {
-                die ( response()->json(['status'=>'error', 'message'=>'Unauthorized']) );
-            }
+            if ($this->user && !in_array($this->user->role, $rules['access']))
+                $response = ['status'=>'error', 'message'=>'Unauthorized'];
+            
         } elseif ($rules['access'] !== 'all') {
-            if ($this->user && $this->user->role !== $rules['access']) {
-                die ( response()->json(['status'=>'error', 'message'=>'Unauthorized']) );
-            }
+            if ($this->user && $this->user->role !== $rules['access'])
+                $response = ['status'=>'error', 'message'=>'Unauthorized'];
+            
         }
+
+        if(isset($response)) :
+            $response['apiId'] = $meta['apiId'] ?? false;
+            else: $response = [ 'apiId' => $meta['apiId'] ];
+        endif;
+
+        return $response;
+    }
+
+    protected function recordApiActivity($response)
+    {
+        if(isset($response['status']) and $response['status'] == 'error'):
+
+            $this->apiMonitor->logActivity($response['apiId'], 'fail');
+            unset($response['apiId']);
+            exit(response()->json($response));
+
+        endif;
+
+        $this->apiMonitor->logActivity($response['apiId'], 'pass');    
+        
     }
 
 }
