@@ -3,18 +3,20 @@
 namespace App\Controllers\App;
 
 use App\Models\ApiKeys;
+use App\Models\ApiActivities;
 
 use App\Controllers\Controller;
-use Leaf\Helpers\Authentication;
 
 class ApiController extends Controller
 {
     protected $apiKeys;
+    protected $apiActivities;
 
     public function __construct()
     {
         parent::__construct();
         $this->apiKeys = new ApiKeys();
+        $this->apiActivities = new ApiActivities();
     }
 
     public function index(){
@@ -80,11 +82,30 @@ class ApiController extends Controller
         
         $data = [
             'title' => 'Api Activity',
-            'apiKey' => $this->apiKeys->find($apiKeyID)
+            'apiID' => $id,
+            'apiKey' => $this->apiKeys->find($apiKeyID),
+            'activities' => $this->apiActivities->activities($apiKeyID)
         ];
 
         response()->markup(view('app.api.activity', $data));
         
+    }
+
+    public function copy(){
+
+        $apiID = \App\Helpers\Helpers::decode(request()->get('api_id'));
+        $secretKey = request()->get('api_secret');
+
+        if($apiID == '' or $secretKey == '')
+            exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
+
+        $api = $this->apiKeys->find($apiID);
+
+        // verify secret key
+        if(!\Leaf\Helpers\Password::verify($secretKey, $api->secret))
+            exit(response()->json(['status' => 'error', 'message' => 'Invalid secret key']));
+
+        response()->json(['status' => 'success', 'message' => $api->token]);
     }
 
 }
