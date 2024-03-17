@@ -30,9 +30,7 @@
                 <li class="pc-item">
                     <a href="/app/home" class="pc-link">
                         <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-status-up"></use>
-                            </svg>
+                            <i data-feather="home"></i>
                         </span>
                         <span class="pc-mtext">{{_('Dashboard')}}</span>
                     </a>
@@ -42,9 +40,7 @@
                 <li class="pc-item">
                     <a href="/app/start" class="pc-link">
                         <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-notification-status"></use>
-                            </svg>
+                            <i data-feather="layout"></i>
                         </span>
                         <span class="pc-mtext">{{_('Template')}}</span>
                     </a>
@@ -53,9 +49,7 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="javascript:void(0)" class="pc-link">
                         <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-level"></use>
-                            </svg>
+                            <i data-feather="menu"></i>
                         </span>
                         <span class="pc-mtext">Menu levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
