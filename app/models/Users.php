@@ -27,4 +27,12 @@ class Users extends Model
         return $this->where('id', $user)->update($columns);
     }
 
+    public function blog_articles(){
+        return $this->hasMany(BlogArticles::class, 'author', 'id');
+    }
+
+    public function file_storage(){
+        return $this->hasMany(FileStorage::class, 'user_id', 'id');
+    }
+
 }
