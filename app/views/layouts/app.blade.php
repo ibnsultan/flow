@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	</head>
 	
-	<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}">
+	<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="true" data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}">
 		<!-- [ Pre-loader ] start -->
 		<div class="loader-bg">
 			<div class="loader-track">
