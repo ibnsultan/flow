@@ -11,11 +11,10 @@ Flow's purpose is empower developers to create high-quality web applications wit
 ## Features
 
 - [X] Authentication
-- [ ] Billing & Payments
-- [ ] Announcements and Notification
+- [X] Announcements and Notification
 - [ ] Blogging & CMS
-- [ ] API & developer tools
+- [X] API & developer tools
   - [X] API Keys Issue
-  - [ ] API requests monitor
+  - [X] API requests monitor (Beta)
 - [ ] Storage & File management
 - [X] Profile management
