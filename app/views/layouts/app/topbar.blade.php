@@ -171,7 +171,7 @@
                                 @endif
 
                                 @if(\App\Helpers\Helpers::isAdmin())
-                                <a href="javascript:void(0)" class="dropdown-item">
+                                <a href="/admin" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-settings"></i>
                                         <span>{{_('Admin Settings')}}</span>
