@@ -1,0 +1,55 @@
+.editor-board{
+    min-height: calc(100vh - 180px);
+    height: 100%;
+    position: relative;
+}
+
+.ck.ck-editor, .ck.ck-editor__main{
+    height: 95% !important;
+    position: absolute;
+    width: 100%;
+}
+
+.ck.ck-editor__main{
+    overflow-y: auto !important;
+}
+
+.ck.ck-toolbar.ck-toolbar_grouping{
+    margin-bottom: 10px;
+    border-bottom: solid 1px #c4c4c4 !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable{
+    height: 100% !important;
+    border: none !important;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
+    box-shadow: none !important;
+}
+
+.user-upload .img-avtar-upload{
+    opacity: 0.5;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c4c4c4;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}

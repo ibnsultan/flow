@@ -28415,3 +28415,9 @@ File: style.css
 table>tbody>tr:last-child, table>tbody>tr:last-child>td{
   border-bottom: none;
 }
+
+.pc-sidebar .pc-micon > svg {
+  width: 18px;
+  height: 18px;
+  margin-top: -2.4px 
+}
