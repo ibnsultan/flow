@@ -10,9 +10,14 @@
 | you set here will be called when a 404 error is encountered
 |
 */
-// app()->set404(function() {
-// 	response()->page(ViewsPath("errors/404.html", false), 404);
-// });
+app()->set404(function() {
+    $isApiRequest = strpos($_SERVER['REQUEST_URI'], '/api') !== false;
+    if ($isApiRequest) {
+        response()->json(['status' => 'error', 'message' => 'Page not found'], 404);
+    } else {
+        response()->page(ViewsPath("errors/404.html", false), 404);
+    }
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +29,16 @@
 | you set here will be called when a 500 error is encountered
 |
 */
-// app()->setErrorHandler(function() {
-// 	response()->page(ViewsPath("errors/500.html", false), 500);
-// });
+if(getenv('app_debug') == 'false'){
+    app()->setErrorHandler(function() {
+        $isApiRequest = strpos($_SERVER['REQUEST_URI'], '/api') !== false;
+        if ($isApiRequest) {
+            response()->json(['status' => 'error', 'message' => 'An error occurred'], 500);
+        } else {
+            response()->page(ViewsPath("errors/500.html", false), 500);
+        }
+    });
+}
 
 /*
 |--------------------------------------------------------------------------
