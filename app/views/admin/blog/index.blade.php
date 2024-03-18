@@ -29,7 +29,7 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Title')}}</th>
+                                                <th class="w-50">{{_('Title')}}</th>
                                                 <th>{{_('Author')}}</th>
                                                 <th>{{_('Category')}}</th>
                                                 <th>{{_('Published')}}</th>
@@ -42,7 +42,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <a href="/admin/blog/{{ \App\Helpers\Helpers::encode($article->id) }}">
+                                                        <a href="/admin/blog/article/edit/{{ \App\Helpers\Helpers::encode($article->id) }}">
                                                             {{ $article->title }}
                                                         </a>
                                                     </td>
@@ -56,7 +56,7 @@
                                                         {{ $article->created_at->diffForHumans() }}
                                                     </td>
                                                     <td>
-                                                        <a href="/admin/blog/{{ $article->id }}/edit" class="btn btn-primary rounded btn-sm">
+                                                        <a href="/admin/blog/article/edit/{{ \App\Helpers\Helpers::encode($article->id) }}" class="btn btn-primary rounded btn-sm">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
                                                         <a href="/admin/blog/{{ $article->id }}/delete" class="btn btn-danger rounded btn-sm">
