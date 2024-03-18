@@ -62,8 +62,9 @@ app()->group('admin', function(){
         # articles routes
         app()->get('/', 'Admin\BlogController@index');
         app()->get('article/write', 'Admin\BlogController@writeArticle');
+        app()->get('article/edit/{id}', 'Admin\BlogController@viewArticle');
 
-        app()->post('article/create', 'Admin\BlogController@createArticle');
+        app()->post('article/write', 'Admin\BlogController@createArticle');
         app()->post('article/update', 'Admin\BlogController@updateArticle');
 
         # article categories routes
