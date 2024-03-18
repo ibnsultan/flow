@@ -79,39 +79,34 @@
 
 @endsection
 @section('scripts')
-    <script src="/assets/js/plugins/ckeditor/classic/ckeditor.js"></script>
-    <script src="https://example.com/ckfinder/ckfinder.js"></script>
+    <!--script src="/assets/js/plugins/ckeditor/classic/ckeditor.js"></script-->
+    <script src="https://cdn.jsdelivr.net/npm/ckeditor5-build-classic-base64-upload-adapter@1.0.1/build/ckeditor.min.js"></script>
     
     <script>
         ClassicEditor
-            .create( document.querySelector( '#classic-editor' ), {
-
-                ckfinder: {
-                    uploadUrl: '/app/media/upload'
-                }
-                
+            .create( document.querySelector( '#classic-editor' ), {             
 
             } )
             .catch( error => {
                 console.error( error );
-            } );
-
-        // update the text area content on ckeditor change
-        $('.ck-editor__editable').on('keyup', function() {
-            alert('changed');
-            $('#classic-editor').val($(this).html());
         });
+        
+        // TODO: listens to ckeditor changes instead of interval
+        setInterval(function() {
+            var ckEditable = document.querySelector('.ck-editor__editable').innerHTML;
+
+            if(ckEditable != $('#classic-editor').val()) {
+                $('#classic-editor').val(ckEditable);
+            }
+        }, 1000);
+        
 
         // on submit form
         document.forms.addArticle.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            console.log(new FormData(this));
-
-            return;
             
             $.ajax({
-                url: '/admin/blog/write',
+                url: '/admin/blog/article/write',
                 type: 'post',
                 data: new FormData(this),
                 contentType: false,
