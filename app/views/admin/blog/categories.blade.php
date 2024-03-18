@@ -51,10 +51,11 @@
                                                         </td>
                                                         <td class="text-end">
                                                             <button class="btn btn-primary rounded btn-sm"
-                                                                data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                                                data-id="{{ $category->id }}"
-                                                                data-name="{{ $category->name }}"
-                                                                data-description="{{ $category->description }}">
+                                                                onclick="editCategory(
+                                                                    '{{ \App\Helpers\Helpers::encode($category->id) }}',
+                                                                    '{{ $category->name }}',
+                                                                    '{{ $category->description }}'
+                                                                )">
                                                                 <i class="bi bi-pencil"></i>
                                                             </button>
                                                             <button class="btn btn-danger rounded btn-sm"
@@ -104,7 +105,10 @@
                             <label for="description" class="form-label">{{_('Description')}}</label>
                             <textarea class="form-control" name="description" placeholder="{{_('Category Description')}}"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">{{_('Save')}}</button>
+                        
+                        <div class="text-center">
+                            <button id="addCategory" type="submit" class="btn btn-primary w-50">{{_('Save')}}</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -123,15 +127,18 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" name="updateCategory">
+                        <input type="text" id="category_id" name="category_id" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">{{_('Category')}}</label>
-                            <input type="text" class="form-control" name="name" placeholder="{{_('Category Name')}}" required>
+                            <input type="text" id="categoryName" class="form-control" name="name" placeholder="{{_('Category Name')}}" required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">{{_('Description')}}</label>
-                            <textarea class="form-control" name="description" placeholder="{{_('Category Description')}}"></textarea>
+                            <textarea class="form-control" id="categoryDescription" name="description" placeholder="{{_('Category Description')}}"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">{{_('Save')}}</button>
+                        <div class="text-center">
+                            <button id="updateCategory" type="submit" class="btn btn-primary w-50">{{_('Save')}}</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -143,6 +150,88 @@
 @section('scripts')
 
     <script>
+
+        // add category submit
+        $('form[name="addCategory"]').submit(function(e){
+            e.preventDefault();
+
+            // disable button and is loading
+            $('#addCategory').attr('disabled', true).html('<i class="bi bi-arrow-clockwise"></i> {{_('Saving...')}}');
+
+            $.ajax({
+                url: '/admin/blog/category/create',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response){
+                    if(response.status == 'success'){
+                        Swal.fire(
+                            '{{_('Success!')}}',
+                            '{{_('The category has been added.')}}',
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        });
+                    }else{
+                        Swal.fire(
+                            '{{_('Error!')}}',
+                            '{{_('The category could not be added.')}}',
+                            'error'
+                        );
+
+                        // enable button
+                        $('#addCategory').attr('disabled', false).html('{{_('Save')}}');
+                    }
+                }
+            });
+
+
+        });
+
+
+        // update category
+        $('form[name="updateCategory"]').submit(function(e){
+            e.preventDefault();
+
+            // disable button and is loading
+            $('#updateCategory').attr('disabled', true).html('<i class="bi bi-arrow-clockwise"></i> {{_('Saving...')}}');
+
+            $.ajax({
+                url: '/admin/blog/category/update',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response){
+                    if(response.status == 'success'){
+                        Swal.fire(
+                            '{{_('Success!')}}',
+                            '{{_('The category has been updated.')}}',
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        });
+                    }else{
+                        Swal.fire(
+                            '{{_('Error!')}}',
+                            '{{_('The category could not be updated.')}}',
+                            'error'
+                        );
+
+                        // enable button
+                        $('#updateCategory').attr('disabled', false).html('{{_('Save')}}');
+                    }
+                }
+            });
+        });
+
+
+        function editCategory(id, name, description){
+            $('#category_id').val(id);
+            $('#categoryName').val(name);
+            $('#categoryDescription').val(description);
+
+            $('#editCategoryModal').modal('show');
+        }
+
+
         function deleteCategory(id){
             Swal.fire({
                 title: '{{_('Are you sure?')}}',
