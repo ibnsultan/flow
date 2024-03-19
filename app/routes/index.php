@@ -60,7 +60,7 @@ if(getenv('app_debug') == 'false'){
 | get `settings` key-value pairs from the database.
 |
 */
-define('settings', new \App\Models\Settings);
+define('settings', new \App\Models\Setting);
 
 /*
 |--------------------------------------------------------------------------
