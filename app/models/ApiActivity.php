@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class ApiActivities extends Model{
+class ApiActivity extends Model{
     
     protected $table = 'api_activities';
 

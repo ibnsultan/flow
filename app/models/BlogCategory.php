@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class BlogCategories extends Model{
+class BlogCategory extends Model{
     
     protected $table = 'blog_categories';
     
@@ -10,9 +10,9 @@ class BlogCategories extends Model{
     
     public $timestamps = true;
 
-    public function blog_articles()
+    public function blog_article()
     {
-        return $this->hasMany(BlogArticles::class, 'category', 'id');
+        return $this->hasMany(BlogArticle::class, 'category', 'id');
     }
 
 }

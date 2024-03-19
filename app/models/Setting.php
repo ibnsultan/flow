@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Settings extends Model
+class Setting extends Model
 {
     protected $table = 'settings';
     

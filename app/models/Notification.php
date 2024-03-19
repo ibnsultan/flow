@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Notifications extends Model{
+class Notification extends Model{
 
     protected $table = 'notifications';
 

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class ApiKeys extends Model{
+class ApiKey extends Model{
     
     protected $table = 'api_keys';
 

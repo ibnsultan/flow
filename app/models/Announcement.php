@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Announcements extends Model{
+class Announcement extends Model{
 
     protected $table = 'announcements';
 

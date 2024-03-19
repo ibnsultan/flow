@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-class BlogArticles extends Model
+class BlogArticle extends Model
 {
     protected $table = 'blog_articles';
     
     protected $fillable = ['title', 'content', 'cover', 'author', 'category', 'tags', 'views', 'likes'];
     
-    protected $with = ['users', 'blog_categories'];
+    protected $with = ['user', 'blog_category'];
 
     public $timestamps = true;
 
@@ -20,13 +20,13 @@ class BlogArticles extends Model
         'updated_at' => 'datetime'
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo(Users::class, 'author');
+        return $this->belongsTo(User::class, 'author');
     }
 
-    public function blog_categories()
+    public function blog_category()
     {
-        return $this->belongsTo(BlogCategories::class, 'category');
+        return $this->belongsTo(BlogCategory::class, 'category');
     }
 }
