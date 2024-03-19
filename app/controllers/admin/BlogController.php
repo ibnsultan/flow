@@ -2,8 +2,8 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\BlogArticles;
-use App\Models\BlogCategories;
+use App\Models\BlogArticle;
+use App\Models\BlogCategory;
 
 use App\Controllers\Controller;
 use App\Controllers\MediaController;
@@ -27,7 +27,7 @@ class BlogController extends Controller
 
         $data = [
             'title' => 'Blog',
-            'articles' => BlogArticles::with('users', 'blog_categories')->orderBy('created_at', 'desc')->get()
+            'articles' => BlogArticle::with('user', 'blog_category')->orderBy('created_at', 'desc')->get()
         ];
 
         response()->markup(view('admin.blog.index', $data));
@@ -45,9 +45,9 @@ class BlogController extends Controller
         if($article_id == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
         $data = [
-            'title' => BlogArticles::find($article_id)->title,
-            'article' => BlogArticles::find($article_id),
-            'categories' => BlogCategories::all(),
+            'title' => BlogArticle::find($article_id)->title,
+            'article' => BlogArticle::find($article_id),
+            'categories' => BlogCategory::all(),
             'article_id' => $id
         ];
 
@@ -64,7 +64,7 @@ class BlogController extends Controller
             
         $data = [
             'title' => 'Write Article',
-            'categories' => BlogCategories::all()
+            'categories' => BlogCategory::all()
         ];
 
         response()->markup(view('admin.blog.write', $data));
@@ -99,7 +99,7 @@ class BlogController extends Controller
 
         try {
             
-            BlogArticles::create([
+            BlogArticle::create([
                 'title' => request()->get('title'),
                 'content' => request()->get('content'),
                 'category' => request()->get('category'),
@@ -129,7 +129,7 @@ class BlogController extends Controller
         $article_id = \App\Helpers\Helpers::decode(request()->get('article_id'));
         if($article_id == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
-        $article = BlogArticles::find($article_id);
+        $article = BlogArticle::find($article_id);
 
         $fileUploaded = null;
         $coverImage = request()->get('cover');
@@ -179,7 +179,7 @@ class BlogController extends Controller
 
         $data = [
             'title' => 'Blog Categories',
-            'categories' => BlogCategories::withCount('blog_articles')->get()
+            'categories' => BlogCategory::withCount('blog_article')->get()
         ];
 
         response()->markup(view('admin.blog.categories', $data));
@@ -194,7 +194,7 @@ class BlogController extends Controller
             
         try {
             
-            BlogCategories::create([
+            BlogCategory::create([
                 'name' => request()->get('name'),
                 'description' => request()->get('description')
             ]);
@@ -218,7 +218,7 @@ class BlogController extends Controller
         $category_id = \App\Helpers\Helpers::decode(request()->get('category_id'));
         if($category_id == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
-        $category = BlogCategories::find($category_id);
+        $category = BlogCategory::find($category_id);
 
         try {
             
@@ -246,13 +246,13 @@ class BlogController extends Controller
     public function deleteCategory($id){
 
         $category_id = \App\Helpers\Helpers::decode($id);
-        $category = BlogCategories::find($category_id);
+        $category = BlogCategory::find($category_id);
 
         if(!$category)
             response()->json(['status' => 'error', 'message' => 'Category not found'], 404);
         
         
-        BlogArticles::where('category', $category_id)->update(['category' => 1]); 
+        BlogArticle::where('category', $category_id)->update(['category' => 1]); 
         $category->delete();
 
         response()->json(['status'=>'success', 'message' => 'Category deleted']);
