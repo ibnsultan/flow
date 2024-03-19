@@ -72,7 +72,7 @@
                 type: "POST",
                 data: $(this).serialize(),
                 success: function(response) {
-                    if(response.status == "success" or response.status == null) {
+                    if(response.status == "success" || response.status == null) {
                         Swal.fire({
                             title: "Success",
                             text: response.message,
