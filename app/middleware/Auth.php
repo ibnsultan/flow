@@ -2,8 +2,8 @@
 
 namespace App\Middleware;
 
-use App\Models\Users;
-use App\Models\ApiKeys;
+use App\Models\User;
+use App\Models\ApiKey;
 
 use Leaf\Helpers\Authentication;
 use App\Controllers\App\ApiController;
@@ -26,8 +26,8 @@ class Auth
     public function __construct()
     {
      
-        $this->users = new Users();
-        $this->apiKeys = new ApiKeys();
+        $this->users = new User();
+        $this->apiKeys = new ApiKey();
         
         $this->user = auth()->user() ?? null;
         $this->uri = ltrim($_SERVER['REQUEST_URI'], '/');
