@@ -19,7 +19,7 @@ class MediaController extends Controller
     {
         $data = [
             'title' => 'Media',
-            'files' => FileStorage::with('users')->get()
+            'files' => FileStorage::with('user')->get()
         ];
 
         response()->markup(view('media.index', $data));
