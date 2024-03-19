@@ -17,9 +17,9 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'current_user' => auth()->user(),
             'stats' => [
-                'users' => \App\Models\Users::count(),
-                'api_keys' => \App\Models\ApiKeys::count(),
-                'articles' => \App\Models\BlogArticles::count()
+                'users' => \App\Models\User::count(),
+                'api_keys' => \App\Models\ApiKey::count(),
+                'articles' => \App\Models\BlogArticle::count()
             ],
         ];
 
