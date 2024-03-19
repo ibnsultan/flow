@@ -175,6 +175,25 @@ class BlogController extends Controller
      * @param string $id
      * @return void
      */
+    public function deleteArticle($id){
+            
+        $article_id = \App\Helpers\Helpers::decode($id);
+        $article = BlogArticle::find($article_id);
+
+        if(!$article)
+            response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
+        
+        $article->delete();
+
+        response()->json(['status'=>'success', 'message' => 'Article deleted']);
+    }
+
+
+    /**
+     * List all categories
+     * 
+     * @return void
+     */
     public function categories(){
 
         $data = [

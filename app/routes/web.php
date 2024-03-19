@@ -63,6 +63,7 @@ app()->group('admin', function(){
         app()->get('/', 'Admin\BlogController@index');
         app()->get('article/write', 'Admin\BlogController@writeArticle');
         app()->get('article/edit/{id}', 'Admin\BlogController@viewArticle');
+        app()->get('article/{id}/delete', 'Admin\BlogController@deleteArticle');
 
         app()->post('article/write', 'Admin\BlogController@createArticle');
         app()->post('article/update', 'Admin\BlogController@updateArticle');

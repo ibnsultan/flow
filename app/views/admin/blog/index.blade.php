@@ -59,9 +59,10 @@
                                                         <a href="/admin/blog/article/edit/{{ \App\Helpers\Helpers::encode($article->id) }}" class="btn btn-primary rounded btn-sm">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
-                                                        <a href="/admin/blog/{{ $article->id }}/delete" class="btn btn-danger rounded btn-sm">
+                                                        <button class="btn btn-danger rounded btn-sm"
+                                                            onclick="deleteArticle('{{ \App\Helpers\Helpers::encode($article->id) }}')">
                                                             <i class="bi bi-trash"></i>
-                                                        </a>
+                                                        </button>
                                                     </td>
 
                                             @endforeach
@@ -83,4 +84,56 @@
         </div>
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+
+        function deleteArticle(id) {
+            
+            Swal.fire({
+                title: '{{_("Are you sure?")}}',
+                text: '{{_("You wont be able to revert this!")}}',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '{{_("Yes, delete it!")}}',
+                cancelButtonText: '{{_("No, cancel!")}}',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/admin/blog/article/' + id + '/delete',
+                        type: 'GET',
+                        success: function (response) {
+                            if (response.status == 'success') {
+                                Swal.fire(
+                                    '{{_("Deleted!")}}',
+                                    '{{_("Article has been deleted.")}}',
+                                    'success'
+                                ).then((result) => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    '{{_("Error!")}}',
+                                    '{{_("There was an error deleting the article")}}',
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function () {
+                            Swal.fire(
+                                '{{_("Error!")}}',
+                                '{{_("There was an error deleting the article")}}',
+                                'error'
+                            );
+                        }
+                    });
+                } 
+            });
+
+        }
+
+
+
+    </script>
 @endsection
