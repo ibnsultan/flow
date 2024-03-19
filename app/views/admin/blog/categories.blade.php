@@ -47,7 +47,7 @@
                                                             {{ $category->description ?? _('No Description') }}
                                                         </td>
                                                         <td>
-                                                            {{ $category->blog_articles->count() }}
+                                                            {{ $category->blog_article->count() }}
                                                         </td>
                                                         <td class="text-end">
                                                             <button class="btn btn-primary rounded btn-sm"

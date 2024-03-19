@@ -47,10 +47,10 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        {{ $article->users->fullname }}
+                                                        {{ $article->user->fullname }}
                                                     </td>
                                                     <td>
-                                                        {{ $article->blog_categories->name }}
+                                                        {{ $article->blog_category->name }}
                                                     </td>
                                                     <td>
                                                         {{ $article->created_at->diffForHumans() }}
