@@ -1,7 +1,7 @@
 <?php
 namespace App\Database\Seeds;
 
-use App\Models\Users;
+use App\Models\User;
 use App\Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +13,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $user = new Users();
+        $user = new User();
         $user->fullname = 'Administrator';
         $user->email = 'admin@flow.io';
         $user->password = \Leaf\Helpers\Password::hash('admin');

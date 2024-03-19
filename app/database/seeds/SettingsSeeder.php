@@ -1,8 +1,7 @@
 <?php
 namespace App\Database\Seeds;
 
-use App\Models\Settings;
-use App\Database\Factories\SettingFactory;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
@@ -15,7 +14,7 @@ class SettingsSeeder extends Seeder
     {
         // You can directly create db records
 
-        $setting = new Settings();
+        $setting = new Setting();
         $settings = array(
             array(
                 "key" => "logo_light",

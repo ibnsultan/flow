@@ -1,8 +1,7 @@
 <?php
 namespace App\Database\Seeds;
 
-use App\Models\BlogCategories;
-use App\Database\Factories\BlogCategoryFactory;
+use App\Models\BlogCategory;
 use Illuminate\Database\Seeder;
 
 class BlogCategoriesSeeder extends Seeder
@@ -13,7 +12,7 @@ class BlogCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        BlogCategories::create([
+        BlogCategory::create([
             'name' => 'General',
             'description' => 'This is the default category for blog articles'
         ]);
