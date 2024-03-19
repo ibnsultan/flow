@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\Users;
-use App\Models\Notifications;
+use App\Models\User;
+use App\Models\Notification;
 
 
 class Controller extends \Leaf\Controller
@@ -14,7 +14,7 @@ class Controller extends \Leaf\Controller
 
     public function __construct()
     {
-        $this->users = new Users();
-        $this->notifications = new Notifications();
+        $this->users = new User();
+        $this->notifications = new Notification();
     }
 }
