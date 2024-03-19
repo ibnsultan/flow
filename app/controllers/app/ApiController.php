@@ -2,8 +2,8 @@
 
 namespace App\Controllers\App;
 
-use App\Models\ApiKeys;
-use App\Models\ApiActivities;
+use App\Models\ApiKey;
+use App\Models\ApiActivity;
 
 use App\Controllers\Controller;
 
@@ -15,8 +15,8 @@ class ApiController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->apiKeys = new ApiKeys();
-        $this->apiActivities = new ApiActivities();
+        $this->apiKeys = new ApiKey();
+        $this->apiActivities = new ApiActivity();
     }
 
     public function index(){
