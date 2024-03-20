@@ -77,13 +77,26 @@
                 </li>
 
                 <! -- users -->
-                <li class="pc-item">
-                    <a href="/admin/users" class="pc-link">
+                <li class="pc-item pc-hasmenu">
+                    <a href="javascript:void(0)" class="pc-link">
                         <span class="pc-micon">
                             <i data-feather="users"></i>
                         </span>
-                        <span class="pc-mtext">{{_('Users')}}</span>
+                        <span class="pc-mtext">{{_('User Management')}}</span>
+                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item">
+                            <a href="/admin/users/all" class="pc-link">
+                                <span class="pc-mtext">{{_('Users')}}</span>
+                            </a>
+                        </li>
+                        <li class="pc-item">
+                            <a href="/admin/users/moderator" class="pc-link">
+                                <span class="pc-mtext">{{_('Moderators')}}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <! -- roles -->
