@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\UserRole;
+
 app()->get('/', fn() => render('welcome'));
 
 
@@ -76,4 +78,29 @@ app()->group('admin', function(){
         app()->post('category/update', 'Admin\BlogController@updateCategory');
         
     });
+
+
+    # user management routes
+    app()->group('users', function(){
+        
+        app()->get('{role}', 'Admin\UserController@index');
+
+    });
+
+    app()->group('user', function(){
+
+        app()->get('/{id}', 'Admin\UserController@viewUser');
+        app()->delete('/{id}', 'Admin\UserController@deleteUser');
+
+        app()->post('update', 'Admin\UserController@updateUser');
+        app()->post('create', 'Admin\UserController@createUser');
+
+    });
+
+});
+
+
+app()->get('test', function(){
+    echo '<pre>';
+    print_r(UserRole::where('name', 'admin')->get()->first()->description);
 });
