@@ -20,7 +20,7 @@ class CreateUsers extends Database
                 $table->string('phone', 100)->unique()->nullable();
                 $table->text('password');
                 $table->text('remember_token')->nullable();
-                $table->char('user_activated', 50)->nullable();
+                $table->char('status', 50)->nullable();
                 $table->char('role', 50)->default('subscriber');
                 $table->string('avatar')->default('/assets/images/user/avatar-2.jpg');
                 $table->text('about')->nullable();
