@@ -81,7 +81,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="mb-1">Secret Key</label>
-                            <input type="text" class="form-control" name="api_secret" placeholder="Enter the API secret key" required>
+                            <input type="password" class="form-control" name="api_secret" placeholder="Enter the API secret key" required>
                             <input type="text" name="api_id" value="{{$apiID}}" hidden>
                         </div>
 
