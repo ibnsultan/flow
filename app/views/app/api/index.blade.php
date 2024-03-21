@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group">
                             <label for="secret">Secret Key</label>
-                            <input type="text" class="form-control" name="api_secret" placeholder="Enter a passkey" required>
+                            <input type="password" class="form-control" name="api_secret" placeholder="Enter a passkey" required>
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary w-50">Create</button>
@@ -117,6 +117,37 @@
 			});
 
         })
+
+        function deleteApiKey(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/app/api/manage/' + id,
+                        type: 'DELETE',
+                        success: function(response) {
+                            if(response.status == 'success') {
+                                Swal.fire({ icon: 'success', title: 'Deleted!', text: response.message }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({ icon: 'error', title: 'Oops...', text: response.message })
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({ icon: 'error', title: 'Oops...', text: 'An error occurred. Please try again later.' });
+                        }
+                    });
+                }
+            })
+        }
 
     </script>
 @endsection
