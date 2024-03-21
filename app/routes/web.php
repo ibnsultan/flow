@@ -28,6 +28,8 @@ app()->group('app', function(){
         app()->get('manage', 'App\ApiController@index');
         app()->get('activity/{id}', 'App\ApiController@activity');
 
+        app()->delete('manage/{id}', 'App\ApiController@revokeKey');
+
         app()->post('copy', 'App\ApiController@copy');
         app()->post('create', 'App\ApiController@issueKey');  
         
