@@ -11,7 +11,7 @@
 |
 */
 app()->set404(function() {
-    $isApiRequest = strpos($_SERVER['REQUEST_URI'], '/api') !== false;
+    $isApiRequest = strpos($_SERVER['REQUEST_URI'], '/api') == 0;
     if ($isApiRequest) {
         response()->json(['status' => 'error', 'message' => 'Page not found'], 404);
     } else {
