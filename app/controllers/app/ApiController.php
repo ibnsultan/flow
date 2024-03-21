@@ -19,6 +19,11 @@ class ApiController extends Controller
         $this->apiActivities = new ApiActivity();
     }
 
+    /**
+     * Display a listing of all user's API keys.
+     *
+     * @return \Leaf\Core\Response
+     */
     public function index(){
 
         $data = [
@@ -30,6 +35,11 @@ class ApiController extends Controller
 
     }
 
+    /**
+     * Issue a new API key
+     *
+     * @return \Leaf\Core\Response
+     */
     public function issueKey(){
         
         $apiName = request()->get('api_name');
@@ -65,32 +75,42 @@ class ApiController extends Controller
 
     }
 
-    public function revokeKey(){
-        $tokenID = request()->get('token_id');
-        $this->apiKeys->delete($tokenID);
+    /**
+     * Delete an API key
+     *
+     * @return \Leaf\Core\Response
+     */
+    public function revokeKey($id){
+
+        $apiID = \App\Helpers\Helpers::decode($id);
+
+        if($apiID == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
+
+        try {
+            ApiKey::where('id', $apiID)->delete();
+            response()->json(['status' => 'success', 'message' => 'API key revoked']);
+            
+        } catch (\Throwable $e) {
+            (getenv('app_debug') == "true")? $message = $e->getMessage() : $message = "Failed to revoke the API key";
+            response()->json(['status' => 'error', 'message' => $message]);
+        }
+   
     }
 
+    /**
+     * Get all user's API keys
+     *
+     * @return object
+     */
     public function userKeys(){
         return $this->apiKeys->user(auth()->id());
     }
 
-    public function activity($id){
-        
-        $apiKeyID = \App\Helpers\Helpers::decode($id);
-
-        if($apiKeyID == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
-        
-        $data = [
-            'title' => 'Api Activity',
-            'apiID' => $id,
-            'apiKey' => $this->apiKeys->find($apiKeyID),
-            'activities' => $this->apiActivities->activities($apiKeyID)
-        ];
-
-        response()->markup(view('app.api.activity', $data));
-        
-    }
-
+    /**
+     * Copy an API key
+     *
+     * @return object
+     */
     public function copy(){
 
         $apiID = \App\Helpers\Helpers::decode(request()->get('api_id'));
@@ -108,6 +128,35 @@ class ApiController extends Controller
         response()->json(['status' => 'success', 'message' => $api->token]);
     }
 
+    /**
+     * Get all user's API activities
+     *
+     * @return \Leaf\Core\Response
+     */
+    public function activity($id){
+        
+        $apiKeyID = \App\Helpers\Helpers::decode($id);
+
+        if($apiKeyID == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
+        
+        $data = [
+            'title' => 'Api Activity',
+            'apiID' => $id,
+            'apiKey' => $this->apiKeys->find($apiKeyID),
+            'activities' => $this->apiActivities->activities($apiKeyID)
+        ];
+
+        response()->markup(view('app.api.activity', $data));
+        
+    }
+
+    /**
+     * Log API activity
+     *
+     * @param string $apiID
+     * @param string $status
+     * @return void
+     */
     public function logActivity($apiID, $status='pass'){
 
         $this->apiActivities->create([
