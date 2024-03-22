@@ -14,11 +14,11 @@ class CreateNotifications extends Database
     {
         if (!static::$capsule::schema()->hasTable('notifications')) :
             static::$capsule::schema()->create('notifications', function (Blueprint $table) {
-                $table->increments('id');
+                $table->id();
                 $table->string('title', 50);
                 $table->string('message', 150);
                 $table->integer('status', 11)->default(0);
-                $table->integer('user_id', 11);
+                $table->integer('user_id');
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             });
