@@ -14,9 +14,11 @@ class CreateSettings extends Database
     {
         if (!static::$capsule::schema()->hasTable('settings')) :
             static::$capsule::schema()->create('settings', function (Blueprint $table) {
-                $table->increments('id');
+                $table->id();
                 $table->string('key', 255);
                 $table->text('value')->nullable();
+                $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
+                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));;
             });
         endif;
     }

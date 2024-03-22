@@ -14,7 +14,7 @@ class CreateAnnouncements extends Database
     {
         if (!static::$capsule::schema()->hasTable('announcements')) :
             static::$capsule::schema()->create('announcements', function (Blueprint $table) {
-                $table->increments('id');
+                $table->id();
                 $table->string('title', 100);
                 $table->string('description', 300);
                 $table->text('cover')->nullable();

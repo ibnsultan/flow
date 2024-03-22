@@ -14,7 +14,7 @@ class CreateApiActivities extends Database
     {
         if (!static::$capsule::schema()->hasTable('api_activities')) :
             static::$capsule::schema()->create('api_activities', function (Blueprint $table) {
-                $table->increments('id');
+                $table->id();
                 $table->string('handler', 300);
                 $table->string('origin', 100);
                 $table->json('payload')->nullable();
