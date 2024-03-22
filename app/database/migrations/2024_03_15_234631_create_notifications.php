@@ -17,7 +17,7 @@ class CreateNotifications extends Database
                 $table->id();
                 $table->string('title', 50);
                 $table->string('message', 150);
-                $table->integer('status', 11)->default(0);
+                $table->integer('status')->default(0);
                 $table->integer('user_id');
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
