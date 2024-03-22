@@ -14,13 +14,13 @@ class CreateApiKeys extends Database
     {
         if (!static::$capsule::schema()->hasTable('api_keys')) :
             static::$capsule::schema()->create('api_keys', function (Blueprint $table) {
-                $table->increments('id');
+                $table->id();
                 $table->string('name', 50);
-                $table->integer('user_id', 11);
+                $table->integer('user_id');
                 $table->text('token');
                 $table->text('secret');
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
-                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));;
             });
         endif;
 
