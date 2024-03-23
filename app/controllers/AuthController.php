@@ -70,16 +70,20 @@ class AuthController extends Controller
     }
 
     /**
+     * @method reset
+     * @return void
+     */
+    public function reset(){
+        response()->markup(view('auth.reset'));
+    }
+
+    /**
      * @method logout
      * @return void
      */
     public static function logout(){
         auth()->logout();
         response()->redirect('/');
-    }
-
-    public function reset(){
-        response()->plain('Hey there, were u expecting something');
     }
 
 
