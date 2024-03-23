@@ -79,8 +79,7 @@
 
 @endsection
 @section('scripts')
-    <!--script src="/assets/js/plugins/ckeditor/classic/ckeditor.js"></script-->
-    <script src="https://cdn.jsdelivr.net/npm/ckeditor5-build-classic-base64-upload-adapter@1.0.1/build/ckeditor.min.js"></script>
+    <script src="/assets/js/plugins/ckeditor/classic/ckeditor.js"></script>
     
     <script>
         ClassicEditor
