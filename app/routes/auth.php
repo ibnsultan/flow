@@ -3,6 +3,7 @@
 use App\Controllers\AuthController;
 
 app()->redirect('/login', '/auth/login');
+app()->redirect('/reset', '/auth/reset');
 app()->redirect('/register', '/auth/register');
 
 app()->group('auth', function(){

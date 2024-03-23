@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\UserRole;
-
 app()->get('/', fn() => render('welcome'));
 
 
@@ -99,10 +97,4 @@ app()->group('admin', function(){
 
     });
 
-});
-
-
-app()->get('test', function(){
-    echo '<pre>';
-    print_r(UserRole::where('name', 'admin')->get()->first()->description);
 });
