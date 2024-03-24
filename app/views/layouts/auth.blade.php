@@ -26,7 +26,7 @@
 	</head>
 	<!-- [Head] end -->
 	<!-- [Body] Start -->
-	<body data-pc-preset="preset-3" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
+	<body data-pc-preset="preset-8" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
 		<!-- [ Pre-loader ] start -->
 		<div class="loader-bg">
 			<div class="loader-track">
@@ -67,6 +67,5 @@
 		<script>change_box_container('false');</script>
 		<script>layout_caption_change('true');</script>
 		<script>layout_rtl_change('false');</script>
-		<script>preset_change("preset-3");</script>
 	</body>
 </html>
