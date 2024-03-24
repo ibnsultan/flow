@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Controllers;
+
+use Leaf\Helpers\Password;
+use App\Helpers\MailSender;
 use App\Controllers\Controller;
 
 class AuthController extends Controller
@@ -70,11 +73,97 @@ class AuthController extends Controller
     }
 
     /**
+     * @method forgot
+     * @return void
+     */
+    public function forgot(){
+        response()->markup(view('auth.reset'));
+    }
+
+    /**
      * @method reset
      * @return void
      */
     public function reset(){
-        response()->markup(view('auth.reset'));
+        
+        try{
+            $email = request()->get('email');
+            
+            // get user data by email
+            $userData = $this->users->where('email', $email)->first();
+            if(!$userData)
+                exit(response()->json(['status'=>'error', 'message'=>'User with such email does not exist']));
+
+            // if reset_token is present and updated time is less than a minute
+            if($userData->remember_token && (time() - strtotime($userData->updated_at)) < 60)
+                exit(response()->json(['status'=>'error', 'message'=>'Password reset link already sent, check spam folder']));
+
+            // generate reset token
+            $resetToken = Password::hash($userData->id.time());
+            $this->users->where('email', $email)->update([
+                'remember_token' => $resetToken
+            ]);
+
+            // send reset email
+            $mail = new MailSender();
+            $mail->sendHtml(
+                'Password Reset',
+                view('mail.reset', ['name'=>$userData->fullname, 'token'=>base64_encode($resetToken)]),
+                $email, $userData->fullname
+            );
+
+            response()->json(['status'=>'success', 'message'=>'Password reset link sent to your email']);
+
+        }catch(\Exception $e){
+            
+            (getenv('app_debug') == 'true') ?
+                response()->json(['status'=>'error', 'message'=>$e->getMessage()]) :
+                response()->json(['status'=>'error', 'message'=>'An error occurred']);
+        }
+    }
+
+    /**
+     * @method changePassword
+     * @param string $token
+     * @return void
+     */
+    public function changePassword($token){
+        $token = base64_decode($token);
+        $userData = $this->users->where('remember_token', $token)->first();
+
+        if(!$userData)
+            exit(response()->page(getcwd().'/app/views/errors/400.html', 400));
+
+        // token issued more than 2 hours ago
+        if((time() - strtotime($userData->updated_at)) > 7200)
+            exit(response()->page(getcwd().'/app/views/errors/400.html', 400));
+
+        response()->markup(view('auth.password', ['token'=>$token]));
+    }
+
+    /**
+     * @method updatePassword
+     * @param string $token
+     * @return void
+     */
+    public function updatePassword($token){
+        $token = base64_decode($token);
+        $userData = $this->users->where('remember_token', $token)->first();
+
+        if(!$userData)
+            exit(response()->json(['status'=>'error', 'message'=>'Invalid token submitted']));
+
+        // token issued more than 2 hours ago
+        if((time() - strtotime($userData->updated_at)) > 7200)
+            exit(response()->json(['status'=>'error', 'message'=>'Token expired']));
+
+        $password = request()->get('password');
+        $this->users->where('remember_token', $token)->update([
+            'password' => Password::hash($password),
+            'remember_token' => null
+        ]);
+
+        response()->json(['status'=>'success', 'message'=>'Password updated successfully']);
     }
 
     /**
