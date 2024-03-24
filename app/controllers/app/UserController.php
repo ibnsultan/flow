@@ -2,6 +2,8 @@
 
 namespace App\Controllers\App;
 
+use Leaf\Helpers\Password;
+
 use App\Controllers\Controller;
 use App\Controllers\App\ApiController;
 
@@ -40,8 +42,6 @@ class UserController extends Controller
                 $file = $file['path'];
             }
 
-            // xit( $file ?? 'no file');
-
             $this->users->updateDetails(
                 auth()->id(),
                 [
@@ -49,7 +49,8 @@ class UserController extends Controller
                     'email' => request()->params('email', auth()->user()['email']),
                     'phone' => request()->params('phone', auth()->user()['phone']),
                     'about' => request()->params('bio', auth()->user()['about']),
-                    'avatar' => $file ?? auth()->user()['avatar']
+                    'avatar' => $file ?? auth()->user()['avatar'],
+                    'remember_token' => null
                 ]
             );
             response()->json(['status' => 'success', 'message' => 'Profile updated successfully']);
@@ -72,14 +73,14 @@ class UserController extends Controller
         if($oldPassword == $newPassword)
             exit( response()->json(['status' => 'error', 'message' => 'Old and new passwords cannot be the same']) );
 
-        if(\Leaf\Helpers\Password::verify($oldPassword, $this->users->find(1)->password)){
+        if(Password::verify($oldPassword, $this->users->find(1)->password)){
 
             try {
 
                 $this->users->updateDetails(
-                    auth()->id(),
-                    [
-                        'password' => \Leaf\Helpers\Password::hash($newPassword)
+                    auth()->id(), [
+                        'password' => Password::hash($newPassword),
+                        'remember_token' => null
                     ]
                 );
 
