@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
+
 use Leaf\Helpers\Password;
 use App\Helpers\MailSender;
 use App\Controllers\Controller;
@@ -57,6 +59,11 @@ class AuthController extends Controller
      * @return void
      */
     public static function register(){
+
+        // check if user exists
+        if(User::where('email', request()->get('email'))->first())
+            exit(response()->json(['status'=>'error', 'message'=>'User already exists']));
+        
         $data = auth()->register([
             'email' => request()->get('email'),
             'fullname' => request()->get('name'),
@@ -70,6 +77,7 @@ class AuthController extends Controller
         }
 
         response()->json($message);
+
     }
 
     /**
