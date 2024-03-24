@@ -22,20 +22,16 @@
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
 							</div>
                             
-                            <div class="row mt-4">
-                                <!-- go back to login -->
-                                <div class="col-6">
-                                    <a href="/login" class="btn btn-light w-100 rounded">
-                                        {{_('Back to Login')}}
-                                    </a>
-                                </div>
+							<!-- form submission -->
+							<div class="d-grid mt-4">
+								<button type="submit" class="btn btn-primary">{{_('Reset Password')}}</button>
+							</div>
 
-                                <!-- form submission -->
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-primary w-100 rounded">
-                                        {{_('Reset Password')}}
-                                    </button>
-                                </div>
+                            <!-- go back to login -->
+                            <div class="d-grid mt-2">
+                                <a href="/login" class="btn btn-light">
+                                    {{_('Back to Login')}}
+                                </a>
                             </div>
 
 							<!-- create account -->
@@ -50,4 +46,64 @@
 			</div>
 		</div>
 	</div>
+@endsection
+@section('scripts')
+
+	<script>
+
+		$(document).ready(function() {
+
+			// form submission
+			$('form[name="reset"]').submit(function(e) {
+				e.preventDefault();
+
+				// disable button to prevent multiple clicks
+				$('button[type="submit"]').attr('disabled', true).html('Processing...');
+
+				var email = $('#email').val();
+				$.ajax({
+					url: '/auth/reset',
+					type: 'POST',
+					data: {
+						email: email
+					},
+					success: function(response) {
+						if (response.status == 'success') {
+							Swal.fire({ icon: 'error', title: 'Success!', text: response.message }).then((result) => {
+								
+								// set 1 minute countdown and reenable button
+								var count = 60;
+								var countdown = setInterval(function() {
+									count--;
+									$('button[type="submit"]').html('Reset Password (' + count + ')');
+									if (count == 0) {
+										clearInterval(countdown);
+										$('button[type="submit"]').attr('disabled', false).html('Reset Password');
+									}
+								}, 1000);
+								
+							});
+						} else {
+							Swal.fire({ icon: 'error', title: 'Error!', text: response.message })
+
+							// enable button
+							$('button[type="submit"]').attr('disabled', false).html('Reset Password');
+						}
+					},
+					error: function() {
+						Swal.fire({
+							icon: 'error', title: 'Error!',
+							text: 'An error occurred while processing your request. Please try again.'
+						})
+
+						// enable button
+						$('button[type="submit"]').attr('disabled', false).html('Reset Password');
+					}
+				});
+			});
+
+		});
+
+	</script>
+
 @endsection
