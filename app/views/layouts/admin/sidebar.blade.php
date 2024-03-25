@@ -133,7 +133,7 @@
                     </a>
                     <ul class="pc-submenu">
                         <li class="pc-item">
-                            <a href="/admin/settings" class="pc-link" onclick="underDevelopment()">
+                            <a href="/admin/settings/general" class="pc-link">
                                 <span class="pc-mtext">{{_('General')}}</span>
                             </a>
                         </li>
