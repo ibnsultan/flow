@@ -97,4 +97,14 @@ app()->group('admin', function(){
 
     });
 
+    app()->group('settings', function(){
+
+        app()->get('general', 'Admin\SettingController@general');
+        app()->get('security', 'Admin\SettingController@security');
+
+        app()->post('general', 'Admin\SettingController@updateGeneral');
+        app()->post('security', 'Admin\SettingController@updateSecurity');
+
+    });
+
 });
