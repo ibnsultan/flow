@@ -69,7 +69,7 @@
 					},
 					success: function(response) {
 						if (response.status == 'success') {
-							Swal.fire({ icon: 'error', title: 'Success!', text: response.message }).then((result) => {
+							Swal.fire({ icon: 'success', title: 'Success!', text: response.message }).then((result) => {
 								
 								// set 1 minute countdown and reenable button
 								var count = 60;
