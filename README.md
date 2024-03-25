@@ -6,15 +6,18 @@ Flow's purpose is empower developers to create high-quality web applications wit
 
 <img src="https://raw.githubusercontent.com/ibnsultan/flow/8bbb403b537ca99ff7a602e1dc6eab5802c8d6a1/storage/uploads/brand/banner.svg">
 
-**NOTE**: Flow is currently under active development and is not ready for use
-
 ## Features
 
 - [X] Authentication
 - [X] Announcements and Notification
-- [ ] Blogging & CMS
+- [X] Blogging & CMS
 - [X] API & developer tools
   - [X] API Keys Issue
   - [X] API requests monitor (Beta)
 - [ ] Storage & File management
 - [X] Profile management
+- [X] Mailing
+
+## NOTE
+
+Flow is currently under active development and is not ready for production use
