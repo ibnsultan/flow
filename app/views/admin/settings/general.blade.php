@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form name="updateSettings" method="POST">
+                            <form name="updateSettings" method="POST" enctype="multipart/form-data">
                                 <div class="row">
 
                                     <! -- Site Name -->
@@ -55,7 +55,7 @@
                                                         <a href="javascript:void(0)" data-value="preset-7"><i class="ti ti-check"></i></a>
                                                         <a href="javascript:void(0)" data-value="preset-8"><i class="ti ti-check"></i></a>
                                                         <a href="javascript:void(0)" data-value="preset-9"><i class="ti ti-check"></i></a>
-                                                        <a href="javascript:void(0)" class="active" data-value="preset-10"><i class="ti ti-check"></i></a>
+                                                        <a href="javascript:void(0)" data-value="preset-10"><i class="ti ti-check"></i></a>
                                                     </div>
                                                 </li>
                                             </div>
@@ -66,18 +66,18 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label" >{{_('Default Layout')}}</label>
-                                            <input type="text" name="default_layout" id="default_layout" value="{{ settings->get('default_layout') }}" hidden/>
+                                            <input type="text" name="theme_layout" id="default_layout" value="{{ settings->get('theme_layout') }}" hidden/>
                                             <div class="row theme-direction">
                                                 <div class="col-6">
                                                     <div class="d-grid">
-                                                        <button type="button" class="preset-btn layout-preset btn active" data-value="false">
+                                                        <button type="button" class="preset-btn layout-preset btn" data-value="false" data-input="ltr">
                                                             <img src="/assets/images/customizer/img-layout-1.svg" alt="img" class="img-fluid h-100">
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="d-grid">
-                                                        <button type="button" class="preset-btn layout-preset btn" data-value="true">
+                                                        <button type="button" class="preset-btn layout-preset btn" data-value="true" data-input="rtl">
                                                             <img src="/assets/images/customizer/img-layout-2.svg" alt="img" class="img-fluid h-100">
                                                         </button>
                                                     </div>
@@ -138,19 +138,51 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function() {
 
-            $('.preset-color a').on('click', function() {
-                $('.preset-color a').removeClass('active');
-                $(this).addClass('active');
-                
-                $('#theme_preset').val($(this).data('value'));
-            });
-
-            $('.layout-preset').on('click', function(){
-                $('#default_layout').val($(this).data('value'));
-            });
-
+        $('.preset-color a').on('click', function() {
+            $('.preset-color a').removeClass('active');
+            $(this).addClass('active');
+            
+            $('#theme_preset').val($(this).data('value'));
         });
+
+        $('.layout-preset').on('click', function(){
+            $('#default_layout').val($(this).data('input'));
+
+            // change active class
+            $('.layout-preset').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('form[name="updateSettings"]').on('submit', function(e) {
+            e.preventDefault();
+
+            // disable btn and is loading
+            $('button[type="submit"]').attr('disabled', true).html('Updating...');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/admin/settings/general',
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({ icon: 'success', title: 'Success', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }else{
+                        Swal.fire({ icon: 'error', title: 'Error', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }
+                },
+                error: function(err) {
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred. Please try again later.' })
+                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                }
+            });
+        });
+
     </script>
 @endsection
