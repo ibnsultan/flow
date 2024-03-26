@@ -99,11 +99,11 @@ app()->group('admin', function(){
 
     app()->group('settings', function(){
 
+        app()->get('seo', 'Admin\SettingController@seo');
         app()->get('general', 'Admin\SettingController@general');
-        app()->get('security', 'Admin\SettingController@security');
 
+        app()->post('seo', 'Admin\SettingController@updateSeo');
         app()->post('general', 'Admin\SettingController@updateGeneral');
-        app()->post('security', 'Admin\SettingController@updateSecurity');
 
     });
 
