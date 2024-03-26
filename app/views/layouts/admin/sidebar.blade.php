@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a href="/admin/settings/seo" class="pc-link" onclick="underDevelopment()">
+                            <a href="/admin/settings/seo" class="pc-link">
                                 <span class="pc-mtext">{{_('SEO')}}</span>
                             </a>
                         </li>
