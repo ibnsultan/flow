@@ -238,34 +238,19 @@
                 contentType: false,
                 success: function(response) {
                     if(response.status == 'success'){
-                        Swal.fire(
-                            'Success',
-                            response.message,
-                            'success'
-                        )
-
+                        Swal.fire( 'Success', response.message, 'success')
                         location.reload();
                     }else{
-                        Swal.fire(
-                            'Error',
-                            response.message,
-                            'error'
-                        )
-
+                        Swal.fire( 'Error', response.message, 'error' )
                         $('button[type="submit"]').attr('disabled', false).html('Update Profile');
                     }
                 },
                 error: function(err) {
-                    Swal.fire(
-                        'Error',
-                        'An error occurred while processing your request',
-                        'error'
-                    )
+                    Swal.fire( 'Error', 'An error occurred while processing your request', 'error')
 
                     $('button[type="submit"]').attr('disabled', false).html('Update Profile');
                 }
             });
-
         }
 
         // image avatar upload input and preview
