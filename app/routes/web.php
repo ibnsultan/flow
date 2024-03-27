@@ -97,13 +97,26 @@ app()->group('admin', function(){
 
     });
 
+
+    # settings routes
     app()->group('settings', function(){
 
         app()->get('seo', 'Admin\SettingController@seo');
         app()->get('general', 'Admin\SettingController@general');
+        app()->get('modules', 'Admin\SettingController@modules');
+        app()->get('translation', 'Admin\SettingController@translation');
 
         app()->post('seo', 'Admin\SettingController@updateSeo');
         app()->post('general', 'Admin\SettingController@updateGeneral');
+        app()->post('modules', 'Admin\SettingController@updateModules');
+        app()->post('translation', 'Admin\SettingController@updateTranslation');
+
+    });
+
+    # translation routes
+    app()->group('translation', function(){
+
+        app()->get('language/{id}', 'Admin\TranslationController@display');        
 
     });
 
