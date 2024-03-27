@@ -143,8 +143,14 @@
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a href="/admin/settings/translations" class="pc-link" onclick="underDevelopment()">
+                            <a href="/admin/settings/translation" class="pc-link">
                                 <span class="pc-mtext">{{_('Translations')}}</span>
+                            </a>
+                        </li>
+                        <!-- modules -->
+                        <li class="pc-item">
+                            <a href="/admin/settings/modules" class="pc-link">
+                                <span class="pc-mtext">{{_('Modules')}}</span>
                             </a>
                         </li>
                     </ul>
