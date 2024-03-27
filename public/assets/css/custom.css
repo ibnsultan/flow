@@ -39,6 +39,14 @@
     background: transparent !important;
 }
 
+div.dt-container.dt-empty-footer tbody>tr:last-child>* {
+    border-bottom: 1px solid #e7eaee !important;
+}
+
+.dt-layout-row.dt-layout-table{
+    margin: 1rem auto;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
