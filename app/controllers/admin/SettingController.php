@@ -3,8 +3,9 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Setting;
-use App\Helpers\Helpers;
+use App\Models\Language;
 
+use App\Helpers\Helpers;
 use App\Controllers\Controller;
 
 class SettingController extends Controller
@@ -123,4 +124,31 @@ class SettingController extends Controller
         }
 
     }
+
+    /**
+     * Modules settings.
+     * 
+     * @return void
+     */
+    public function modules(){
+        
+        response()->markup(view('admin.settings.modules', [
+            'title' => 'Modules Settings',
+        ]));
+
+    }
+
+    /**
+     * Translation settings.
+     * 
+     * @return void
+     */
+    public function translation(){
+        
+        response()->markup(view('admin.translation.languages', [
+            'title' => 'Languages & Translations',
+            'languages' => Language::all()
+        ]));
+    }
+
 }
