@@ -71,6 +71,14 @@
 					confirmButtonText: 'OK'
 				});
 			}
+
+			function injectStylesheet(url) {
+				var link = document.createElement('link');
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = url;
+				document.head.appendChild(link);
+			}
 		</script>
 
 		<!--script>layout_change('{{cookie()->get('theme_color') ?? 'light' }}');</script-->
