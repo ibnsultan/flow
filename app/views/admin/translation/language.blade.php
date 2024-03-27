@@ -74,8 +74,8 @@
                 lengthMenu: [100, 250, 500, 1000],
                 order: [[0, 'asc']],
                 language: {
-                    search: '{{_('Search')}}',
-                    lengthMenu: '{{_('Show')}} _MENU_ {{_('entries')}}',
+                    search: '{{_('Search')}} &nbsp;',
+                    lengthMenu: '{{_('Show')}} &nbsp; _MENU_',
                     info: '{{_('Showing')}} _START_ {{_('to')}} _END_ {{_('of')}} _TOTAL_ {{_('entries')}}',
                     infoEmpty: '{{_('No entries found')}}',
                     zeroRecords: '{{_('No matching records found')}}',
