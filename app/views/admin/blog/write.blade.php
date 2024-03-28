@@ -56,7 +56,7 @@
 
                                 <div class="form-group user-upload rounded w-100">
                                     <img src="/assets/images/placeholder.jpg" alt="Image Placeholder" id="imagePreview" class="w-100">
-                                    <label for="cover" id="coverUpload" class="img-avtar-upload" onclick="document.getElementById('cover').click()">
+                                    <label for="cover" id="coverUpload" class="img-avtar-upload" >
                                         <i class="ti ti-camera f-24 mb-1"></i>
                                         <span>Upload</span>
                                     </label>
