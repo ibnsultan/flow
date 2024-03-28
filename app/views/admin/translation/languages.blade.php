@@ -41,12 +41,21 @@
                                                 <tr>
                                                     <td>{{ $language->name }}</td>
                                                     <td class="text-center">{{ strtoupper($language->iso) }}</td>
-                                                    <td class="text-center">{{ strtoupper($language->layout) }}</td>
+                                                    <td class="text-center cursor-pointer"
+                                                        onclick="swalLangLayout('{{ \App\Helpers\Helpers::encode($language->id) }}')">
+                                                        {{ strtoupper($language->layout) }}
+                                                    </td>
                                                     <td class="text-center">
                                                         @if($language->status == 'active')
-                                                            <span class="badge bg-success">{{_('Active')}}</span>
+                                                            <span class="badge bg-success cursor-pointer" 
+                                                                onclick="swalLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
+                                                                {{_('Active')}}
+                                                            </span>
                                                         @else
-                                                            <span class="badge bg-danger">{{_('Inactive')}}</span>
+                                                            <span class="badge bg-danger cursor-pointer" 
+                                                                onclick="swalLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
+                                                                {{_('Inactive')}}
+                                                            </span>
                                                         @endif
                                                     </td>
                                                     <td class="text-end">
@@ -54,13 +63,6 @@
                                                             class="btn btn-primary rounded btn-sm">
                                                             <i class="ti ti-pencil"></i>
                                                         </a>
-                                                        <!-- options modal -->
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-secondary rounded btn-sm" 
-                                                                data-bs-toggle="modal" data-bs-target="languageOptions" data-id="{{ $language->id }}">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </button>
-                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -82,20 +84,6 @@
         </div>
     </div>
 
-    <!-- language options modal -->
-    <div class="modal fade" id="languageOptions" tabindex="-1" aria-labelledby="languageOptionsLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-center">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="languageOptionsLabel">{{_('Language Options')}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('scripts')
 
@@ -110,19 +98,68 @@
         });
 
         // on language options modal
-        $('#languageOptions').on('show.bs.modal', function (event) {
-            let button = $(event.relatedTarget);
-            let id = button.data('id');
-            let modal = $(this);
-
-            $.ajax({
-                url: '/admin/translation/language/' + id,
-                method: 'get',
-                success: function(response) {
-                    modal.find('.modal-body').html(response);
+        function swalLangLayout(id){
+            Swal.fire({
+                title: 'Select Layout',
+                input: 'select',
+                inputOptions: { 'ltr': 'LTR', 'rtl': 'RTL' },
+                inputAttributes: { autocapitalize: 'off' },
+                showCancelButton: true,
+                confirmButtonText: 'Update',
+                showLoaderOnConfirm: true,
+                preConfirm: (layout) => {
+                    $.ajax({
+                        url: '/admin/translation/layout',
+                        method: 'post',
+                        data: {
+                            id: id,
+                            layout: layout
+                        },
+                        success: function(response){
+                            if(response.status == 'success'){
+                                Swal.fire({ title: 'Success', text: 'Language layout updated successfully.', icon: 'success' }).then(() => {
+                                    $(`td[onclick="swalLangLayout('${id}']`).html(layout.toUpperCase());
+                                });
+                            }else{
+                                Swal.fire({ title: 'Error', text: 'An error occurred. Please try again.', icon: 'error' });
+                            }
+                        }
+                    });
                 }
             });
-        });
+        }
+
+        function swalLangStatus(id){
+            Swal.fire({
+                title: 'Select Status',
+                input: 'select',
+                inputOptions: { 'active': 'Active', 'inactive': 'Inactive' },
+                inputAttributes: { autocapitalize: 'off' },
+                showCancelButton: true,
+                confirmButtonText: 'Update',
+                showLoaderOnConfirm: true,
+                preConfirm: (status) => {
+                    $.ajax({
+                        url: '/admin/translation/status',
+                        method: 'post',
+                        data: {
+                            id: id,
+                            status: status
+                        },
+                        success: function(response){
+                            if(response.status == 'success'){
+                                Swal.fire({ title: 'Success', text: 'Language status updated successfully.', icon: 'success' }).then(() => {
+                                    $(`td[onclick="swalLangStatus('${id}']`).html(status == 'active' ? '<span class="badge bg-success cursor-pointer" onclick="swalLangStatus(\''+id+'\')">Active</span>' : '<span class="badge bg-danger cursor-pointer" onclick="swalLangStatus(\''+id+'\')">Inactive</span>');
+                                });
+                            }else{
+                                Swal.fire({ title: 'Error', text: 'An error occurred. Please try again.', icon: 'error' });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        
 
     </script>
 
