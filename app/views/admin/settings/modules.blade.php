@@ -104,7 +104,15 @@
             // disable btn and is loading
             $('button[type="submit"]').attr('disabled', true).html('Updating...');
 
-            let formData = new FormData(this);
+            // get all checkboxes, if checked, set value to true, else false
+            var formData = new FormData(this);
+            $('input[type="checkbox"]').each(function() {
+                if($(this).is(':checked')){
+                    formData.append($(this).attr('name'), 'true');
+                }else{
+                    formData.append($(this).attr('name'), 'false');
+                }
+            });
 
             $.ajax({
                 url: '/admin/settings/modules',
