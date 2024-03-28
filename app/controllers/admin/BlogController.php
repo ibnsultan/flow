@@ -94,14 +94,21 @@ class BlogController extends Controller
 
         }
 
-        ( request()->get('tags') ) ? $tags = explode(',', str_replace(' ', '', request()->get('tags'))) : $tags = null;
+        ( request()->get('tags') ) ?
+            $tags = explode(',', str_replace(' ', '', request()->get('tags'))) : $tags = null;
 
+        // extract images from the content
+        $content = extract_images_from_html(
+            request()->get('content'),'storage/app/uploads/blog/');
+
+        // reencode the content
+        $content = htmlentities($content);
 
         try {
             
             BlogArticle::create([
                 'title' => request()->get('title'),
-                'content' => request()->get('content'),
+                'content' => $content,
                 'category' => request()->get('category'),
                 'tags' => $tags,
                 'author' => auth()->id(),
@@ -127,7 +134,8 @@ class BlogController extends Controller
     {
 
         $article_id = \App\Helpers\Helpers::decode(request()->get('article_id'));
-        if($article_id == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
+        if($article_id == '')
+            exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
         $article = BlogArticle::find($article_id);
 
@@ -149,11 +157,18 @@ class BlogController extends Controller
 
         ( request()->get('tags') ) ? $tags = explode(',', str_replace(' ', '', request()->get('tags'))) : $tags = null;
 
+        // extract images from the content
+        $content = extract_images_from_html(
+            request()->get('content'),'storage/app/uploads/blog/');
+
+        // reencode the content
+        $content = htmlentities($content);
+
         try {
             
             $article->update([
                 'title' => request()->get('title'),
-                'content' => request()->get('content'),
+                'content' => $content,
                 'category' => request()->get('category'),
                 'tags' => $tags,
                 'cover' => $fileUploaded['path'] ?? $article->cover
