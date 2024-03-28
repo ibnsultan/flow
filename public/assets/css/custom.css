@@ -47,6 +47,11 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
     margin: 1rem auto;
 }
 
+/* Cursor */
+.cursor-pointer{
+    cursor: pointer;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
