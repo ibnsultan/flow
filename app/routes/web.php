@@ -120,4 +120,18 @@ app()->group('admin', function(){
 
     });
 
+
+    # pages routes
+    app()->group('pages', function(){
+
+        app()->get('/', 'Admin\PageController@index');
+        app()->get('add', 'Admin\PageController@add');
+        app()->get('edit/{id}', 'Admin\PageController@edit');
+        app()->get('delete/{id}', 'Admin\PageController@delete');
+
+        app()->post('add', 'Admin\PageController@addPage');
+        app()->post('update/{id}', 'Admin\PageController@updatePage');
+
+    });
+
 });
