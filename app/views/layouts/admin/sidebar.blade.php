@@ -72,6 +72,29 @@
                     </ul>
                 </li>
 
+                <!-- pages -->
+                <li class="pc-item pc-hasmenu">
+                    <a href="javascript:void(0)" class="pc-link">
+                        <span class="pc-micon">
+                            <i data-feather="file"></i>
+                        </span>
+                        <span class="pc-mtext">{{_('Pages')}}</span>
+                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                    </a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item">
+                            <a href="/admin/pages" class="pc-link">
+                                <span class="pc-mtext">{{_('All Pages')}}</span>
+                            </a>
+                        </li>
+                        <li class="pc-item">
+                            <a href="/admin/pages/add" class="pc-link">
+                                <span class="pc-mtext">{{_('Add Page')}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="pc-item pc-caption">
                     <label>{{_('Management')}}</label>
                 </li>
