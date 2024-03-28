@@ -96,3 +96,36 @@ function _($key){
     return $translation[$key] ?? $key;
 
 }
+
+/*
+|--------------------------------------------------------------------------
+| Extract Images from HTML
+|--------------------------------------------------------------------------
+|
+| This function is used to extract images from an HTML string.
+|
+*/
+function extract_images_from_html($html_content, $output_dir, $encoded = true)
+{
+    if($encoded)
+        $html_content = html_entity_decode($html_content);
+
+    // Regular expression to match base64 encoded image data
+    $pattern = '/<img.*?src="data:image\/(.*?);base64,(.*?)".*?>/si';
+    preg_match_all($pattern, $html_content, $matches, PREG_SET_ORDER);
+
+    // Iterate through matched image data
+    foreach ($matches as $match) {
+        
+        $image_format = $match[1];
+        $image_data = base64_decode($match[2]);
+        $image_filename = uniqid() . '.' . $image_format;
+
+        file_put_contents($output_dir . $image_filename, $image_data);
+        $public_dir = str_replace('storage/app', '/storage', $output_dir);
+        $html_content = str_replace($match[0], '<img src="' . $public_dir  . $image_filename . '">', $html_content);
+
+    }
+
+    return $html_content;
+}
