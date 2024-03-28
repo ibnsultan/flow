@@ -139,6 +139,33 @@ class SettingController extends Controller
     }
 
     /**
+     * Update the modules settings.
+     * 
+     * @return void
+     */
+    public function updateModules(){
+
+        try{
+
+            // update settings
+            foreach($_REQUEST as $key => $value){
+                
+                $sanitizedValue = request()->get($key);
+                Setting::where('key', $key)->update(['value' => $sanitizedValue]);
+
+            }
+
+            response()->json(['status' => 'success', 'message' => 'Settings updated successfully']);
+
+        }catch (\Exception $e) {
+            (getenv('app_debug') == "true")? 
+                response()->json(['status' => 'error', 'message' => $e->getMessage()]) :
+                response()->json(['status' => 'error', 'message' => 'Failed to update settings']);
+        }
+
+    }
+
+    /**
      * Translation settings.
      * 
      * @return void
