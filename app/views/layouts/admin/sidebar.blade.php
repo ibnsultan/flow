@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
 
         <div class="m-header">
-            <a href="#" class="b-brand text-primary">
+            <a href="javascript:void(0)" class="b-brand text-primary">
                 <img src="{{ settings->get('logo_dark') }}" class="w-75"/>
                 <span class="badge bg-light-success rounded-pill ms-2 theme-version">{{ settings->get('system_version') }}</span>
             </a>
