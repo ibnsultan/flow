@@ -81,8 +81,30 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="col-md-6 col-xxl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar avtar-s bg-light-info">
+                                        <i data-feather="file" class="text-info"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="mb-0">{{ _('Articles Written') }}</h6>
+                                </div>
+                            </div>
+                            <div class="p-3 mt-0">
+                                <div class="mt-3 row align-items-center">
+                                    <h1 class="mb-0 text-start">{{ $stats['pages'] }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </div>
-@endsection
+@endsection 
