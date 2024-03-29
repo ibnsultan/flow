@@ -69,7 +69,7 @@
     
     <script>
         ClassicEditor
-            .create( document.querySelector( '#classic-editor' ), {} )
+            .create( document.querySelector( '#classic-editor' ) )
             .catch( error => {console.error( error )
         });
         
@@ -118,4 +118,4 @@
 
 
     </script>
-@endsection
+@endsection 
