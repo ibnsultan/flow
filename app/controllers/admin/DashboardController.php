@@ -2,6 +2,11 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\ApiKey;
+use App\Models\BlogArticle;
+use App\Models\User;
+use App\Models\Page;
+
 use App\Controllers\Controller;
 
 class DashboardController extends Controller
@@ -17,9 +22,10 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'current_user' => auth()->user(),
             'stats' => [
-                'users' => \App\Models\User::count(),
-                'api_keys' => \App\Models\ApiKey::count(),
-                'articles' => \App\Models\BlogArticle::count()
+                'users' => User::count(),
+                'api_keys' => ApiKey::count(),
+                'articles' => BlogArticle::count(),
+                'pages' => Page::count(),
             ],
         ];
 
