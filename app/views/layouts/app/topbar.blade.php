@@ -66,70 +66,77 @@
                         </a>
                     </div>
                 </li>
-                <li class="pc-h-item">
-                    <a href="javascript:void(0)" class="pc-head-link me-0" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-flash"></use>
-                        </svg>
-                    </a>
-                </li>
+
+                @if(settings->get('allow_announcement') == 'true')
+                    <li class="pc-h-item">
+                        <a href="javascript:void(0)" class="pc-head-link me-0" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-flash"></use>
+                            </svg>
+                        </a>
+                    </li>
+                @endif
                 
+
+                @if(settings->get('allow_notification') == 'true')
                 
-                @php // Notifications Section
-                    $notifications = new App\Controllers\App\NotificationsController();
-                    $notificationCount = count($notifications->userNotifications());
-                @endphp
-                <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none me-0"
-                        data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" >
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-notification"></use>
-                        </svg>
-                        <span class="badge bg-success pc-h-badge">{{ $notificationCount }}</span>
-                    </a>
+                    @php // Notifications Section
+                        $notifications = new App\Controllers\App\NotificationsController();
+                        $notificationCount = count($notifications->userNotifications());
+                    @endphp
+                    <li class="dropdown pc-h-item">
+                        <a class="pc-head-link dropdown-toggle arrow-none me-0"
+                            data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" >
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-notification"></use>
+                            </svg>
+                            <span class="badge bg-success pc-h-badge">{{ $notificationCount }}</span>
+                        </a>
 
-                    <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-                        <div class="dropdown-header d-flex align-items-center justify-content-between">
-                            <h5 class="m-0">{{_('Notifications')}}</h5>
-                            @if( $notificationCount )
-                                <a href="javascript:void(0)" class="btn btn-link btn-sm">Mark all read</a>
-                            @endif
-                        </div>
-                        <div class="dropdown-body text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
+                        <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
+                            <div class="dropdown-header d-flex align-items-center justify-content-between">
+                                <h5 class="m-0">{{_('Notifications')}}</h5>
+                                @if( $notificationCount )
+                                    <a href="javascript:void(0)" class="btn btn-link btn-sm">Mark all read</a>
+                                @endif
+                            </div>
+                            <div class="dropdown-body text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
 
-                            @if( $notificationCount )
+                                @if( $notificationCount )
 
-                                @foreach ($notifications->userNotifications() as $notification)
-                                    <div class="card mb-2">
-                                        <div class="card-body">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <span class="float-end text-sm text-muted">{{ $notification->created_at->diffForHumans() }}</span>
-                                                    <h5 class="text-body mb-2">{{ $notification->title }}</h5>
-                                                    <p class="mb-0">{{ $notification->message }} </p>
+                                    @foreach ($notifications->userNotifications() as $notification)
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="flex-shrink-0">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <span class="float-end text-sm text-muted">{{ $notification->created_at->diffForHumans() }}</span>
+                                                        <h5 class="text-body mb-2">{{ $notification->title }}</h5>
+                                                        <p class="mb-0">{{ $notification->message }} </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    @endforeach
+
+                                @else
+
+                                    <div class="text-center py-2">
+                                        <p class="text-muted">No new notifications</p>
                                     </div>
-                                @endforeach
 
-                            @else
+                                @endif
 
-                                <div class="text-center py-2">
-                                    <p class="text-muted">No new notifications</p>
-                                </div>
-
-                            @endif
-
+                            </div>
+                            <div class="text-center py-2">
+                                <a href="javascript:void(0)" class="link-danger">Clear all Notifications</a>
+                            </div>
                         </div>
-                        <div class="text-center py-2">
-                            <a href="javascript:void(0)" class="link-danger">Clear all Notifications</a>
-                        </div>
-                    </div>
-                    
-                </li>
+                        
+                    </li>
+
+                @endif
 
                 <!-- user profile section -->
                 <li class="dropdown pc-h-item header-user-profile">
