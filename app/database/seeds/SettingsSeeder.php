@@ -17,12 +17,12 @@ class SettingsSeeder extends Seeder
         $setting = new Setting();
         $settings = array(
             array(
-                "key" => "logo_light",
-                "value" => "/assets/images/brand/logo.png",
+                "key" => "site_name",
+                "value" => "Flow",
             ),
             array(
-                "key" => "logo_dark",
-                "value" => "/assets/images/brand/logo.png",
+                "key" => "site_url",
+                "value" => "https://flow.test",
             ),
             array(
                 "key" => "favicon",
@@ -33,7 +33,7 @@ class SettingsSeeder extends Seeder
                 "value" => "alpha",
             ),
             array(
-                "key" => "default_layout",
+                "key" => "theme_layout",
                 "value" => "ltr",
             ),
             array(
@@ -42,14 +42,58 @@ class SettingsSeeder extends Seeder
             ),
             array(
                 "key" => "allow_blog",
-                "value" => "true",
+                "value" => "false",
             ),
             array(
                 "key" => "allow_apis",
                 "value" => "true",
             ),
+            array(
+                "key" => "theme_contrast",
+                "value" => "true",
+            ),
+            array(
+                "key" => "theme_color",
+                "value" => "preset-9",
+            ),
+            array(
+                "key" => "logo_light",
+                "value" => "/assets/images/brand/logo.png",
+            ),
+            array(
+                "key" => "logo_dark",
+                "value" => "/assets/images/brand/logo.png",
+            ),
+            array(
+                "key" => "meta_keywords",
+                "value" => NULL,
+            ),
+            array(
+                "key" => "meta_image",
+                "value" => NULL,
+            ),
+            array(
+                "key" => "meta_description",
+                "value" => NULL,
+            ),
+            array(
+                "key" => "user_confirm",
+                "value" => "false",
+            ),
+            array(
+                "key" => "allow_notification",
+                "value" => "true",
+            ),
+            array(
+                "key" => "allow_announcement",
+                "value" => "true",
+            ),
+            array(
+                "key" => "allow_registration",
+                "value" => "false",
+            ),
         );
-
+        
         foreach($settings as $entry) {
             $setting->create($entry);
         }
