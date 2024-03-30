@@ -22,6 +22,10 @@
                             <form name="updateSeo" method="POST" enctype="multipart/form-data">
                                 <div class="row">
 
+                                    <div class="col-md-12 my-2">
+                                        <h6 class="card-title">Notifications</h6>
+                                    </div>
+
                                     <!-- allow announcements -->
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
@@ -46,6 +50,10 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12 my-2">
+                                        <h6 class="card-title">CMS</h6>
+                                    </div>
+
                                     <!-- allow blog -->
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
@@ -56,6 +64,10 @@
                                                 </label>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="col-md-12 my-2">
+                                        <h6 class="card-title">Authentication</h6>
                                     </div>
 
                                     <!-- allow api -->
@@ -123,7 +135,7 @@
                 success: function(response) {
                     if(response.status == 'success'){
                         Swal.fire({ icon: 'success', title: 'Success', text: response.message })
-                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                            .then(() => { location.reload(); })
                     }else{
                         Swal.fire({ icon: 'error', title: 'Error', text: response.message })
                         $('button[type="submit"]').attr('disabled', false).html('Update Profile');
