@@ -206,6 +206,31 @@ switch(url) {
                 console.error('Failed to load CKEditor:', error);
         });
 
+        // on submit form
+        document.forms.addArticle.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: '/admin/blog/article/update',
+                type: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if(response.status == 'success') {
+                        Swal.fire( 'Success!', 'The article has been Updated Succesfully.', 'success' )
+                    }else{
+                        Swal.fire( 'Error!', 'The article could not be updated.', 'error' );
+                    }
+                },
+                error: function(response) {
+                    Swal.fire( 'Error!', 'The article could not be updated.', 'error' );
+                }
+            });
+
+        }); break
+
 
 
     default:
