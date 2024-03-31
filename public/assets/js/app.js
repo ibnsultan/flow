@@ -1,1 +1,40 @@
-console.log('Hello World from app.js');
+layout_sidebar_change('false')
+change_box_container('false')
+layout_caption_change('true')
+
+function change_theme_color(color){
+    document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
+    layout_change(color);
+}
+
+function underDevelopment(){
+    // prevent default action
+    event.preventDefault();
+
+    Swal.fire({
+        title: 'Under Development',
+        text: 'This feature is under development and will be available soon.',
+        icon: 'info',
+        confirmButtonText: 'OK'
+    });
+}
+
+function injectStylesheet(url) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = url;
+    document.head.appendChild(link);
+}
+
+function injectScript(url) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+// layout_change('{{cookie()->get('theme_color') ?? 'light' }}');
