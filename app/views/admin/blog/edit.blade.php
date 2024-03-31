@@ -85,27 +85,8 @@
 
 @endsection
 @section('scripts')
-    <script src="/assets/js/plugins/ckeditor/classic/ckeditor.js"></script>
 
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#classic-editor' ), {             
-
-            } )
-            .catch( error => {
-                console.error( error );
-        });
-        
-        // TODO: listens to ckeditor changes instead of interval
-        setInterval(function() {
-            var ckEditable = document.querySelector('.ck-editor__editable').innerHTML;
-
-            if(ckEditable != $('#classic-editor').val()) {
-                $('#classic-editor').val(ckEditable);
-            }
-        }, 1000);
-        
-
         // on submit form
         document.forms.addArticle.addEventListener('submit', function(e) {
             e.preventDefault();
