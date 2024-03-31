@@ -134,4 +134,9 @@ app()->group('admin', function(){
 
     });
 
+    app()->get('script', function(){
+        $content = file_get_contents(getcwd().'/public/assets/js/admin.js');
+        response()->withHeader('Content-Type', 'application/javascript')->plain($content);
+    });
+
 });
