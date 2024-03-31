@@ -4,19 +4,6 @@
     <div class="pc-container">
         <div class="pc-content">
             
-            <!--div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body position-relative page-title" >
-                            <h5>
-                                {{_('Write Article')}}
-                            </h5>            
-                        </div>
-                    </div>
-                </div>
-            </div-->
-
-            
             <form action="post" enctype="multipart/form-data" name="addArticle">
                 <div class="row">
                     <div class="col-md-8 col-sm-12">
@@ -83,47 +70,4 @@
         </div>
     </div>
 
-@endsection
-@section('scripts')
-
-    <script>
-        // on submit form
-        document.forms.addArticle.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            $.ajax({
-                url: '/admin/blog/article/update',
-                type: 'post',
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(response) {
-                    if(response.status == 'success') {
-                        Swal.fire(
-                            'Success!',
-                            'The article has been Updated Succesfully.',
-                            'success'
-                        )
-                    }else{
-                        Swal.fire(
-                            'Error!',
-                            'The article could not be updated.',
-                            'error'
-                        );
-                    }
-                },
-                error: function(response) {
-                    Swal.fire(
-                        'Error!',
-                        'The article could not be updated.',
-                        'error'
-                    );
-                }
-            });
-
-        });
-
-
-    </script>
 @endsection
