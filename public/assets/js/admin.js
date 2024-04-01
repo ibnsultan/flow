@@ -1,5 +1,11 @@
 var url = window.location.pathname;
 
+function pattern(urlMatch) {
+    if (!urlMatch) return false;
+
+    return urlMatch[0];
+}
+
 switch(url) {
 
     // pattern: /admin/blog/articles
@@ -185,7 +191,7 @@ switch(url) {
 
     
     // pattern: /blog/article/edit/{alphanumeric}
-    case url.match(/\/admin\/blog\/article\/edit\/[a-zA-Z0-9]+/g)[0]:
+    case pattern(url.match(/\/admin\/blog\/article\/edit\/[a-zA-Z0-9]+/g)) :
         injectScript('/assets/js/plugins/ckeditor/classic/ckeditor.js')
             .then(() => {
                 ClassicEditor
@@ -231,7 +237,127 @@ switch(url) {
 
         }); break
 
+    case '/admin/settings/general':
+        $('.preset-color a').on('click', function() {
+            $('.preset-color a').removeClass('active');
+            $(this).addClass('active');
+            
+            $('#theme_preset').val($(this).data('value'));
+        });
 
+        $('.layout-preset').on('click', function(){
+            $('#default_layout').val($(this).data('input'));
+
+            // change active class
+            $('.layout-preset').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('form[name="updateSettings"]').on('submit', function(e) {
+            e.preventDefault();
+
+            // disable btn and is loading
+            $('button[type="submit"]').attr('disabled', true).html('Updating...');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/admin/settings/general',
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({ icon: 'success', title: 'Success', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }else{
+                        Swal.fire({ icon: 'error', title: 'Error', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }
+                },
+                error: function(err) {
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred. Please try again later.' })
+                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                }
+            });
+        }); break
+
+    
+    case '/admin/settings/seo':
+        $('form[name="updateSeo"]').on('submit', function(e) {
+            e.preventDefault();
+
+            // disable btn and is loading
+            $('button[type="submit"]').attr('disabled', true).html('Updating...');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/admin/settings/seo',
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({ icon: 'success', title: 'Success', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }else{
+                        Swal.fire({ icon: 'error', title: 'Error', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }
+                },
+                error: function(err) {
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred. Please try again later.' })
+                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                }
+            });
+        }); break
+
+    
+    case '/admin/settings/modules':
+        $('form[name="updateModules"]').on('submit', function(e) {
+            e.preventDefault();
+
+            // disable btn and is loading
+            $('button[type="submit"]').attr('disabled', true).html('Updating...');
+
+            // get all checkboxes, if checked, set value to true, else false
+            var formData = new FormData(this);
+            $('input[type="checkbox"]').each(function() {
+                if($(this).is(':checked')){
+                    formData.append($(this).attr('name'), 'true');
+                }else{
+                    formData.append($(this).attr('name'), 'false');
+                }
+            });
+
+            $.ajax({
+                url: '/admin/settings/modules',
+                method: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({ icon: 'success', title: 'Success', text: response.message })
+                            .then(() => { location.reload(); })
+                    }else{
+                        Swal.fire({ icon: 'error', title: 'Error', text: response.message })
+                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                    }
+                },
+                error: function(err) {
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred. Please try again later.' })
+                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
+                }
+            });
+        });
+        break
+
+
+    
 
     default:
         // do nothing
