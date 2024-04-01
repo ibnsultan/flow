@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form name="updateSeo" method="POST" enctype="multipart/form-data">
+                            <form name="updateModules" method="POST" enctype="multipart/form-data">
                                 <div class="row">
 
                                     <div class="col-md-12 my-2">
@@ -106,47 +106,4 @@
         
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-
-        $('form[name="updateSeo"]').on('submit', function(e) {
-            e.preventDefault();
-
-            // disable btn and is loading
-            $('button[type="submit"]').attr('disabled', true).html('Updating...');
-
-            // get all checkboxes, if checked, set value to true, else false
-            var formData = new FormData(this);
-            $('input[type="checkbox"]').each(function() {
-                if($(this).is(':checked')){
-                    formData.append($(this).attr('name'), 'true');
-                }else{
-                    formData.append($(this).attr('name'), 'false');
-                }
-            });
-
-            $.ajax({
-                url: '/admin/settings/modules',
-                method: 'post',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if(response.status == 'success'){
-                        Swal.fire({ icon: 'success', title: 'Success', text: response.message })
-                            .then(() => { location.reload(); })
-                    }else{
-                        Swal.fire({ icon: 'error', title: 'Error', text: response.message })
-                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
-                    }
-                },
-                error: function(err) {
-                    Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred. Please try again later.' })
-                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
-                }
-            });
-        });
-
-    </script>
 @endsection
