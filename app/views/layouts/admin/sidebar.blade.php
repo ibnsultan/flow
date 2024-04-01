@@ -95,6 +95,16 @@
                     </ul>
                 </li>
 
+                <!-- announcements -->
+                <li class="pc-item">
+                    <a href="/admin/announcement" class="pc-link">
+                        <span class="pc-micon">
+                            <i data-feather="zap"></i>
+                        </span>
+                        <span class="pc-mtext">{{_('Announcement')}}</span>
+                    </a>
+                </li>
+
                 <li class="pc-item pc-caption">
                     <label>{{_('Management')}}</label>
                 </li>
@@ -178,8 +188,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <! -- announcements -->
 
             </ul>
         </div>
