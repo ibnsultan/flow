@@ -129,3 +129,21 @@ function extract_images_from_html($html_content, $output_dir, $encoded = true)
 
     return $html_content;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Substring
+|--------------------------------------------------------------------------
+|
+| This function is used to get a substring from a string.
+|
+*/
+function substring($string, $length, $end = '...'){
+
+    if(strlen($string) > $length)
+        return substr($string, 0, $length) . $end;
+
+    return $string;
+
+}
