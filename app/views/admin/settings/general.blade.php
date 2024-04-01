@@ -26,7 +26,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">{{_('Site Name')}}</label>
-                                            <input type="text" class="form-control" name="site_name" value="{{ getenv('app_name') }}">
+                                            <input type="text" class="form-control" name="site_name" value="{{ settings->get('site_name') }}">
                                         </div>
                                     </div>
 
@@ -34,7 +34,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">{{_('Site URL')}}</label>
-                                            <input type="text" class="form-control" name="site_url" value="{{ getenv('app_url') }}">
+                                            <input type="text" class="form-control" name="site_url" value="{{ settings->get('site_url') }}">
                                         </div>
                                     </div>
 
@@ -135,54 +135,4 @@
         
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-
-        $('.preset-color a').on('click', function() {
-            $('.preset-color a').removeClass('active');
-            $(this).addClass('active');
-            
-            $('#theme_preset').val($(this).data('value'));
-        });
-
-        $('.layout-preset').on('click', function(){
-            $('#default_layout').val($(this).data('input'));
-
-            // change active class
-            $('.layout-preset').removeClass('active');
-            $(this).addClass('active');
-        });
-
-        $('form[name="updateSettings"]').on('submit', function(e) {
-            e.preventDefault();
-
-            // disable btn and is loading
-            $('button[type="submit"]').attr('disabled', true).html('Updating...');
-
-            let formData = new FormData(this);
-
-            $.ajax({
-                url: '/admin/settings/general',
-                method: 'post',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if(response.status == 'success'){
-                        Swal.fire({ icon: 'success', title: 'Success', text: response.message })
-                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
-                    }else{
-                        Swal.fire({ icon: 'error', title: 'Error', text: response.message })
-                        $('button[type="submit"]').attr('disabled', false).html('Update Profile');
-                    }
-                },
-                error: function(err) {
-                    Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred. Please try again later.' })
-                    $('button[type="submit"]').attr('disabled', false).html('Update Profile');
-                }
-            });
-        });
-
-    </script>
 @endsection
