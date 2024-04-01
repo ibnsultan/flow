@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header position-relative">
+                        <div class="card-body position-relative">
                             <h5>
                                 {{_('Pages')}}
                             </h5>
