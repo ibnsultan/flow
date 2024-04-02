@@ -6,6 +6,19 @@ function pattern(urlMatch) {
     return urlMatch[0];
 }
 
+function multiple(urls) {
+
+    var url = window.location.pathname;
+    for (var i = 0; i < urls.length; i++) {
+        if (url === urls[i]) {
+            return urls[i];
+        }
+    }
+    
+    return false;
+
+}
+
 switch(url) {
 
     // pattern: /admin/blog/articles
@@ -357,8 +370,105 @@ switch(url) {
         break
 
 
-    
+    case multiple([ '/admin/users/all', '/admin/users/moderator' ]):
+        $('form[name="userRegistrationForm"]').submit(function(e){
 
+			e.preventDefault();
+			
+			// disable button to prevent multiple clicks
+			$('button[type="submit"]').attr('disabled', true).html('Processing...');
+
+			$.ajax({
+				url: '/admin/user/create',
+				type: 'POST',
+				data: $(this).serialize(),
+				success: function(response) {
+					if(response.status == 'success') {
+
+						Swal.fire({ icon: 'success', title: 'Success', text: response.message }).then(() => {
+							location.reload();
+						});
+
+					} else {
+
+						Swal.fire({ icon: 'error', title: 'Oops...', text: response.message });
+						$('button[type="submit"]').attr('disabled', false).html('Create User');
+
+					}
+				},
+				error: function() {
+
+					Swal.fire({ icon: 'error', title: 'Oops...', text: 'An error occurred. Please try again later.' });
+					$('button[type="submit"]').attr('disabled', false).html('Create User');
+
+				}
+			});
+
+		})
+
+        function deleteUser(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this user!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {                    
+                    $.ajax({
+                        url: '/admin/user/' + id ,
+                        type: 'DELETE',
+                        success: function(response){
+                            if(response.status == 'success'){
+                                Swal.fire( 'Deleted!', response.message, 'success'
+                                ).then((result) => {
+                                    location.reload();
+                                });
+                            }else{
+                                Swal.fire( 'Error!', response.message, 'error' );
+                            }
+                        },
+                        error: function() {
+                            Swal.fire( 'Error!', 'There was an error deleting the user', 'error' );
+                        }
+                    });
+                }
+            });
+        }; break
+
+
+    // pattern: admin/user/{alphanumeric}
+    case pattern(url.match(/\/admin\/user\/[a-zA-Z0-9]+/g)):
+        $('[name="updateProfile"]').submit(function(e){
+            e.preventDefault();
+            let formData = new FormData(this);
+            
+            $.ajax({
+                url: '/admin/user/update',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response.status == 'success'){
+                        Swal.fire('Success', response.message, 'success')
+                        .then((result) => {
+                            location.reload();
+                        });
+                    }else{
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                },
+                error: function(err){
+                    Swal.fire('Error', 'An error occurred. Please try again', 'error');
+                }
+            });
+        });
+
+
+    
     default:
         // do nothing
         break
