@@ -43,7 +43,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <a href="/admin/user/{{ \App\Helpers\Helpers::encode($user->id) }}">
+                                                        <a href="/admin/user/{{ $helper::encode($user->id) }}">
                                                             {{ $user->fullname }}
                                                         </a>
                                                     </td>
@@ -51,12 +51,12 @@
                                                     <td> {{ $user->user_role->description }} </td>
                                                     <td> {{ $user->status ?? 'Unverified' }} </td>
                                                     <td>
-                                                        <a href="/admin/user/{{ \App\Helpers\Helpers::encode($user->id) }}" class="btn btn-primary rounded btn-sm">
+                                                        <a href="/admin/user/{{ $helper::encode($user->id) }}" class="btn btn-primary rounded btn-sm">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
-                                                        <a href="/admin/users/{{ \App\Helpers\Helpers::encode($user->id) }}" class="btn btn-danger rounded btn-sm">
+                                                        <button class="btn btn-danger rounded btn-sm" onclick="deleteUser('{{ $helper::encode($user->id) }}')">
                                                             <i class="bi bi-trash"></i>
-                                                        </a>
+                                                        </button>                                                        
                                                     </td>
                                                 </tr>
 
@@ -132,42 +132,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        $('form[name="userRegistrationForm"]').submit(function(e){
-
-			e.preventDefault();
-			
-			// disable button to prevent multiple clicks
-			$('button[type="submit"]').attr('disabled', true).html('Processing...');
-
-			$.ajax({
-				url: '/admin/user/create',
-				type: 'POST',
-				data: $(this).serialize(),
-				success: function(response) {
-					if(response.status == 'success') {
-
-						Swal.fire({ icon: 'success', title: 'Success', text: response.message }).then(() => {
-							location.reload();
-						});
-
-					} else {
-
-						Swal.fire({ icon: 'error', title: 'Oops...', text: response.message });
-						$('button[type="submit"]').attr('disabled', false).html('Create User');
-
-					}
-				},
-				error: function() {
-
-					Swal.fire({ icon: 'error', title: 'Oops...', text: 'An error occurred. Please try again later.' });
-					$('button[type="submit"]').attr('disabled', false).html('Create User');
-
-				}
-			});
-
-		})
-    </script>
 @endsection
