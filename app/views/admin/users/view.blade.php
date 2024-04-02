@@ -21,6 +21,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <form name="updateProfileDetails" method='post' enctype="multiart/form-data">
+
+                                    <input type="hidden" name="user_id" value="{{ $helper::encode($user->id) }}">
                                     <div class="row">
                                         <div class="col-sm-12 text-center mb-3">
                                             <div class="user-upload wid-75">
@@ -35,7 +37,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">{{_('Full Name')}}</label>
-                                                <input type="text" name="name" class="form-control" value="{{ $user->fullname }}" required>
+                                                <input type="text" name="fullname" class="form-control" value="{{ $user->fullname }}" required>
                                             </div>
                                         </div>
 
@@ -85,7 +87,7 @@
 
                                         
                                         <div class="col-12 text-center btn-page mt-3">
-                                            <button type="submit" class="btn btn-danger rounded">{{_('Update User Profile')}}</button>
+                                            <button type="submit" class="btn btn-danger rounded">{{_('Update User')}}</button>
                                         </div>
                                     </div>
                                 </form>
