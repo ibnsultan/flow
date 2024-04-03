@@ -37,4 +37,9 @@ function injectScript(url) {
     });
 }
 
+function change_theme_color(color){
+    document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
+    layout_change(color);
+}
+
 // layout_change('{{cookie()->get('theme_color') ?? 'light' }}');
