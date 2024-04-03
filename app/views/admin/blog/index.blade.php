@@ -57,11 +57,11 @@
                                                     </td>
                                                     <td>
                                                         <a href="/admin/blog/article/edit/{{ \App\Helpers\Helpers::encode($article->id) }}" class="btn btn-primary rounded btn-sm">
-                                                            <i class="bi bi-pencil"></i>
+                                                            <i class="ti ti-pencil"></i>
                                                         </a>
                                                         <button class="btn btn-danger rounded btn-sm"
                                                             onclick="deleteArticle('{{ \App\Helpers\Helpers::encode($article->id) }}')">
-                                                            <i class="bi bi-trash"></i>
+                                                            <i class="ti ti-trash"></i>
                                                         </button>
                                                     </td>
 
