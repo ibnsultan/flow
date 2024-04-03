@@ -52,10 +52,10 @@
                                                     <td> {{ $user->status ?? 'Unverified' }} </td>
                                                     <td>
                                                         <a href="/admin/user/{{ $helper::encode($user->id) }}" class="btn btn-primary rounded btn-sm">
-                                                            <i class="bi bi-pencil"></i>
+                                                            <i class="ti ti-pencil"></i>
                                                         </a>
                                                         <button class="btn btn-danger rounded btn-sm" onclick="deleteUser('{{ $helper::encode($user->id) }}')">
-                                                            <i class="bi bi-trash"></i>
+                                                            <i class="ti ti-trash"></i>
                                                         </button>                                                        
                                                     </td>
                                                 </tr>
