@@ -57,19 +57,7 @@
 		<script src="/assets/js/pcoded.js"></script>
 		<script src="/assets/js/plugins/feather.min.js"></script>
         <script src="/assets/js/plugins/sweetalert2.all.min.js"></script>
-
-		<script>
-			function change_theme_color(color){
-				document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
-				layout_change(color);
-			}
-		</script>
-
-		<!--script>layout_change('{{cookie()->get('theme_color') ?? 'light' }}');</script-->
-		<script>layout_sidebar_change('false');</script>
-		<script>change_box_container('false');</script>
-		<script>layout_caption_change('true');</script>
-		<script>layout_rtl_change('{{_("rtl")}}');</script>
+		<script src="/assets/js/app.js"></script>
 
 		@yield('scripts')
 
