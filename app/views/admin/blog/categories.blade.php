@@ -56,11 +56,11 @@
                                                                     '{{ $category->name }}',
                                                                     '{{ $category->description }}'
                                                                 )">
-                                                                <i class="bi bi-pencil"></i>
+                                                                <i class="ti ti-pencil"></i>
                                                             </button>
                                                             <button class="btn btn-danger rounded btn-sm"
                                                                 onclick="deleteCategory('{{ \App\Helpers\Helpers::encode($category->id) }}')">
-                                                                <i class="bi bi-trash"></i>
+                                                                <i class="ti ti-trash"></i>
                                                             </button>
                                                         </td>
                                                     </tr>
