@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Models\BlogArticle;
 use App\Models\BlogCategory;
 
@@ -41,7 +42,7 @@ class BlogController extends Controller
      */
     public function viewArticle($id){
 
-        $article_id = \App\Helpers\Helpers::decode($id);
+        $article_id = Helpers::decode($id);
         if($article_id == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
         $data = [
@@ -133,7 +134,7 @@ class BlogController extends Controller
     public function updateArticle()
     {
 
-        $article_id = \App\Helpers\Helpers::decode(request()->get('article_id'));
+        $article_id = Helpers::decode(request()->get('article_id'));
         if($article_id == '')
             exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
@@ -192,7 +193,7 @@ class BlogController extends Controller
      */
     public function deleteArticle($id){
             
-        $article_id = \App\Helpers\Helpers::decode($id);
+        $article_id = Helpers::decode($id);
         $article = BlogArticle::find($article_id);
 
         if(!$article)
@@ -249,7 +250,7 @@ class BlogController extends Controller
      */
     public function updateCategory(){
 
-        $category_id = \App\Helpers\Helpers::decode(request()->get('category_id'));
+        $category_id = Helpers::decode(request()->get('category_id'));
         if($category_id == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
         $category = BlogCategory::find($category_id);
@@ -279,7 +280,7 @@ class BlogController extends Controller
      */
     public function deleteCategory($id){
 
-        $category_id = \App\Helpers\Helpers::decode($id);
+        $category_id = Helpers::decode($id);
         $category = BlogCategory::find($category_id);
 
         if(!$category)
