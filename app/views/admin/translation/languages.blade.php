@@ -42,18 +42,18 @@
                                                     <td>{{ $language->name }}</td>
                                                     <td class="text-center">{{ strtoupper($language->iso) }}</td>
                                                     <td class="text-center cursor-pointer"
-                                                        onclick="swalLangLayout('{{ \App\Helpers\Helpers::encode($language->id) }}')">
+                                                        onclick="changeLangLayout('{{ \App\Helpers\Helpers::encode($language->id) }}')">
                                                         {{ strtoupper($language->layout) }}
                                                     </td>
                                                     <td class="text-center">
                                                         @if($language->status == 'active')
                                                             <span class="badge bg-success cursor-pointer" 
-                                                                onclick="swalLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
+                                                                onclick="changeLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
                                                                 {{_('Active')}}
                                                             </span>
                                                         @else
                                                             <span class="badge bg-danger cursor-pointer" 
-                                                                onclick="swalLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
+                                                                onclick="changeLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
                                                                 {{_('Inactive')}}
                                                             </span>
                                                         @endif
@@ -98,7 +98,7 @@
         });
 
         // on language options modal
-        function swalLangLayout(id){
+        function changeLangLayout(id){
             Swal.fire({
                 title: 'Select Layout',
                 input: 'select',
@@ -118,7 +118,7 @@
                         success: function(response){
                             if(response.status == 'success'){
                                 Swal.fire({ title: 'Success', text: 'Language layout updated successfully.', icon: 'success' }).then(() => {
-                                    $(`td[onclick="swalLangLayout('${id}']`).html(layout.toUpperCase());
+                                    $(`td[onclick="changeLangLayout('${id}']`).html(layout.toUpperCase());
                                 });
                             }else{
                                 Swal.fire({ title: 'Error', text: 'An error occurred. Please try again.', icon: 'error' });
@@ -129,7 +129,7 @@
             });
         }
 
-        function swalLangStatus(id){
+        function changeLangStatus(id){
             Swal.fire({
                 title: 'Select Status',
                 input: 'select',
@@ -149,7 +149,7 @@
                         success: function(response){
                             if(response.status == 'success'){
                                 Swal.fire({ title: 'Success', text: 'Language status updated successfully.', icon: 'success' }).then(() => {
-                                    $(`td[onclick="swalLangStatus('${id}']`).html(status == 'active' ? '<span class="badge bg-success cursor-pointer" onclick="swalLangStatus(\''+id+'\')">Active</span>' : '<span class="badge bg-danger cursor-pointer" onclick="swalLangStatus(\''+id+'\')">Inactive</span>');
+                                    $(`td[onclick="changeLangStatus('${id}']`).html(status == 'active' ? '<span class="badge bg-success cursor-pointer" onclick="changeLangStatus(\''+id+'\')">Active</span>' : '<span class="badge bg-danger cursor-pointer" onclick="changeLangStatus(\''+id+'\')">Inactive</span>');
                                 });
                             }else{
                                 Swal.fire({ title: 'Error', text: 'An error occurred. Please try again.', icon: 'error' });
