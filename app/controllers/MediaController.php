@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Helpers;
 use App\Models\FileStorage;
 use App\Controllers\Controller;
 
@@ -80,7 +81,7 @@ class MediaController extends Controller
 
     public function delete($id)
     {
-        $file_id = \App\Helpers\Helpers::decode($id);
+        $file_id = Helpers::decode($id);
         $file = FileStorage::find($file_id);
 
         if (!$file)
