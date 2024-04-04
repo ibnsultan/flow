@@ -250,6 +250,8 @@ switch(url) {
 
         }); break
 
+    
+    // pattern: /admin/settings/general
     case '/admin/settings/general':
         $('.preset-color a').on('click', function() {
             $('.preset-color a').removeClass('active');
@@ -297,6 +299,7 @@ switch(url) {
         }); break
 
     
+    // pattern: /admin/settings/seo
     case '/admin/settings/seo':
         $('form[name="updateSeo"]').on('submit', function(e) {
             e.preventDefault();
@@ -329,6 +332,7 @@ switch(url) {
         }); break
 
     
+    // pattern: /admin/settings/modules
     case '/admin/settings/modules':
         $('form[name="updateModules"]').on('submit', function(e) {
             e.preventDefault();
@@ -465,10 +469,177 @@ switch(url) {
                     Swal.fire('Error', 'An error occurred. Please try again', 'error');
                 }
             });
-        });
-
+        }); break
 
     
+    // pattern: /admin/pages/add
+    case '/admin/pages/add':
+        injectScript('/assets/js/plugins/ckeditor/classic/ckeditor.js')
+            .then(() => {
+                ClassicEditor
+                    .create(document.querySelector('#classic-editor'))
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            var ckEditable = editor.getData();
+                            if (ckEditable !== $('#classic-editor').val()) {
+                                $('#classic-editor').val(ckEditable);
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            })
+            .catch(error => {
+                console.error('Failed to load CKEditor:', error);
+        });
+
+        // TODO: listens to ckeditor changes instead of interval
+        setInterval(function() {
+            var ckEditable = document.querySelector('.ck-editor__editable').innerHTML;
+
+            if(ckEditable != $('#classic-editor').val()) {
+                $('#classic-editor').val(ckEditable);
+            }
+        }, 1000);
+
+        // slugify title
+        document.forms.addPage.title.addEventListener('keyup', function() {
+            var title = this.value;
+            var slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+            document.forms.addPage.slug.value = slug;
+        });
+
+        // on submit form
+        document.forms.addPage.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: '/admin/pages/add',
+                type: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if(response.status == 'success') {
+                        Swal.fire( 'Success!', response.message, 'success' ).then((result) => {
+                            location.href = '/admin/pages/'
+                        });
+                    }else{
+                        Swal.fire( 'Error!', response.message, 'error' );
+                    }
+                },
+                error: function(response) {
+                    Swal.fire( 'Error!', 'The article could not be published.', 'error' );
+                }
+            });
+
+        }); break
+
+
+    // pattern: /admin/pages/edit/{alphanumeric}
+    case pattern(url.match(/\/admin\/pages\/edit\/[a-zA-Z0-9]+/g)):
+        injectScript('/assets/js/plugins/ckeditor/classic/ckeditor.js')
+            .then(() => {
+                ClassicEditor
+                    .create(document.querySelector('#classic-editor'))
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            var ckEditable = editor.getData();
+                            if (ckEditable !== $('#classic-editor').val()) {
+                                $('#classic-editor').val(ckEditable);
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            })
+            .catch(error => {
+                console.error('Failed to load CKEditor:', error);
+        });
+
+        // TODO: listens to ckeditor changes instead of interval
+        setInterval(function() {
+            var ckEditable = document.querySelector('.ck-editor__editable').innerHTML;
+
+            if(ckEditable != $('#classic-editor').val()) {
+                $('#classic-editor').val(ckEditable);
+            }
+        }, 1000);
+
+        // slugify title
+        document.forms.updatePage.title.addEventListener('keyup', function() {
+            var title = this.value;
+            var slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+            document.forms.updatePage.slug.value = slug;
+        });
+
+        // on submit form
+        document.forms.updatePage.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var pageId = $('#pageId').val()
+            console.log(pageId);
+            
+            $.ajax({
+                url: `/admin/pages/update/${pageId}`,
+                type: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if(response.status == 'success') {
+                        Swal.fire( 'Success!', response.message, 'success' ).then((result) => {
+                            location.href = '/admin/pages/'
+                        });
+                    }else{
+                        Swal.fire( 'Error!', response.message, 'error' );
+                    }
+                },
+                error: function(response) {
+                    Swal.fire( 'Error!', 'The article could not be published.', 'error' );
+                }
+            });
+
+        }); break
+
+
+    // pattern: /admin/pages
+    case '/admin/pages':
+        function deletePage(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You wont be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin/pages/delete/${id}`,
+                        type: 'GET',
+                        success: function (response) {
+                            if (response.status == 'success') {
+                                Swal.fire( 'Deleted!', response.message, 'success' ).then((result) => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire( 'Error!', response.message, 'error' );
+                            }
+                        },
+                        error: function () {
+                            Swal.fire( 'Error!', response.message ?? 'There was an error deleting the page', 'error' );
+                        }
+                    });
+                } 
+            });
+
+        } break
+
     default:
         // do nothing
         break
