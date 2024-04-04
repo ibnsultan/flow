@@ -2,6 +2,7 @@
 
 namespace App\Controllers\App;
 
+use App\Helpers\Helpers;
 use App\Models\ApiKey;
 use App\Models\ApiActivity;
 
@@ -82,7 +83,7 @@ class ApiController extends Controller
      */
     public function revokeKey($id){
 
-        $apiID = \App\Helpers\Helpers::decode($id);
+        $apiID = Helpers::decode($id);
 
         if($apiID == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
@@ -113,7 +114,7 @@ class ApiController extends Controller
      */
     public function copy(){
 
-        $apiID = \App\Helpers\Helpers::decode(request()->get('api_id'));
+        $apiID = Helpers::decode(request()->get('api_id'));
         $secretKey = request()->get('api_secret');
 
         if($apiID == '' or $secretKey == '')
@@ -135,7 +136,7 @@ class ApiController extends Controller
      */
     public function activity($id){
         
-        $apiKeyID = \App\Helpers\Helpers::decode($id);
+        $apiKeyID = Helpers::decode($id);
 
         if($apiKeyID == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
         
