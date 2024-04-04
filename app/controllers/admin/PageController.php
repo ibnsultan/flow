@@ -91,7 +91,8 @@ class PageController extends Controller
 
         response()->markup(view('admin.pages.edit', [
             'title' => 'Edit Page',
-            'page' => $page
+            'page' => $page,
+            'helper' => new Helpers(),
         ]));
 
     }
