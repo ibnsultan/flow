@@ -2,6 +2,7 @@
 
 namespace App\Controllers\App;
 
+use App\Helpers\Helpers;
 use Leaf\Helpers\Password;
 
 use App\Controllers\Controller;
@@ -31,7 +32,7 @@ class UserController extends Controller
         try {
 
             if(request()->get('avatar')['size']){
-                $file = \App\Helpers\Helpers::upload(
+                $file = Helpers::upload(
                     'avatar',
                     'storage/app/uploads/avatars/',
                     ['jpg', 'jpeg', 'png', 'gif']
