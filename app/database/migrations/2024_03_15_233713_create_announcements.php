@@ -18,7 +18,8 @@ class CreateAnnouncements extends Database
                 $table->string('title', 100);
                 $table->string('description', 300);
                 $table->text('cover')->nullable();
-                $table->string('link', 100)->unique();
+                $table->text('link')->nullable();
+                $table->json('receipients');            
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             });
