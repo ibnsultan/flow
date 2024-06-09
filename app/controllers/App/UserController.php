@@ -2,6 +2,8 @@
 
 namespace App\Controllers\App;
 
+use App\Models\User;
+
 use App\Helpers\Helpers;
 use Leaf\Helpers\Password;
 
@@ -43,7 +45,7 @@ class UserController extends Controller
                 $file = $file['path'];
             }
 
-            $this->users->updateDetails(
+            User::updateDetails(
                 auth()->id(),
                 [
                     'fullname' => request()->params('name', auth()->user()['fullname']),
@@ -74,11 +76,11 @@ class UserController extends Controller
         if($oldPassword == $newPassword)
             exit( response()->json(['status' => 'error', 'message' => 'Old and new passwords cannot be the same']) );
 
-        if(Password::verify($oldPassword, $this->users->find(1)->password)){
+        if(Password::verify($oldPassword, User::find(auth()->id())->password)){
 
             try {
 
-                $this->users->updateDetails(
+                User::updateDetails(
                     auth()->id(), [
                         'password' => Password::hash($newPassword),
                         'remember_token' => null
