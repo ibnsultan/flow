@@ -3,8 +3,7 @@
         <div class="row">
             <div class="col my-1">
                 <p class="m-0">
-                    {{getenv('app_name')}} &copy; {{date('Y')}}. All Rights Reserved. | Design by
-                    <a href="https://github.com/ibnsultan" target="_blank">ibnsultan</a>
+                    {{ $settings->site_name }} &copy; {{date('Y')}}. All Rights Reserved.
                 </p>
             </div>
             <div class="col-auto my-1">
