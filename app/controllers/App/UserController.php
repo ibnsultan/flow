@@ -21,12 +21,11 @@ class UserController extends Controller
     }
 
     public function display(){
-        $data = [
-            'title' => 'Profile',
-            'apiKeys' => $this->api->userKeys(),
-        ];
 
-        response()->markup(view('app.user.profile', $data));
+        $this->data->title = 'Profile';
+        $this->data->apiKeys = $this->api->userKeys();
+
+        render('app.user.profile', (array) $this->data);
     }
 
     public function update(){
