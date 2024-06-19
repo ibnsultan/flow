@@ -6,9 +6,7 @@ class Notification extends Model{
 
     protected $table = 'notifications';
 
-    protected $fillable = [
-       'title', 'message', 'status', 'user_id'
-    ];
+    protected $fillable = [ 'title', 'message', 'status', 'user_id' ];
 
     public $timestamps = true;
 
@@ -18,12 +16,12 @@ class Notification extends Model{
     ];
 
     // select unread, order by date
-    public function user($user){
-        return $this->where('user_id', $user)->where('status', 0)->orderBy('created_at', 'desc')->get();
+    public static function user($user){
+        return self::where('user_id', $user)->where('status', 0)->orderBy('created_at', 'desc')->get();
     }
 
-    public function markAsRead($id){
-        return $this->where('id', $id)->update(['status' => 1]);
+    public static function markAsRead($id){
+        return self::where('id', $id)->update(['status' => 1]);
     }
 
 }
