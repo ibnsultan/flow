@@ -18,17 +18,15 @@ class DashboardController extends Controller
 
     public function home(){
 
-        $data = [
-            'title' => 'Dashboard',
-            'current_user' => auth()->user(),
-            'stats' => [
-                'users' => User::count(),
-                'api_keys' => ApiKey::count(),
-                'articles' => BlogArticle::count(),
-                'pages' => Page::count(),
-            ],
+        $this->data->title = 'Dashboard';
+        $this->data->current_user = auth()->user();
+        $this->data->stats = [
+            'users' => User::count(),
+            'api_keys' => ApiKey::count(),
+            'articles' => BlogArticle::count(),
+            'pages' => Page::count(),
         ];
 
-        response()->markup(view('admin.dashboard', $data));
+        render('admin.dashboard', (array) $this->data);
     }
 }
