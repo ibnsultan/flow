@@ -8,10 +8,10 @@
                     <div class="card">
                         <div class="card-body pb-4 position-relative">
                             <h5>
-                                {{_('Languages & Translations')}}
+                                {{__('Languages & Translations')}}
                             </h5>
                             <input class="form-control w-25 position-absolute" 
-                                style="top:0.8rem;right:2rem;" id="languageSearch" placeholder="{{_('Search Language')}}"/>
+                                style="top:0.8rem;right:2rem;" id="languageSearch" placeholder="{{__('Search Language')}}"/>
              
                         </div>
                     </div>
@@ -29,11 +29,11 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Language')}}</th>
-                                                <th class="text-center">{{_('Code')}}</th>
-                                                <th class="text-center">{{_('Layout')}}</th>
-                                                <th class="text-center">{{_('Status')}}</th>
-                                                <th class="text-end">{{_('Actions')}}</th>
+                                                <th>{{__('Language')}}</th>
+                                                <th class="text-center">{{__('Code')}}</th>
+                                                <th class="text-center">{{__('Layout')}}</th>
+                                                <th class="text-center">{{__('Status')}}</th>
+                                                <th class="text-end">{{__('Actions')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -49,12 +49,12 @@
                                                         @if($language->status == 'active')
                                                             <span class="badge bg-success cursor-pointer" 
                                                                 onclick="changeLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
-                                                                {{_('Active')}}
+                                                                {{__('Active')}}
                                                             </span>
                                                         @else
                                                             <span class="badge bg-danger cursor-pointer" 
                                                                 onclick="changeLangStatus('{{ \App\Helpers\Helpers::encode($language->id) }}')">
-                                                                {{_('Inactive')}}
+                                                                {{__('Inactive')}}
                                                             </span>
                                                         @endif
                                                     </td>
@@ -72,7 +72,7 @@
 
                             @else
                                 <div class="text-center">
-                                    {{_('No languages found')}}
+                                    {{__('No languages found')}}
                                 </div>
                             @endif
 

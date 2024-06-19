@@ -8,11 +8,11 @@
                     <div class="card">
                         <div class="card-body position-relative">
                             <h5>
-                                {{_('Posts')}}
+                                {{__('Posts')}}
                             </h5> 
                             <a class="btn btn-primary position-absolute" 
                                 style="top:0.8rem;right:2rem;" href="/admin/blog/article/write">
-                                {{_('Add New')}}
+                                {{__('Add New')}}
                             </a>              
                         </div>
                     </div>
@@ -29,11 +29,11 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="w-50">{{_('Title')}}</th>
-                                                <th>{{_('Author')}}</th>
-                                                <th>{{_('Category')}}</th>
-                                                <th>{{_('Published')}}</th>
-                                                <th>{{_('Actions')}}</th>
+                                                <th class="w-50">{{__('Title')}}</th>
+                                                <th>{{__('Author')}}</th>
+                                                <th>{{__('Category')}}</th>
+                                                <th>{{__('Published')}}</th>
+                                                <th>{{__('Actions')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,7 +72,7 @@
                                 </div>
                             @else
                                 <div class="text-center">
-                                    <h5>{{_('No posts found')}}</h5>
+                                    <h5>{{__('No posts found')}}</h5>
                                 </div>
                             @endif
                         </div>

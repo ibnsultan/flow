@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body position-relative">
                             <h5>
-                                {{_('Announcements')}}
+                                {{__('Announcements')}}
                             </h5>
                             <a class="btn btn-primary position-absolute" 
                                 style="top:0.8rem;right:2rem;" href="/admin/announcement/add"
                                 data-bs-toggle="modal" data-bs-target="#addNewAnnouncement">
-                                {{_('Add New')}}
+                                {{__('Add New')}}
                             </a>             
                         </div>
                     </div>
@@ -32,10 +32,10 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Title')}}</th>
-                                                <th>{{_('Description')}}</th>
-                                                <th>{{_('Issued')}}</th>
-                                                <th>{{_('Actions')}}</th>
+                                                <th>{{__('Title')}}</th>
+                                                <th>{{__('Description')}}</th>
+                                                <th>{{__('Issued')}}</th>
+                                                <th>{{__('Actions')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,7 +60,7 @@
 
                             @else
                                 <div class="text-center">
-                                    {{_('No announcements found')}}
+                                    {{__('No announcements found')}}
                                 </div>
                             @endif
 
@@ -79,18 +79,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addNewAnnouncementLabel">
-                        {{_('Add New Announcement')}}
+                        {{__('Add New Announcement')}}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form name="addAnnouncement" method="POST">
                         <div class="form-group">
-                            <label class="form-label">{{_('Title')}}</label>
+                            <label class="form-label">{{__('Title')}}</label>
                             <input type="text" name="title" class="form-control" placeholder="announcement title" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">{{_('Description')}}</label>
+                            <label class="form-label">{{__('Description')}}</label>
                             <textarea name="description" class="form-control" rows="3" placeholder="announcement content" required></textarea>
                         </div>
                         <div class="form-group user-upload rounded w-100">
@@ -103,7 +103,7 @@
                                 onchange="document.getElementById('imagePreview').src = window.URL.createObjectURL(this.files[0])">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary w-100 rounded">{{_('Publish')}}</button>
+                            <button type="submit" class="btn btn-primary w-100 rounded">{{__('Publish')}}</button>
                         </div>
                     </form>
                 </div>

@@ -11,17 +11,17 @@
                             <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1" role="tab" aria-selected="true">
-                                    <i class="ti ti-user me-2"></i>{{_('Profile')}}
+                                    <i class="ti ti-user me-2"></i>{{__('Profile')}}
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2" role="tab" aria-selected="false" tabindex="-1">
-                                    <i class="ti ti-file-text me-2"></i>{{_('Personal Details')}}
+                                    <i class="ti ti-file-text me-2"></i>{{__('Personal Details')}}
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="profile-tab-4" data-bs-toggle="tab" href="#profile-4" role="tab" aria-selected="false" tabindex="-1">
-                                    <i class="ti ti-lock me-2"></i>{{_('Security')}}
+                                    <i class="ti ti-lock me-2"></i>{{__('Security')}}
                                     </a>
                                 </li>
                             </ul>
@@ -65,7 +65,7 @@
                                                 <li class="list-group-item px-0 pt-0">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <p class="mb-1 text-muted">{{_('Full Name')}}</p>
+                                                            <p class="mb-1 text-muted">{{__('Full Name')}}</p>
                                                             <p class="mb-0">{{ auth()->user()['fullname'] }}</p>
                                                         </div>
                                                     </div>
@@ -73,7 +73,7 @@
                                                 <li class="list-group-item px-0">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">{{_('Email address')}}</p>
+                                                            <p class="mb-1 text-muted">{{__('Email address')}}</p>
                                                             <p class="mb-0">{{ auth()->user()['email'] }}</p>
                                                         </div>
                                                     </div>
@@ -81,7 +81,7 @@
                                                 <li class="list-group-item px-0">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">{{_('Phone')}}</p>
+                                                            <p class="mb-1 text-muted">{{__('Phone')}}</p>
                                                             <p class="mb-0">{{ auth()->user()['phone'] ?? 'Phone not set' }}</p>
                                                         </div>
                                                     </div>
@@ -89,7 +89,7 @@
                                                 <li class="list-group-item px-0">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <p class="mb-1 text-muted">{{_('About Me')}}</p>
+                                                            <p class="mb-1 text-muted">{{__('About Me')}}</p>
                                                             <p class="mb-0">
                                                                 @if( auth()->user()['about'] == '' )
                                                                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters
@@ -111,7 +111,7 @@
                                     <div class="col-lg-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>{{_('Edit Personal Information')}}</h5>
+                                                <h5>{{__('Edit Personal Information')}}</h5>
                                             </div>
                                             <div class="card-body">
                                                 <form name="updateProfileDetails" method='post' enctype="multiart/form-data">
@@ -128,25 +128,25 @@
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">{{_('Full Name')}}</label>
+                                                                <label class="form-label">{{__('Full Name')}}</label>
                                                                 <input type="text" name="name" class="form-control" value="{{ auth()->user()['fullname'] }}" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label">{{_('Email')}}</label>
+                                                                <label class="form-label">{{__('Email')}}</label>
                                                                 <input type="text" name="email" class="form-control" value="{{ auth()->user()['email'] }}" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label">{{_('Phone')}}</label>
+                                                                <label class="form-label">{{__('Phone')}}</label>
                                                                 <input type="text" name="phone" class="form-control" value="{{ auth()->user()['phone'] }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">{{_('Bio')}}</label>
+                                                                <label class="form-label">{{__('Bio')}}</label>
                                                                 <textarea class="form-control" name="bio">{{ auth()->user()['about'] }}</textarea>
                                                             </div>
                                                         </div>
@@ -156,7 +156,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 text-center btn-page">
-                                        <button type="submit" class="btn btn-primary rounded w-25">{{_('Update Profile')}}</button>
+                                        <button type="submit" class="btn btn-primary rounded w-25">{{__('Update Profile')}}</button>
                                     </div>
                                 </div>
                             </form>

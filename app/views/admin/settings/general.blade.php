@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-body pb-3 position-relative">
                             <h5>
-                                {{_('General Settings')}}
+                                {{__('General Settings')}}
                             </h5>                
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                                     <! -- Site Name -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('Site Name')}}</label>
+                                            <label class="form-label">{{__('Site Name')}}</label>
                                             <input type="text" class="form-control" name="site_name" value="{{ settings->get('site_name') }}">
                                         </div>
                                     </div>
@@ -33,7 +33,7 @@
                                     <! -- Site URL -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('Site URL')}}</label>
+                                            <label class="form-label">{{__('Site URL')}}</label>
                                             <input type="text" class="form-control" name="site_url" value="{{ settings->get('site_url') }}">
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                                     <! -- color preset -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('Theme Color')}}</label>
+                                            <label class="form-label">{{__('Theme Color')}}</label>
                                             <input type="text" name="color_preset" id="theme_preset" value="{{ settings->get('theme_color') }}" hidden>
                                             <div>
                                                 <li class="list-group-item">
@@ -65,7 +65,7 @@
                                     <!-- default layout -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label" >{{_('Default Layout')}}</label>
+                                            <label class="form-label" >{{__('Default Layout')}}</label>
                                             <input type="text" name="theme_layout" id="default_layout" value="{{ settings->get('theme_layout') }}" hidden/>
                                             <div class="row theme-direction">
                                                 <div class="col-6">
@@ -89,7 +89,7 @@
                                     <! -- favicon -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('Favicon')}}</label>
+                                            <label class="form-label">{{__('Favicon')}}</label>
                                             <input type="file" class="form-control" name="favicon" accept="image/*">
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                     <! -- light logo -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('Light Logo')}}</label>
+                                            <label class="form-label">{{__('Light Logo')}}</label>
                                             <input type="file" class="form-control" name="logo_light" accept="image/*">
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                     <! -- dark logo -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('Dark Logo')}}</label>
+                                            <label class="form-label">{{__('Dark Logo')}}</label>
                                             <input type="file" class="form-control" name="logo_dark" accept="image/*">
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
                                     <! -- system version -->
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">{{_('System Version')}}</label>
+                                            <label class="form-label">{{__('System Version')}}</label>
                                             <input type="text" class="form-control" name="system_version" value="{{ settings->get('system_version') }}">
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                                     <!-- submit button -->
                                     <div class="col-md-12 col-sm-12 text-center mt-3">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary rounded">{{_('UPDATE SETTINGS')}}</button>
+                                            <button type="submit" class="btn btn-primary rounded">{{__('UPDATE SETTINGS')}}</button>
                                         </div>
                                     </div>
 

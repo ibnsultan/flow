@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body position-relative page-title" >
                             <h5>
-                                {{_('Write Article')}}
+                                {{__('Write Article')}}
                             </h5>            
                         </div>
                     </div>

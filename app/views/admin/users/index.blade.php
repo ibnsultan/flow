@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body position-relative">
                             <h5>
-                                {{_('Users')}}
+                                {{__('Users')}}
                             </h5> 
                             <a class="btn btn-primary position-absolute" 
                                 style="top:0.8rem;right:2rem;" href="/admin/users/add"
                                 data-bs-toggle="modal" data-bs-target="#registerNewUser">
-                                {{_('Add New')}}
+                                {{__('Add New')}}
                             </a>              
                         </div>
                     </div>
@@ -30,11 +30,11 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Name')}}</th>
-                                                <th>{{_('Email')}}</th>
-                                                <th>{{_('Role')}}</th>
-                                                <th>{{_('Status')}}</th>
-                                                <th>{{_('Actions')}}</th>
+                                                <th>{{__('Name')}}</th>
+                                                <th>{{__('Email')}}</th>
+                                                <th>{{__('Role')}}</th>
+                                                <th>{{__('Status')}}</th>
+                                                <th>{{__('Actions')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -67,7 +67,7 @@
                                 </div>
                             @else
                                 <div class="alert alert-danger" role="alert">
-                                    {{_('No users found')}}
+                                    {{__('No users found')}}
                                 </div>
                             @endif
                         </div>
@@ -84,13 +84,13 @@
         <div class="modal-dialog modal-dialog-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="registerNewUserLabel">{{_('Register New User')}}</h5>
+                    <h5 class="modal-title" id="registerNewUserLabel">{{__('Register New User')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="alert bg-light-warning text-warning" role="alert">
-                        {{_('User registered by admin will automatically be active')}}
+                        {{__('User registered by admin will automatically be active')}}
                     </div>
 
                     <form action="post" name="userRegistrationForm">
@@ -112,7 +112,7 @@
                                 <div class="form-group">
                                     <label class="form-label">User role</label>
                                     <select name="user_role" class="form-select">
-                                        <option value="subscriber" hidden>{{_('Subscriber')}}</option>
+                                        <option value="subscriber" hidden>{{__('Subscriber')}}</option>
                                         @foreach (\App\Models\UserRole::all() as $role)
                                             <option value="{{ $role->name }}">{{ $role->name }}</option>                                                        
                                         @endforeach
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary rounded w-100 ">{{_('Create User')}}</button>
+                                    <button type="submit" class="btn btn-primary rounded w-100 ">{{__('Create User')}}</button>
                                 </div>
                             </div>
                         </div>

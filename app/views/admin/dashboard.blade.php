@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-header position-relative">
                             <h5>
-                                {{_('Dashboard')}}
+                                {{__('Dashboard')}}
                             </h5>                
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-0">{{ _('Users') }}</h6>
+                                    <h6 class="mb-0">{{ __('Users') }}</h6>
                                 </div>
                             </div>
                             <div class="p-3 mt-0">
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-0">{{ _('API Keys') }}</h6>
+                                    <h6 class="mb-0">{{ __('API Keys') }}</h6>
                                 </div>
                             </div>
                             <div class="p-3 mt-0">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-0">{{ _('Articles') }}</h6>
+                                    <h6 class="mb-0">{{ __('Articles') }}</h6>
                                 </div>
                             </div>
                             <div class="p-3 mt-0">
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-0">{{ _('Pages') }}</h6>
+                                    <h6 class="mb-0">{{ __('Pages') }}</h6>
                                 </div>
                             </div>
                             <div class="p-3 mt-0">

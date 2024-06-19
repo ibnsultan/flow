@@ -67,7 +67,7 @@
                     </div>
                 </li>
 
-                @if(settings->get('allow_announcement') == 'true')
+                @if($settings->allow_announcement == 'true')
                     <li class="pc-h-item">
                         <a href="javascript:void(0)" class="pc-head-link me-0" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
                             <svg class="pc-icon">
@@ -78,7 +78,7 @@
                 @endif
                 
 
-                @if(settings->get('allow_notification') == 'true')
+                @if($settings->allow_notification == 'true')
                 
                     @php // Notifications Section
                         $notifications = new App\Controllers\App\NotificationsController();
@@ -95,7 +95,7 @@
 
                         <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                             <div class="dropdown-header d-flex align-items-center justify-content-between">
-                                <h5 class="m-0">{{_('Notifications')}}</h5>
+                                <h5 class="m-0">{{__('Notifications')}}</h5>
                                 @if( $notificationCount )
                                     <a href="javascript:void(0)" class="btn btn-link btn-sm">Mark all read</a>
                                 @endif
@@ -142,17 +142,17 @@
                 <li class="dropdown pc-h-item header-user-profile">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
                         href="javascript:void(0)" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false" >
-                        <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar" />
+                        <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar" style="aspect-ration:1/1"/>
                     </a>
                     <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                         <div class="dropdown-header d-flex align-items-center justify-content-between">
-                            <h5 class="m-0">{{_('profile')}}</h5>
+                            <h5 class="m-0">{{__('profile')}}</h5>
                         </div>
                         <div class="dropdown-body">
                             <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
                                 <div class="d-flex mb-1">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar wid-35" />
+                                        <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar wid-35" style="aspect-ration:1/1"/>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-1">{{ auth()->user()['fullname'] }} 🖖</h6>
@@ -164,24 +164,24 @@
                                 <a href="/app/profile/view" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-user text-muted me-2"></i>
-                                        <span>{{_('My Profile')}}</span>
+                                        <span>{{__('My Profile')}}</span>
                                     </span>
                                 </a>
 
-                                @if(settings->get('allow_apis') == 'true')
+                                @if($settings->allow_apis == 'true')
                                 <a href="/app/api/manage" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-code"></i>
-                                        <span>{{_('API Settings')}}</span>
+                                        <span>{{__('API Settings')}}</span>
                                     </span>
                                 </a>
                                 @endif
 
-                                @if(\App\Helpers\Helpers::isAdmin())
+                                @if($helpers::isAdmin())
                                 <a href="/admin" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-settings"></i>
-                                        <span>{{_('Admin Settings')}}</span>
+                                        <span>{{__('Admin Settings')}}</span>
                                     </span>
                                 </a>
                                 @endif
@@ -189,7 +189,7 @@
                                 <!--a href="javascript:void(0)" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-headset"></i>
-                                        <span>{{_('support')}}</span>
+                                        <span>{{__('support')}}</span>
                                     </span>
                                 </a-->
 

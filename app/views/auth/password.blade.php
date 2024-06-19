@@ -13,7 +13,7 @@
 							<div class="d-grid my-3"> </div>
 						</div>
 
-						<h4 class="text-center f-w-500 mb-3"> {{_('Enter your new password')}} </h4>
+						<h4 class="text-center f-w-500 mb-3"> {{__('Enter your new password')}} </h4>
 
 						<form name="reset" method="post">
 
@@ -25,20 +25,20 @@
                             
 							<!-- form submission -->
 							<div class="d-grid mt-4">
-								<button type="submit" class="btn btn-primary">{{_('Change Password')}}</button>
+								<button type="submit" class="btn btn-primary">{{__('Change Password')}}</button>
 							</div>
 
 							<!-- go back to login -->
                             <div class="d-grid mt-2">
                                 <a href="/login" class="btn btn-light">
-                                    {{_('Back to Login')}}
+                                    {{__('Back to Login')}}
                                 </a>
                             </div>
 
 							<!-- create account -->
 							<div class="d-flex justify-content-between align-items-end mt-4">
-								<h6 class="f-w-500 mb-0"> {{_('Don\'t have an Account?')}} </h6>
-								<a href="/register" class="link-primary"> {{_('Create Account')}} </a>
+								<h6 class="f-w-500 mb-0"> {{__('Don\'t have an Account?')}} </h6>
+								<a href="/register" class="link-primary"> {{__('Create Account')}} </a>
 							</div>
 						</form>
 		

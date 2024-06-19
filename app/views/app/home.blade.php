@@ -9,7 +9,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header m-0">
-                                <h3 class="card-title">Welcome to <span class="text-primary">Flow</span></h3>
+                                <h3 class="card-title">Welcome to <span class="text-primary">{{$settings->site_name}}</span></h3>
                             </div>
                             <div class="card-body">
                                 <p>Flow is a comprehensive web application development starter kit designed to accelerate the process of building modern and feature-rich web applications. With a focus on simplicity, flexibility, and efficiency, Flow provides developers with a robust set of tools and features to kickstart their projects. From secure authentication and seamless API integration to beautifully designed UI/UX components and powerful admin tools</p>

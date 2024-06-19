@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-body position-relative">
                             <h5>
-                                {{ _('Edit User Information') }}
+                                {{ __('Edit User Information') }}
                             </h5>             
                         </div>
                     </div>
@@ -36,28 +36,28 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">{{_('Full Name')}}</label>
+                                                <label class="form-label">{{__('Full Name')}}</label>
                                                 <input type="text" name="fullname" class="form-control" value="{{ $user->fullname }}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">{{_('Email')}}</label>
+                                                <label class="form-label">{{__('Email')}}</label>
                                                 <input type="text" name="email" class="form-control" value="{{ $user->email }}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">{{_('Phone')}}</label>
+                                                <label class="form-label">{{__('Phone')}}</label>
                                                 <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">{{_('User Role')}}</label>
+                                                <label class="form-label">{{__('User Role')}}</label>
                                                 <select name="user_role" class="form-select">
                                                     <option value="{{ $user->user_role->name }}" hidden>{{ $user->user_role->description }}</option>
                                                     @foreach (\App\Models\UserRole::all() as $role)
@@ -69,7 +69,7 @@
 
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">{{_('User Status')}}</label>
+                                                <label class="form-label">{{__('User Status')}}</label>
                                                 <select name="user_status" class="form-select">
                                                     <option value="{{ $user->status ?? null }}" hidden>{{ $user->status ?? 'Unverified' }}</option>
                                                     <option value="active">Active</option>
@@ -80,14 +80,14 @@
 
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">{{_('Bio')}}</label>
+                                                <label class="form-label">{{__('Bio')}}</label>
                                                 <textarea class="form-control" name="bio">{{ auth()->user()['about'] }}</textarea>
                                             </div>
                                         </div>
 
                                         
                                         <div class="col-12 text-center btn-page mt-3">
-                                            <button type="submit" class="btn btn-danger rounded">{{_('Update User')}}</button>
+                                            <button type="submit" class="btn btn-danger rounded">{{__('Update User')}}</button>
                                         </div>
                                     </div>
                                 </form>

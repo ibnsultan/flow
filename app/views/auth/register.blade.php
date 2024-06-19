@@ -13,7 +13,7 @@
 							<div class="d-grid my-3"> </div>
 						</div>
 
-						<h4 class="text-center f-w-500 mb-3"> {{_('Create a new Account')}} </h4>
+						<h4 class="text-center f-w-500 mb-3"> {{__('Create a new Account')}} </h4>
 
 						<form name="register" method="post">
 
@@ -38,20 +38,20 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        {{_('I agree to the')}} <a href="/policy/terms" class="link-primary"> {{_('Terms and Conditions')}} </a>
+                                        {{__('I agree to the')}} <a href="/policy/terms" class="link-primary"> {{__('Terms and Conditions')}} </a>
                                     </label>
                                 </div>
 							</div>
 
 							<!-- form submission -->
 							<div class="d-grid mt-4">
-								<button type="submit" class="btn btn-primary">{{_('Submit')}}</button>
+								<button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
 							</div>
 
 							<!-- create account -->
 							<div class="d-flex justify-content-between align-items-end mt-4">
-								<h6 class="f-w-500 mb-0"> {{_('Already have an Account?')}} </h6>
-								<a href="/login" class="link-primary"> {{_('Login')}} </a>
+								<h6 class="f-w-500 mb-0"> {{__('Already have an Account?')}} </h6>
+								<a href="/login" class="link-primary"> {{__('Login')}} </a>
 							</div>
 						</form>
 		

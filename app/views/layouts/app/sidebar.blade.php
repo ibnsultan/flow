@@ -24,7 +24,7 @@
             </div>
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
-                    <label>{{_('Navigation')}}</label>
+                    <label>{{__('Navigation')}}</label>
                 </li>
                 
                 <li class="pc-item">
@@ -32,7 +32,7 @@
                         <span class="pc-micon">
                             <i data-feather="home"></i>
                         </span>
-                        <span class="pc-mtext">{{_('Dashboard')}}</span>
+                        <span class="pc-mtext">{{__('Dashboard')}}</span>
                     </a>
                 </li>
 
@@ -42,7 +42,7 @@
                         <span class="pc-micon">
                             <i data-feather="layout"></i>
                         </span>
-                        <span class="pc-mtext">{{_('Template')}}</span>
+                        <span class="pc-mtext">{{__('Template')}}</span>
                     </a>
                 </li>
 

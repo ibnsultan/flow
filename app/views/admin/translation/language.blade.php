@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body pb-4 position-relative">
                             <h5>
-                                {{_('Translations')}}: {{ $language->name }}
+                                {{__('Translations')}}: {{ $language->name }}
                             </h5>             
                         </div>
                     </div>
@@ -27,8 +27,8 @@
                                     <table id="row-callback" class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Key')}}</th>
-                                                <th>{{_('Translation')}}</th>
+                                                <th>{{__('Key')}}</th>
+                                                <th>{{__('Translation')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -44,7 +44,7 @@
 
                             @else
                                 <div class="text-center">
-                                    {{_('No translations found for this language.')}}
+                                    {{__('No translations found for this language.')}}
                                 </div>
                             @endif
 
@@ -74,17 +74,17 @@
                 lengthMenu: [100, 250, 500, 1000],
                 order: [[0, 'asc']],
                 language: {
-                    search: '{{_('Search')}} &nbsp;',
-                    lengthMenu: '{{_('Show')}} &nbsp; _MENU_',
-                    info: '{{_('Showing')}} _START_ {{_('to')}} _END_ {{_('of')}} _TOTAL_ {{_('entries')}}',
-                    infoEmpty: '{{_('No entries found')}}',
-                    zeroRecords: '{{_('No matching records found')}}',
-                    infoFiltered: '{{_('filtered from')}} _MAX_ {{_('total entries')}}',
+                    search: '{{__('Search')}} &nbsp;',
+                    lengthMenu: '{{__('Show')}} &nbsp; _MENU_',
+                    info: '{{__('Showing')}} _START_ {{__('to')}} _END_ {{__('of')}} _TOTAL_ {{__('entries')}}',
+                    infoEmpty: '{{__('No entries found')}}',
+                    zeroRecords: '{{__('No matching records found')}}',
+                    infoFiltered: '{{__('filtered from')}} _MAX_ {{__('total entries')}}',
                     paginate: {
-                        first: '{{_('First')}}',
-                        last: '{{_('Last')}}',
-                        next: '{{_('Next')}}',
-                        previous: '{{_('Previous')}}'
+                        first: '{{__('First')}}',
+                        last: '{{__('Last')}}',
+                        next: '{{__('Next')}}',
+                        previous: '{{__('Previous')}}'
                     }
                 }
             });

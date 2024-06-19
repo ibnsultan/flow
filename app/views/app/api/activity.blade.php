@@ -32,9 +32,9 @@
                                         <thead>
                                             <tr>
                                                 <th></th>
-                                                <th>{{_('Handler')}}</th>
-                                                <th>{{_('Origin')}}</th>
-                                                <th class="w-25">{{_('Payload')}}</th>
+                                                <th>{{__('Handler')}}</th>
+                                                <th>{{__('Origin')}}</th>
+                                                <th class="w-25">{{__('Payload')}}</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

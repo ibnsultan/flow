@@ -24,33 +24,33 @@
 
                                 <div class="form-group">
                                     <select name="status" class="form-select" required>
-                                        <option value="live">{{_('Published')}}</option>
-                                        <option value="draft">{{_('Draft')}}</option>
+                                        <option value="live">{{__('Published')}}</option>
+                                        <option value="draft">{{__('Draft')}}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">                                    
-                                    <label class="form-label">{{_('Page Title')}}</label>
+                                    <label class="form-label">{{__('Page Title')}}</label>
                                     <input type="text" class="form-control" name="title" placeholder="Article Title ..." required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">{{_('URL Slug')}}</label>
+                                    <label class="form-label">{{__('URL Slug')}}</label>
                                     <input type="text" name="slug" placeholder="url slug" class="form-control" pattern="^[a-zA-Z0-9_-]+$" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">{{_('Meta Keywords')}}</label>
+                                    <label class="form-label">{{__('Meta Keywords')}}</label>
                                     <input type="text" name="meta_keywords" placeholder="Meta Keywords, comma separated" class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">{{_('Meta Description')}}</label>
+                                    <label class="form-label">{{__('Meta Description')}}</label>
                                     <textarea name="meta_description" class="form-control" placeholder="Meta Description" rows="5"></textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary w-100 rounded">{{_('PUBLISH PAGE')}}</button>
+                                    <button type="submit" class="btn btn-primary w-100 rounded">{{__('PUBLISH PAGE')}}</button>
                                 </div>
 
                             </div>

@@ -1,6 +1,6 @@
 <div class="offcanvas pc-announcement-offcanvas offcanvas-end" tabindex="-1" id="announcement" aria-labelledby="announcementLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="announcementLabel"> {{_('What\'s New')}} </h5>
+        <h5 class="offcanvas-title" id="announcementLabel"> {{__('What\'s New')}} </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -38,7 +38,7 @@
 
         @else
             <div class="alert alert-warning" role="alert">
-                {{_('No new announcements')}}
+                {{__('No new announcements')}}
             </div>            
         @endif
 

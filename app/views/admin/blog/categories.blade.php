@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body position-relative">
                             <h5>
-                                {{_('Categories')}}
+                                {{__('Categories')}}
                             </h5> 
                             <button class="btn btn-primary position-absolute" 
                                 style="top:0.8rem;right:2rem;"
                                 data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                                {{_('Add New')}}
+                                {{__('Add New')}}
                             </button>              
                         </div>
                     </div>
@@ -31,10 +31,10 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Category')}}</th>
-                                                <th>{{_('Description')}}</th>
-                                                <th>{{_('No. Articles')}}</th>
-                                                <th class="text-end">{{_('Actions')}}</th>
+                                                <th>{{__('Category')}}</th>
+                                                <th>{{__('Description')}}</th>
+                                                <th>{{__('No. Articles')}}</th>
+                                                <th class="text-end">{{__('Actions')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,7 +72,7 @@
                             @else
 
                                 <div class="text-center">
-                                    <h5>{{_('No Categories found')}}</h5>
+                                    <h5>{{__('No Categories found')}}</h5>
                                 </div>
 
                             @endif
@@ -91,23 +91,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addCategoryModalLabel">
-                        {{_('Add New Category')}}
+                        {{__('Add New Category')}}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form method="post" name="addCategory">
                         <div class="mb-3">
-                            <label for="name" class="form-label">{{_('Category')}}</label>
-                            <input type="text" class="form-control" name="name" placeholder="{{_('Category Name')}}" required>
+                            <label for="name" class="form-label">{{__('Category')}}</label>
+                            <input type="text" class="form-control" name="name" placeholder="{{__('Category Name')}}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">{{_('Description')}}</label>
-                            <textarea class="form-control" name="description" placeholder="{{_('Category Description')}}"></textarea>
+                            <label for="description" class="form-label">{{__('Description')}}</label>
+                            <textarea class="form-control" name="description" placeholder="{{__('Category Description')}}"></textarea>
                         </div>
                         
                         <div class="text-center">
-                            <button id="addCategory" type="submit" class="btn btn-primary w-50">{{_('Save')}}</button>
+                            <button id="addCategory" type="submit" class="btn btn-primary w-50">{{__('Save')}}</button>
                         </div>
                     </form>
                 </div>
@@ -121,7 +121,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editCategoryModalLabel">
-                        {{_('Edit Category')}}
+                        {{__('Edit Category')}}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -129,15 +129,15 @@
                     <form method="post" name="updateCategory">
                         <input type="text" id="category_id" name="category_id" hidden>
                         <div class="mb-3">
-                            <label for="name" class="form-label">{{_('Category')}}</label>
-                            <input type="text" id="categoryName" class="form-control" name="name" placeholder="{{_('Category Name')}}" required>
+                            <label for="name" class="form-label">{{__('Category')}}</label>
+                            <input type="text" id="categoryName" class="form-control" name="name" placeholder="{{__('Category Name')}}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">{{_('Description')}}</label>
-                            <textarea class="form-control" id="categoryDescription" name="description" placeholder="{{_('Category Description')}}"></textarea>
+                            <label for="description" class="form-label">{{__('Description')}}</label>
+                            <textarea class="form-control" id="categoryDescription" name="description" placeholder="{{__('Category Description')}}"></textarea>
                         </div>
                         <div class="text-center">
-                            <button id="updateCategory" type="submit" class="btn btn-primary w-50">{{_('Save')}}</button>
+                            <button id="updateCategory" type="submit" class="btn btn-primary w-50">{{__('Save')}}</button>
                         </div>
                     </form>
                 </div>

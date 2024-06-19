@@ -8,11 +8,11 @@
                     <div class="card">
                         <div class="card-body position-relative">
                             <h5>
-                                {{_('Pages')}}
+                                {{__('Pages')}}
                             </h5>
                             <a class="btn btn-primary position-absolute" 
                                 style="top:0.8rem;right:2rem;" href="/admin/pages/add">
-                                {{_('Add New')}}
+                                {{__('Add New')}}
                             </a>             
                         </div>
                     </div>
@@ -31,10 +31,10 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>{{_('Title')}}</th>
-                                                <th>{{_('Short')}}</th>
-                                                <th class="text-center">{{_('Status')}}</th>
-                                                <th class="text-end">{{_('Actions')}}</th>
+                                                <th>{{__('Title')}}</th>
+                                                <th>{{__('Short')}}</th>
+                                                <th class="text-center">{{__('Status')}}</th>
+                                                <th class="text-end">{{__('Actions')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -45,9 +45,9 @@
                                                     <td>{{ substr(strip_tags(html_entity_decode($page->content)), 0, 100) }}</td>
                                                     <td class="text-center">
                                                         @if($page->status == 'live')
-                                                            <span class="badge bg-success"> {{_('Published')}} </span>
+                                                            <span class="badge bg-success"> {{__('Published')}} </span>
                                                         @else
-                                                            <span class="badge bg-danger"> {{_('Draft')}} </span>
+                                                            <span class="badge bg-danger"> {{__('Draft')}} </span>
                                                         @endif
                                                     </td>
                                                     <td class="text-end">
@@ -70,7 +70,7 @@
                             @else
 
                                 <div class="text-center">
-                                    {{_('No pages found.')}}
+                                    {{__('No pages found.')}}
                                 </div>
                             
                             @endif
