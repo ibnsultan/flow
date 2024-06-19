@@ -2,9 +2,12 @@
 
 namespace App\Controllers\App;
 
-use App\Helpers\Helpers;
 use App\Models\ApiKey;
 use App\Models\ApiActivity;
+
+use App\Helpers\Helpers;
+use Leaf\Helpers\Password;
+use Leaf\Helpers\Authentication;
 
 use App\Controllers\Controller;
 
@@ -27,12 +30,10 @@ class ApiController extends Controller
      */
     public function index(){
 
-        $data = [
-            'title' => 'API Key Management',
-            'apiKeys' => $this->apiKeys->user(auth()->id())
-        ];
+        $this->data->title = 'API Key Management';
+        $this->data->apiKeys = $this->apiKeys->user(auth()->id());
 
-        response()->markup(view('app.api.index', $data));
+        render('app.api.index', (array) $this->data);
 
     }
 
@@ -44,11 +45,11 @@ class ApiController extends Controller
     public function issueKey(){
         
         $apiName = request()->get('api_name');
-        $secretKey = \Leaf\Helpers\Password::hash(request()->get('api_secret'));
+        $secretKey = Password::hash(request()->get('api_secret'));
 
         try{
 
-            $token = \Leaf\Helpers\Authentication::generateToken(
+            $token = Authentication::generateToken(
                 [
                     'iat' => time(),
                     'exp' => strtotime('+1 year'),
@@ -121,9 +122,11 @@ class ApiController extends Controller
             exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
         $api = $this->apiKeys->find($apiID);
+        if(!$api)
+            exit(response()->json(['status' => 'error', 'message' => 'API key not found']));
 
         // verify secret key
-        if(!\Leaf\Helpers\Password::verify($secretKey, $api->secret))
+        if(!Password::verify($secretKey, $api->secret))
             exit(response()->json(['status' => 'error', 'message' => 'Invalid secret key']));
 
         response()->json(['status' => 'success', 'message' => $api->token]);
@@ -138,16 +141,15 @@ class ApiController extends Controller
         
         $apiKeyID = Helpers::decode($id);
 
-        if($apiKeyID == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
-        
-        $data = [
-            'title' => 'Api Activity',
-            'apiID' => $id,
-            'apiKey' => $this->apiKeys->find($apiKeyID),
-            'activities' => $this->apiActivities->activities($apiKeyID)
-        ];
+        if($apiKeyID == '')
+            exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
-        response()->markup(view('app.api.activity', $data));
+        $this->data->title = 'API Activity';
+        $this->data->apiID = $id;
+        $this->data->apiKey = $this->apiKeys->find($apiKeyID);
+        $this->data->activities = $this->apiActivities->activities($apiKeyID);
+
+        render('app.api.activity', (array) $this->data);
         
     }
 
