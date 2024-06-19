@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 <form name="updateProfileDetails" method='post' enctype="multiart/form-data">
 
-                                    <input type="hidden" name="user_id" value="{{ $helper::encode($user->id) }}">
+                                    <input type="hidden" name="user_id" value="{{ $helpers::encode($user->id) }}">
                                     <div class="row">
                                         <div class="col-sm-12 text-center mb-3">
                                             <div class="user-upload wid-75">
