@@ -6,13 +6,9 @@ class User extends Model
 {
     protected $table = 'users';
     
-    protected $fillable = [
-        'fullname', 'email', 'password', 'avatar', 'role', 'phone', 'about', 'status'
-    ];
+    protected $fillable = [ 'fullname', 'email', 'password', 'avatar', 'role', 'phone', 'about', 'status' ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = [ 'password', 'remember_token' ];
 
     protected $with = ['user_role'];
 
@@ -23,49 +19,41 @@ class User extends Model
         'updated_at' => 'datetime'
     ];
 
-    public $adminRoles = ['admin', 'moderator'];
+    public static $adminRoles = ['admin', 'moderator'];
 
+    public static function non_admins(){
+        return self::whereNotIn('role', static::$adminRoles)->with('user_role')->orderBy('created_at', 'desc')->get();
+    }
 
-    /**
-     * Relationsips
-     * 
-     */
+    public static function admins(){
+        return self::whereIn('role', static::$adminRoles)->get();
+    }
+    
+    public static function updateDetails($user, $columns){
+        return self::where('id', $user)->update($columns);
+    }
 
+    public static function getUser($user_id){
+        return self::where('id', $user_id)->with('user_role')->get()->first();
+    }
+
+    # has many articles
     public function blog_article(){
         return $this->hasMany(BlogArticle::class, 'author', 'id');
     }
 
+    # owns many files
     public function file_storage(){
         return $this->hasMany(FileStorage::class, 'user_id', 'id');
     }
 
+    # has one api key
     public function api_key(){
         return $this->hasOne(ApiKey::class, 'user_id', 'id');
     }
 
+    # belongs to a single role
     public function user_role(){
         return $this->belongsTo(UserRole::class, 'role', 'name');
-    }
-
-
-    /**
-     * Queries
-     * 
-     */
-
-    public function non_admins(){
-        return $this->whereNotIn('role', $this->adminRoles)->with('user_role')->orderBy('created_at', 'desc')->get();
-    }
-
-    public function admins(){
-        return $this->whereIn('role', $this->adminRoles)->get();
-    }
-    
-    public function updateDetails($user, $columns){
-        return $this->where('id', $user)->update($columns);
-    }
-
-    public function getUser($user_id){
-        return $this->where('id', $user_id)->with('user_role')->get()->first();
     }
 }
