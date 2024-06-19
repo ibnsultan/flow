@@ -3,8 +3,8 @@
 
         <div class="m-header">
             <a href="javascript:void(0)" class="b-brand text-primary">
-                <img src="{{ settings->get('logo_dark') }}" class="w-75"/>
-                <span class="badge bg-light-success rounded-pill ms-2 theme-version">{{ settings->get('system_version') }}</span>
+                <img src="{{ $settings->logo_dark }}" class="w-75"/>
+                <span class="badge bg-light-success rounded-pill ms-2 theme-version">{{ $settings->system_version }}</span>
             </a>
         </div>
 
@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar wid-45 rounded-circle" />
+                            <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar wid-45 rounded-circle" style="aspect-ration:1/1"/>
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
                             <h6 class="mb-0"> {{ auth()->user()['fullname'] }} </h6>
