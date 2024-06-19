@@ -74,7 +74,7 @@ function require_files(){
 |
 */
 
-function _($key){
+function __($key){
 
     $language = cookie()->get('lang') ?? 'en';
     $directory = getcwd() . "/storage/languages/$language.json";
