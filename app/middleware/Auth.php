@@ -104,7 +104,7 @@ class Auth
 
         # get user data and apiId if available
         return [ 
-            'user'=>$this->users->find($data->user_id),
+            'user'=>User::find($data->user_id),
             'apiId'=>$this->apiKeys->getSecret($bearerToken)->id ?? false
         ];
     }
