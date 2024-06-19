@@ -43,7 +43,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <a href="/admin/user/{{ $helper::encode($user->id) }}">
+                                                        <a href="/admin/user/{{ $helpers::encode($user->id) }}">
                                                             {{ $user->fullname }}
                                                         </a>
                                                     </td>
@@ -51,10 +51,10 @@
                                                     <td> {{ $user->user_role->description }} </td>
                                                     <td> {{ $user->status ?? 'Unverified' }} </td>
                                                     <td>
-                                                        <a href="/admin/user/{{ $helper::encode($user->id) }}" class="btn btn-primary rounded btn-sm">
+                                                        <a href="/admin/user/{{ $helpers::encode($user->id) }}" class="btn btn-primary rounded btn-sm">
                                                             <i class="ti ti-pencil"></i>
                                                         </a>
-                                                        <button class="btn btn-danger rounded btn-sm" onclick="deleteUser('{{ $helper::encode($user->id) }}')">
+                                                        <button class="btn btn-danger rounded btn-sm" onclick="deleteUser('{{ $helpers::encode($user->id) }}')">
                                                             <i class="ti ti-trash"></i>
                                                         </button>                                                        
                                                     </td>
