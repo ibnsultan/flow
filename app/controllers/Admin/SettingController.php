@@ -14,11 +14,11 @@ class SettingController extends Controller
      * Show the general settings.
      */
     public function general(){
+
+        $this->data->title = 'General Settings';
+        $this->data->setting = Setting::all();
         
-        response()->markup(view('admin.settings.general', [
-            'title' => 'General Settings',
-            'settings' => Setting::all()
-        ]));
+        render('admin.settings.general', (array) $this->data);
 
     }
 
@@ -30,15 +30,6 @@ class SettingController extends Controller
     public function updateGeneral(){
 
         try{
-
-            /*exit(
-                response()->json([
-                    'status' => 'error',
-                    'message' => 'This feature is disabled in the demo',
-                    'request' => $_REQUEST,
-                    'files' => $_FILES
-                ])
-            );*/
 
             // upload files
             foreach(['favicon','logo_light','logo_dark'] as $key){
@@ -82,9 +73,8 @@ class SettingController extends Controller
      */
     public function seo(){
         
-        response()->markup(view('admin.settings.seo', [
-            'title' => 'SEO Settings',
-        ]));
+        $this->data->title = 'SEO Settings';
+        render('admin.settings.seo', (array) $this->data);
 
     }
 
@@ -132,9 +122,8 @@ class SettingController extends Controller
      */
     public function modules(){
         
-        response()->markup(view('admin.settings.modules', [
-            'title' => 'Modules Settings',
-        ]));
+        $this->data->title = 'Modules Settings';
+        render('admin.settings.modules', (array) $this->data);
 
     }
 
@@ -172,10 +161,10 @@ class SettingController extends Controller
      */
     public function translation(){
         
-        response()->markup(view('admin.translation.languages', [
-            'title' => 'Languages & Translations',
-            'languages' => Language::all()
-        ]));
+        $this->data->title = 'Languages & Translations';
+        $this->data->languages = Language::all();
+        
+        render('admin.settings.translation', (array) $this->data);
     }
 
 }
