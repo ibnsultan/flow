@@ -40,10 +40,10 @@ class TranslationController extends Controller
         $missingKeys = array_diff_key($defaultLanguage, $languageData);
         $updatedFile = array_merge($languageData, $missingKeys);
 
-        response()->markup(view('admin.translation.language', [
-            'title' => 'Translation: ' . $language->name,
-            'language' => $language,
-            'languageData' => $updatedFile
-        ]));
+        $this->data->title = 'Translation: ' . $language->name;
+        $this->data->language = $language;
+        $this->data->languageData = $updatedFile;
+
+        render('admin.translation.language', (array) $this->data);
     }
 }
