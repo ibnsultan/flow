@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>{{$title ?? getenv('app_name')}}</title>
+		<title>{{ $settings->site_name }}</title>
 		<!-- [Meta] -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="author" content="{{getenv('app_author')}}">
 		
-		<link rel="icon" href="{{ settings->get('favicon') }}" type="image/x-icon">
+		<link rel="icon" href="{{ $settings->favicon }}" type="image/x-icon">
 		<link rel="stylesheet" href="/assets/fonts/inter/inter.css" id="main-font-link" />
 		<link rel="stylesheet" href="/assets/fonts/tabler-icons.min.css" />
 		<link rel="stylesheet" href="/assets/fonts/feather.css" />
@@ -23,10 +23,10 @@
 	</head>
 	
 	<body 
-		data-pc-preset="{{ settings->get('theme_color') }}" 
-		data-pc-sidebar-caption="true" 
-		data-pc-direction="{{ settings->get('theme_layout') }}"
 		data-pc-theme_contrast="true"
+		data-pc-sidebar-caption="true" 
+		data-pc-preset="{{ $settings->theme_color }}" 
+		data-pc-direction="{{ $settings->theme_layout }}"
 		data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}" >
 		
 		<div class="loader-bg">
@@ -47,8 +47,7 @@
 
 		<!-- Required Js -->
 		
-		<script>document.querySelector('nav').classList.add('pc-sidebar-hide');</script>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 		<script src="/assets/js/plugins/popper.min.js"></script>
 		<script src="/assets/js/plugins/simplebar.min.js"></script>
