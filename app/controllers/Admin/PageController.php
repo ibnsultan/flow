@@ -19,11 +19,13 @@ class PageController extends Controller
      * 
      * @return void
      */
-    public function index(){
-        response()->markup(view('admin.pages.index', [
-            'title' => 'Pages',
-            'pages' => Page::all()
-        ]));
+    public function index() :void
+    {
+
+        $this->data->title = 'Pages';
+        $this->data->pages = Page::all();
+
+        render('admin.pages.index', (array) $this->data);
     }
 
     /**
@@ -31,10 +33,10 @@ class PageController extends Controller
      * 
      * @return void
      */
-    public function add(){
-        response()->markup(view('admin.pages.add', [
-            'title' => 'Add Page'
-        ]));
+    public function add() :void
+    {
+        $this->data->title = 'Create New Page';
+        render('admin.pages.add', (array) $this->data);
     }
 
     /**
@@ -84,17 +86,17 @@ class PageController extends Controller
     public function edit($id){
         
         $pageId = Helpers::decode($id);
-        $page = Page::find($pageId);
+        if($pageId == '')
+            exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
+        $page = Page::find($pageId);
         if(!$page)
             exit(response()->page(getcwd().'/app/views/errors/404.html', 404));
 
-        response()->markup(view('admin.pages.edit', [
-            'title' => 'Edit Page',
-            'page' => $page,
-            'helper' => new Helpers(),
-        ]));
+        $this->data->title = 'Edit Page';
+        $this->data->page = $page;
 
+        render('admin.pages.edit', (array) $this->data);
     }
 
     /**
@@ -150,13 +152,14 @@ class PageController extends Controller
     public function delete($id){
         
         $pageId = Helpers::decode($id);
+        if($pageId == '')
+            response()->json(['status' => 'error', 'message' => 'Invalid request']);
+        
         $page = Page::find($pageId);
-
         if(!$page)
             response()->json(['status' => 'error', 'message' => 'Page not found'], 404);
         
         $page->delete();
-
         response()->json(['status'=>'success', 'message' => 'Page deleted']);
     }
 
