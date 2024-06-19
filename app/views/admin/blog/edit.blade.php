@@ -22,7 +22,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <input type="text" name="article_id" value="{{$article_id}}" hidden>
+                                <input type="text" name="article_id" value="{{$article->id}}" hidden>
 
                                 <div class="form-group">                                    
                                     <label class="form-label">Article Title</label>
