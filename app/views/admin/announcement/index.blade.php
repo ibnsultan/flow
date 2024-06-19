@@ -45,10 +45,10 @@
                                                     <td>{{ $announcement->description }}</td>
                                                     <td>{{ $announcement->created_at->diffForHumans() }}</td>
                                                     <td>
-                                                        <a href="/admin/announcement/edit/{{ $helper::encode($announcement->id) }}" class="btn btn-sm btn-primary rounded">
+                                                        <a href="/admin/announcement/edit/{{ $helpers::encode($announcement->id) }}" class="btn btn-sm btn-primary rounded">
                                                             <i class="ti ti-pencil"></i>
                                                         </a>
-                                                        <a href="/admin/announcement/delete/{{ $helper::encode($announcement->id) }}" class="btn btn-sm btn-danger rounded">
+                                                        <a href="/admin/announcement/delete/{{ $helpers::encode($announcement->id) }}" class="btn btn-sm btn-danger rounded">
                                                             <i class="ti ti-trash"></i>
                                                         </a>
                                                     </td>
