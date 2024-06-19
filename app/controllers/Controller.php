@@ -2,19 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\Setting;
 use App\Models\Notification;
 
+use App\Helpers\Helpers;
 
 class Controller extends \Leaf\Controller
 {
 
-    protected $users;
-    protected $notifications;
+    protected $data;
 
     public function __construct()
     {
-        $this->users = new User();
-        $this->notifications = new Notification();
+        $this->data = new \stdClass();
+        $this->data->helpers = new Helpers;
+        $this->data->notification = new Notification;
+        $this->data->settings = (object) Setting::all()->pluck('value', 'key')->toArray();
     }
+
 }
