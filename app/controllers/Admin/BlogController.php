@@ -26,12 +26,10 @@ class BlogController extends Controller
      */
     public function index(){
 
-        $data = [
-            'title' => 'Blog',
-            'articles' => BlogArticle::with('user', 'blog_category')->orderBy('created_at', 'desc')->get()
-        ];
+        $this->data->title = 'Blog';
+        $this->data->articles = BlogArticle::with('user', 'blog_category')->orderBy('created_at', 'desc')->get();
 
-        response()->markup(view('admin.blog.index', $data));
+        render('admin.blog.index', (array) $this->data);
     }
 
     /**
@@ -43,16 +41,14 @@ class BlogController extends Controller
     public function viewArticle($id){
 
         $article_id = Helpers::decode($id);
-        if($article_id == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
+        if($article_id == '')
+            exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
-        $data = [
-            'title' => BlogArticle::find($article_id)->title,
-            'article' => BlogArticle::find($article_id),
-            'categories' => BlogCategory::all(),
-            'article_id' => $id
-        ];
+        $this->data->article = BlogArticle::find($article_id);
+        $this->data->title = $this->data->article->title;
+        $this->data->categories = BlogCategory::all();
 
-        response()->markup( view('admin.blog.edit', $data) );
+        render('admin.blog.edit', (array) $this->data);
 
     }
 
@@ -62,13 +58,11 @@ class BlogController extends Controller
      * @return void
      */
     public function writeArticle(){
-            
-        $data = [
-            'title' => 'Write Article',
-            'categories' => BlogCategory::all()
-        ];
 
-        response()->markup(view('admin.blog.write', $data));
+        $this->data->title = 'Write Article';
+        $this->data->categories = BlogCategory::all();
+
+        render('admin.blog.write', (array) $this->data);
     }
 
     /**
@@ -212,12 +206,10 @@ class BlogController extends Controller
      */
     public function categories(){
 
-        $data = [
-            'title' => 'Blog Categories',
-            'categories' => BlogCategory::withCount('blog_article')->get()
-        ];
+        $this->data->title = 'Blog Categories';
+        $this->data->categories = BlogCategory::withCount('blog_article')->get();
 
-        response()->markup(view('admin.blog.categories', $data));
+        render('admin.blog.categories', (array) $this->data);
     }
 
     /**
