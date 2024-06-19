@@ -2,6 +2,7 @@
 
 namespace App\Controllers\App;
 
+use App\Models\Notification;
 use App\Controllers\Controller;
 
 class NotificationsController extends Controller
@@ -12,7 +13,7 @@ class NotificationsController extends Controller
     }
 
     public function userNotifications(){
-        return $this->notifications->user(auth()->id());
+        return Notification::user(auth()->id());
     }
     
 }
