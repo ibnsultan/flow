@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-8 col-sm-12">
                         <div class="card h-100">
-                            <input type="hidden" id="pageId" name="id" value="{{ $helper::encode($page->id) }}">
+                            <input type="hidden" id="pageId" name="id" value="{{ $helpers::encode($page->id) }}">
                             <div class="card-body editor-board">
 
                                 <textarea name="content" id="classic-editor" required hidden> {!! $page->content !!} </textarea>
