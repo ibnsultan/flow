@@ -13,11 +13,9 @@ class HomeController extends Controller
 
     public function home(){
 
-        $data = [
-            'title' => 'Dashboard',
-            'current_user' => auth()->user()
-        ];
+        $this->data->title = 'Dashboard';
+        $this->data->current_user = auth()->user();
 
-        response()->markup(view('app.home', $data));
+        render('app.home', (array) $this->data);
     }
 }
