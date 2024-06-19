@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\User;
+
 use App\Helpers\Helpers;
 use Leaf\Helpers\Password;
 use App\Helpers\MailSender;
@@ -27,16 +29,13 @@ class UserController extends Controller
             exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
         ($role == 'all') ? 
-            $users = $this->users->non_admins() : 
-            $users = $this->users->admins() ;
+            $users = User::non_admins() : 
+            $users = User::admins() ;
 
-        $data = [
-            'title' => 'Users',
-            'users' => $users,
-            'helper' => new Helpers,
-        ];
+        $this->data->title = 'Users';
+        $this->data->users = $users;
 
-        response()->markup(view('admin.users.index', $data));
+        render('admin.users.index', (array) $this->data);
     }
 
 
@@ -48,13 +47,13 @@ class UserController extends Controller
     public function createUser(){
 
         // check if user exists
-        if($this->users->where('email', request()->get('email'))->first())
+        if(User::where('email', request()->get('email'))->first())
             exit(response()->json(['status'=>'error', 'message'=>'User already exists']));
 
         try {
 
             // insert user records
-            $this->users::create([
+            User::create([
                 'fullname' => request()->get('fullname'),
                 'email' => request()->get('email'),
                 'password' => Password::hash(random_bytes(8)),
@@ -98,13 +97,10 @@ class UserController extends Controller
         if($user_id == '')
             exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
-        $data = [
-            'title' => "Manage: {$this->users->find($user_id)->fullname}",
-            'user' => $this->users->getUser($user_id),
-            'helper' => new Helpers
-        ];
+        $this->data->title = "Manage: " . User::find($user_id)->fullname;
+        $this->data->user = User::find($user_id);
 
-        response()->markup( view('admin.users.view', $data) );
+        render('admin.users.view', (array) $this->data);
 
     }
 
@@ -120,10 +116,10 @@ class UserController extends Controller
         if($user_id == '')
             exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
-        if($this->users->find($user_id)->role == 'admin')
+        if(User::find($user_id)->role == 'admin')
             exit(response()->json(['status'=>'error', 'message'=>'You cannot delete an admin']));
 
-        $this->users->find($user_id)->delete();
+        User::find($user_id)->delete();
         response()->json(['status'=>'success', 'message'=>'User deleted successfully']);
 
     }
@@ -142,7 +138,7 @@ class UserController extends Controller
         if($user_id == '')
             exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
-        $user = $this->users->find($user_id);
+        $user = User::find($user_id);
 
         // check if user exists
         if(!$user)
