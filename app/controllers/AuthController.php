@@ -20,7 +20,7 @@ class AuthController extends Controller
      * @return void
      */
     public function signin(){
-        response()->markup(view('auth.login'));
+       render('auth.login');
     }
 
     /**
@@ -28,7 +28,7 @@ class AuthController extends Controller
      * @return void
      */
     public function signup(){
-        response()->markup(view('auth.register'));
+        render('auth.register');
     }
 
     /**
@@ -85,7 +85,7 @@ class AuthController extends Controller
      * @return void
      */
     public function forgot(){
-        response()->markup(view('auth.reset'));
+        render('auth.reset');
     }
 
     /**
@@ -98,7 +98,7 @@ class AuthController extends Controller
             $email = request()->get('email');
             
             // get user data by email
-            $userData = $this->users->where('email', $email)->first();
+            $userData = User::where('email', $email)->first();
             if(!$userData)
                 exit(response()->json(['status'=>'error', 'message'=>'User with such email does not exist']));
 
@@ -108,7 +108,7 @@ class AuthController extends Controller
 
             // generate reset token
             $resetToken = Password::hash($userData->id.time());
-            $this->users->where('email', $email)->update([
+            User::where('email', $email)->update([
                 'remember_token' => $resetToken
             ]);
 
@@ -137,7 +137,7 @@ class AuthController extends Controller
      */
     public function changePassword($token){
         $token = base64_decode($token);
-        $userData = $this->users->where('remember_token', $token)->first();
+        $userData = User::where('remember_token', $token)->first();
 
         if(!$userData)
             exit(response()->page(getcwd().'/app/views/errors/400.html', 400));
@@ -146,7 +146,9 @@ class AuthController extends Controller
         if((time() - strtotime($userData->updated_at)) > 7200)
             exit(response()->page(getcwd().'/app/views/errors/400.html', 400));
 
-        response()->markup(view('auth.password', ['token'=>$token]));
+        $this->data->token = $token;
+
+        render('auth.password', (array) $this->data);
     }
 
     /**
@@ -156,7 +158,7 @@ class AuthController extends Controller
      */
     public function updatePassword($token){
         $token = base64_decode($token);
-        $userData = $this->users->where('remember_token', $token)->first();
+        $userData = User::where('remember_token', $token)->first();
 
         if(!$userData)
             exit(response()->json(['status'=>'error', 'message'=>'Invalid token submitted']));
@@ -166,7 +168,7 @@ class AuthController extends Controller
             exit(response()->json(['status'=>'error', 'message'=>'Token expired']));
 
         $password = request()->get('password');
-        $this->users->where('remember_token', $token)->update([
+        User::where('remember_token', $token)->update([
             'password' => Password::hash($password),
             'remember_token' => null
         ]);
