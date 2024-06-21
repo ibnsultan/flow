@@ -48,9 +48,17 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 }
 
 /* Cursor */
-.cursor-pointer{
-    cursor: pointer;
-}
+.cursor-pointer{ cursor: pointer; }
+
+.btn { border-radius: 5px !important; }
+.btn-primary { color: #fff !important; }
+
+/* form select */
+.select2-container { display: block !important; }
+ span.select2-dropdown.select2-dropdown--below { z-index: 1100; }
+.select2-container--default .select2-selection--single .select2-selection__arrow { height: 50px; }
+.select2-container--default .select2-selection--single { border: 1px solid #bec8d0; height: 50px; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 50px; }
 
 /* custom scrollbar */
 ::-webkit-scrollbar {

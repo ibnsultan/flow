@@ -42,4 +42,7 @@ function change_theme_color(color){
     layout_change(color);
 }
 
+
+$('.form-select').select2();
+
 // layout_change('{{cookie()->get('theme_color') ?? 'light' }}');
