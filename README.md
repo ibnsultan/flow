@@ -8,7 +8,9 @@ Flow's purpose is empower developers to create high-quality web applications wit
 
 ## Features
 
-- [X] Authentication
+- [X] Access and Authentication
+  - [X] Basic Auth: login, register, etc
+  - [ ] Granular Permission
 - [X] Announcements and Notification
 - [X] Blogging & CMS
 - [X] API & developer tools
