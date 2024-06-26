@@ -1,3 +1,5 @@
+@import url('/assets/css/fontawesome-all.css');
+
 .editor-board{
     min-height: calc(100vh - 180px);
     height: 100%;
@@ -52,6 +54,7 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 
 .btn { border-radius: 5px !important; }
 .btn-primary { color: #fff !important; }
+.btn-light { border: solid 1px #727272 !important; }
 
 /* form select */
 .select2-container { display: block !important; }
@@ -59,6 +62,50 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 .select2-container--default .select2-selection--single .select2-selection__arrow { height: 50px; }
 .select2-container--default .select2-selection--single { border: 1px solid #bec8d0; height: 50px; }
 .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 50px; }
+
+/* positioning */
+.start-10 { left: 10px; }
+.start-20 { left: 20px; }
+.start-30 { left: 30px; }
+.start-40 { left: 40px; }
+
+.end-10 { right: 10px; }
+.end-20 { right: 20px; }
+.end-30 { right: 30px; }
+.end-40 { right: 40px; }
+
+.top-10 { top: 10px; }
+.top-20 { top: 20px; }
+.top-30 { top: 30px; }
+.top-40 { top: 40px; }
+
+.bottom-10 { bottom: 10px; }
+.bottom-20 { bottom: 20px; }
+.bottom-30 { bottom: 30px; }
+.bottom-40 { bottom: 40px; }
+
+.bg-success-light {
+	background-color: #d3fdd7 !important;
+}
+
+.bg-danger-light {
+	background-color: #ffdadf !important;
+}
+
+.bg-warning-light {
+	background-color: #fffbd3 !important;
+}
+
+.bg-info-light {
+    background-color: #d3f3ff !important;
+}
+
+/* Custom Width */
+.min-w25{ min-width: 25% !important; }
+.min-w50{ min-width: 50% !important; }
+.min-w75{ min-width: 75% !important; }
+.min-w100{ min-width: 100% !important; }
+
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
