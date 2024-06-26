@@ -2,6 +2,45 @@ layout_sidebar_change('false')
 change_box_container('false')
 layout_caption_change('true')
 
+$(document).ready(function() {
+    
+    $('.form-select').select2();
+
+    /* datepicker
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true
+    });*/
+
+    $('.media-preview').click(function() {
+        $(this).siblings('input[type="file"]').click();
+
+        $(this).siblings('input[type="file"]').change(function() {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.media-preview').css('background-image', 'url(' + e.target.result + ')');
+            }
+            reader.readAsDataURL(file);
+        });
+
+    });
+});
+
+function buttonState(button, state, initialText=null) {
+
+    button = $(button);
+
+    if (state === 'loading') {
+        button.attr('disabled', true);
+        button.html('<i class="fa fa-spinner fa-spin"></i> Loading...');
+    } else {
+        button.attr('disabled', false);
+        button.html(initialText);
+    }
+}
+
 function change_theme_color(color){
     document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
     layout_change(color);
@@ -41,8 +80,5 @@ function change_theme_color(color){
     document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
     layout_change(color);
 }
-
-
-$('.form-select').select2();
 
 // layout_change('{{cookie()->get('theme_color') ?? 'light' }}');
