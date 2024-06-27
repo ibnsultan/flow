@@ -5,7 +5,7 @@ namespace App\Models;
 class Module extends Model{
     protected $table = 'modules';
 
-    protected $fillable = ['module_name', 'description', 'status'];
+    protected $fillable = ['name', 'description', 'status', 'is_core'];
 
     public $timestamps = true;
 
