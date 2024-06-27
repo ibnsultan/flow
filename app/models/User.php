@@ -54,6 +54,6 @@ class User extends Model
 
     # belongs to a single role
     public function user_role(){
-        return $this->belongsTo(UserRole::class, 'role', 'name');
+        return $this->belongsTo(Role::class, 'role', 'name');
     }
 }
