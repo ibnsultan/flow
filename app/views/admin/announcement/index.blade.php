@@ -6,12 +6,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body position-relative">
+                        <div class="card-body border-0 position-relative">
                             <h5>
                                 {{__('Announcements')}}
                             </h5>
-                            <a class="btn btn-primary position-absolute" 
-                                style="top:0.8rem;right:2rem;" href="/admin/announcement/add"
+                            <a class="btn btn-primary rounded text-white position-absolute" style="top:0.8rem;right:2rem;"
                                 data-bs-toggle="modal" data-bs-target="#addNewAnnouncement">
                                 {{__('Add New')}}
                             </a>             
