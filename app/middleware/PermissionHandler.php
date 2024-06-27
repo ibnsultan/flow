@@ -3,10 +3,12 @@
 namespace App\Middleware;
 
 use App\Models\User;
+use App\Models\Module;
 use App\Models\Permission;
 use App\Models\RolePermission;
 use App\Models\UserPermission;
 use App\Models\PermissionType;
+use App\Models\Role;
 
 class PermissionHandler
 {
@@ -15,67 +17,44 @@ class PermissionHandler
         // ...
     }
 
-    public function permission(string $permissionName, ?int $userId=null) :string
+    public static function can(string $moduleName, string $permissionName, mixed $permissionScopes = 'all', int $userId = null) :object
     {
         $userId = $userId ?? auth()->id();
-        $userRole = User::find($userId)->role;
+        $userRoleId = Role::where('name', User::find($userId)->role)->first()->id;        
 
-        $permissionId = Permission::where('name', $permissionName)->first();
+        # check if such permission exists
+        $permissionId = Permission::where('name', $permissionName)->where('module_id', Module::where('name', $moduleName)->first()->id)->first();
+        if (!$permissionId) return (object) [ 'status' => false ];
         
-        // check from role permissions first, if not found, check from user permissions
-        $rolePermission = RolePermission::where('role_id', $userRole->id)
-            ->where('permission_id', $permissionId)
-            ->first();
+        $permissionId = $permissionId->id;
 
-        if ($rolePermission) {
-            return $rolePermission->permissionType->name;
-        }
-
-        $userPermission = UserPermission::where('user_id', $userId)
-            ->where('permission_id', $permissionId)
-            ->first();
-
-        if ($userPermission) {
-            return $userPermission->permissionType->name;
-        }
-
-        return 'none';        
-    }
-
-    public function hasPermission($permissionName, $permissionType) :bool
-    {
-        $permission = Permission::where('name', $permissionName)->first();
-        $permissionType = PermissionType::where('name', $permissionType)->first();
-
-        $rolePermission = RolePermission::where('role_id', auth()->user()->role->id)
-            ->where('permission_id', $permission->id)
-            ->where('permission_type_id', $permissionType->id)
-            ->first();
-
-        if ($rolePermission) {
-            return true;
-        }
-
-        $userPermission = UserPermission::where('user_id', auth()->id())
-            ->where('permission_id', $permission->id)
-            ->where('permission_type_id', $permissionType->id)
-            ->first();
-
-        if ($userPermission) {
-            return true;
-        }
-
-        return false;
-
-    }
-
-    public function userPermissions() :null|object
-    {
-        $userPermissions = UserPermission::with('permission', 'permissionType')
-            ->where('user_id', auth()->id())
-            ->get();
+        # check if role has permission
+        $rolePermission = RolePermission::byPermission($permissionId, $userRoleId);
+        if($rolePermission) {
             
-        return $userPermissions;
+            if(!is_array($permissionScopes)) {
+                if($rolePermission[0]['scope'] == $permissionScopes):
+                    return (object) [ 'status' => true, 'scope' => $permissionScopes ];
+                    else: return (object) [ 'status' => false ];
+                endif;
+            }
+
+            // I know there no need to check if $permissionScopes is an array, but I'm doing it anyway
+            if(is_array($permissionScopes) and in_array($rolePermission[0]['scope'], $permissionScopes))
+                return (object) [ 'status' => true, 'scope' => $rolePermission[0]['scope'] ];
+                
+        }
+
+        return (object) [ 'status' => false ];
+    }
+
+    public static function ownership(string $scope, $ownFunction, $addFunction) :bool
+    {
+        if($scope == 'owned' and !$ownFunction) return false;
+        if($scope == 'added' and !$addFunction) return false;
+        if($scope == 'both' and !$ownFunction and !$addFunction) return false;
+
+       return true;
     }
 
 }
