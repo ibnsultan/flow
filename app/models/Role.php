@@ -14,6 +14,18 @@ class Role extends Model{
         'updated_at' => 'datetime'
     ];
 
+    // get roles with number of user co
+    public static function withUsers() {
+        return self::select('roles.*', Model::raw('count(users.id) as users_count'))
+            ->leftJoin('users', 'roles.name', '=', 'users.role')
+            ->groupBy('roles.id')
+            ->get();
+    }
+
+    public function users() {
+        return $this->hasMany(User::class);
+    }
+
     public function rolePermissions() {
         return $this->hasMany(RolePermission::class);
     }
