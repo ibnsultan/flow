@@ -42,7 +42,7 @@ class PermissionHandler
             // I know there no need to check if $permissionScopes is an array, but I'm doing it anyway
             if(is_array($permissionScopes) and in_array($rolePermission[0]['scope'], $permissionScopes))
                 return (object) [ 'status' => true, 'scope' => $rolePermission[0]['scope'] ];
-                
+
         }
 
         return (object) [ 'status' => false ];
