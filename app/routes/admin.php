@@ -97,15 +97,18 @@ app()->group('admin', function(){
     # access control routes
     app()->group('access', function(){
 
-        app()->get('roles', 'Admin\AccessController@indexRoles');
+        app()->get('roles', 'Admin\AccessController@roles');
+        app()->get('modules', 'Admin\AccessController@modules');
         app()->get('permissions', 'Admin\AccessController@permissions');
         app()->get('roles/{id}', 'Admin\AccessController@viewRole');
-        app()->get('permissions/{id}', 'Admin\AccessController@viewPermission');
+        app()->get('permissions/list/{role}', 'Admin\AccessController@rolePermissions');
 
-        app()->post('roles/create', 'Admin\AccessController@createRole');
-        app()->post('permissions/create', 'Admin\AccessController@createPermission');
+        app()->post('roles/add', 'Admin\AccessController@createRole');
+        app()->post('permissions/add', 'Admin\AccessController@addPermission');
+        app()->post('roles/permissions/update', 'Admin\AccessController@registerRolePermission');
 
         app()->post('roles/update', 'Admin\AccessController@updateRole');
+        app()->post('modules/status', 'Admin\ModulesController@updateStatus');
         app()->post('permissions/update', 'Admin\AccessController@updatePermission');
 
         app()->delete('roles/{id}', 'Admin\AccessController@deleteRole');
