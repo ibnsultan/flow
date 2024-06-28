@@ -60,7 +60,7 @@
                                                 <label class="form-label">{{__('User Role')}}</label>
                                                 <select name="user_role" class="form-select">
                                                     <option value="{{ $user->user_role->name }}" hidden>{{ $user->user_role->description }}</option>
-                                                    @foreach (\App\Models\UserRole::all() as $role)
+                                                    @foreach (\App\Models\Role::all() as $role)
                                                         <option value="{{ $role->name }}">{{ $role->name }}</option>                                                        
                                                     @endforeach
                                                 </select>
