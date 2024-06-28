@@ -115,13 +115,13 @@
                         <span class="pc-micon">
                             <i data-feather="users"></i>
                         </span>
-                        <span class="pc-mtext">{{__('User Management')}}</span>
+                        <span class="pc-mtext">{{__('Users')}}</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
                         <li class="pc-item">
                             <a href="/admin/users/all" class="pc-link">
-                                <span class="pc-mtext">{{__('Users')}}</span>
+                                <span class="pc-mtext">{{__('Subscribers')}}</span>
                             </a>
                         </li>
                         <li class="pc-item">
@@ -138,7 +138,7 @@
                         <span class="pc-micon">
                             <i data-feather="shield"></i>
                         </span>
-                        <span class="pc-mtext">{{__('Privileges')}}</span>
+                        <span class="pc-mtext">{{__('Access')}}</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
@@ -150,6 +150,11 @@
                         <li class="pc-item">
                             <a href="/admin/access/permissions" class="pc-link">
                                 <span class="pc-mtext">{{__('Permissions')}}</span>
+                            </a>
+                        </li>
+                        <li class="pc-item">
+                            <a href="/admin/access/modules" class="pc-link">
+                                <span class="pc-mtext">{{__('Modules')}}</span>
                             </a>
                         </li>
                     </ul>
@@ -183,7 +188,7 @@
                         <!-- modules -->
                         <li class="pc-item">
                             <a href="/admin/settings/modules" class="pc-link">
-                                <span class="pc-mtext">{{__('Modules')}}</span>
+                                <span class="pc-mtext">{{__('Features')}}</span>
                             </a>
                         </li>
                     </ul>
