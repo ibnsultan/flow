@@ -21,7 +21,7 @@ class UserController extends Controller
      * List all Users
      * 
      * @param string $role
-     * @return void`    
+     * @return void
      */
     public function index($role){
 
@@ -154,7 +154,7 @@ class UserController extends Controller
                 'email' => request()->get('email'),
                 'phone' => $phone,
                 'role' => request()->get('user_role'),
-                'status' => request()->get('status'),
+                'status' => request()->get('user_status'),
                 'about' => request()->get('bio')
             ]);
 
