@@ -15,6 +15,9 @@
 		<link rel="stylesheet" href="/assets/fonts/fontawesome.css" />
 		<link rel="stylesheet" href="/assets/fonts/material.css" />
 		
+		<link rel="stylesheet" href="/assets/css/plugins/toastr.min.css" />
+		<link rel="stylesheet" href="/assets/css/plugins/select2.min.css">
+		
 		<link rel="stylesheet" href="/assets/css/style.css" id="main-style-link" />
 		<link rel="stylesheet" href="/assets/css/style-preset.css" />
 		<link rel="stylesheet" href="/assets/css/custom.css" />
@@ -52,7 +55,9 @@
 		<script src="/assets/js/fonts/custom-font.js"></script>
 		<script src="/assets/js/pcoded.js"></script>
 		<script src="/assets/js/plugins/feather.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="/assets/js/plugins/sweetalert2.all.min.js"></script>
+        <script src="/assets/js/plugins/toastr.min.js"></script>
+		<script src="/assets/js/plugins/select2.min.js"></script>
 		<script src="/assets/js/app.js"></script>
 		<script src="/admin/script"></script>
 
