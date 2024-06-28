@@ -5,7 +5,7 @@ namespace App\Models;
 class Role extends Model{
     protected $table = 'roles';
 
-    protected $fillable = ['role_name', 'description'];
+    protected $fillable = ['name', 'description'];
 
     public $timestamps = true;
 
