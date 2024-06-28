@@ -22,7 +22,7 @@ class User extends Model
     public static $adminRoles = ['admin', 'moderator'];
 
     public static function non_admins(){
-        return self::whereNotIn('role', static::$adminRoles)->with('user_role')->orderBy('created_at', 'desc')->get();
+        return self::whereNotIn('role', static::$adminRoles)->orderBy('created_at', 'desc')->get();
     }
 
     public static function admins(){
@@ -34,7 +34,7 @@ class User extends Model
     }
 
     public static function getUser($user_id){
-        return self::where('id', $user_id)->with('user_role')->get()->first();
+        return self::where('id', $user_id)->get()->first();
     }
 
     # has many articles
