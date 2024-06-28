@@ -49,13 +49,13 @@
                                                     </td>
                                                     <td> {{ $user->email }} </td>
                                                     <td> {{ $user->user_role->description }} </td>
-                                                    <td> {{ $user->status ?? 'Unverified' }} </td>
+                                                    <td> {{ $user->status ?? 'Inactive' }} </td>
                                                     <td>
                                                         <a href="/admin/user/{{ $helpers::encode($user->id) }}" class="btn btn-primary rounded btn-sm">
-                                                            <i class="ti ti-pencil"></i>
+                                                            <i class="fa fa-pencil"></i>
                                                         </a>
                                                         <button class="btn btn-danger rounded btn-sm" onclick="deleteUser('{{ $helpers::encode($user->id) }}')">
-                                                            <i class="ti ti-trash"></i>
+                                                            <i class="fa fa-trash"></i>
                                                         </button>                                                        
                                                     </td>
                                                 </tr>
@@ -113,7 +113,7 @@
                                     <label class="form-label">User role</label>
                                     <select name="user_role" class="form-select">
                                         <option value="subscriber" hidden>{{__('Subscriber')}}</option>
-                                        @foreach (\App\Models\UserRole::all() as $role)
+                                        @foreach (\App\Models\Role::all() as $role)
                                             <option value="{{ $role->name }}">{{ $role->name }}</option>                                                        
                                         @endforeach
                                     </select>
