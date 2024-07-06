@@ -85,12 +85,10 @@ app()->group('admin', function(){
     app()->group('announcement', function(){
 
         app()->get('/', 'Admin\AnnouncementController@index');
-        app()->get('add', 'Admin\AnnouncementController@add');
         app()->get('edit/{id}', 'Admin\AnnouncementController@edit');
         app()->get('delete/{id}', 'Admin\AnnouncementController@delete');
 
-        app()->post('add', 'Admin\AnnouncementController@addAnnouncement');
-        app()->post('update/{id}', 'Admin\AnnouncementController@updateAnnouncement');
+        app()->post('add', 'Admin\AnnouncementController@add');
 
     });
 
