@@ -5,7 +5,7 @@
     </div>
     <div class="offcanvas-body">
 
-        @php $announcements = (new App\Models\Announcement)->group(auth()->user()['role']); @endphp
+        @php $announcements = $announcement::group(auth()->user()['role']); @endphp
         @if(count($announcements))
 
             @foreach($announcements as $announcement)
