@@ -62,6 +62,9 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 .select2-container--default .select2-selection--single .select2-selection__arrow { height: 50px; }
 .select2-container--default .select2-selection--single { border: 1px solid #bec8d0; height: 50px; }
 .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 50px; }
+.select2-container--default .select2-selection--multiple { padding: 10px 0 14px 5px !important;}
+
+textarea.select2-search__field ::placeholder { color: #dbe1e5 !important; }
 
 /* positioning */
 .start-10 { left: 10px; }
