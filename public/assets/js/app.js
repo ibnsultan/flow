@@ -4,14 +4,17 @@ layout_caption_change('true')
 
 $(document).ready(function() {
     
-    $('.form-select').select2();
+    $('.form-select').select2({
+        placeholder: 'Select an option',
+    });
 
-    /* datepicker
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayHighlight: true
-    });*/
+    if($('.datepicker').length) {
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    }
 
     $('.media-preview').click(function() {
         $(this).siblings('input[type="file"]').click();
