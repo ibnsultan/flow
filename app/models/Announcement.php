@@ -7,19 +7,20 @@ class Announcement extends Model{
     protected $table = 'announcements';
 
     protected $fillable = [
-        'title', 'description', 'cover', 'receipients', 'link'
+        'title', 'description', 'cover', 'recipients', 'link'
     ];
 
     public $timestamps = true;
 
     protected $casts = [
-        'receipients' => 'json',
+        'recipients' => 'json',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
 
-    function group($role){
-        return $this->whereJsonContains('receipients', $role)->limit(15)->get();
+    public static function group($role){
+        return self::whereJsonContains('recipients', $role)
+            ->limit(15)->latest()->get();
     }
 
 }
