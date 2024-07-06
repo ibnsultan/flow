@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Module;
 use App\Models\Setting;
+use App\Models\Announcement;
 use App\Models\Notification;
 
 use App\Helpers\Helpers;
@@ -21,6 +22,7 @@ class Controller extends \Leaf\Controller
 
         # new instances
         $this->data->helpers = new Helpers;
+        $this->data->announcement = new Announcement;
         $this->data->notification = new Notification;
         $this->data->permission = new PermissionHandler;
 
