@@ -18,8 +18,8 @@ class ApiActivity extends Model{
         'updated_at' => 'datetime'
     ];
 
-    public function activities($id){
-        return $this->where('apiID', $id)->orderBy('created_at', 'desc')->get();
+    public static function key($id){
+        return self::where('apiID', $id)->orderBy('created_at', 'desc')->get();
     }
     
 }
