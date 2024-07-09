@@ -7,7 +7,6 @@ use App\Models\Module;
 use App\Models\Permission;
 use App\Models\RolePermission;
 use App\Models\UserPermission;
-use App\Models\PermissionType;
 use App\Models\Role;
 
 class PermissionHandler
@@ -20,10 +19,13 @@ class PermissionHandler
     public static function can(string $moduleName, string $permissionName, mixed $permissionScopes = 'all', int $userId = null) :object
     {
         $userId = $userId ?? auth()->id();
-        $userRoleId = Role::where('name', User::find($userId)->role)->first()->id;        
+        $userRoleId = Role::where('name', User::find($userId)->role)->first()->id;    
+        
+        $module = Module::where('name', $moduleName)->first();
+        if(!$module) return (object) [ 'status' => false ];
 
         # check if such permission exists
-        $permissionId = Permission::where('name', $permissionName)->where('module_id', Module::where('name', $moduleName)->first()->id)->first();
+        $permissionId = Permission::where('name', $permissionName)->where('module_id', $module->id)->first();
         if (!$permissionId) return (object) [ 'status' => false ];
         
         $permissionId = $permissionId->id;
