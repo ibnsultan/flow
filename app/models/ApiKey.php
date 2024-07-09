@@ -17,12 +17,12 @@ class ApiKey extends Model{
         'updated_at' => 'datetime'
     ];
 
-    public function user($user){
-        return $this->where('user_id', $user)->get();
+    public static function user($user){
+        return self::where('user_id', $user)->get();
     }
 
-    public function getSecret($token){
-        return $this->where('token', $token)->first();
+    public static function getSecret($token){
+        return self::where('token', $token)->first();
     }
     
 }

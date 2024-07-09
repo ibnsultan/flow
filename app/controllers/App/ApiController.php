@@ -13,14 +13,10 @@ use App\Controllers\Controller;
 
 class ApiController extends Controller
 {
-    protected $apiKeys;
-    protected $apiActivities;
 
     public function __construct()
     {
         parent::__construct();
-        $this->apiKeys = new ApiKey();
-        $this->apiActivities = new ApiActivity();
     }
 
     /**
@@ -30,8 +26,11 @@ class ApiController extends Controller
      */
     public function index(){
 
+        if(!$this->data->modules->api)
+            exit(response()->page(getcwd()."/app/views/errors/404.html"));
+
         $this->data->title = 'API Key Management';
-        $this->data->apiKeys = $this->apiKeys->user(auth()->id());
+        $this->data->apiKeys = ApiKey::user(auth()->id());
 
         render('app.api.index', (array) $this->data);
 
@@ -43,6 +42,9 @@ class ApiController extends Controller
      * @return \Leaf\Core\Response
      */
     public function issueKey(){
+
+        if(!$this->data->modules->api)
+            exit(response()->json(['status' => 'error', 'message' => 'API module is disabled']));
         
         $apiName = request()->get('api_name');
         $secretKey = Password::hash(request()->get('api_secret'));
@@ -59,7 +61,7 @@ class ApiController extends Controller
                 $secretKey
             );
 
-            $this->apiKeys->create([
+            ApiKey::create([
                 'name' => $apiName,
                 'user_id' => auth()->id(),
                 'token' => $token,
@@ -105,7 +107,7 @@ class ApiController extends Controller
      * @return object
      */
     public function userKeys(){
-        return $this->apiKeys->user(auth()->id());
+        return ApiKey::user(auth()->id());
     }
 
     /**
@@ -115,13 +117,16 @@ class ApiController extends Controller
      */
     public function copy(){
 
+        if(!$this->data->modules->api)
+            exit(response()->json(['status' => 'error', 'message' => 'API module is disabled']));
+
         $apiID = Helpers::decode(request()->get('api_id'));
         $secretKey = request()->get('api_secret');
 
         if($apiID == '' or $secretKey == '')
             exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
-        $api = $this->apiKeys->find($apiID);
+        $api = ApiKey::find($apiID);
         if(!$api)
             exit(response()->json(['status' => 'error', 'message' => 'API key not found']));
 
@@ -141,13 +146,13 @@ class ApiController extends Controller
         
         $apiKeyID = Helpers::decode($id);
 
-        if($apiKeyID == '')
+        if($apiKeyID == '' or !$this->data->modules->api)
             exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
         $this->data->title = 'API Activity';
         $this->data->apiID = $id;
-        $this->data->apiKey = $this->apiKeys->find($apiKeyID);
-        $this->data->activities = $this->apiActivities->activities($apiKeyID);
+        $this->data->apiKey = ApiKey::find($apiKeyID);
+        $this->data->activities = ApiActivity::key($apiKeyID);
 
         render('app.api.activity', (array) $this->data);
         
@@ -162,7 +167,7 @@ class ApiController extends Controller
      */
     public function logActivity($apiID, $status='pass'){
 
-        $this->apiActivities->create([
+        ApiActivity::create([
             'handler' => $_SERVER['REQUEST_URI'],
             'origin' => $_SERVER['REMOTE_ADDR'],
             'payload' => $_REQUEST,
