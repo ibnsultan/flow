@@ -168,7 +168,7 @@
                                     </span>
                                 </a>
 
-                                @if($settings->allow_apis == 'true')
+                                @if($modules->api)
                                 <a href="/app/api/manage" class="dropdown-item">
                                     <span>
                                         <i class="ti ti-code"></i>
