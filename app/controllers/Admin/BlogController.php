@@ -9,6 +9,9 @@ use App\Models\BlogCategory;
 use App\Controllers\Controller;
 use App\Controllers\MediaController;
 
+use App\Middleware\PermissionHandler;
+use App\Models\Permission;
+
 class BlogController extends Controller
 {
     protected $filestorage;
@@ -26,8 +29,16 @@ class BlogController extends Controller
      */
     public function index(){
 
+        if(!PermissionHandler::can('blog', 'read')->status) exit(render('errors.403'));
+
         $this->data->title = 'Blog';
-        $this->data->articles = BlogArticle::with('user', 'blog_category')->orderBy('created_at', 'desc')->get();
+        $this->data->articles = BlogArticle::with('user', 'blog_category')
+            ->orderBy('created_at', 'desc')->get();
+
+        # permission list
+        $this->data->addArticlePermission = PermissionHandler::can('blog', 'create');
+        $this->data->editArticlePermission = PermissionHandler::can('blog', 'update');
+        $this->data->deleteArticlePermission = PermissionHandler::can('blog', 'delete');
 
         render('admin.blog.index', (array) $this->data);
     }
@@ -40,11 +51,24 @@ class BlogController extends Controller
      */
     public function viewArticle($id){
 
-        $article_id = Helpers::decode($id);
-        if($article_id == '')
-            exit(response()->page(getcwd()."/app/views/errors/404.html"));
+        # validate user permission
+        $permission = PermissionHandler::can('blog', 'read');
+        if(!$permission->status) exit(render('errors.403'));
 
-        $this->data->article = BlogArticle::find($article_id);
+        # fetch the article
+        $article_id = Helpers::decode($id);
+        if($article_id == '') exit(response()->page(getcwd()."/app/views/errors/404.html"));
+
+        $article = BlogArticle::find($article_id);
+
+        # validate property ownership
+        if($permission->scope !== 'all'){
+            if(!PermissionHandler::owns( $permission->scope, auth()->id() == $article->author ))
+                exit(render('errors.403'));
+        }
+
+        # data allocation
+        $this->data->article = $article;
         $this->data->title = $this->data->article->title;
         $this->data->categories = BlogCategory::all();
 
@@ -59,6 +83,11 @@ class BlogController extends Controller
      */
     public function writeArticle(){
 
+        # validate user permission
+        if(!PermissionHandler::can('blog', 'add')->status)
+            exit(render('errors.403'));
+        
+        # data allocation
         $this->data->title = 'Write Article';
         $this->data->categories = BlogCategory::all();
 
@@ -71,6 +100,9 @@ class BlogController extends Controller
      * @return void
      */
     public function createArticle(){
+
+        if(!PermissionHandler::can('blog', 'add')->status)
+            exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         $fileUploaded = null;
         $coverImage = request()->get('cover');
@@ -89,14 +121,13 @@ class BlogController extends Controller
 
         }
 
-        ( request()->get('tags') ) ?
-            $tags = explode(',', str_replace(' ', '', request()->get('tags'))) : $tags = null;
+        # prepare article tags
+        (request()->get('tags')) ?
+            $tags = explode(',', str_replace(' ', '', request()->get('tags'))) :
+            $tags = null;
 
         // extract images from the content
-        $content = extract_images_from_html(
-            request()->get('content'),'storage/app/uploads/blog/');
-
-        // reencode the content
+        $content = extract_images_from_html(request()->get('content'),'storage/app/uploads/blog/');
         $content = htmlentities($content);
 
         try {
@@ -110,12 +141,17 @@ class BlogController extends Controller
                 'cover' => $fileUploaded['path'] ?? null
             ]);
 
-            response()->json( ['status' => 'success', 'message'=> 'Article added succesfully'] );
+            response()->json( ['status' => 'success', 'message'=> __('Article added succesfully')] );
 
         } catch (\Throwable $e) {
 
-            (getenv('app_debug') == "true")? $message = $e->getMessage() : $message = "Could not Publish the article";
-            response()->json(['status' => 'error', 'message' => $message]);
+            response()->json(['status' => 'error', 'message' => __('An error occured while publishing the article'),
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                ]
+            ]);
+
         }
         
     }
@@ -127,13 +163,25 @@ class BlogController extends Controller
      */
     public function updateArticle()
     {
+        # validate user permission
+        $permission = PermissionHandler::can('blog', 'read');
+        if(!$permission->status)
+            exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
+        # fetch the article
         $article_id = Helpers::decode(request()->get('article_id'));
         if($article_id == '')
-            exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
+            exit(response()->json(['status' => 'error', 'message' => __('Invalid request')]));
 
         $article = BlogArticle::find($article_id);
 
+        # if user does not own the article
+        if($permission->scope !== 'all'){
+            if(!PermissionHandler::owns( $permission->scope, auth()->id() == $article->author ))
+                exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
+        }
+
+        # uploads file
         $fileUploaded = null;
         $coverImage = request()->get('cover');
 
@@ -150,13 +198,13 @@ class BlogController extends Controller
 
         }
 
-        ( request()->get('tags') ) ? $tags = explode(',', str_replace(' ', '', request()->get('tags'))) : $tags = null;
+        # extract tags
+        (request()->get('tags')) ?
+            $tags = explode(',', str_replace(' ', '', request()->get('tags'))) :
+            $tags = null;
 
         // extract images from the content
-        $content = extract_images_from_html(
-            request()->get('content'),'storage/app/uploads/blog/');
-
-        // reencode the content
+        $content = extract_images_from_html(request()->get('content'),'storage/app/uploads/blog/');
         $content = htmlentities($content);
 
         try {
@@ -169,12 +217,17 @@ class BlogController extends Controller
                 'cover' => $fileUploaded['path'] ?? $article->cover
             ]);
 
-            response()->json( ['status' => 'success', 'message'=> 'Article updated succesfully'] );
+            response()->json( ['status' => 'success', 'message'=> __('Article updated succesfully')] );
 
         } catch (\Throwable $e) {
 
-            (getenv('app_debug') == "true")? $message = $e->getMessage() : $message = "Could not update the article";
-            response()->json(['status' => 'error', 'message' => $message]);
+            response()->json(['status' => 'error', 'message' => __('An error occured while updating the article'),
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                ]
+            ]);
+
         }
         
     }
@@ -186,15 +239,26 @@ class BlogController extends Controller
      * @return void
      */
     public function deleteArticle($id){
-            
+
+        # validate user permission
+        $permission = PermissionHandler::can('blog', 'delete');
+        if(!$permission->status) exit(render('errors.403'));
+         
+        # fetch the article
         $article_id = Helpers::decode($id);
         $article = BlogArticle::find($article_id);
 
-        if(!$article)
-            response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
-        
-        $article->delete();
+        # if user does not own the article
+        if($permission->scope !== 'all'){
+            if(!PermissionHandler::owns( $permission->scope, auth()->id() == $article->author ))
+                exit(render('errors.403'));
+        }
 
+        # article not found
+        if(!$article) response()->json(['status' => 'error', 'message' => 'Article not found'], 404);
+        
+        # delete the article
+        $article->delete();
         response()->json(['status'=>'success', 'message' => 'Article deleted']);
     }
 
@@ -205,7 +269,12 @@ class BlogController extends Controller
      * @return void
      */
     public function categories(){
+        
+        # validate user permission
+        if(!PermissionHandler::can('blog', 'view_blog_categories')->status)
+            exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
+        # data allocation
         $this->data->title = 'Blog Categories';
         $this->data->categories = BlogCategory::withCount('blog_article')->get();
 
@@ -218,6 +287,10 @@ class BlogController extends Controller
      * @return void
      */
     public function createCategory(){
+
+        # validate user permission
+        if(!PermissionHandler::can('blog', 'create_blog_categories')->status)
+            exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
             
         try {
             
@@ -230,8 +303,12 @@ class BlogController extends Controller
 
         } catch (\Throwable $e) {
 
-            (getenv('app_debug') == "true")? $message = $e->getMessage() : $message = "Could not add the category";
-            response()->json(['status' => 'error', 'message' => $message]);
+            response()->json(['status' => 'error', 'message' => __('An error occured while creating category'),
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                ]
+            ]);
         }
     }
 
@@ -242,11 +319,17 @@ class BlogController extends Controller
      */
     public function updateCategory(){
 
+        # validate user permission
+        if(!PermissionHandler::can('blog', 'update_blog_categories')->status)
+            exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
+
+        #fetch category
         $category_id = Helpers::decode(request()->get('category_id'));
         if($category_id == '') exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
         $category = BlogCategory::find($category_id);
 
+        # start updating
         try {
             
             $category->update([
@@ -254,12 +337,16 @@ class BlogController extends Controller
                 'description' => request()->get('description')
             ]);
 
-            response()->json( ['status' => 'success', 'message'=> 'Category updated succesfully'] );
+            response()->json( ['status' => 'success', 'message'=> __('Category updated succesfully')] );
 
         } catch (\Throwable $e) {
 
-            (getenv('app_debug') == "true")? $message = $e->getMessage() : $message = "Could not update the category";
-            response()->json(['status' => 'error', 'message' => $message]);
+            response()->json(['status' => 'error', 'message' => __('An error occured while creating category'),
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                ]
+            ]);
         }
 
     }
@@ -271,18 +358,29 @@ class BlogController extends Controller
      * @return void
      */
     public function deleteCategory($id){
+        
+        # validate user permission
+        if(!PermissionHandler::can('blog', 'delete_blog_categories')->status)
+            exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
-        $category_id = Helpers::decode($id);
-        $category = BlogCategory::find($category_id);
+        # fetch category
+        $categoryId = Helpers::decode($id);
+        $category = BlogCategory::find($categoryId);
 
+        # prevent deletion of the default category
+        if($categoryId === 1)
+            exit(response()->json( ['status' => 'error', 'message'=> __('Default category can\'t be deleted')]));
+
+        # check if category exists
         if(!$category)
-            response()->json(['status' => 'error', 'message' => 'Category not found'], 404);
+            response()->json(['status' => 'error', 'message' => __('Category does not exist')]);
         
-        
-        BlogArticle::where('category', $category_id)->update(['category' => 1]); 
-        $category->delete();
+        # reallocate article to default category before deleting
+        BlogArticle::where('category', $categoryId)->update(['category' => 1]);
 
-        response()->json(['status'=>'success', 'message' => 'Category deleted']);
+        # delete
+        $category->delete();
+        response()->json(['status'=>'success', 'message' => __('Category succesfully deleted')]);
 
     }
 }
