@@ -22,41 +22,65 @@ class AccessController extends Controller
         parent::__construct();
     }
 
+    /**
+     * Roles Management
+     * 
+     * @return void
+     */
     public function roles() :void
     {
+        # validate permission
+        if(!PermissionHandler::can('setting', 'view_roles')->status)
+            exit(render('errors.403'));
+
+        # data allocation
         $this->data->title = 'Roles Management';
         $this->data->roles = Role::withUsers();
+
+        # permission allocation
+        $this->data->addRolePermission = PermissionHandler::can('setting', 'add_role');
+        $this->data->editRolePermission = PermissionHandler::can('setting', 'edit_role');
+        $this->data->deleteRolePermission = PermissionHandler::can('setting', 'delete_role');
 
         render('admin.access.roles', (array) $this->data);
     }
 
-    public function modules() :void
-    {
-        $this->data->title = 'Modules Management';
-        $this->data->modules = Module::all();
-
-        render('admin.access.modules', (array) $this->data); 
-    }
-
+    /**
+     * Permissions Management
+     * 
+     * @return void
+     */
     public function permissions() :void
     {
-        $permission = PermissionHandler::can('setting', 'view_permissions');
-        if(!$permission->status) exit(render('errors.403'));
+        # validate permission
+        if(!PermissionHandler::can('setting', 'view_permissions')->status)
+            exit(render('errors.403'));
 
+        # data allocation
         $this->data->title = 'Permissions Management';
         $this->data->roles = Role::withUsers();
-        $this->data->modules = Module::all();
+        $this->data->appModules = Module::all();
+
+        # permission allocation
+        $this->data->addPermissionPermission = PermissionHandler::can('setting', 'add_permission');
 
         render('admin.access.permissions', (array) $this->data);
     }
 
+    /**
+     * Add a new Permission
+     * 
+     * @return void
+     */
     public function addPermission() :void
     {
-        $permission = PermissionHandler::can('setting', 'add_permission');
-        if(!$permission->status)
+        # validate permission
+        if(!PermissionHandler::can('setting', 'add_permission')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
         try{
+
+            # retrieve data
             $data = [
                 'name' => request()->params('permission'),
                 'module_id' => request()->params('module'),
@@ -67,6 +91,7 @@ class AccessController extends Controller
             if(in_array(null, $data))
                 exit(response()->json(['status' => 'error', 'message' => __('Invalid Request')]));
 
+            # sanitize description and permission name
             $data['description'] = request()->params('description');
             $data['name'] = strtolower(preg_replace('/[^A-Za-z0-9]/', '_', $data['name']));
 
@@ -90,7 +115,6 @@ class AccessController extends Controller
                 'permission_type_id' => 4,
             ]);
 
-
             response()->json(['status' => 'success', 'message' => __('Permission added successfully')]);
         }catch(\Exception $e){
             response()->json(['status' => 'error', 'message' => __('An error occurred while adding permission'),
@@ -102,20 +126,26 @@ class AccessController extends Controller
         }
     }
 
+    /**
+     * Fetch Role Permissions
+     * 
+     * @param string $role
+     * @return void
+     */
     public function rolePermissions($role) :void
     {
         try{
-
-            $permission = PermissionHandler::can('setting', 'view_role_permissions');
-            if(!$permission->status)
+            # validate permission
+            if(!PermissionHandler::can('setting', 'view_role_permissions')->status)
                 exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
+            # fetch and validate role id
             $role = Role::where('name', $role)->first();
             $role = $role->id;
 
-            if(!$role)
-                exit(response()->json(['status' => 'error', 'message' => __('Role not found')]));
+            if(!$role) exit(response()->json(['status' => 'error', 'message' => __('Role not found')]));
 
+            # fetch modules and instantiate permissions
             $modules = Module::all();
             $modulesPermissions = [];
 
@@ -150,9 +180,14 @@ class AccessController extends Controller
                 return $carry;
             }, []);
             
+            # allocate data
             $this->data->role = $role;
             $this->data->modulesPermissions = $modulesPermissions;
             $this->data->permissionTypes = PermissionType::all()->pluck('name', 'id')->toArray();
+
+            # allocate permissions
+            $this->data->editRolePermission = PermissionHandler::can('setting', 'edit_role_permissions');
+            $this->data->resetRolePermission = PermissionHandler::can('setting', 'delete_role_permissions');
 
             $markup = view('admin.access.partials.role-permissions', (array) $this->data);
 
@@ -169,13 +204,19 @@ class AccessController extends Controller
 
     }
 
+    /**
+     * Update Role Permissions
+     * 
+     * @return void
+     */
     public function registerRolePermission() :void
     {
        try{
-            $permission = PermissionHandler::can('setting', 'edit_role_permissions');
-            if(!$permission->status)
+            # validate permission
+            if(!PermissionHandler::can('setting', 'edit_role_permissions')->status)
                 exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
+            # retrieve request data
             $data = [
                 'role' => request()->params('role'),
                 'value' => request()->params('value'),
@@ -183,20 +224,24 @@ class AccessController extends Controller
                 'permission' => request()->params('permission'),
             ];
 
+            # validate data
             if(in_array(null, $data))
                 exit(response()->json(['status' => 'error', 'message' => __('All fields are required')]));
 
+            # decode and validate role
             (!empty(Helpers::decode($data['role']))) ?
                 $roleId= Helpers::decode($data['role']) :
                 exit(response()->json(['status' => 'error', 'message' => __('Invalid Request')]));
 
-            # validate if parameter exists
+            # validate if role exists
             if(!Role::find($roleId))
                 exit(response()->json(['status' => 'error', 'message' => __('Role not found')]));
 
+            # fetch permission and types
             $scopeId = PermissionType::where('name', $data['value'])->first()->id;
-
             $permissionId = Permission::where('name', $data['permission'])->first()->id;
+
+            # validate permission
             if(!$permissionId)
                 exit(response()->json(['status' => 'error', 'message' => __('Permission not found')]));
 
@@ -207,7 +252,10 @@ class AccessController extends Controller
                 'permission_type_id' => $scopeId ?? 0,
             ];
             
-            if(!RolePermission::updateExisting($roleId, $permissionId, $scopeId)) RolePermission::create($data);        
+            # check if permission exists, if not create else update
+            if(!RolePermission::updateExisting($roleId, $permissionId, $scopeId))
+                RolePermission::create($data);
+
             response()->json(['status' => 'success', 'message' => __('Role permissions updated successfully')]);
 
         }catch(\Exception $e){
