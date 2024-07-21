@@ -84,4 +84,6 @@ function change_theme_color(color){
     layout_change(color);
 }
 
+const toast = iziToast;
+
 // layout_change('{{cookie()->get('theme_color') ?? 'light' }}');
