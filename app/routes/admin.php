@@ -96,12 +96,13 @@ app()->group('admin', function(){
     app()->group('access', function(){
 
         app()->get('roles', 'Admin\AccessController@roles');
-        app()->get('modules', 'Admin\AccessController@modules');
+        app()->get('modules', 'Admin\ModulesController@index');
         app()->get('permissions', 'Admin\AccessController@permissions');
         app()->get('roles/{id}', 'Admin\AccessController@viewRole');
         app()->get('permissions/list/{role}', 'Admin\AccessController@rolePermissions');
 
         app()->post('roles/add', 'Admin\AccessController@createRole');
+        app()->post('modules/add', 'Admin\ModulesController@createModule');
         app()->post('permissions/add', 'Admin\AccessController@addPermission');
         app()->post('roles/permissions/update', 'Admin\AccessController@registerRolePermission');
 
