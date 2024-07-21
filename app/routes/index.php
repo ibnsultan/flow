@@ -49,7 +49,7 @@ if(getenv('app_debug') == 'false'){
 | protect routes from unauthenticated users.
 |
 */
-(new \App\Middleware\Auth)->init();
+call_user_func([new \App\Middleware\Auth, 'init']);
 
 /*
 |--------------------------------------------------------------------------
