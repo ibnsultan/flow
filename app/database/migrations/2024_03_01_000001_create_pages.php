@@ -4,27 +4,6 @@ use Leaf\Schema;
 use Leaf\Database;
 use Illuminate\Database\Schema\Blueprint;
 
-/*
-CREATE TABLE `pages` (
-	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(300) NOT NULL COLLATE 'latin1_swedish_ci',
-	`slug` VARCHAR(300) NOT NULL COLLATE 'latin1_swedish_ci',
-	`content` LONGTEXT NOT NULL COLLATE 'latin1_swedish_ci',
-	`status` CHAR(50) NOT NULL DEFAULT 'live' COLLATE 'latin1_swedish_ci',
-	`meta_keywords` VARCHAR(300) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
-	`meta_description` VARCHAR(300) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
-	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`) USING BTREE,
-	UNIQUE INDEX `hyperlink` (`slug`) USING BTREE
-)
-COLLATE='latin1_swedish_ci'
-ENGINE=InnoDB
-AUTO_INCREMENT=2
-;
-
-*/
-
 class CreatePages extends Database
 {
     /**
