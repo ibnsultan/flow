@@ -25,7 +25,8 @@ class CreateUsers extends Database
                 $table->string('avatar')->default('/assets/images/user/avatar-2.jpg');
                 $table->text('about')->nullable();
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
-                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));   
+                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+                $table->unique(['email', 'phone']);
             });
         endif;
     }
