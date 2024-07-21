@@ -86,7 +86,7 @@
                                     <label class="form-label"> {{__('Module')}} </label>
                                     <select name="module" class="form-select" required>
                                         <option value=""> {{__('Select Module')}} </option>
-                                        @foreach ($modules as $module)
+                                        @foreach ($appModules as $module)
                                             <option value="{{$module->id}}"> {{ ucfirst($module->name) }} </option>
                                         @endforeach
                                     </select>
