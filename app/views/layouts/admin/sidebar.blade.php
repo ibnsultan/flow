@@ -3,8 +3,8 @@
 
         <div class="m-header">
             <a href="javascript:void(0)" class="b-brand text-primary">
-                <img src="{{ settings->get('logo_dark') }}" class="w-75"/>
-                <span class="badge bg-light-success rounded-pill ms-2 theme-version">{{ settings->get('system_version') }}</span>
+                <img src="{{ $settings->logo_dark }}" class="w-75"/>
+                <span class="badge bg-light-success rounded-pill ms-2 theme-version">{{ $settings->system_version }}</span>
             </a>
         </div>
 
@@ -50,60 +50,68 @@
                 </li>
 
                 <!-- blog -->
-                <li class="pc-item pc-hasmenu">
-                    <a href="javascript:void(0)" class="pc-link">
-                        <span class="pc-micon">
-                            <i data-feather="file-text"></i>
-                        </span>
-                        <span class="pc-mtext">{{__('Blog')}}</span>
-                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
-                    </a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item">
-                            <a href="/admin/blog" class="pc-link">
-                                <span class="pc-mtext">{{__('Posts')}}</span>
-                            </a>
-                        </li>
-                        <li class="pc-item">
-                            <a href="/admin/blog/categories" class="pc-link">
-                                <span class="pc-mtext">{{__('Categories')}}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if($permission::can('blog', 'read', ['all', 'owned', 'added'])->status)
+                    <li class="pc-item pc-hasmenu">
+                        <a href="javascript:void(0)" class="pc-link">
+                            <span class="pc-micon">
+                                <i data-feather="file-text"></i>
+                            </span>
+                            <span class="pc-mtext">{{__('Blog')}}</span>
+                            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item">
+                                <a href="/admin/blog" class="pc-link">
+                                    <span class="pc-mtext">{{__('Posts')}}</span>
+                                </a>
+                            </li>
+                            @if($permission::can('blog', 'view_blog_categories')->status)
+                                <li class="pc-item">
+                                    <a href="/admin/blog/categories" class="pc-link">
+                                        <span class="pc-mtext">{{__('Categories')}}</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
 
                 <!-- pages -->
-                <li class="pc-item pc-hasmenu">
-                    <a href="javascript:void(0)" class="pc-link">
-                        <span class="pc-micon">
-                            <i data-feather="file"></i>
-                        </span>
-                        <span class="pc-mtext">{{__('Pages')}}</span>
-                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
-                    </a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item">
-                            <a href="/admin/pages" class="pc-link">
-                                <span class="pc-mtext">{{__('All Pages')}}</span>
-                            </a>
-                        </li>
-                        <li class="pc-item">
-                            <a href="/admin/pages/add" class="pc-link">
-                                <span class="pc-mtext">{{__('Add Page')}}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if($permission::can('page', 'read', ['all', 'owned', 'added'])->status)
+                    <li class="pc-item pc-hasmenu">
+                        <a href="javascript:void(0)" class="pc-link">
+                            <span class="pc-micon">
+                                <i data-feather="file"></i>
+                            </span>
+                            <span class="pc-mtext">{{__('Pages')}}</span>
+                            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item">
+                                <a href="/admin/pages" class="pc-link">
+                                    <span class="pc-mtext">{{__('All Pages')}}</span>
+                                </a>
+                            </li>
+                            <li class="pc-item">
+                                <a href="/admin/pages/add" class="pc-link">
+                                    <span class="pc-mtext">{{__('Add Page')}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
 
                 <!-- announcements -->
-                <li class="pc-item">
-                    <a href="/admin/announcement" class="pc-link">
-                        <span class="pc-micon">
-                            <i data-feather="zap"></i>
-                        </span>
-                        <span class="pc-mtext">{{__('Announcement')}}</span>
-                    </a>
-                </li>
+                @if($permission::can('announcement', 'read')->status)
+                    <li class="pc-item">
+                        <a href="/admin/announcement" class="pc-link">
+                            <span class="pc-micon">
+                                <i data-feather="zap"></i>
+                            </span>
+                            <span class="pc-mtext">{{__('Announcement')}}</span>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="pc-item pc-caption">
                     <label>{{__('Management')}}</label>
@@ -180,11 +188,11 @@
                                 <span class="pc-mtext">{{__('SEO')}}</span>
                             </a>
                         </li>
-                        <li class="pc-item">
+                        <!--li class="pc-item">
                             <a href="/admin/settings/translation" class="pc-link">
                                 <span class="pc-mtext">{{__('Translations')}}</span>
                             </a>
-                        </li>
+                        </li-->
                         <!-- modules -->
                         <li class="pc-item">
                             <a href="/admin/settings/modules" class="pc-link">
