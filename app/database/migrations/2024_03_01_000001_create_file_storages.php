@@ -23,7 +23,8 @@ class CreateFileStorages extends Database
                 $table->string('extension');
                 $table->string('mime')->nullable();
                 $table->integer('user_id');
-                $table->timestamps();
+                $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
+                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));;
                 
             });
         endif;

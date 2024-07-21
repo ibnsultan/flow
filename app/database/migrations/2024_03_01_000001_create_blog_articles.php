@@ -23,7 +23,8 @@ class CreateBlogArticles extends Database
                 $table->json('tags')->nullable();
                 $table->integer('views')->default(0);
                 $table->integer('likes')->default(0);
-                $table->timestamps();
+                $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
+                $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));;
             });
         endif;
     }
