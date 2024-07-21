@@ -24,9 +24,6 @@ class CreateRolePermissions extends Database
             });
         endif;
 
-        // you can now build your migrations with schemas.
-        // see: https://leafphp.dev/docs/mvc/schema.html
-        // Schema::build('role_permissions');
     }
 
     /**
