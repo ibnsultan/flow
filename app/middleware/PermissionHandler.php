@@ -50,7 +50,7 @@ class PermissionHandler
         return (object) [ 'status' => false ];
     }
 
-    public static function ownership(string $scope, $ownFunction, $addFunction) :bool
+    public static function owns(string $scope, $ownFunction=false, $addFunction=false) :bool
     {
         if($scope == 'owned' and !$ownFunction) return false;
         if($scope == 'added' and !$addFunction) return false;
