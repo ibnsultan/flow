@@ -1,6 +1,5 @@
 <?php
 
-@session_start();
 /*
 |--------------------------------------------------------------------------
 | Switch to root path
@@ -92,7 +91,7 @@ Leaf\Core::loadApplicationConfig();
 |
 */
 require_once getcwd() .'/lib/Functions.php';
-
+use Leaf\FS;
 
 /*
 |--------------------------------------------------------------------------
