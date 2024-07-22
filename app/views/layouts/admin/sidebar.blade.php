@@ -150,21 +150,22 @@
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
-                        <li class="pc-item">
-                            <a href="/admin/access/roles" class="pc-link">
-                                <span class="pc-mtext">{{__('Roles')}}</span>
-                            </a>
-                        </li>
-                        <li class="pc-item">
-                            <a href="/admin/access/permissions" class="pc-link">
-                                <span class="pc-mtext">{{__('Permissions')}}</span>
-                            </a>
-                        </li>
-                        <li class="pc-item">
-                            <a href="/admin/access/modules" class="pc-link">
-                                <span class="pc-mtext">{{__('Modules')}}</span>
-                            </a>
-                        </li>
+                        <!-- modules -->
+                        @if($permission::can('setting', 'view_modules')->status)
+                            <li class="pc-item">
+                                <a href="/admin/access/modules" class="pc-link">
+                                    <span class="pc-mtext">{{__('Modules')}}</span>
+                                </a>
+                            </li>
+                        @endif
+                        <!-- permissions -->
+                        @if($permission::can('setting', 'view_permissions')->status)
+                            <li class="pc-item">
+                                <a href="/admin/access/permissions" class="pc-link">
+                                    <span class="pc-mtext">{{__('Permissions')}}</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 
