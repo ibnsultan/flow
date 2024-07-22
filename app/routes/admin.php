@@ -95,7 +95,6 @@ app()->group('admin', function(){
     # access control routes
     app()->group('access', function(){
 
-        app()->get('roles', 'Admin\AccessController@roles');
         app()->get('modules', 'Admin\ModulesController@index');
         app()->get('permissions', 'Admin\AccessController@permissions');
         app()->get('roles/{id}', 'Admin\AccessController@viewRole');
