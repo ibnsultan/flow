@@ -10,15 +10,25 @@
                             <h5>
                                 {{ __($title) }}
                             </h5>
-                            @php $add_permission = $permission::can('setting', 'add_permission'); @endphp
-                            @if($add_permission->status)
-                            <a class="btn btn-primary rounded text-white position-absolute" style="top:0.8rem;right:2rem;"
-                                data-bs-toggle="modal" data-bs-target="#addNewRolePermission">
-                                {{__('Add New')}}
-                            </a>
-                            @endif
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    @if($addRolePermission->status)
+                        <a class="btn btn-primary rounded text-white"
+                            data-bs-toggle="modal" data-bs-target="#addNewUserRole">
+                            {{__('Create New Role')}}
+                        </a>
+                    @endif
+                    @if($addPermissionPermission->status)
+                        <a class="btn btn-warning rounded text-white"
+                            data-bs-toggle="modal" data-bs-target="#addNewRolePermission">
+                            {{__('Add New Permission')}}
+                        </a>
+                    @endif
                 </div>
             </div>
 
@@ -54,87 +64,37 @@
     </div>
 
     <!-- modal: new user role -->
-    @if($add_permission->status)
-    <div class="modal fade" id="addNewRolePermission" tabindex="-1" aria-labelledby="addNewRolePermissionLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addNewRolePermissionLabel"> {{__('Add New Role Permission')}} </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form name="addNewRolePermission" method="post">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-label"> {{__('Permission Name')}} </label>
-                                    <input type="text" name="permission" class="form-control" placeholder="modify_user_permissions" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-label"> {{__('Description')}} </label>
-                                    <textarea name="description" class="form-control" placeholder="Allow User Role Modifification" rows="2"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-label"> {{__('Module')}} </label>
-                                    <select name="module" class="form-select" required>
-                                        <option value=""> {{__('Select Module')}} </option>
-                                        @foreach ($appModules as $module)
-                                            <option value="{{$module->id}}"> {{ ucfirst($module->name) }} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-label"> {{__('Scopes')}} </label> <br>
-                                    <!-- inline checkboxes: all, added, owned, both, none -->
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="all" name="permissions[]" checked hidden>
-                                        <input class="form-check-input" type="checkbox" value="all" name="permissions[]" checked disabled>
-                                        <label class="form-check-label" for="inlineCheckbox1"> {{__('All')}} </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="owned" name="permissions[]">
-                                        <label class="form-check-label" for="inlineCheckbox2"> {{__('Owned')}} </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="added" name="permissions[]">
-                                        <label class="form-check-label" for="inlineCheckbox3"> {{__('Added')}} </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="both" name="permissions[]">
-                                        <label class="form-check-label" for="inlineCheckbox2"> {{__('Both')}} </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="none" name="permissions[]" checked hidden>
-                                        <input class="form-check-input" type="checkbox" value="none" name="permissions[]" checked disabled>
-                                        <label class="form-check-label" for="inlineCheckbox3"> {{__('None')}} </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <button id='btnAddPermission' type="submit" class="btn btn-primary w-100"> {{__('Save')}} </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+    @if($addPermissionPermission->status)
+        <div class="modal fade" id="addNewRolePermission" tabindex="-1" aria-labelledby="addNewRolePermissionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addNewRolePermissionLabel"> {{__('Add New Role Permission')}} </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @include('admin.access.forms.add-role-permission')
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
+    <!-- add new user role -->
+    @if($addRolePermission->status)
+        <div class="modal fade" id="addNewUserRole" tabindex="-1" aria-labelledby="addNewUserRoleLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addNewUserRoleLabel"> {{__('Add New User Role')}} </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @include('admin.access.forms.add-user-role')
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
 
     <!-- permissions offcanvas -->
@@ -144,9 +104,10 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-
+            <!-- permissions list -->
         </div>
     </div>
+
 @endsection
 @section('scripts')
     <script>
@@ -161,8 +122,6 @@
             $('.list-permissions').click(function() {
                 
                 var role = $(this).data('role');
-
-                // change button state
                 buttonState('.list-permissions', 'loading');
 
                 var url = `/admin/access/permissions/list/${role}`;
@@ -184,33 +143,56 @@
             });
 
             // add new role permission
-            @if($add_permission->status)
-            $('form[name="addNewRolePermission"]').submit(function(e) {
-                e.preventDefault();
-                buttonState('#btnAddPermission', 'loading');
+            @if($addPermissionPermission->status)
+                $('#formAddRolePermission').submit(function(e) {
+                    e.preventDefault();
+                    buttonState('#btnAddPermission', 'loading');
 
-                var url = "/admin/access/permissions/add";
-                var data = $(this).serialize();
-                $.post(url, data, function(response) {
-                    if(response.status === 'success') {
-                        buttonState('#btnAddPermission', 'reset', 'Save');
-                        iziToast.success({
-                            message: response.message,
-                            position: 'bottomCenter'
-                        });
-                        setTimeout(function() {
-                            $('form[name="addNewRolePermission"]').trigger('reset');
-                            $('select[name="module"]').val(null).trigger('change');
-                        }, 1000);
-                    } else {
-                        iziToast.error({
-                            message: response.message,
-                            position: 'bottomCenter'
-                        });
-                        buttonState('#btnAddPermission', 'reset', 'Save');
-                    }
+                    var url = "/admin/access/permissions/add";
+                    var data = $(this).serialize();
+                    $.post(url, data, function(response) {
+                        if(response.status === 'success') {
+                            buttonState('#btnAddPermission', 'reset', 'Save');
+                            iziToast.success({
+                                message: response.message,
+                                position: 'bottomCenter'
+                            });
+                            setTimeout(function() {
+                                $('#formAddRolePermission').trigger('reset');
+                                $('select[name="module"]').val(null).trigger('change');
+                            }, 1000);
+                        } else {
+                            iziToast.error({
+                                message: response.message,
+                                position: 'bottomCenter'
+                            });
+                            buttonState('#btnAddPermission', 'reset', 'Save');
+                        }
+                    });
                 });
-            });
+            @endif
+
+            // add new user role
+            @if($addRolePermission->status)
+                $('#formAddUserRole').submit(function(e) {
+                    e.preventDefault();
+                    buttonState('#btnAddUserRole', 'loading');
+
+                    var url = "/admin/access/roles/add";
+                    var data = $(this).serialize();
+                    $.post(url, data, function(response) {
+                        if(response.status === 'success') {
+                            buttonState('#btnAddUserRole', 'reset', 'Create Role');
+                            toast.success({ message: response.message, position: 'bottomCenter' });
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            toast.error({ message: response.message, position: 'bottomCenter' });
+                            buttonState('#btnAddUserRole', 'reset', 'Create Role');
+                        }
+                    });
+                });
             @endif
         });
     </script>
