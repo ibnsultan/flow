@@ -83,15 +83,13 @@ Leaf\Core::loadApplicationConfig();
 
 /*
 |--------------------------------------------------------------------------
-| Load Application Functions
+| Load Custom Libraries
 |--------------------------------------------------------------------------
 |
-| Leaf MVC allows you to define your own functions and use them globally
-| in your application.
+| Load your custom libraries and helpers 
 |
 */
-require_once getcwd() .'/lib/Functions.php';
-use Leaf\FS;
+\Leaf\Core::loadLibs();
 
 /*
 |--------------------------------------------------------------------------
