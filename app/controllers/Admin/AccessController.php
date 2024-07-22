@@ -46,6 +46,61 @@ class AccessController extends Controller
     }
 
     /**
+     * Create a new Role
+     * 
+     * @return void
+     */
+    public function createRole() :void
+    {
+        # validate permission
+        if(!PermissionHandler::can('setting', 'add_user_role')->status)
+            exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
+
+        try{
+
+            # retrieve data
+            $data = [
+                'name' => request()->params('name'),
+                'description' => request()->params('description'),
+            ];
+
+            # validate data
+            if(empty($data['name']))
+                exit(response()->json(['status' => 'error', 'message' => __('All fields are required')]));
+
+            # check for duplicate role
+            if(Role::where('name', $data['name'])->exists())
+                exit(response()->json(['status' => 'error', 'message' => __('Role already exists')]));
+
+            Role::create($data);
+
+            # check if role should clone permissions from another role
+            if(request()->get('clone')){
+                
+                $role = Role::where('name', $data['name'])->first();
+                $permissions = RolePermission::where('role_id', request()->get('clone'))->get();
+
+                foreach($permissions as $permission){
+                    RolePermission::create([
+                        'role_id' => $role->id,
+                        'permission_id' => $permission['permission_id'],
+                        'permission_type_id' => $permission['permission_type_id'],
+                    ]);
+                }
+            }
+
+            response()->json(['status' => 'success', 'message' => __('Role added successfully')]);
+        }catch(\Exception $e){
+            response()->json(['status' => 'error', 'message' => __('An error occurred while adding role'),
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                ]
+            ]);
+        }
+    }
+
+    /**
      * Permissions Management
      * 
      * @return void
@@ -62,6 +117,8 @@ class AccessController extends Controller
         $this->data->appModules = Module::all();
 
         # permission allocation
+        $this->data->addRolePermission = PermissionHandler::can('setting', 'add_user_role');
+        $this->data->editRolePermission = PermissionHandler::can('setting', 'edit_user_role');
         $this->data->addPermissionPermission = PermissionHandler::can('setting', 'add_permission');
 
         render('admin.access.permissions', (array) $this->data);
