@@ -13,6 +13,8 @@ class PagesSeeder extends Seeder
      */
     public function run()
     {
+        Page::truncate();
+
         $pages = array(
             array(
                 "title" => "Privacy Policy",

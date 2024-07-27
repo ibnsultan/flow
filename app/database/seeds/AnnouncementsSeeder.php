@@ -12,6 +12,8 @@ class AnnouncementsSeeder extends Seeder
      */
     public function run()
     {
+        Announcement::truncate();
+
         Announcement::create([
             'title' => 'Welcome to Flow!',
             'description' => 'This is the first announcement on Flow. Welcome!',

@@ -13,6 +13,9 @@ class PermissionTypesSeeder extends Seeder
      */
     public function run()
     {
+
+        PermissionType::truncate();
+
         $permission_types = ["added", "owned", "both", "all", "none"];
 
         foreach ($permission_types as $type) {

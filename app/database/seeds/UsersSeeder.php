@@ -13,6 +13,8 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
+
         $user = new User();
         $user->fullname = 'Administrator';
         $user->email = 'admin@flow.app';

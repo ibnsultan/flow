@@ -12,6 +12,9 @@ class BlogCategoriesSeeder extends Seeder
      */
     public function run()
     {
+
+        BlogCategory::truncate();
+
         BlogCategory::create([
             'name' => 'General',
             'description' => 'This is the default category for blog articles'

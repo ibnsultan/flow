@@ -12,9 +12,8 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
-        // You can directly create db records
+        Setting::truncate();
 
-        $setting = new Setting();
         $settings = array(
             array(
                 "key" => "site_name",
@@ -95,7 +94,7 @@ class SettingsSeeder extends Seeder
         );
         
         foreach($settings as $entry) {
-            $setting->create($entry);
+            Setting::create($entry);
         }
     }
 }
