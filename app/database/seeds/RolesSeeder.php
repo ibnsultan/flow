@@ -15,7 +15,7 @@ class RolesSeeder extends Seeder
     {
         // admin
         Role::create([
-            "role_name" => "admin",
+            "name" => "admin",
             "description" => "Admin role"
         ]);
     }
