@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="author" content="{{getenv('app_author')}}">
 		
-		<link rel="icon" href="{{ settings->get('favicon') }}" type="image/x-icon">
+		<link rel="icon" href="{{ $settings->favicon }}" type="image/x-icon">
 		<link rel="stylesheet" href="/assets/fonts/inter/inter.css" id="main-font-link" />
 		<link rel="stylesheet" href="/assets/fonts/tabler-icons.min.css" />
 		<link rel="stylesheet" href="/assets/fonts/feather.css" />
@@ -26,10 +26,10 @@
 	</head>
 	
 	<body
-		data-pc-preset="{{ settings->get('theme_color') }}" 
-		data-pc-sidebar-caption="true" 
-		data-pc-direction="{{ settings->get('theme_layout') }}"
 		data-pc-theme_contrast="true"
+		data-pc-sidebar-caption="true" 
+		data-pc-preset="{{ $settings->theme_color }}" 
+		data-pc-direction="{{ $settings->theme_layout }}"
 		data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}" >
 
 		<div class="loader-bg">
