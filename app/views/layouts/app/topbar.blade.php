@@ -67,7 +67,7 @@
                     </div>
                 </li>
 
-                @if($settings->allow_announcement == 'true')
+                @if($modules->announcement)
                     <li class="pc-h-item">
                         <a href="javascript:void(0)" class="pc-head-link me-0" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
                             <svg class="pc-icon">
@@ -78,7 +78,7 @@
                 @endif
                 
 
-                @if($settings->allow_notification == 'true')
+                @if($modules->announcement)
                 
                     @php // Notifications Section
                         $notifications = new App\Controllers\App\NotificationsController();
