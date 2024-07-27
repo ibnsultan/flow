@@ -14,19 +14,6 @@
                     <i class="ti ti-menu-2"></i>
                     </a>
                 </li>
-                <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search"
-                       data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
-                        <svg class="pc-icon">
-                            <use xlink:href="#custom-search-normal-1"></use>
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu pc-h-dropdown drp-search">
-                        <form class="px-3 py-2">
-                            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . ." />
-                        </form>
-                    </div>
-                </li>
             </ul>
         </div>
         <!-- [Mobile Media Block end] -->
