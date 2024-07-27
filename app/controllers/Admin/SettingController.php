@@ -47,9 +47,9 @@ class SettingController extends Controller
                 'theme_color' => request()->get('color_preset'),
                 'theme_layout' => request()->get('theme_layout'),
                 'system_version' => request()->get('system_version'),
-                'favicon' => $favicon['path'] ?? settings->get('favicon'),
-                'logo_light' => $logo_light['path'] ?? settings->get('logo_light'),
-                'logo_dark' => $logo_dark['path'] ?? settings->get('logo_dark')
+                'favicon' => $favicon['path'] ?? settings->favicon,
+                'logo_light' => $logo_light['path'] ?? settings->logo_light,
+                'logo_dark' => $logo_dark['path'] ?? settings->logo_dark
             ];
 
             // update settings
@@ -97,7 +97,7 @@ class SettingController extends Controller
             $formData = [
                 'meta_description' => request()->get('meta_description'),
                 'meta_keywords' => request()->get('meta_keywords'),
-                'meta_image' => $meta_image['path'] ?? settings->get('meta_image')
+                'meta_image' => $meta_image['path'] ?? settings->meta_image
             ];
 
             // update settings

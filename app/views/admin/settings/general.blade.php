@@ -26,7 +26,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">{{__('Site Name')}}</label>
-                                            <input type="text" class="form-control" name="site_name" value="{{ settings->get('site_name') }}">
+                                            <input type="text" class="form-control" name="site_name" value="{{ settings->site_name }}">
                                         </div>
                                     </div>
 
@@ -34,7 +34,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">{{__('Site URL')}}</label>
-                                            <input type="text" class="form-control" name="site_url" value="{{ settings->get('site_url') }}">
+                                            <input type="text" class="form-control" name="site_url" value="{{ settings->site_url }}">
                                         </div>
                                     </div>
 
@@ -42,7 +42,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">{{__('Theme Color')}}</label>
-                                            <input type="text" name="color_preset" id="theme_preset" value="{{ settings->get('theme_color') }}" hidden>
+                                            <input type="text" name="color_preset" id="theme_preset" value="{{ settings->theme_color }}" hidden>
                                             <div>
                                                 <li class="list-group-item">
                                                     <div class="theme-color preset-color">
@@ -66,7 +66,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label" >{{__('Default Layout')}}</label>
-                                            <input type="text" name="theme_layout" id="default_layout" value="{{ settings->get('theme_layout') }}" hidden/>
+                                            <input type="text" name="theme_layout" id="default_layout" value="{{ settings->theme_layout }}" hidden/>
                                             <div class="row theme-direction">
                                                 <div class="col-6">
                                                     <div class="d-grid">
@@ -114,7 +114,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">{{__('System Version')}}</label>
-                                            <input type="text" class="form-control" name="system_version" value="{{ settings->get('system_version') }}">
+                                            <input type="text" class="form-control" name="system_version" value="{{ settings->system_version }}">
                                         </div>
                                     </div>
 

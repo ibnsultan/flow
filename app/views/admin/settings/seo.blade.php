@@ -26,7 +26,7 @@
                                         
                                         <label class="form-label">{{__('Meta Image')}}</label>
                                         <div class="form-group user-upload rounded w-100">
-                                            <img src="{{ settings->get('meta_image') ?? '/assets/images/placeholder.jpg' }}" alt="Image Placeholder" id="imagePreview" class="w-100 h-100">
+                                            <img src="{{ settings->meta_image ?? '/assets/images/placeholder.jpg' }}" alt="Image Placeholder" id="imagePreview" class="w-100 h-100">
                                             <label for="cover" id="coverUpload" class="img-avtar-upload">
                                                 <i class="ti ti-camera f-24 mb-1"></i>
                                                 <span>Upload</span>
@@ -39,14 +39,14 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="form-label">{{__('Meta Keywords')}}</label>
-                                                <textarea name="meta_keywords" class="form-control" placeholder="keywords comma separated" rows="3">{{ settings->get('meta_keywords') }}</textarea>
+                                                <textarea name="meta_keywords" class="form-control" placeholder="keywords comma separated" rows="3">{{ settings->meta_keywords }}</textarea>
                                             </div>
                                         </div>
                                          
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="form-label">{{__('Meta Description')}}</label>
-                                                <textarea name="meta_description" class="form-control" placeholder="description" rows="3">{{ settings->get('meta_description') }}</textarea>
+                                                <textarea name="meta_description" class="form-control" placeholder="description" rows="3">{{ settings->meta_description }}</textarea>
                                             </div>
                                         </div>
                                     </div>

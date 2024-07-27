@@ -41,7 +41,7 @@
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="allow_announcement" id="allow_announcement" {{ settings->get('allow_announcement') == 'true' ? 'checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox" name="allow_announcement" id="allow_announcement" {{ settings->allow_announcement == 'true' ? 'checked' : '' }}>
                                                 <label class="form-check" for="allow_announcement">
                                                     {{__('Allow Announcements')}}
                                                 </label>
@@ -53,7 +53,7 @@
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="allow_notification" id="allow_notification" {{ settings->get('allow_notification') == 'true' ? 'checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox" name="allow_notification" id="allow_notification" {{ settings->allow_notification == 'true' ? 'checked' : '' }}>
                                                 <label class="form-check" for="allow_notification">
                                                     {{__('Allow Notifications')}}
                                                 </label>
@@ -69,7 +69,7 @@
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="allow_blog" id="allow_blog" {{ settings->get('allow_blog') == 'true' ? 'checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox" name="allow_blog" id="allow_blog" {{ settings->allow_blog == 'true' ? 'checked' : '' }}>
                                                 <label class="form-check" for="allow_blog">
                                                     {{__('Allow Blog')}}
                                                 </label>
@@ -85,7 +85,7 @@
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="allow_apis" id="allow_apis" {{ settings->get('allow_apis') == 'true' ? 'checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox" name="allow_apis" id="allow_apis" {{ settings->allow_apis == 'true' ? 'checked' : '' }}>
                                                 <label class="form-check" for="allow_apis">
                                                     {{__('Allow API')}}
                                                 </label>
@@ -97,7 +97,7 @@
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="allow_registration" id="allow_registration" {{ settings->get('allow_registration') == 'true' ? 'checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox" name="allow_registration" id="allow_registration" {{ settings->allow_registration == 'true' ? 'checked' : '' }}>
                                                 <label class="form-check" for="allow_registration">
                                                     {{__('Allow Registration')}}
                                                 </label>
