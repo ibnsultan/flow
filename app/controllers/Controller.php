@@ -29,5 +29,9 @@ class Controller extends \Leaf\Controller
         # required data
         $this->data->modules = (object) Module::all()->pluck('status', 'name')->toArray();
         $this->data->settings = (object) Setting::all()->pluck('value', 'key')->toArray();
+
+        // backward compatibility
+        if(!defined('modules')) define('modules', $this->data->modules ?? null);
+        if(!defined('settings')) define('settings', $this->data->settings ?? null);
     }
 }
