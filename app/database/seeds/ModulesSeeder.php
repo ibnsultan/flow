@@ -27,7 +27,7 @@ class ModulesSeeder extends Seeder
             ),
             array(
                 "id" => 2,
-                "name" => "setting",
+                "name" => "app",
                 "description" => NULL,
                 "status" => 1,
                 "is_core" => 1,
