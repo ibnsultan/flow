@@ -8,7 +8,7 @@
 
 						<div class="text-center">
 							<a href="/">
-								<img src="{{ settings->get('logo_dark') }}" class="w-25" alt="img">
+								<img src="{{ settings->logo_dark }}" class="w-25" alt="img">
 							</a>
 							<div class="d-grid my-3"> </div>
 						</div>
@@ -45,7 +45,7 @@
 
 							<!-- form submission -->
 							<div class="d-grid mt-4">
-								<button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+								<button type="submit" id="btnAuth" class="btn btn-primary">{{__('Submit')}}</button>
 							</div>
 
 							<!-- create account -->
@@ -66,6 +66,7 @@
 		$("form[name='register']").submit(function(event) {
 			
 			event.preventDefault();
+			buttonState('#btnAuth', 'loading');
 
             $.ajax({
                 url: "/auth/register",
@@ -73,31 +74,20 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if(response.status == "success" || response.status == null) {
-                        Swal.fire({
-                            title: "Success",
-                            text: response.message,
-                            icon: "success",
-                            confirmButtonText: "Ok"
+                        Swal.fire({ title: "Success", text: response.message, icon: "success", confirmButtonText: "Ok"
                         }).then(() => {
                             window.location.href = "/login";
                         });
                     } else {
-                        Swal.fire({
-                            title: "Error",
-                            text: response.message,
-                            icon: "error",
-                            confirmButtonText: "Ok"
-                        });
+                        Swal.fire({ title: "Error", text: response.message, icon: "error", confirmButtonText: "Ok" });
                     }
                 },
                 error: function() {
-                    Swal.fire({
-                        title: "Error",
-                        text: "An error occurred. Please try again later.",
-                        icon: "error",
-                        confirmButtonText: "Ok"
-                    });
-                }
+                    Swal.fire({ title: "Error", text: "An error occurred. Please try again later.", icon: "error", confirmButtonText: "Ok" });
+                },
+				complete: function() {
+					buttonState("#btnAuth", "reset", "Submit");
+				}
             });
             
 

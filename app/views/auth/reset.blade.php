@@ -8,7 +8,7 @@
 
 						<div class="text-center">
 							<a href="/">
-								<img src="{{ settings->get('logo_dark') }}" class="w-25" alt="img">
+								<img src="{{ settings->logo_dark }}" class="w-25" alt="img">
 							</a>
 							<div class="d-grid my-3"> </div>
 						</div>
@@ -24,7 +24,7 @@
                             
 							<!-- form submission -->
 							<div class="d-grid mt-4">
-								<button type="submit" class="btn btn-primary">{{__('Reset Password')}}</button>
+								<button type="submit" id="btnAuth" class="btn btn-primary">{{__('Reset Password')}}</button>
 							</div>
 
                             <!-- go back to login -->
