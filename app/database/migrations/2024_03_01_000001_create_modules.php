@@ -17,7 +17,7 @@ class CreateModules extends Database
                 $table->id();
                 $table->string('name');
                 $table->string('description')->nullable();
-                $table->string('status')->default('active');
+                $table->integer('status');
                 $table->integer('is_core')->default(0);
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
