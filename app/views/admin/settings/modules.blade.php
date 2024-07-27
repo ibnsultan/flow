@@ -15,6 +15,17 @@
                 </div>
             </div>
 
+            <!-- warning: deprecated -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-warning">
+                        <p>
+                            {{__('This page is deprecated. Please use the new Access->Modules page to manage modules.')}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
