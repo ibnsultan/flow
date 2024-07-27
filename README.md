@@ -24,7 +24,7 @@ Flow's purpose is empower developers to create high-quality web applications wit
 ## Installation
 
 ```bash
-composer require ibnsultan/flow <PROJECT_NAME>
+composer create-project ibnsultan/flow <PROJECT_NAME>
 ```
 
 ```bash
