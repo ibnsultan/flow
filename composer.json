@@ -1,7 +1,7 @@
 {
     "name": "ibnsultan/flow",
     "description": "A lightweight PHP MVC framework powered by Leaf",
-    "type": "library",
+    "type": "project",
     "keywords": [
         "framework",
         "leaf",
