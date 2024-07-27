@@ -6,7 +6,7 @@
         <!-- START MAIN CONTENT AREA -->
         <tr>
             <td style="text-align:center; padding-top:1rem;">
-                <img width="200" src="{{ settings->get('logo_dark') }}" alt="Logo">
+                <img width="200" src="{{ settings->logo_dark }}" alt="Logo">
             </td>
         </tr>
         <tr>
