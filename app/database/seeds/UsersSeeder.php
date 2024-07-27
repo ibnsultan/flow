@@ -15,10 +15,10 @@ class UsersSeeder extends Seeder
     {
         $user = new User();
         $user->fullname = 'Administrator';
-        $user->email = 'admin@flow.io';
-        $user->password = \Leaf\Helpers\Password::hash('admin');
+        $user->email = 'admin@flow.app';
+        $user->password = \Leaf\Helpers\Password::hash('password');
         $user->role = 'admin';
-        $user->avatar = '/storage/uploads/avatars/65f40d8e507be.gif';
+        $user->avatar = '/assets/images/user/avatar-1.jpg';
         $user->save();
     }
 }
