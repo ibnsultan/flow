@@ -31,19 +31,6 @@ $(document).ready(function() {
     });
 });
 
-function buttonState(button, state, initialText=null) {
-
-    button = $(button);
-
-    if (state === 'loading') {
-        button.attr('disabled', true);
-        button.html('<i class="fa fa-spinner fa-spin"></i> Loading...');
-    } else {
-        button.attr('disabled', false);
-        button.html(initialText);
-    }
-}
-
 function change_theme_color(color){
     document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
     layout_change(color);

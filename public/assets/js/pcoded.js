@@ -545,3 +545,15 @@ var slideToggle = (target, duration = 0) => {
 };
 // =======================================================
 // =======================================================
+function buttonState(button, state, initialText=null) {
+
+    button = $(button);
+
+    if (state === 'loading') {
+        button.attr('disabled', true);
+        button.html('<i class="fa fa-spinner fa-spin"></i> Loading...');
+    } else {
+        button.attr('disabled', false);
+        button.html(initialText);
+    }
+}
