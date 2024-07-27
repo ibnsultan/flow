@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="author" content="{{getenv('app_author')}}">
 		
-		<link rel="icon" href="{{ settings->get('favicon') }}" type="image/x-icon">
+		<link rel="icon" href="{{ settings->favicon }}" type="image/x-icon">
 		
 		<link rel="stylesheet" href="/assets/fonts/inter/inter.css" id="main-font-link" />
 		<link rel="stylesheet" href="/assets/fonts/tabler-icons.min.css" />
@@ -37,7 +37,7 @@
         @yield('content')
 
 		<!-- Required Js -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="/assets/js/plugins/jquery-3.7.1.min.js"></script>
 		<script src="/assets/js/plugins/popper.min.js"></script>
 		<script src="/assets/js/plugins/simplebar.min.js"></script>
 		<script src="/assets/js/plugins/bootstrap.min.js"></script>
