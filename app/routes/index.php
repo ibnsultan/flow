@@ -53,17 +53,6 @@ call_user_func([new \App\Middleware\Auth, 'init']);
 
 /*
 |--------------------------------------------------------------------------
-| Initialize Settings Model
-|--------------------------------------------------------------------------
-|
-| This initializes the settings model. The settings model is used to
-| get `settings` key-value pairs from the database.
-|
-*/
-define('settings', new \App\Models\Setting);
-
-/*
-|--------------------------------------------------------------------------
 | Set up Controller namespace
 |--------------------------------------------------------------------------
 |
