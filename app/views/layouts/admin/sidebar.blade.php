@@ -151,7 +151,7 @@
                     </a>
                     <ul class="pc-submenu">
                         <!-- modules -->
-                        @if($permission::can('setting', 'view_modules')->status)
+                        @if($permission::can('app', 'view_modules')->status)
                             <li class="pc-item">
                                 <a href="/admin/access/modules" class="pc-link">
                                     <span class="pc-mtext">{{__('Modules')}}</span>
@@ -159,7 +159,7 @@
                             </li>
                         @endif
                         <!-- permissions -->
-                        @if($permission::can('setting', 'view_permissions')->status)
+                        @if($permission::can('app', 'view_permissions')->status)
                             <li class="pc-item">
                                 <a href="/admin/access/permissions" class="pc-link">
                                     <span class="pc-mtext">{{__('Permissions')}}</span>
