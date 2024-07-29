@@ -9,7 +9,7 @@ use App\Models\RolePermission;
 use App\Models\UserPermission;
 use App\Models\Role;
 
-class PermissionHandler
+class Handler
 {
     public function __construct()
     {
