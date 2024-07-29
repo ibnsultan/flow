@@ -24,7 +24,7 @@ class AnnouncementController extends Controller
 
     public function add() :void
     {
-        if(!PermissionHandler::can('setting', 'add_announcements')->status)
+        if(!PermissionHandler::can('app', 'add_announcements')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to add announcements')]));
         
         try{
