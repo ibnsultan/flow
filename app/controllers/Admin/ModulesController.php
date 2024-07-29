@@ -24,15 +24,15 @@ class ModulesController extends Controller
     public function index() :void
     {
         # validate permission
-        if(!PermissionHandler::can('setting', 'view_modules')->status) exit(render('errors.403'));
+        if(!PermissionHandler::can('app', 'view_modules')->status) exit(render('errors.403'));
 
         # data allocation
         $this->data->title = 'Modules Management';
         $this->data->appModules = Module::all();
 
         # permission allocation
-        $this->data->addModulePermission = PermissionHandler::can('setting', 'add_module');
-        $this->data->editModulePermission = PermissionHandler::can('setting', 'edit_module');
+        $this->data->addModulePermission = PermissionHandler::can('app', 'add_module');
+        $this->data->editModulePermission = PermissionHandler::can('app', 'edit_module');
 
         render('admin.access.modules', (array) $this->data); 
     }
@@ -40,7 +40,7 @@ class ModulesController extends Controller
     public function createModule() :void
     {
         # validate permission
-        if(!PermissionHandler::can('setting', 'add_module')->status)
+        if(!PermissionHandler::can('app', 'add_module')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You are not authorized')]));
         
         try{
@@ -94,7 +94,7 @@ class ModulesController extends Controller
     {
 
         # validate permission
-        if(!PermissionHandler::can('setting', 'edit_module')->status)
+        if(!PermissionHandler::can('app', 'edit_module')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You are not authorized')]));
 
         try{
