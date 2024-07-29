@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Helpers\Helpers;
-use App\Middleware\PermissionHandler;
+use App\Middleware\Handler;
 
 use App\Models\Role;
 use App\Models\Announcement;
@@ -24,7 +24,7 @@ class AnnouncementController extends Controller
 
     public function add() :void
     {
-        if(!PermissionHandler::can('app', 'add_announcements')->status)
+        if(!Handler::can('app', 'add_announcements')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to add announcements')]));
         
         try{
@@ -66,7 +66,7 @@ class AnnouncementController extends Controller
     public function delete($id) :void
     {
 
-        if(!PermissionHandler::can('settings', 'delete_announscements'))
+        if(!Handler::can('settings', 'delete_announscements'))
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to delete announcements')]));
 
         $announcement = Announcement::find($id);

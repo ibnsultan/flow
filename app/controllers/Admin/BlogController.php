@@ -9,7 +9,7 @@ use App\Models\BlogCategory;
 use App\Controllers\Controller;
 use App\Controllers\MediaController;
 
-use App\Middleware\PermissionHandler;
+use App\Middleware\Handler;
 use App\Models\Permission;
 
 class BlogController extends Controller
@@ -29,16 +29,16 @@ class BlogController extends Controller
      */
     public function index(){
 
-        if(!PermissionHandler::can('blog', 'read')->status) exit(render('errors.403'));
+        if(!Handler::can('blog', 'read')->status) exit(render('errors.403'));
 
         $this->data->title = 'Blog';
         $this->data->articles = BlogArticle::with('user', 'blog_category')
             ->orderBy('created_at', 'desc')->get();
 
         # permission list
-        $this->data->addArticlePermission = PermissionHandler::can('blog', 'create');
-        $this->data->editArticlePermission = PermissionHandler::can('blog', 'update');
-        $this->data->deleteArticlePermission = PermissionHandler::can('blog', 'delete');
+        $this->data->addArticlePermission = Handler::can('blog', 'create');
+        $this->data->editArticlePermission = Handler::can('blog', 'update');
+        $this->data->deleteArticlePermission = Handler::can('blog', 'delete');
 
         render('admin.blog.index', (array) $this->data);
     }
@@ -52,7 +52,7 @@ class BlogController extends Controller
     public function viewArticle($id){
 
         # validate user permission
-        $permission = PermissionHandler::can('blog', 'read');
+        $permission = Handler::can('blog', 'read');
         if(!$permission->status) exit(render('errors.403'));
 
         # fetch the article
@@ -63,7 +63,7 @@ class BlogController extends Controller
 
         # validate property ownership
         if($permission->scope !== 'all'){
-            if(!PermissionHandler::owns( $permission->scope, auth()->id() == $article->author ))
+            if(!Handler::owns( $permission->scope, auth()->id() == $article->author ))
                 exit(render('errors.403'));
         }
 
@@ -84,7 +84,7 @@ class BlogController extends Controller
     public function writeArticle(){
 
         # validate user permission
-        if(!PermissionHandler::can('blog', 'add')->status)
+        if(!Handler::can('blog', 'add')->status)
             exit(render('errors.403'));
         
         # data allocation
@@ -101,7 +101,7 @@ class BlogController extends Controller
      */
     public function createArticle(){
 
-        if(!PermissionHandler::can('blog', 'add')->status)
+        if(!Handler::can('blog', 'add')->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         $fileUploaded = null;
@@ -164,7 +164,7 @@ class BlogController extends Controller
     public function updateArticle()
     {
         # validate user permission
-        $permission = PermissionHandler::can('blog', 'read');
+        $permission = Handler::can('blog', 'read');
         if(!$permission->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
@@ -177,7 +177,7 @@ class BlogController extends Controller
 
         # if user does not own the article
         if($permission->scope !== 'all'){
-            if(!PermissionHandler::owns( $permission->scope, auth()->id() == $article->author ))
+            if(!Handler::owns( $permission->scope, auth()->id() == $article->author ))
                 exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
         }
 
@@ -241,7 +241,7 @@ class BlogController extends Controller
     public function deleteArticle($id){
 
         # validate user permission
-        $permission = PermissionHandler::can('blog', 'delete');
+        $permission = Handler::can('blog', 'delete');
         if(!$permission->status) exit(render('errors.403'));
          
         # fetch the article
@@ -250,7 +250,7 @@ class BlogController extends Controller
 
         # if user does not own the article
         if($permission->scope !== 'all'){
-            if(!PermissionHandler::owns( $permission->scope, auth()->id() == $article->author ))
+            if(!Handler::owns( $permission->scope, auth()->id() == $article->author ))
                 exit(render('errors.403'));
         }
 
@@ -271,7 +271,7 @@ class BlogController extends Controller
     public function categories(){
         
         # validate user permission
-        if(!PermissionHandler::can('blog', 'view_blog_categories')->status)
+        if(!Handler::can('blog', 'view_blog_categories')->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         # data allocation
@@ -289,7 +289,7 @@ class BlogController extends Controller
     public function createCategory(){
 
         # validate user permission
-        if(!PermissionHandler::can('blog', 'create_blog_categories')->status)
+        if(!Handler::can('blog', 'create_blog_categories')->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
             
         try {
@@ -320,7 +320,7 @@ class BlogController extends Controller
     public function updateCategory(){
 
         # validate user permission
-        if(!PermissionHandler::can('blog', 'update_blog_categories')->status)
+        if(!Handler::can('blog', 'update_blog_categories')->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         #fetch category
@@ -360,7 +360,7 @@ class BlogController extends Controller
     public function deleteCategory($id){
         
         # validate user permission
-        if(!PermissionHandler::can('blog', 'delete_blog_categories')->status)
+        if(!Handler::can('blog', 'delete_blog_categories')->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         # fetch category
