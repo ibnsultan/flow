@@ -30,7 +30,7 @@ class AccessController extends Controller
     public function roles() :void
     {
         # validate permission
-        if(!PermissionHandler::can('setting', 'view_roles')->status)
+        if(!PermissionHandler::can('app', 'view_roles')->status)
             exit(render('errors.403'));
 
         # data allocation
@@ -38,9 +38,9 @@ class AccessController extends Controller
         $this->data->roles = Role::withUsers();
 
         # permission allocation
-        $this->data->addRolePermission = PermissionHandler::can('setting', 'add_role');
-        $this->data->editRolePermission = PermissionHandler::can('setting', 'edit_role');
-        $this->data->deleteRolePermission = PermissionHandler::can('setting', 'delete_role');
+        $this->data->addRolePermission = PermissionHandler::can('app', 'add_role');
+        $this->data->editRolePermission = PermissionHandler::can('app', 'edit_role');
+        $this->data->deleteRolePermission = PermissionHandler::can('app', 'delete_role');
 
         render('admin.access.roles', (array) $this->data);
     }
@@ -53,7 +53,7 @@ class AccessController extends Controller
     public function createRole() :void
     {
         # validate permission
-        if(!PermissionHandler::can('setting', 'add_user_role')->status)
+        if(!PermissionHandler::can('app', 'add_user_role')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
         try{
@@ -108,7 +108,7 @@ class AccessController extends Controller
     public function permissions() :void
     {
         # validate permission
-        if(!PermissionHandler::can('setting', 'view_permissions')->status)
+        if(!PermissionHandler::can('app', 'view_permissions')->status)
             exit(render('errors.403'));
 
         # data allocation
@@ -117,9 +117,9 @@ class AccessController extends Controller
         $this->data->appModules = Module::all();
 
         # permission allocation
-        $this->data->addRolePermission = PermissionHandler::can('setting', 'add_user_role');
-        $this->data->editRolePermission = PermissionHandler::can('setting', 'edit_user_role');
-        $this->data->addPermissionPermission = PermissionHandler::can('setting', 'add_permission');
+        $this->data->addRolePermission = PermissionHandler::can('app', 'add_user_role');
+        $this->data->editRolePermission = PermissionHandler::can('app', 'edit_user_role');
+        $this->data->addPermissionPermission = PermissionHandler::can('app', 'add_permission');
 
         render('admin.access.permissions', (array) $this->data);
     }
@@ -132,7 +132,7 @@ class AccessController extends Controller
     public function addPermission() :void
     {
         # validate permission
-        if(!PermissionHandler::can('setting', 'add_permission')->status)
+        if(!PermissionHandler::can('app', 'add_permission')->status)
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
         try{
@@ -193,7 +193,7 @@ class AccessController extends Controller
     {
         try{
             # validate permission
-            if(!PermissionHandler::can('setting', 'view_role_permissions')->status)
+            if(!PermissionHandler::can('app', 'view_role_permissions')->status)
                 exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
             # fetch and validate role id
@@ -243,8 +243,8 @@ class AccessController extends Controller
             $this->data->permissionTypes = PermissionType::all()->pluck('name', 'id')->toArray();
 
             # allocate permissions
-            $this->data->editRolePermission = PermissionHandler::can('setting', 'edit_role_permissions');
-            $this->data->resetRolePermission = PermissionHandler::can('setting', 'delete_role_permissions');
+            $this->data->editRolePermission = PermissionHandler::can('app', 'edit_role_permissions');
+            $this->data->resetRolePermission = PermissionHandler::can('app', 'delete_role_permissions');
 
             $markup = view('admin.access.partials.role-permissions', (array) $this->data);
 
@@ -270,7 +270,7 @@ class AccessController extends Controller
     {
        try{
             # validate permission
-            if(!PermissionHandler::can('setting', 'edit_role_permissions')->status)
+            if(!PermissionHandler::can('app', 'edit_role_permissions')->status)
                 exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to perform this action')]));
 
             # retrieve request data
