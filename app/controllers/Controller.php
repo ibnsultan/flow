@@ -8,7 +8,7 @@ use App\Models\Announcement;
 use App\Models\Notification;
 
 use App\Helpers\Helpers;
-use App\Middleware\PermissionHandler;
+use App\Middleware\Handler;
 
 class Controller extends \Leaf\Controller
 {
@@ -22,10 +22,10 @@ class Controller extends \Leaf\Controller
 
         # new instances
         $this->data->helpers = new Helpers;
+        $this->data->handler = new Handler;
         $this->data->announcement = new Announcement;
         $this->data->notification = new Notification;
-        $this->data->permission = new PermissionHandler;
-
+        
         # required data
         $this->data->modules = (object) Module::all()->pluck('status', 'name')->toArray();
         $this->data->settings = (object) Setting::all()->pluck('value', 'key')->toArray();

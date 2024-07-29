@@ -50,7 +50,7 @@
                 </li>
 
                 <!-- blog -->
-                @if($permission::can('blog', 'read', ['all', 'owned', 'added'])->status)
+                @if($handler::can('blog', 'read', ['all', 'owned', 'added'])->status)
                     <li class="pc-item pc-hasmenu">
                         <a href="javascript:void(0)" class="pc-link">
                             <span class="pc-micon">
@@ -65,7 +65,7 @@
                                     <span class="pc-mtext">{{__('Posts')}}</span>
                                 </a>
                             </li>
-                            @if($permission::can('blog', 'view_blog_categories')->status)
+                            @if($handler::can('blog', 'view_blog_categories')->status)
                                 <li class="pc-item">
                                     <a href="/admin/blog/categories" class="pc-link">
                                         <span class="pc-mtext">{{__('Categories')}}</span>
@@ -77,7 +77,7 @@
                 @endif
 
                 <!-- pages -->
-                @if($permission::can('page', 'read', ['all', 'owned', 'added'])->status)
+                @if($handler::can('page', 'read', ['all', 'owned', 'added'])->status)
                     <li class="pc-item pc-hasmenu">
                         <a href="javascript:void(0)" class="pc-link">
                             <span class="pc-micon">
@@ -102,7 +102,7 @@
                 @endif
 
                 <!-- announcements -->
-                @if($permission::can('announcement', 'read')->status)
+                @if($handler::can('announcement', 'read')->status)
                     <li class="pc-item">
                         <a href="/admin/announcement" class="pc-link">
                             <span class="pc-micon">
@@ -151,7 +151,7 @@
                     </a>
                     <ul class="pc-submenu">
                         <!-- modules -->
-                        @if($permission::can('app', 'view_modules')->status)
+                        @if($handler::can('app', 'view_modules')->status)
                             <li class="pc-item">
                                 <a href="/admin/access/modules" class="pc-link">
                                     <span class="pc-mtext">{{__('Modules')}}</span>
@@ -159,7 +159,7 @@
                             </li>
                         @endif
                         <!-- permissions -->
-                        @if($permission::can('app', 'view_permissions')->status)
+                        @if($handler::can('app', 'view_permissions')->status)
                             <li class="pc-item">
                                 <a href="/admin/access/permissions" class="pc-link">
                                     <span class="pc-mtext">{{__('Permissions')}}</span>
