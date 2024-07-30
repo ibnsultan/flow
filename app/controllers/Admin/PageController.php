@@ -2,10 +2,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Helpers\Helpers;
-
 use App\Models\Page;
 use App\Controllers\Controller;
+
+use App\Helpers\Helpers;
+use App\Middleware\Handler;
 
 class PageController extends Controller
 {
@@ -22,8 +23,17 @@ class PageController extends Controller
     public function index() :void
     {
 
+        # validate permission
+        if(!Handler::can('page', 'read')->status) exit(render('errors.403'));
+
+        # allocate data
         $this->data->title = 'Pages';
         $this->data->pages = Page::all();
+
+        # allocate permission
+        $this->data->addPagePermission = Handler::can('page', 'create');
+        $this->data->editPagePermission = Handler::can('page', 'update');
+        $this->data->deletePagePermission = Handler::can('page', 'delete');
 
         render('admin.pages.index', (array) $this->data);
     }
@@ -35,6 +45,9 @@ class PageController extends Controller
      */
     public function add() :void
     {
+        # validate permission
+        if(!Handler::can('page', 'create')->status) exit(render('errors.403'));
+
         $this->data->title = 'Create New Page';
         render('admin.pages.add', (array) $this->data);
     }
@@ -46,15 +59,19 @@ class PageController extends Controller
      */
     public function addPage(){
 
-        // extract images from the content
-        $content = extract_images_from_html(
-            request()->get('content'),'storage/app/uploads/blog/');
+        # validate permission
+        if(!Handler::can('page', 'create')->status)
+            exit(response()->json(['status' => 'error', 'message' => 'Permission denied']));
 
-        
-        $content = htmlentities($content);
-        
         try{
 
+            // extract images from the content
+            $content = extract_images_from_html(
+                request()->get('content'),'storage/app/uploads/blog/');
+
+            $content = htmlentities($content);
+            
+            # add the page
             Page::create([
 
                 'title' => request()->get('title'),
@@ -70,9 +87,13 @@ class PageController extends Controller
             response()->json(['status' => 'success', 'message' => 'Page added successfully']);
 
         }catch(\Exception $e){
-            ( getenv('app_debug') == 'true') ?
-                response()->json(['status' => 'error', 'message' => $e->getMessage()]) :
-                response()->json(['status' => 'error', 'message' => 'Failed to add the page']);
+            response()->json(['status' => 'error', 'message' => 'Failed to add the page',
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ]
+            ]);
         }
 
     }
@@ -84,15 +105,21 @@ class PageController extends Controller
      * @return void
      */
     public function edit($id){
+
+        # validate permission
+        if(!Handler::can('page', 'update')->status) exit(render('errors.403'));
         
+        # decode the id
         $pageId = Helpers::decode($id);
         if($pageId == '')
             exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
 
+        # find the page
         $page = Page::find($pageId);
         if(!$page)
             exit(response()->page(getcwd().'/app/views/errors/404.html', 404));
 
+        # allocate data
         $this->data->title = 'Edit Page';
         $this->data->page = $page;
 
@@ -107,22 +134,27 @@ class PageController extends Controller
      */
     public function updatePage($id){
 
-        $pageId = Helpers::decode($id);
-        $page = Page::find($pageId);
-
-        if(!$page)
-            exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
-
-        // extract images from the content
-        $content = extract_images_from_html(
-            request()->get('content'),'storage/app/uploads/blog/');
-
-        $content = htmlentities($content);
+        # validate permission
+        if(!Handler::can('page', 'update')->status)
+            exit(response()->json(['status' => 'error', 'message' => 'Permission denied']));
 
         try{
 
-            $page->update([
+            # decode the id
+            $pageId = Helpers::decode($id);
+            $page = Page::find($pageId);
 
+            # check if page exists
+            if(!$page) exit(response()->json(['status' => 'error', 'message' => 'Invalid request']));
+
+            // extract images from the content
+            $content = extract_images_from_html(
+                request()->get('content'),'storage/app/uploads/blog/');
+
+            $content = htmlentities($content);
+
+            # update the page
+            $page->update([
                 'title' => request()->get('title'),
                 'slug' => request()->get('slug'),
                 'content' => $content,
@@ -130,15 +162,18 @@ class PageController extends Controller
                 'meta_description' => request()->get('meta_description'),
                 'meta_keywords' => request()->get('meta_keywords'),
                 'status' => request()->get('status')
-
             ]);
 
             response()->json(['status' => 'success', 'message' => 'Page updated successfully']);
 
         }catch(\Exception $e){
-            ( getenv('app_debug') == 'true') ?
-                response()->json(['status' => 'error', 'message' => $e->getMessage()]) :
-                response()->json(['status' => 'error', 'message' => 'Failed to update the page']);
+            response()->json(['status' => 'error', 'message' => 'Failed to update the page',
+                'debug' => [
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ]
+            ]);
         }
     }
 
@@ -150,15 +185,21 @@ class PageController extends Controller
      */
 
     public function delete($id){
+
+        # validate permission
+        if(!Handler::can('page', 'delete')->status)
+            exit(response()->json(['status' => 'error', 'message' => 'Permission denied']));
         
+        # decode the id
         $pageId = Helpers::decode($id);
         if($pageId == '')
             response()->json(['status' => 'error', 'message' => 'Invalid request']);
         
+        # find the page
         $page = Page::find($pageId);
-        if(!$page)
-            response()->json(['status' => 'error', 'message' => 'Page not found'], 404);
-        
+        if(!$page) response()->json(['status' => 'error', 'message' => 'Page not found']);
+
+        # delete the page
         $page->delete();
         response()->json(['status'=>'success', 'message' => 'Page deleted']);
     }
