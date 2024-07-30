@@ -84,8 +84,7 @@ class BlogController extends Controller
     public function writeArticle(){
 
         # validate user permission
-        if(!Handler::can('blog', 'add')->status)
-            exit(render('errors.403'));
+        if(!Handler::can('blog', 'add')->status) exit(render('errors.403'));
         
         # data allocation
         $this->data->title = 'Write Article';
@@ -277,6 +276,11 @@ class BlogController extends Controller
         # data allocation
         $this->data->title = 'Blog Categories';
         $this->data->categories = BlogCategory::withCount('blog_article')->get();
+
+        # permission list
+        $this->data->addCategoryPermission = Handler::can('blog', 'create_blog_categories');
+        $this->data->editCategoryPermission = Handler::can('blog', 'update_blog_categories');
+        $this->data->deleteCategoryPermission = Handler::can('blog', 'delete_blog_categories');
 
         render('admin.blog.categories', (array) $this->data);
     }
