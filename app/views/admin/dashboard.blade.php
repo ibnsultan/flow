@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header position-relative">
+                        <div class="card-header position-relative border-0">
                             <h5>
                                 {{__('Dashboard')}}
                             </h5>                
