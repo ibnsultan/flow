@@ -52,6 +52,7 @@ class Handler
 
     public static function owns(string $scope, $ownFunction=false, $addFunction=false) :bool
     {
+        if($scope == 'all') return true;
         if($scope == 'owned' and !$ownFunction) return false;
         if($scope == 'added' and !$addFunction) return false;
         if($scope == 'both' and !$ownFunction and !$addFunction) return false;
