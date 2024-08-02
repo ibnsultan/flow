@@ -18,4 +18,11 @@ class HomeController extends Controller
 
         render('app.home', (array) $this->data);
     }
+
+    public function start(){ 
+        $this->data->title = 'Start';
+        $this->data->current_user = auth()->user();
+
+        render('app.start', (array) $this->data);
+    }
 }
