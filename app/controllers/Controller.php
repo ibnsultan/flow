@@ -4,11 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Module;
 use App\Models\Setting;
-use App\Models\Announcement;
-use App\Models\Notification;
-
-use App\Helpers\Helpers;
-use App\Middleware\Handler;
 
 class Controller extends \Leaf\Controller
 {
@@ -21,10 +16,11 @@ class Controller extends \Leaf\Controller
         $this->data = new \stdClass();
 
         # new instances
-        $this->data->helpers = new Helpers;
-        $this->data->handler = new Handler;
-        $this->data->announcement = new Announcement;
-        $this->data->notification = new Notification;
+        $this->data->date = new \Carbon\Carbon;
+        $this->data->helpers = new \App\Helpers\Helpers;
+        $this->data->handler = new \App\Middleware\Handler;
+        $this->data->announcement = new \App\Models\Announcement;
+        $this->data->notification = new \App\Models\Notification;
         
         # required data
         $this->data->modules = (object) Module::all()->pluck('status', 'name')->toArray();
