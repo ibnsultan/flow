@@ -1,117 +1,102 @@
 <?php
 
-app()->group('admin', function(){
+app()->group('admin', ['namespace' => '\App\Controllers\Admin', function(){
     
-    app()->get('', 'Admin\DashboardController@home');
+    app()->get('', 'DashboardController@home');
     
     # Blog Routes
     app()->group('blog', function(){
         
         # articles routes
-        app()->get('/', 'Admin\BlogController@index');
-        app()->get('article/write', 'Admin\BlogController@writeArticle');
-        app()->get('article/edit/{id}', 'Admin\BlogController@viewArticle');
-        app()->get('article/{id}/delete', 'Admin\BlogController@deleteArticle');
+        app()->get('/', 'BlogController@index');
+        app()->get('article/write', 'BlogController@writeArticle');
+        app()->get('article/edit/{id}', 'BlogController@viewArticle');
+        app()->get('article/{id}/delete', 'BlogController@deleteArticle');
 
-        app()->post('article/write', 'Admin\BlogController@createArticle');
-        app()->post('article/update', 'Admin\BlogController@updateArticle');
+        app()->post('article/write', 'BlogController@createArticle');
+        app()->post('article/update', 'BlogController@updateArticle');
 
         # article categories routes
-        app()->get('categories', 'Admin\BlogController@categories');
-        app()->get('categories/{id}/delete', 'Admin\BlogController@deleteCategory');
+        app()->get('categories', 'BlogController@categories');
+        app()->get('categories/{id}/delete', 'BlogController@deleteCategory');
 
-        app()->post('category/create', 'Admin\BlogController@createCategory');
-        app()->post('category/update', 'Admin\BlogController@updateCategory');
-        
+        app()->post('category/create', 'BlogController@createCategory');
+        app()->post('category/update', 'BlogController@updateCategory');    
     });
 
 
     # user management routes
     app()->group('users', function(){
-        
-        app()->get('{role}', 'Admin\UserController@index');
-
+        app()->get('{role}', 'UserController@index');
     });
 
     app()->group('user', function(){
+        app()->get('/{id}', 'UserController@viewUser');
+        app()->delete('/{id}', 'UserController@deleteUser');
 
-        app()->get('/{id}', 'Admin\UserController@viewUser');
-        app()->delete('/{id}', 'Admin\UserController@deleteUser');
-
-        app()->post('update', 'Admin\UserController@updateUser');
-        app()->post('create', 'Admin\UserController@createUser');
-
+        app()->post('update', 'UserController@updateUser');
+        app()->post('create', 'UserController@createUser');
     });
 
 
     # settings routes
     app()->group('settings', function(){
+        app()->get('seo', 'SettingController@seo');
+        app()->get('general', 'SettingController@general');
+        app()->get('modules', 'SettingController@modules');
+        app()->get('translation', 'SettingController@translation');
 
-        app()->get('seo', 'Admin\SettingController@seo');
-        app()->get('general', 'Admin\SettingController@general');
-        app()->get('modules', 'Admin\SettingController@modules');
-        app()->get('translation', 'Admin\SettingController@translation');
-
-        app()->post('seo', 'Admin\SettingController@updateSeo');
-        app()->post('general', 'Admin\SettingController@updateGeneral');
-        app()->post('modules', 'Admin\SettingController@updateModules');
-        app()->post('translation', 'Admin\SettingController@updateTranslation');
-
+        app()->post('seo', 'SettingController@updateSeo');
+        app()->post('general', 'SettingController@updateGeneral');
+        app()->post('modules', 'SettingController@updateModules');
+        app()->post('translation', 'SettingController@updateTranslation');
     });
 
     # translation routes
     app()->group('translation', function(){
-
-        app()->get('language/{id}', 'Admin\TranslationController@display');        
-
+        app()->get('language/{id}', 'TranslationController@display');
     });
 
 
     # pages routes
     app()->group('pages', function(){
+        app()->get('/', 'PageController@index');
+        app()->get('add', 'PageController@add');
+        app()->get('edit/{id}', 'PageController@edit');
+        app()->get('delete/{id}', 'PageController@delete');
 
-        app()->get('/', 'Admin\PageController@index');
-        app()->get('add', 'Admin\PageController@add');
-        app()->get('edit/{id}', 'Admin\PageController@edit');
-        app()->get('delete/{id}', 'Admin\PageController@delete');
-
-        app()->post('add', 'Admin\PageController@addPage');
-        app()->post('update/{id}', 'Admin\PageController@updatePage');
-
+        app()->post('add', 'PageController@addPage');
+        app()->post('update/{id}', 'PageController@updatePage');
     });
 
 
     # announcement routes
     app()->group('announcement', function(){
+        app()->get('/', 'AnnouncementController@index');
+        app()->get('edit/{id}', 'AnnouncementController@edit');
+        app()->get('delete/{id}', 'AnnouncementController@delete');
 
-        app()->get('/', 'Admin\AnnouncementController@index');
-        app()->get('edit/{id}', 'Admin\AnnouncementController@edit');
-        app()->get('delete/{id}', 'Admin\AnnouncementController@delete');
-
-        app()->post('add', 'Admin\AnnouncementController@add');
-
+        app()->post('add', 'AnnouncementController@add');
     });
 
     # access control routes
     app()->group('access', function(){
+        app()->get('modules', 'ModulesController@index');
+        app()->get('permissions', 'AccessController@permissions');
+        app()->get('roles/{id}', 'AccessController@viewRole');
+        app()->get('permissions/list/{role}', 'AccessController@rolePermissions');
 
-        app()->get('modules', 'Admin\ModulesController@index');
-        app()->get('permissions', 'Admin\AccessController@permissions');
-        app()->get('roles/{id}', 'Admin\AccessController@viewRole');
-        app()->get('permissions/list/{role}', 'Admin\AccessController@rolePermissions');
+        app()->post('roles/add', 'AccessController@createRole');
+        app()->post('modules/add', 'ModulesController@createModule');
+        app()->post('permissions/add', 'AccessController@addPermission');
+        app()->post('roles/permissions/update', 'AccessController@registerRolePermission');
 
-        app()->post('roles/add', 'Admin\AccessController@createRole');
-        app()->post('modules/add', 'Admin\ModulesController@createModule');
-        app()->post('permissions/add', 'Admin\AccessController@addPermission');
-        app()->post('roles/permissions/update', 'Admin\AccessController@registerRolePermission');
+        app()->post('roles/update', 'AccessController@updateRole');
+        app()->post('modules/status', 'ModulesController@updateStatus');
+        app()->post('permissions/update', 'AccessController@updatePermission');
 
-        app()->post('roles/update', 'Admin\AccessController@updateRole');
-        app()->post('modules/status', 'Admin\ModulesController@updateStatus');
-        app()->post('permissions/update', 'Admin\AccessController@updatePermission');
-
-        app()->delete('roles/{id}', 'Admin\AccessController@deleteRole');
-        app()->delete('permissions/{id}', 'Admin\AccessController@deletePermission');
-
+        app()->delete('roles/{id}', 'AccessController@deleteRole');
+        app()->delete('permissions/{id}', 'AccessController@deletePermission');
     });
 
     app()->get('script', function(){
@@ -119,4 +104,4 @@ app()->group('admin', function(){
         response()->withHeader('Content-Type', 'application/javascript')->plain($content);
     });
 
-});
+}]);
