@@ -28,13 +28,13 @@
 					<ion-icon name="book-outline"></ion-icon>
 					<div class="ml-1">
 						<h4>
-							Leaf <span class="green">Flow</span> Documentation
+							<span class="green">Flow</span> Documentation
 						</h4>
 						<p class="mt-1">
 							Flow is based on Leaf MVC which comes with a clean and developer-friendly documentation.
 						</p>
-						<a href="https://mvc.leafphp.dev/" target="_blank" rel="noopener">
-							Leaf MVC Docs
+						<a href="https://github.com/ibnsultan/flow/wiki" target="_blank" rel="noopener">
+							Flow Docs
 						</a>
 					</div>
 				</div>
@@ -45,9 +45,9 @@
 							Leaf Documentation
 						</h4>
 						<p class="mt-1">
-							Since Skeleton is basically a boilerplate built with Leaf, we recommend checking out the leaf docs first.
+							Since Flow is basically a kit built with Leaf, we recommend checking out the leaf docs first.
 						</p>
-						<a href="https://leafphp.dev" target="_blank" rel="noopener">
+						<a href="https://mvc.leafphp.dev" target="_blank" rel="noopener">
 							Leaf Docs
 						</a>
 					</div>
