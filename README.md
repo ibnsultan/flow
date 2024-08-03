@@ -48,3 +48,5 @@ The default login credentials are:
 - Password: `password`
 
 **NOTE:** Flow is under active development so in the meantime there will be alot of updated involving breaking changes
+
+Check out the [wiki](https://github.com/ibnsultan/flow/wiki)
