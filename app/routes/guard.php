@@ -17,11 +17,11 @@ return [
     'auth/register' => 
         [ 'session' => false, 'access' => 'guest'],
 
-    'app{wild}' => 
+    'app/{wild}' => 
         [ 'session' => true, 'access' => 'all' ],
 
-    'admin{wild}' => 
-        [ 'session' => true, 'access' => 'admin' ],
+    'admin/{wild}' => 
+        [ 'session' => true, 'access' => ['admin', 'moderator'] ],
         
     'api/auth/{wild}' =>
         [ 'session' => false, 'access' => 'guest' ],
