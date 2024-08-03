@@ -11,14 +11,22 @@ use App\Models\Role;
 
 class Handler
 {
-    public function __construct()
-    {
-        // ...
-    }
 
-    public static function can(string $moduleName, string $permissionName, mixed $permissionScopes = 'all', int $userId = null) :object
+    /**
+     * Check if user has permission to access a module
+     *
+     * @param string $moduleName
+     * @param string $permissionName
+     * @param mixed $permissionScopes
+     * @param int $userId
+     * @return object
+     */
+
+    public static function can(string $moduleName, string $permissionName, mixed $permissionScopes = null, int $userId = null) :object
     {
         $userId = $userId ?? auth()->id();
+        $permissionScopes = $permissionScopes ?? ['all', 'owned', 'added', 'both'];
+
         $userRoleId = Role::where('name', User::find($userId)->role)->first()->id;    
         
         $module = Module::where('name', $moduleName)->first();
@@ -49,6 +57,15 @@ class Handler
 
         return (object) [ 'status' => false ];
     }
+
+    /**
+     * Check if user owns or added a resource
+     *
+     * @param string $scope
+     * @param mixed $ownFunction
+     * @param mixed $addFunction
+     * @return bool
+     */
 
     public static function owns(string $scope, $ownFunction=false, $addFunction=false) :bool
     {
