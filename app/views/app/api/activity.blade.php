@@ -99,7 +99,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         $("form[name='copyApiKeyForm']").submit(function(event) {
             event.preventDefault();
@@ -135,4 +135,4 @@
             Swal.fire({ icon: 'success', title: 'Success', text: 'API key copied to clipboard' })
         }
     </script>
-@endsection
+@endpush
