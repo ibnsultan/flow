@@ -218,7 +218,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
+@push('scripts')
     <script>
     
         // form submission profile details
@@ -326,4 +326,4 @@
 
         }
     </script>
-@endsection
+@endpush
