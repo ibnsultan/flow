@@ -62,7 +62,8 @@
 		<script src="/assets/js/plugins/select2.min.js"></script>
 		<script src="/assets/js/app.js"></script>
 
-		@yield('scripts')
+		@yield('scripts') <!-- leaving it for backward compatibility -->
+		@stack('scripts')
 
 	</body>
 </html>
