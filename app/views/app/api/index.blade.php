@@ -91,7 +91,7 @@
     </div>
 
 @endsection
-@section('scripts')
+@push('scripts')
     <script>
 
         $("form[name='createApiKey']").submit(function(event) {
@@ -150,4 +150,4 @@
         }
 
     </script>
-@endsection
+@endpush
