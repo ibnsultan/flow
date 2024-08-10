@@ -18,15 +18,18 @@ class RolesSeeder extends Seeder
         $roles = [
             [
                 "name" => "admin",
-                "description" => "Admin role"
+                "description" => "Admin role",
+                "is_admin" => 1
             ],
             [
                 "name" => "moderator",
-                "description" => "Moderator role"
+                "description" => "Moderator role",
+                "is_admin" => 1
             ],
             [
                 "name" => "subscriber",
-                "description" => "User role"
+                "description" => "User role",
+                "is_admin" => 0
             ]
         ];
 
