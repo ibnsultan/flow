@@ -170,16 +170,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.8.6",
+            "version": "3.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "b7411825cf7efb7e51f9791dea19d86e43b399a1"
+                "reference": "2093d670ca17f634f3c095ec10a20687eccebd99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/b7411825cf7efb7e51f9791dea19d86e43b399a1",
-                "reference": "b7411825cf7efb7e51f9791dea19d86e43b399a1",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2093d670ca17f634f3c095ec10a20687eccebd99",
+                "reference": "2093d670ca17f634f3c095ec10a20687eccebd99",
                 "shasum": ""
             },
             "require": {
@@ -195,12 +195,12 @@
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "1.11.5",
+                "phpstan/phpstan": "1.11.7",
                 "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "9.6.19",
+                "phpunit/phpunit": "9.6.20",
                 "psalm/plugin-phpunit": "0.18.4",
                 "slevomat/coding-standard": "8.13.1",
-                "squizlabs/php_codesniffer": "3.10.1",
+                "squizlabs/php_codesniffer": "3.10.2",
                 "symfony/cache": "^5.4|^6.0|^7.0",
                 "symfony/console": "^4.4|^5.4|^6.0|^7.0",
                 "vimeo/psalm": "4.30.0"
@@ -263,7 +263,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.8.6"
+                "source": "https://github.com/doctrine/dbal/tree/3.8.7"
             },
             "funding": [
                 {
@@ -279,7 +279,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-19T10:38:17+00:00"
+            "time": "2024-08-07T11:57:25+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1966,16 +1966,16 @@
         },
         {
             "name": "leafs/fs",
-            "version": "v1.1",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafsphp/fs.git",
-                "reference": "eb046d925abde2e0b6e6d527c5e343b85baddc4a"
+                "reference": "278e7cd22acd9ee15052aa847c9ac5bd4f840dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafsphp/fs/zipball/eb046d925abde2e0b6e6d527c5e343b85baddc4a",
-                "reference": "eb046d925abde2e0b6e6d527c5e343b85baddc4a",
+                "url": "https://api.github.com/repos/leafsphp/fs/zipball/278e7cd22acd9ee15052aa847c9ac5bd4f840dae",
+                "reference": "278e7cd22acd9ee15052aa847c9ac5bd4f840dae",
                 "shasum": ""
             },
             "require": {
@@ -2014,7 +2014,7 @@
             ],
             "support": {
                 "issues": "https://github.com/leafsphp/fs/issues",
-                "source": "https://github.com/leafsphp/fs/tree/v1.1"
+                "source": "https://github.com/leafsphp/fs/tree/v1.2"
             },
             "funding": [
                 {
@@ -2026,25 +2026,26 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-09-03T22:21:13+00:00"
+            "time": "2024-08-09T18:42:18+00:00"
         },
         {
             "name": "leafs/http",
-            "version": "v2.3.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafsphp/http.git",
-                "reference": "d54f6dc5c28a4e0c0294c39ebdd05d3c059d86f2"
+                "reference": "c14b20884cce803c8d6aec4251438211aecf6e49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafsphp/http/zipball/d54f6dc5c28a4e0c0294c39ebdd05d3c059d86f2",
-                "reference": "d54f6dc5c28a4e0c0294c39ebdd05d3c059d86f2",
+                "url": "https://api.github.com/repos/leafsphp/http/zipball/c14b20884cce803c8d6aec4251438211aecf6e49",
+                "reference": "c14b20884cce803c8d6aec4251438211aecf6e49",
                 "shasum": ""
             },
             "require": {
                 "leafs/anchor": "*",
-                "leafs/form": "*"
+                "leafs/form": "*",
+                "leafs/fs": "*"
             },
             "type": "library",
             "autoload": {
@@ -2080,7 +2081,7 @@
             ],
             "support": {
                 "issues": "https://github.com/leafsphp/http/issues",
-                "source": "https://github.com/leafsphp/http/tree/v2.3.0"
+                "source": "https://github.com/leafsphp/http/tree/v2.4.0"
             },
             "funding": [
                 {
@@ -2092,7 +2093,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-08-24T22:52:10+00:00"
+            "time": "2024-08-08T11:44:26+00:00"
         },
         {
             "name": "leafs/leaf",
@@ -2289,7 +2290,7 @@
             ],
             "support": {
                 "issues": "https://github.com/leafsphp/mvc-core/issues",
-                "source": "https://github.com/leafsphp/mvc-core/tree/main"
+                "source": "https://github.com/leafsphp/mvc-core/tree/v1.4.0"
             },
             "funding": [
                 {
@@ -2735,20 +2736,20 @@
         },
         {
             "name": "nette/utils",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "d3ad0aa3b9f934602cb3e3902ebccf10be34d218"
+                "reference": "736c567e257dbe0fcf6ce81b4d6dbe05c6899f96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/d3ad0aa3b9f934602cb3e3902ebccf10be34d218",
-                "reference": "d3ad0aa3b9f934602cb3e3902ebccf10be34d218",
+                "url": "https://api.github.com/repos/nette/utils/zipball/736c567e257dbe0fcf6ce81b4d6dbe05c6899f96",
+                "reference": "736c567e257dbe0fcf6ce81b4d6dbe05c6899f96",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0 <8.4"
+                "php": "8.0 - 8.4"
             },
             "conflict": {
                 "nette/finder": "<3",
@@ -2815,9 +2816,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.0.4"
+                "source": "https://github.com/nette/utils/tree/v4.0.5"
             },
-            "time": "2024-01-17T16:50:36+00:00"
+            "time": "2024-08-07T15:39:19+00:00"
         },
         {
             "name": "nikic/php-parser",
