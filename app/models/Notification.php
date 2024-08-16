@@ -16,8 +16,8 @@ class Notification extends Model{
     ];
 
     // select unread, order by date
-    public static function user($user){
-        return self::where('user_id', $user)->where('status', 0)->orderBy('created_at', 'desc')->get();
+    public static function user_list($user){
+        return self::where('user_id', $user)->where('status', 0)->orderBy('created_at', 'desc')->limit(10)->get();
     }
 
     public static function markAsRead($id){
