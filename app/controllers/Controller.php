@@ -20,7 +20,7 @@ class Controller extends \Leaf\Controller
         $this->data->helpers = new \App\Helpers\Helpers;
         $this->data->handler = new \App\Middleware\Handler;
         $this->data->announcement = new \App\Models\Announcement;
-        $this->data->notification = new \App\Models\Notification;
+        $this->data->notifications = new \App\Models\Notification;
         
         # required data
         $this->data->modules = (object) Module::all()->pluck('status', 'name')->toArray();
