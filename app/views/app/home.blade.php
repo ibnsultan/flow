@@ -20,62 +20,45 @@
                 </div>
 
                 <div class="row mt-2">
-                
-                    <div class="col-xl-3 col-md-6 col-sm-12 mt-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                            
-                                <h5 class="card-title mb-4">
-                                    <i class="bi bi-shield-lock"></i> &nbsp; Authentication
-                                </h5>
 
-                                <p>Flow provides robust authentication mechanisms, ensuring that only authorized users can access your application's resources</p>
+                    @foreach ([
+                        [
+                            'icon' => 'fa-sharp-duotone fa-solid fa-helmet-battle',
+                            'title' => 'Authentication',
+                            'desc' => 'Flow provides robust authentication mechanisms, ensuring that only authorized users can access your application\'s resources'
+                        ],
+                        [
+                            'icon' => 'fa-sharp-duotone fa-solid fa-webhook',
+                            'title' => 'API Integration',
+                            'desc' => 'Flow comes equipped with a versatile and ready-to-use API, allowing seamless integration with external systems and services'
+                        ],
+                        [
+                            'icon' => 'fa-sharp-duotone fa-solid fa-swatchbook',
+                            'title' => 'Well-Designed UI/UX',
+                            'desc' => 'With Flow, you get access to a collection of well-designed UI components and intuitive UX patterns. From responsive layouts to interactive elements'
+                        ],
+                        [
+                            'icon' => 'fa-sharp-duotone fa-solid fa-tools',
+                            'title' => 'Admin Tools',
+                            'desc' => 'Flow provides a user-friendly admin dashboard that streamlines administrative tasks. With features such as user management, settings, etc'
+                        ]
+                    ] as $feature)
 
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                
+                                    <h5 class="card-title mb-4">
+                                        <i class="{{$feature['icon']}} flow-feature-icon position-absolute"
+                                            style="font-size: 5rem; opacity:0.1; right: 1rem;"></i>
+                                        <span class="flow-feauture-title">{{$feature['title']}}</span>
+                                    </h5>
+                                    <p class="flow-feature-desc">{{$feature['desc']}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                
-                    <div class="col-xl-3 col-md-6 col-sm-12 mt-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                            
-                                <h5 class="card-title mb-4">
-                                    <i class="bi bi-link-45deg"></i> &nbsp; API Integration
-                                </h5>
-
-                                <p>Flow comes equipped with a versatile and ready-to-use API, allowing seamless integration with external systems and services</p>
-
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="col-xl-3 col-md-6 col-sm-12 mt-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                            
-                                <h5 class="card-title mb-4">
-                                    <i class="bi bi-palette"></i> &nbsp; Well-Designed UI/UX
-                                </h5>
-
-                                <p> With Flow, you get access to a collection of well-designed UI components and intuitive UX patterns. From responsive layouts to interactive elements,</p>
-
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="col-xl-3 col-md-6 col-sm-12 mt-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                            
-                                <h5 class="card-title mb-4">
-                                    <i class="bi bi-magic"></i> &nbsp; Admin Tools
-                                </h5>
-
-                                <p>Flow provides a user-friendly admin dashboard that streamlines administrative tasks. With features such as user management, analytics, and customizable reporting</p>
-
-                            </div>
-                        </div>
-                    </div>
+                        
+                    @endforeach
             
                 </div>
 
