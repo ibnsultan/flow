@@ -30,7 +30,8 @@
         "leafs/vite": "^0.1.0",
         "leafs/cookie": "^1.1",
         "hashids/hashids": "^5.0",
-        "nette/mail": "^4.0"
+        "nette/mail": "^4.0",
+        "leafs/csrf": "^0.4.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.16"
