@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ed340916a77e3fa085f33eea28b23a1",
+    "content-hash": "e9220e8a0362ecadfe3bff8d69dfcd99",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -1695,6 +1695,71 @@
                 }
             ],
             "time": "2022-07-25T22:09:52+00:00"
+        },
+        {
+            "name": "leafs/csrf",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/csrf.git",
+                "reference": "7cb875a8cb3ea5d971aad7aab3ca8b1bdcbfbdca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/csrf/zipball/7cb875a8cb3ea5d971aad7aab3ca8b1bdcbfbdca",
+                "reference": "7cb875a8cb3ea5d971aad7aab3ca8b1bdcbfbdca",
+                "shasum": ""
+            },
+            "require": {
+                "leafs/anchor": "*",
+                "leafs/http": "*",
+                "leafs/session": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php",
+                    "src/scripts.php"
+                ],
+                "psr-4": {
+                    "Leaf\\Anchor\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf CSRF security patch for leaf anchor",
+            "homepage": "https://leafphp.netlify.app/#/",
+            "keywords": [
+                "framework",
+                "leaf",
+                "php",
+                "util"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/csrf/issues",
+                "source": "https://github.com/leafsphp/csrf/tree/v0.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/leafsphp",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2023-10-07T21:12:46+00:00"
         },
         {
             "name": "leafs/date",
