@@ -73,6 +73,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="createApiKey" method="post">
+                        @csrf
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" name="api_name" placeholder="Enter name" required>

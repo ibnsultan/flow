@@ -74,6 +74,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form name="copyApiKeyForm" method='post'>
+                    @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="copyApiKeyLabel">Copy API Key</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
