@@ -44,7 +44,7 @@
         @yield('content')
 
 		
-		@include('layouts.app.partials')
+		@include('app.partials.announcements')
 		@include('layouts.app.basebar')
 
 		<!-- Required Js -->
