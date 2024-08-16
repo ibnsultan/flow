@@ -39,15 +39,15 @@
 		</div>
 		
 		@include('layouts.admin.sidebar')
-		@include('layouts.app.topbar')
+		@include('layouts.admin.topbar')
 
         @yield('content')
 
-		@include('layouts.app.partials')
+		@include('admin.partials.announcements')
 		@include('layouts.app.basebar')
 
 		<!-- Required Js -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="/assets/js/plugins/jquery-3.7.1.min.js"></script>
 		<script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 		<script src="/assets/js/plugins/popper.min.js"></script>
 		<script src="/assets/js/plugins/simplebar.min.js"></script>
