@@ -81,5 +81,6 @@ require_files(
     getcwd().'/app/routes/app.php',
     getcwd().'/app/routes/api.php',
     getcwd().'/app/routes/admin.php',
-    getcwd().'/app/routes/auth.php'
+    getcwd().'/app/routes/auth.php',
+    getcwd().'/app/routes/hooks.php',
 );
