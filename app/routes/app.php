@@ -8,33 +8,21 @@ app()->group('app', ['namespace' => '\App\Controllers\App', function(){
 
     # Profile routes
     app()->group('profile', function(){
-        app()->get('view', 'UserController@display');
-        app()->post('update', 'UserController@update');
-        app()->post('password/update', 'UserController@updatePassword');
+        app()->get('view', ['name'=>'my.profile', 'UserController@display']);
+        app()->post('update', ['name'=>'update.my-profile', 'UserController@update']);
+        app()->post('password/update', ['name'=>'update.my-password', 'UserController@updatePassword']);
     });
     
 
     # API routes
     app()->group('api', function(){
-        app()->get('manage', 'ApiController@index');
-        app()->get('activity/{id}', 'ApiController@activity');
+        app()->get('manage', ['name'=>'api.manage', 'ApiController@index']);
+        app()->get('activity/{id}', ['name'=>'api.activity', 'ApiController@activity']);
 
-        app()->delete('manage/{id}', 'ApiController@revokeKey');
+        app()->post('copy', ['name'=>'api.fetch', 'ApiController@copy']);
+        app()->post('create', ['name'=>'api.create', 'ApiController@issueKey']);  
 
-        app()->post('copy', 'ApiController@copy');
-        app()->post('create', 'ApiController@issueKey');      
-    });
-
-
-    # Blog routes
-    app()->group('blog', function(){
-        app()->get('/', 'BlogController@index');
-        app()->get('article/{id}', 'BlogController@article');
-        app()->get('category/{id}', 'BlogController@category');
-    });
-
-    app()->group('media', function(){
-        app()->post('upload', 'MediaController@upload');
+        app()->delete('manage/{id}', ['name'=>'api.view', 'ApiController@revokeKey']);    
     });
 
 }]);
