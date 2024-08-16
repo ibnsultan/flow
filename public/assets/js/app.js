@@ -31,10 +31,39 @@ $(document).ready(function() {
     });
 });
 
+// Darkmode Switch
+
 function change_theme_color(color){
     document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
     layout_change(color);
 }
+
+const DarkModeState = document.cookie.split('; ').find(row => row.startsWith('theme_color='));
+const switchDarkMode = document.getElementById('switchDarkMode');
+if (switchDarkMode) {
+    if (DarkModeState) {
+        const theme_color = DarkModeState.split('=')[1];
+        if (theme_color === 'dark') {
+            switchDarkMode.checked = true;
+        }
+    }
+
+    switchDarkMode.addEventListener('change', function() {
+        if (this.checked) {
+            change_theme_color('dark');
+        } else {
+            change_theme_color('light');
+        }
+    });
+}
+
+function change_theme_color(color){
+    document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
+    layout_change(color);
+}
+
+
+// Under Development Alert
 
 function underDevelopment(){
     // prevent default action
@@ -47,6 +76,9 @@ function underDevelopment(){
         confirmButtonText: 'OK'
     });
 }
+
+
+// Styles and Scripts Injection
 
 function injectStylesheet(url) {
     var link = document.createElement('link');
@@ -64,11 +96,6 @@ function injectScript(url) {
         script.onerror = reject;
         document.head.appendChild(script);
     });
-}
-
-function change_theme_color(color){
-    document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
-    layout_change(color);
 }
 
 const toast = iziToast;
