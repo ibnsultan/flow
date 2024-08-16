@@ -147,3 +147,37 @@ function substring($string, $length, $end = '...'){
     return $string;
 
 }
+
+
+/*
+|--------------------------------------------------------------------------
+|  CSRF Field
+|--------------------------------------------------------------------------
+|
+| This function is used to generate a CSRF token field.
+|
+*/
+if(!function_exists('csrf_field')){
+
+    function csrf_field(){
+        return \Leaf\Anchor\CSRF::form();
+    }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+|  CSRF Token
+|--------------------------------------------------------------------------
+|
+| This function is used to get the CSRF token.
+|
+*/
+if(!function_exists('csrf_token')){
+
+    function csrf_token(){
+        return \Leaf\Anchor\CSRF::token()['_token'];
+    }
+
+}
+
