@@ -1,4 +1,5 @@
 <form method="post" id="formAddUserRole">
+    @csrf
     <!-- role name -->
     <div class="form-group">
         <label for="name" class="form-label">{{__('Role Name')}}</label>

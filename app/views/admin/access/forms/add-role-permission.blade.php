@@ -1,4 +1,5 @@
 <form name="addNewRolePermission" id="formAddRolePermission" method="post">
+    @csrf
     <div class="row">
         <div class="col-12">
             <div class="form-group">

@@ -20,6 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <form name="updateSeo" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
 
                                     <div class="col-md-4 col-sm-12">

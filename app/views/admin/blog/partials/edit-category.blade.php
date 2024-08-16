@@ -10,6 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" name="updateCategory">
+                        @csrf
                         <input type="text" id="category_id" name="category_id" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">{{__('Category')}}</label>

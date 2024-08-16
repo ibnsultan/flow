@@ -112,6 +112,7 @@
                         url: '/admin/translation/layout',
                         method: 'post',
                         data: {
+                            _token: '{{ csrf_token() }}',
                             id: id,
                             layout: layout
                         },
@@ -143,6 +144,7 @@
                         url: '/admin/translation/status',
                         method: 'post',
                         data: {
+                            _token: '{{ csrf_token() }}',
                             id: id,
                             status: status
                         },

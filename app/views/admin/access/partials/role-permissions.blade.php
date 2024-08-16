@@ -85,6 +85,7 @@
             url: '/admin/access/roles/permissions/update',
             type: 'POST',
             data: {
+                _token: '{{ csrf_token() }}',
                 role: role,
                 value: value,
                 module: feature,

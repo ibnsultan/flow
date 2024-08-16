@@ -4,20 +4,8 @@
     <div class="pc-container">
         <div class="pc-content">
             
-            <!--div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body position-relative page-title" >
-                            <h5>
-                                {{__('Write Article')}}
-                            </h5>            
-                        </div>
-                    </div>
-                </div>
-            </div-->
-
-            
             <form action="post" enctype="multipart/form-data" name="addArticle">
+                @csrf
                 <div class="row">
                     <div class="col-md-8 col-sm-12">
                         <div class="card h-100">

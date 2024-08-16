@@ -10,6 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" name="addCategory">
+                        @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">{{ __('Category') }}</label>
                             <input type="text" class="form-control" name="name" placeholder="{{ __('Category Name') }}" required>

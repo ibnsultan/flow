@@ -20,6 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <form name="updateSettings" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
 
                                     <! -- Site Name -->

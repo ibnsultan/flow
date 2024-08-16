@@ -84,6 +84,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="addNewUserRole" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

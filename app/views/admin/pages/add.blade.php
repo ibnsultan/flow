@@ -5,6 +5,7 @@
         <div class="pc-content">
             
             <form action="post" enctype="multipart/form-data" name="addPage">
+                @csrf
                 <div class="row">
                     <div class="col-md-8 col-sm-12 mb-2">
                         <div class="card h-100">

@@ -16,12 +16,13 @@
             </div>
 
             <form name="updateProfile" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <form name="updateProfileDetails" method='post' enctype="multiart/form-data">
-
+                                    @csrf
                                     <input type="hidden" name="user_id" value="{{ $helpers::encode($user->id) }}">
                                     <div class="row">
                                         <div class="col-sm-12 text-center mb-3">
