@@ -56,13 +56,25 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 .btn-primary { color: #fff !important; }
 .btn-light { border: solid 1px #727272 !important; }
 
-/* form select */
+/* form select2 */
 .select2-container { display: block !important; }
  span.select2-dropdown.select2-dropdown--below { z-index: 1100; }
 .select2-container--default .select2-selection--single .select2-selection__arrow { height: 50px; }
 .select2-container--default .select2-selection--single { border: 1px solid #bec8d0; height: 50px; }
 .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 50px; }
 .select2-container--default .select2-selection--multiple { padding: 10px 0 14px 5px !important;}
+
+/* form select2 dark theme */
+[data-pc-theme=dark] .select2-container--default .select2-selection--single,
+[data-pc-theme=dark] .select2-container--default .select2-selection--multiple,
+[data-pc-theme=dark] .select2-dropdown
+{
+    border-color: #303f50;
+    background-color: #263240;
+}
+[data-pc-theme=dark] .select2-container--default .select2-selection--single .select2-selection__rendered{
+    color: #b5bfc8;
+}
 
 textarea.select2-search__field ::placeholder { color: #dbe1e5 !important; }
 
