@@ -4,18 +4,6 @@
 		<div class="pc-content">
 
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header position-relative">
-                            <h5>
-                                Starter Template
-                            </h5>                
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
 
                 <div class="col-12">
                     <div class="card">
