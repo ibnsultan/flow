@@ -74,9 +74,9 @@ app()->group('admin', ['namespace' => '\App\Controllers\Admin', function(){
     app()->group('announcement', function(){
         app()->get('/', 'AnnouncementController@index');
         app()->get('edit/{id}', 'AnnouncementController@edit');
-        app()->get('delete/{id}', 'AnnouncementController@delete');
+        app()->get('delete/{id}', ['name'=>'admin.announcement.delete', 'AnnouncementController@delete']);
 
-        app()->post('add', 'AnnouncementController@add');
+        app()->post('add', ['name'=>'admin.announcement.create', 'AnnouncementController@add']);
     });
 
     # access control routes
