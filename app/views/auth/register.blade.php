@@ -17,6 +17,8 @@
 
 						<form name="register" method="post">
 
+							@csrf
+
                             <!-- name input -->
                             <div class="form-group mb-3">
 								<input type="text" class="form-control" name="name" placeholder="John Doe" required>

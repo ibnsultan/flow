@@ -17,6 +17,8 @@
 
 						<form name="reset" method="post">
 
+							@csrf
+
 							<!-- email input -->
 							<div class="form-group mb-3">
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
@@ -65,6 +67,7 @@
 					url: '/auth/reset',
 					type: 'POST',
 					data: {
+						_token: '{{ csrf_token() }}',
 						email: email
 					},
 					success: function(response) {

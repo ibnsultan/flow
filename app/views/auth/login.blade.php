@@ -17,6 +17,7 @@
 
 						<form name="login" method="post">
 
+							@csrf
 							<!-- email input -->
 							<div class="form-group mb-3">
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>

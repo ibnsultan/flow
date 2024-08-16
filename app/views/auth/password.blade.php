@@ -17,6 +17,8 @@
 
 						<form name="reset" method="post">
 
+							@csrf
+
 							<!-- password input -->
 							<div class="form-group mb-3 position-relative">
 								<input type="password" class="form-control" name="password" placeholder="••••••••••••" required autocomplete='false'>
