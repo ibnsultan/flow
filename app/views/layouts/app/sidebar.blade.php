@@ -9,19 +9,7 @@
         </div>
 
         <div class="navbar-content pc-trigger">
-            <div class="card pc-user-card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar wid-45 rounded-circle" style="aspect-ration:1/1"/>
-                        </div>
-                        <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0"> {{ auth()->user()['fullname'] }} </h6>
-                            <small>{{ auth()->user()['role'] }}</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
                     <label>{{__('Navigation')}}</label>
