@@ -17,6 +17,10 @@ return [
     'auth/register' => 
         [ 'session' => false, 'access' => 'guest'],
 
+    
+    'hook/{wild}' =>
+        [ 'session' => false, 'access' => 'all' ],
+
     'app/{wild}' => 
         [ 'session' => true, 'access' => 'all' ],
 
@@ -27,6 +31,6 @@ return [
         [ 'session' => false, 'access' => 'guest' ],
     
     'api/{wild}' =>
-        [ 'session' =>true, 'access' => 'all' ]
+        [ 'session' =>true, 'access' => 'all' ],
 
 ];
