@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Admin;
 
-use App\Helpers\Helpers;
 use App\Middleware\Handler;
 
 use App\Models\Role;
@@ -13,10 +12,17 @@ class AnnouncementController extends Controller
 {
     public function index() :void
     {
+        # Check if user has permission to view announcements
+        if(!Handler::can('app', 'view_announcements')->status) exit(render('errors.403'));
 
+        # allocate data
         $this->data->roles = Role::all();
         $this->data->title = 'Announcement List';
         $this->data->announcements = Announcement::all();
+
+        # allocate permissions
+        $this->data->addAnnouncementPermission = Handler::can('app', 'add_announcements');
+        $this->data->deleteAnnouncementPermission = Handler::can('app', 'delete_announcements');
 
         render('admin.announcement.index', (array) $this->data);
 
@@ -66,7 +72,7 @@ class AnnouncementController extends Controller
     public function delete($id) :void
     {
 
-        if(!Handler::can('settings', 'delete_announscements'))
+        if(!Handler::can('settings', 'delete_announcements'))
             exit(response()->json(['status' => 'error', 'message' => __('You do not have permission to delete announcements')]));
 
         $announcement = Announcement::find($id);
