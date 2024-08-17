@@ -7,45 +7,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body pb-4 position-relative">
-                            <h5>
-                                {{__('Translations')}}: {{ $language->name }}
-                            </h5>             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
                         <div class="card-body">
 
                             @if(count($languageData))
-
-                                <div class="table-responsive dt-responsive">
-                                    <table id="row-callback" class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>{{__('Key')}}</th>
-                                                <th>{{__('Translation')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($languageData as $key => $value)
-                                                <tr>
-                                                    <td>{{ $key }}</td>
-                                                    <td contenteditable>{{ $value }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                                @include('admin.translation.tables.translations')
                             @else
-                                <div class="text-center">
-                                    {{__('No translations found for this language.')}}
-                                </div>
+                                @include('layouts.admin.empty')
                             @endif
 
                         </div>
@@ -90,5 +57,33 @@
             });
 
         });
+
+        $(document).on('blur', '.translation-phrase', function() {
+            let id = $(this).data('translation-id');
+            let key = $(this).data('translation-key');
+            let value = $(this).text();
+
+            $.ajax({
+                url: "{{ route('language.update') }}",
+                type: 'POST',
+                data: {
+                    id: id,
+                    key: key,
+                    value: value,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if(response.status) {
+                        toast.success({ message:response.message, position: 'bottomCenter' });
+                    } else {
+                        toastr.error({ message:response.message, position: 'bottomCenter' });
+                    }
+                },
+                error: function() {
+                    toastr.error({ message:"{{ __('An error occurred. Please try again.') }}", position: 'bottomCenter' });
+                }
+            });
+        });
+
     </script>
 @endsection 
