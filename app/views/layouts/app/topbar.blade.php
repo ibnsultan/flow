@@ -100,32 +100,51 @@
 
                                 <!--announcements-->
                                 @if($modules->announcement)
-                                <a href="javascript:void(0)" class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
-                                    <span>
-                                        <i class="fa-solid fa-bullhorn"></i>
-                                        <span>{{__('Announcements')}}</span>
-                                    </span>
-                                </a>
+                                    <a href="javascript:void(0)" class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
+                                        <span>
+                                            <i class="fa-solid fa-bullhorn"></i>
+                                            <span>{{__('Announcements')}}</span>
+                                        </span>
+                                    </a>
+                                @endif
+
+                                @if($langs::active()->count())
+                                    <a class="dropdown-item">
+                                        <span class="d-flex align-items-center">
+                                            <i class="fa-solid fa-globe"></i>
+                                            <span>{{ __('Languages') }}</span>
+                                        </span>
+                                        <span class="flex-shrink-0">
+                                            <select id="inputChangeLang" class="bg-transparent border-0 shadow-none">
+                                                <option value="en">{{ __('Default') }}</option>
+                                                @foreach($langs::active() as $lang)
+                                                    <option value="{{ $lang->iso }}" {{ $lang->iso == cookie()::get('lang') ? 'selected' : '' }}>
+                                                        {{ $lang->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </span>
+                                    </a>
                                 @endif
                                 
                                 <hr class="border-secondary border-opacity-50" />
 
                                 @if($modules->api)
-                                <a href="{{ route('api.manage') }}" class="dropdown-item">
-                                    <span>
-                                        <i class="fa-solid fa-webhook"></i>
-                                        <span>{{__('API Settings')}}</span>
-                                    </span>
-                                </a>
+                                    <a href="{{ route('api.manage') }}" class="dropdown-item">
+                                        <span>
+                                            <i class="fa-solid fa-webhook"></i>
+                                            <span>{{__('API Settings')}}</span>
+                                        </span>
+                                    </a>
                                 @endif
 
                                 @if($helpers::isAdmin())
-                                <a href="/admin" class="dropdown-item">
-                                    <span>
-                                        <i class="fa-solid fa-gear"></i>
-                                        <span>{{__('Admin Settings')}}</span>
-                                    </span>
-                                </a>
+                                    <a href="/admin" class="dropdown-item">
+                                        <span>
+                                            <i class="fa-solid fa-gear"></i>
+                                            <span>{{__('Admin Settings')}}</span>
+                                        </span>
+                                    </a>
                                 @endif
 
                                 <!--a href="javascript:void(0)" class="dropdown-item">
