@@ -15,10 +15,12 @@ class Controller extends \Leaf\Controller
     {
         $this->data = new \stdClass();
 
-        # new instances
+        # helper instances
         $this->data->date = new \Carbon\Carbon;
         $this->data->helpers = new \App\Helpers\Helpers;
         $this->data->handler = new \App\Middleware\Handler;
+        
+        $this->data->langs = new \App\Models\Language;
         $this->data->announcement = new \App\Models\Announcement;
         $this->data->notifications = new \App\Models\Notification;
         
