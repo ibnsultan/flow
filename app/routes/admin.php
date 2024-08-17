@@ -1,8 +1,10 @@
 <?php
 
+# TODO: Add route names to all routes
+
 app()->group('admin', ['namespace' => '\App\Controllers\Admin', function(){
     
-    app()->get('', 'DashboardController@home');
+    app()->get('', ['name'=>'admin.home', 'DashboardController@home']);
     
     # Blog Routes
     app()->group('blog', function(){
@@ -41,20 +43,22 @@ app()->group('admin', ['namespace' => '\App\Controllers\Admin', function(){
 
     # settings routes
     app()->group('settings', function(){
-        app()->get('seo', 'SettingController@seo');
-        app()->get('general', 'SettingController@general');
-        app()->get('modules', 'SettingController@modules');
-        app()->get('translation', 'SettingController@translation');
+        app()->get('seo', ['name'=>'settings.seo', 'SettingController@seo']);
+        app()->get('general', ['name'=>'settings.general', 'SettingController@general']);
 
-        app()->post('seo', 'SettingController@updateSeo');
-        app()->post('general', 'SettingController@updateGeneral');
-        app()->post('modules', 'SettingController@updateModules');
-        app()->post('translation', 'SettingController@updateTranslation');
+        app()->post('seo', ['name'=>'seo.update', 'SettingController@updateSeo']);
+        app()->post('general', ['name'=>'settings.update', 'SettingController@updateGeneral']);
+        app()->post('translation', ['name'=>'settings.seo', 'SettingController@updateTranslation']);    // legacy
     });
 
     # translation routes
     app()->group('translation', function(){
-        app()->get('language/{id}', 'TranslationController@display');
+        app()->get('languages', ['name'=>'language.list', 'TranslationController@index']);
+        app()->get('languages/{id}', ['name'=>'language.view', 'TranslationController@display']);
+
+        app()->post('language/update', ['name'=>'language.update', 'TranslationController@update']);
+        app()->post('langauge/status', ['name'=>'language.status', 'TranslationController@status']);
+        app()->post('language/layout', ['name'=>'language.layout', 'TranslationController@layout']);
     });
 
 
