@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Setting;
-use App\Models\Language;
 
 use App\Helpers\Helpers;
 use App\Controllers\Controller;
@@ -152,19 +151,6 @@ class SettingController extends Controller
                 response()->json(['status' => 'error', 'message' => 'Failed to update settings']);
         }
 
-    }
-
-    /**
-     * Translation settings.
-     * 
-     * @return void
-     */
-    public function translation(){
-        
-        $this->data->title = 'Languages & Translations';
-        $this->data->languages = Language::all();
-        
-        render('admin.settings.translation', (array) $this->data);
     }
 
 }
