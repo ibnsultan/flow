@@ -18,7 +18,7 @@ class CreateLanguages extends Database
                 $table->string('name', 50);
                 $table->char('iso', 50);
                 $table->char('layout', 50);
-                $table->char('status', 50);
+                $table->integer('status')->default(0);
                 $table->timestamp('created_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default(static::$capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));                
             });
