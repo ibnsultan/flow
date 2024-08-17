@@ -19,7 +19,7 @@ app()->group('auth', function(){
     app()->get('/password/{token}', 'AuthController@changePassword');
     app()->post('/password/{token}', 'AuthController@updatePassword');
 
-    app()->get('/logout', 'AuthController@logout');
+    app()->get('/logout', ['name'=>'logout', 'AuthController@logout']);
 
 });
 
