@@ -16,6 +16,7 @@ $(document).ready(function() {
         });
     }
 
+    // Media Preview
     $('.media-preview').click(function() {
         $(this).siblings('input[type="file"]').click();
 
@@ -29,10 +30,20 @@ $(document).ready(function() {
         });
 
     });
+
+    // Language Switch
+    $('#inputChangeLang').on('change', function() {
+        let lang = $(this).val();
+        document.cookie = "lang=" + lang + "; max-age=" + 60 * 60 * 24 * 365 + "; path=/";
+        toast.success({
+            message: 'Language changed successfully',
+            position: 'bottomCenter'
+        });
+        setTimeout(() => { location.reload();}, 1000);
+    });
 });
 
 // Darkmode Switch
-
 function change_theme_color(color){
     document.cookie = `theme_color=${color}; max-age=${60*60*24*365*30}; path=/`;
     layout_change(color);
@@ -99,5 +110,3 @@ function injectScript(url) {
 }
 
 const toast = iziToast;
-
-// layout_change('{{cookie()->get('theme_color') ?? 'light' }}');
