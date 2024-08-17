@@ -16,4 +16,14 @@ class Language extends Model
         'updated_at' => 'datetime'
     ];
 
+    public static function active()
+    {
+        return self::where('status', 1)->get();
+    }
+
+    public static function fetch($iso)
+    {
+        return self::where('iso', $iso)->first();
+    }
+
 }
