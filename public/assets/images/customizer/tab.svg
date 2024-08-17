@@ -1,0 +1,24 @@
+<svg width="72" height="46" viewBox="0 0 72 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_7611_401998)">
+<rect width="8" height="46" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<rect x="2" y="2" width="4" height="4" rx="1" fill="#4680FF"/>
+<rect x="2" y="8" width="4" height="4" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<rect x="2" y="14" width="4" height="4" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<rect x="2" y="20" width="4" height="4" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<rect x="2" y="26" width="4" height="4" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<rect x="2" y="32" width="4" height="4" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<rect x="2" y="38" width="4" height="4" rx="1" fill="#4680FF" fill-opacity="0.4"/>
+<path d="M70.12 0H26.88C25.8417 0 25 0.89543 25 2V8C25 9.10457 25.8417 10 26.88 10H70.12C71.1583 10 72 9.10457 72 8V2C72 0.89543 71.1583 0 70.12 0Z" fill="#4680FF" fill-opacity="0.4"/>
+<path d="M70.12 12H26.88C25.8417 12 25 12.8954 25 14V44C25 45.1046 25.8417 46 26.88 46H70.12C71.1583 46 72 45.1046 72 44V14C72 12.8954 71.1583 12 70.12 12Z" fill="#4680FF" fill-opacity="0.15"/>
+<path d="M22.5 0H10.5C9.67157 0 9 0.428249 9 0.956522V21.0435C9 21.5718 9.67157 22 10.5 22H22.5C23.3284 22 24 21.5718 24 21.0435V0.956522C24 0.428249 23.3284 0 22.5 0Z" fill="#4680FF" fill-opacity="0.2"/>
+<path d="M17.3 3H11.7C11.3134 3 11 3.33579 11 3.75V5.25C11 5.66421 11.3134 6 11.7 6H17.3C17.6866 6 18 5.66421 18 5.25V3.75C18 3.33579 17.6866 3 17.3 3Z" fill="#4680FF"/>
+<path d="M22.25 7H11.75C11.3358 7 11 7.33579 11 7.75V9.25C11 9.66421 11.3358 10 11.75 10H22.25C22.6642 10 23 9.66421 23 9.25V7.75C23 7.33579 22.6642 7 22.25 7Z" fill="#4680FF" fill-opacity="0.4"/>
+<path d="M22.25 11H11.75C11.3358 11 11 11.3358 11 11.75V13.25C11 13.6642 11.3358 14 11.75 14H22.25C22.6642 14 23 13.6642 23 13.25V11.75C23 11.3358 22.6642 11 22.25 11Z" fill="#4680FF" fill-opacity="0.4"/>
+<path d="M22.25 15H11.75C11.3358 15 11 15.3358 11 15.75V17.25C11 17.6642 11.3358 18 11.75 18H22.25C22.6642 18 23 17.6642 23 17.25V15.75C23 15.3358 22.6642 15 22.25 15Z" fill="#4680FF" fill-opacity="0.4"/>
+</g>
+<defs>
+<clipPath id="clip0_7611_401998">
+<rect width="72" height="46" fill="white"/>
+</clipPath>
+</defs>
+</svg>
