@@ -13,3 +13,4 @@ yarn-error.log
 *Test.php
 check.cmd
 changes.php
+/public/storage
