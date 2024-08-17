@@ -12,7 +12,7 @@
         
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
-                    <label>{{__('Navigation')}}</label>
+                    <label>{{ __('Navigation') }}</label>
                 </li>
                 
                 <li class="pc-item">
@@ -20,7 +20,7 @@
                         <span class="pc-micon">
                             <i data-feather="grid"></i>
                         </span>                            
-                        <span class="pc-mtext">{{__('Dashboard')}}</span>
+                        <span class="pc-mtext">{{ __('Dashboard') }}</span>
                     </a>
                 </li>
 
@@ -29,12 +29,12 @@
                         <span class="pc-micon">
                             <i data-feather="globe"></i>
                         </span>
-                        <span class="pc-mtext">{{__('App Home')}}</span>
+                        <span class="pc-mtext">{{ __('App Home') }}</span>
                     </a>
                 </li>
 
                 <li class="pc-item pc-caption">
-                    <label>{{__('CMS')}}</label>
+                    <label>{{ __('CMS') }}</label>
                 </li>
 
                 <!-- blog -->
@@ -44,19 +44,19 @@
                             <span class="pc-micon">
                                 <i data-feather="file-text"></i>
                             </span>
-                            <span class="pc-mtext">{{__('Blog')}}</span>
+                            <span class="pc-mtext">{{ __('Blog') }}</span>
                             <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                         </a>
                         <ul class="pc-submenu">
                             <li class="pc-item">
                                 <a href="/admin/blog" class="pc-link">
-                                    <span class="pc-mtext">{{__('Posts')}}</span>
+                                    <span class="pc-mtext">{{ __('Posts') }}</span>
                                 </a>
                             </li>
                             @if($handler::can('blog', 'view_blog_categories')->status)
                                 <li class="pc-item">
                                     <a href="/admin/blog/categories" class="pc-link">
-                                        <span class="pc-mtext">{{__('Categories')}}</span>
+                                        <span class="pc-mtext">{{ __('Categories') }}</span>
                                     </a>
                                 </li>
                             @endif
@@ -71,18 +71,18 @@
                             <span class="pc-micon">
                                 <i data-feather="file"></i>
                             </span>
-                            <span class="pc-mtext">{{__('Pages')}}</span>
+                            <span class="pc-mtext">{{ __('Pages') }}</span>
                             <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                         </a>
                         <ul class="pc-submenu">
                             <li class="pc-item">
                                 <a href="/admin/pages" class="pc-link">
-                                    <span class="pc-mtext">{{__('All Pages')}}</span>
+                                    <span class="pc-mtext">{{ __('All Pages') }}</span>
                                 </a>
                             </li>
                             <li class="pc-item">
                                 <a href="/admin/pages/add" class="pc-link">
-                                    <span class="pc-mtext">{{__('Add Page')}}</span>
+                                    <span class="pc-mtext">{{ __('Add Page') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -96,13 +96,23 @@
                             <span class="pc-micon">
                                 <i data-feather="zap"></i>
                             </span>
-                            <span class="pc-mtext">{{__('Announcement')}}</span>
+                            <span class="pc-mtext">{{ __('Announcement') }}</span>
                         </a>
                     </li>
                 @endif
 
+                <!-- translations -->
+                <li class="pc-item">
+                    <a href="{{ route('language.list') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <i data-feather="globe"></i>
+                        </span>
+                        <span class="pc-mtext">{{ __('Translations') }}</span>
+                    </a>
+                </li>
+
                 <li class="pc-item pc-caption">
-                    <label>{{__('Management')}}</label>
+                    <label>{{ __('Management') }}</label>
                 </li>
 
                 <! -- users -->
@@ -111,18 +121,18 @@
                         <span class="pc-micon">
                             <i data-feather="users"></i>
                         </span>
-                        <span class="pc-mtext">{{__('Users')}}</span>
+                        <span class="pc-mtext">{{ __('Users') }}</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
                         <li class="pc-item">
                             <a href="/admin/users/all" class="pc-link">
-                                <span class="pc-mtext">{{__('Subscribers')}}</span>
+                                <span class="pc-mtext">{{ __('Subscribers') }}</span>
                             </a>
                         </li>
                         <li class="pc-item">
                             <a href="/admin/users/moderator" class="pc-link">
-                                <span class="pc-mtext">{{__('Moderators')}}</span>
+                                <span class="pc-mtext">{{ __('Moderators') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -134,23 +144,32 @@
                         <span class="pc-micon">
                             <i data-feather="shield"></i>
                         </span>
-                        <span class="pc-mtext">{{__('Access')}}</span>
+                        <span class="pc-mtext">{{ __('Access') }}</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
+
                         <!-- modules -->
                         @if($handler::can('app', 'view_modules')->status)
                             <li class="pc-item">
                                 <a href="/admin/access/modules" class="pc-link">
-                                    <span class="pc-mtext">{{__('Modules')}}</span>
+                                    <span class="pc-mtext">{{ __('Modules') }}</span>
                                 </a>
                             </li>
+
+                            <!-- submodules ->
+                            <li class="pc-item">
+                                <a href="/admin/access/sub-modules" class="pc-link">
+                                    <span class="pc-mtext">{{ __('SubModules') }}</span>
+                                </a>
+                            </li-->
                         @endif
+
                         <!-- permissions -->
                         @if($handler::can('app', 'view_permissions')->status)
                             <li class="pc-item">
                                 <a href="/admin/access/permissions" class="pc-link">
-                                    <span class="pc-mtext">{{__('Permissions')}}</span>
+                                    <span class="pc-mtext">{{ __('Permissions') }}</span>
                                 </a>
                             </li>
                         @endif
@@ -158,38 +177,35 @@
                 </li>
 
                 <! -- settings -->
+                @if($handler::can('app', 'view_settings')->status)
                 <li class="pc-item pc-hasmenu">
                     <a href="javascript:void(0)" class="pc-link">
                         <span class="pc-micon">
                             <i data-feather="settings"></i>
                         </span>
-                        <span class="pc-mtext">{{__('Settings')}}</span>
+                        <span class="pc-mtext">{{ __('Settings') }}</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
                     <ul class="pc-submenu">
+
+                        <!-- general settings -->
                         <li class="pc-item">
                             <a href="/admin/settings/general" class="pc-link">
-                                <span class="pc-mtext">{{__('General')}}</span>
+                                <span class="pc-mtext">{{ __('General') }}</span>
                             </a>
                         </li>
+                    
+
+                        <!-- seo settings -->
                         <li class="pc-item">
                             <a href="/admin/settings/seo" class="pc-link">
-                                <span class="pc-mtext">{{__('SEO')}}</span>
+                                <span class="pc-mtext">{{ __('SEO') }}</span>
                             </a>
                         </li>
-                        <!--li class="pc-item">
-                            <a href="/admin/settings/translation" class="pc-link">
-                                <span class="pc-mtext">{{__('Translations')}}</span>
-                            </a>
-                        </li-->
-                        <!-- modules -->
-                        <li class="pc-item">
-                            <a href="/admin/settings/modules" class="pc-link">
-                                <span class="pc-mtext">{{__('Features')}}</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
+                @endif
 
             </ul>
         </div>
