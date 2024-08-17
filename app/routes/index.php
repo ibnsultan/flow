@@ -12,10 +12,10 @@
 */
 app()->set404(function() {
     $isApiRequest = strpos($_SERVER['REQUEST_URI'], 'api') == 1;
-    if ($isApiRequest) {
+    if ($isApiRequest or request()->isAjax()) {
         response()->json(['status' => 'error', 'message' => 'Page not found'], 404);
     } else {
-        response()->page(ViewsPath("errors/404.html", false), 404);
+        response()->page("app/views/errors/404.html", 404);
     }
 });
 
@@ -32,7 +32,7 @@ app()->set404(function() {
 if(getenv('app_debug') == 'false'){
     app()->setErrorHandler(function() {
         $isApiRequest = strpos($_SERVER['REQUEST_URI'], '/api') !== false;
-        if ($isApiRequest) {
+        if ($isApiRequest or request()->isAjax()) {
             response()->json(['status' => 'error', 'message' => 'An error occurred'], 500);
         } else {
             response()->page(ViewsPath("errors/500.html", false), 500);
@@ -72,8 +72,8 @@ app()->setNamespace('\App\Controllers');
 | manually using the require_files() function.
 |
 */
-$routes = scandir(getcwd().'/app/routes');
-$ignore = ['.', '..', 'guard', 'index.php', 'web.php'];
+$routes = scandir('app/routes');
+$ignore = ['.', '..', 'guard', 'index.php'];
 
 foreach($routes as $file) {
     if(!in_array($file, $ignore))
