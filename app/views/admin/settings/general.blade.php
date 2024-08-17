@@ -6,18 +6,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body pb-3 position-relative">
-                            <h5>
-                                {{__('General Settings')}}
-                            </h5>                
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
                         <div class="card-body">
                             <form name="updateSettings" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -47,7 +35,7 @@
                                             <div>
                                                 <li class="list-group-item">
                                                     <div class="theme-color preset-color">
-                                                        <a href="javascript:void(0)" data-value="preset-1"><i class="ti ti-check"></i></a>
+                                                        <a href="javascript:void(0)" class="active" data-value="preset-1"><i class="ti ti-check"></i></a>
                                                         <a href="javascript:void(0)" data-value="preset-2"><i class="ti ti-check"></i></a>
                                                         <a href="javascript:void(0)" data-value="preset-3"><i class="ti ti-check"></i></a>
                                                         <a href="javascript:void(0)" data-value="preset-4"><i class="ti ti-check"></i></a>
@@ -72,14 +60,14 @@
                                                 <div class="col-6">
                                                     <div class="d-grid">
                                                         <button type="button" class="preset-btn layout-preset btn" data-value="false" data-input="ltr">
-                                                            <img src="/assets/images/customizer/img-layout-1.svg" alt="img" class="img-fluid h-100">
+                                                            <img src="/assets/images/customizer/ltr.svg" alt="img" class="img-fluid h-100">
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="d-grid">
                                                         <button type="button" class="preset-btn layout-preset btn" data-value="true" data-input="rtl">
-                                                            <img src="/assets/images/customizer/img-layout-2.svg" alt="img" class="img-fluid h-100">
+                                                            <img src="/assets/images/customizer/rtl.svg" alt="img" class="img-fluid h-100">
                                                         </button>
                                                     </div>
                                                 </div>
