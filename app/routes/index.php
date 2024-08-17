@@ -68,19 +68,14 @@ app()->setNamespace('\App\Controllers');
 |--------------------------------------------------------------------------
 |
 | Leaf MVC automatically loads all files in the routes folder that
-| start with "_". We call these files route partials. An example
-| partial has been created for you.
-|
-| If you want to manually load routes, you can
-| create a file that doesn't start with "_" and manually require
-| it here like so:
+| don't start with "guard" or "index". You can also load routes
+| manually using the require_files() function.
 |
 */
-require_files(
-    getcwd().'/app/routes/web.php',
-    getcwd().'/app/routes/app.php',
-    getcwd().'/app/routes/api.php',
-    getcwd().'/app/routes/admin.php',
-    getcwd().'/app/routes/auth.php',
-    getcwd().'/app/routes/hooks.php',
-);
+$routes = scandir(getcwd().'/app/routes');
+$ignore = ['.', '..', 'guard', 'index.php', 'web.php'];
+
+foreach($routes as $file) {
+    if(!in_array($file, $ignore))
+        require_files('app/routes/'.$file);
+}
