@@ -28,8 +28,8 @@
 		data-pc-theme_contrast="true"
 		data-pc-sidebar-caption="true" 
 		data-pc-preset="{{ $settings->theme_color }}" 
-		data-pc-direction="{{ $settings->theme_layout }}"
-		data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}" >
+		data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}" 
+		data-pc-direction="{{ $langs::fetch(cookie()->get('lang'))->layout ?? $settings->theme_layout }}" >
 		
 		<div class="loader-bg">
 			<div class="loader-track">
