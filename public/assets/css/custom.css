@@ -67,14 +67,17 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 /* form select2 dark theme */
 [data-pc-theme=dark] .select2-container--default .select2-selection--single,
 [data-pc-theme=dark] .select2-container--default .select2-selection--multiple,
-[data-pc-theme=dark] .select2-dropdown
-{
+[data-pc-theme=dark] .select2-dropdown{
     border-color: #303f50;
     background-color: #263240;
 }
 [data-pc-theme=dark] .select2-container--default .select2-selection--single .select2-selection__rendered{
     color: #b5bfc8;
 }
+
+[data-pc-layout="compact"] .theme-version {display: none;}
+[data-pc-layout="compact"] .theme-logo {width: 100%;}
+[data-pc-layout="compact"] .pc-submenu .pc-mtext { display: block; }
 
 textarea.select2-search__field ::placeholder { color: #dbe1e5 !important; }
 

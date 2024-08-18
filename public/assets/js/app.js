@@ -73,9 +73,7 @@ function change_theme_color(color){
     layout_change(color);
 }
 
-
 // Under Development Alert
-
 function underDevelopment(){
     // prevent default action
     event.preventDefault();
@@ -90,7 +88,6 @@ function underDevelopment(){
 
 
 // Styles and Scripts Injection
-
 function injectStylesheet(url) {
     var link = document.createElement('link');
     link.rel = 'stylesheet';
