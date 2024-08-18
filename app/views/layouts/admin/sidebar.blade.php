@@ -27,7 +27,7 @@
                 <li class="pc-item">
                     <a href="/app/home" class="pc-link">
                         <span class="pc-micon">
-                            <i data-feather="globe"></i>
+                            <i data-feather="feather"></i>
                         </span>
                         <span class="pc-mtext">{{ __('App Home') }}</span>
                     </a>
