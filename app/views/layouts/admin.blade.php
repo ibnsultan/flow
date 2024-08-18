@@ -21,13 +21,11 @@
 		<link rel="stylesheet" href="/assets/css/style.css" id="main-style-link" />
 		<link rel="stylesheet" href="/assets/css/style-preset.css" />
 		<link rel="stylesheet" href="/assets/css/custom.css" />
-		
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	</head>
 	
 	<body
 		data-pc-theme_contrast="true"
-		data-pc-sidebar-caption="true" 
+		data-pc-sidebar-caption="true"
 		data-pc-preset="{{ $settings->theme_color }}" 
 		data-pc-theme="{{cookie()->get('theme_color') ?? 'light' }}" 
 		data-pc-direction="{{ $langs::fetch(cookie()->get('lang'))->layout ?? $settings->theme_layout }}" >
@@ -48,7 +46,7 @@
 
 		<!-- Required Js -->
         <script src="/assets/js/plugins/jquery-3.7.1.min.js"></script>
-		<script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
+		<script src="/assets/js/simplebar.min.js"></script>
 		<script src="/assets/js/plugins/popper.min.js"></script>
 		<script src="/assets/js/plugins/simplebar.min.js"></script>
 		<script src="/assets/js/plugins/bootstrap.min.js"></script>
