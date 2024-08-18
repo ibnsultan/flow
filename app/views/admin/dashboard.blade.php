@@ -4,25 +4,13 @@
 		<div class="pc-content">
 
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header position-relative border-0">
-                            <h5>
-                                {{__('Dashboard')}}
-                            </h5>                
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-md-6 col-xxl-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
-                                    <div class="avtar avtar-s bg-light-warning">
-                                        <i data-feather="users" class="text-warning"></i>
+                                    <div class="avtar avtar-s position-absolute end-40" style="opacity:0.1;">
+                                        <i class="text-warning flow-feature-iconfa-sharp-duotone fa-solid fa-users" style="font-size: 5rem;"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -43,8 +31,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
-                                    <div class="avtar avtar-s bg-light-success">
-                                        <i data-feather="code" class="text-success"></i>
+                                    <div class="avtar avtar-s position-absolute end-40" style="opacity:0.1;">
+                                        <i class="text-success flow-feature-iconfa-sharp-duotone fa-solid fa-key" style="font-size: 5rem;"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -65,8 +53,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
-                                    <div class="avtar avtar-s bg-light-primary">
-                                        <i data-feather="file-text" class="text-primary"></i>
+                                    <div class="avtar avtar-s position-absolute end-40" style="opacity:0.1;">
+                                        <i class="fa-duotone fa-solid fa-align-right" style="font-size: 5rem;"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -87,8 +75,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
-                                    <div class="avtar avtar-s bg-light-info">
-                                        <i data-feather="file" class="text-info"></i>
+                                    <div class="avtar avtar-s position-absolute end-40" style="opacity:0.1;">
+                                        <i class="text-danger flow-feature-iconfa-sharp-duotone fa-solid fa-file-alt" style="font-size: 5rem;"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
