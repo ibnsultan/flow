@@ -1,4 +1,5 @@
-<nav class="pc-sidebar pc-sidebar-hide">
+<--To have a default hidden sidebar, add the class `pc-sidebar-hide` -->
+<nav class="pc-sidebar">
     <div class="navbar-wrapper">
 
         <div class="m-header">
@@ -13,12 +14,13 @@
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
                     <label>{{__('Navigation')}}</label>
+                    <i class="ph-duotone ph-gauge"></i>
                 </li>
                 
                 <li class="pc-item">
                     <a href="/app/home" class="pc-link">
                         <span class="pc-micon">
-                            <i data-feather="home"></i>
+                            <i class="ph-duotone ph-squares-four"></i>
                         </span>
                         <span class="pc-mtext">{{__('Dashboard')}}</span>
                     </a>
@@ -28,7 +30,7 @@
                 <li class="pc-item">
                     <a href="/app/start" class="pc-link">
                         <span class="pc-micon">
-                            <i data-feather="layout"></i>
+                            <i class="ph-duotone ph-rocket"></i>
                         </span>
                         <span class="pc-mtext">{{__('Template')}}</span>
                     </a>
@@ -37,7 +39,7 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="javascript:void(0)" class="pc-link">
                         <span class="pc-micon">
-                            <i data-feather="menu"></i>
+                            <i class="ph-duotone ph-tree-structure"></i>
                         </span>
                         <span class="pc-mtext">Menu levels</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
