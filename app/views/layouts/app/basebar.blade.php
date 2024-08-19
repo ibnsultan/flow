@@ -6,7 +6,7 @@
                     {{ $settings->site_name }} &copy; {{date('Y')}}. All Rights Reserved.
                 </p>
             </div>
-            <div class="col-auto my-1">
+            <div class="col-auto text-end d-none d-md-block my-1 ">
                 <ul class="list-inline footer-link mb-0">
                     <li class="list-inline-item"><a href="/">Home</a></li>
                     <li class="list-inline-item"><a href="/docs" target="_blank">Documentation</a></li>
