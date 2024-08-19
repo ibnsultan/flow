@@ -1,4 +1,4 @@
-<--To have a default hidden sidebar, add the class `pc-sidebar-hide` -->
+<!-- To have a default hidden sidebar, add the class `pc-sidebar-hide` -->
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
 
