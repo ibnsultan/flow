@@ -22,6 +22,7 @@ class PermissionsSeeder extends Seeder
             array( "name" => "delete", "description" => NULL, "module_id" => 1, "is_primary" => 1, "scopes" => "['all', 'owned', 'none']" ),
             array( "name" => "modify_user_role", "description" => NULL, "module_id" => 1, "is_primary" => 0, "scopes" => "['all', 'none']" ),
             array( "name" => "update_user_permissions", "description" => NULL, "module_id" => 1, "is_primary" => 0, "scopes" => "['all', 'none']" ),
+            array( "name" => "view_settings", "description" => NULL, "module_id" => 2, "is_primary" => 0, "scopes" => "['all', 'none']" ),
             array( "name" => "update_general_settings", "description" => NULL, "module_id" => 2, "is_primary" => 0, "scopes" => "['all', 'none']" ),
             array( "name" => "update_seo_settings", "description" => NULL, "module_id" => 2, "is_primary" => 0, "scopes" => "['all', 'none']" ),
             array( "name" => "update_translation_settings", "description" => NULL, "module_id" => 2, "is_primary" => 0, "scopes" => "['all', 'none']" ),
