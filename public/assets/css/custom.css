@@ -49,6 +49,26 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
     margin: 1rem auto;
 }
 
+.datatable-table thead th, .table thead th{
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* No border top on children of the first row */
+.datatable-table thead tr:first-child th,
+.table thead tr:first-child th{
+    border-top: none !important;
+    border-bottom: solid 2px #909090 !important;
+}
+
+/* No border bottom on children of the last row */
+.datatable-table tbody tr:last-child,
+.table tbody tr:last-child,
+.datatable-table tbody tr:last-child td,
+.table tbody tr:last-child td{
+    border-bottom: none !important;
+}
+
 /* Cursor */
 .cursor-pointer{ cursor: pointer; }
 
@@ -102,6 +122,14 @@ textarea.select2-search__field ::placeholder { color: #dbe1e5 !important; }
 .bottom-30 { bottom: 30px; }
 .bottom-40 { bottom: 40px; }
 
+/* Form */
+.form-group{ margin-bottom: 1rem; }
+label {
+    margin: 0 0 .3rem .2rem;
+    font-weight: bold;
+}
+
+/* Color and Layers */
 .bg-success-light {
 	background-color: #d3fdd7 !important;
 }
