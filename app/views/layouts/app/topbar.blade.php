@@ -26,7 +26,7 @@
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0"
                         data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" >
-                        <i class="fa-solid fa-cowbell"></i>
+                        <i class="ph-duotone ph-bell"></i>
                     </a>
 
                     <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
@@ -64,7 +64,7 @@
                         href="javascript:void(0)" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false" >
                         <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar" style="aspect-ration:1/1"/>
                     </a>
-                    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+                    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2">
                         <div class="dropdown-body">
                             <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
                                 <div class="d-flex mb-1">
@@ -77,41 +77,37 @@
                                     </div>
                                 </div>
                                 <hr class="border-secondary border-opacity-50" />
-
-                                <div class="card">
-                                    <div class="card-body py-3">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h5 class="mb-0">
-                                                <span class="m-1">{{ __('Dark Mode') }}</span>
-                                            </h5>
-                                            <div class="form-check form-switch form-check-reverse m-0">
-                                                <input class="form-check-input f-18" id="switchDarkMode" type="checkbox" role="switch">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 
                                 <a href="{{ route('my.profile') }}" class="dropdown-item">
-                                    <span>
-                                        <i class="fa-solid fa-user"></i>
+                                    <span class="d-flex align-items-center">
+                                        <i class="ph-duotone ph-user-circle-gear"></i>
                                         <span>{{__('My Profile')}}</span>
                                     </span>
-                                </a>
+                                </a>                               
 
+                                <a href="javascript:void(0)" class="dropdown-item">
+                                    <span class="d-flex align-items-center">
+                                        <i class="ph-duotone ph-lifebuoy"></i>
+                                        <span>{{__('Support')}}</span>
+                                    </span>
+                                </a>
+                                
                                 <!--announcements-->
                                 @if($modules->announcement)
                                     <a href="javascript:void(0)" class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#announcement" aria-controls="announcement">
-                                        <span>
-                                            <i class="fa-solid fa-bullhorn"></i>
+                                        <span class="d-flex align-items-center">
+                                            <i class="ph-duotone ph-flag-banner"></i>
                                             <span>{{__('Announcements')}}</span>
                                         </span>
                                     </a>
-                                @endif
+                                @endif 
+                                
+                                <hr class="border-secondary border-opacity-50" />
 
-                                @if($langs::active()->count())
-                                    <a class="dropdown-item">
+                                @if(!$langs::active()->count())
+                                    <div class="dropdown-item">
                                         <span class="d-flex align-items-center">
-                                            <i class="fa-solid fa-globe"></i>
+                                            <i class="ph-duotone ph-globe-hemisphere-west"></i>
                                             <span>{{ __('Languages') }}</span>
                                         </span>
                                         <span class="flex-shrink-0">
@@ -124,15 +120,25 @@
                                                 @endforeach
                                             </select>
                                         </span>
-                                    </a>
+                                    </div>
                                 @endif
+
+                                <div class="dropdown-item">
+                                    <span class="d-flex align-items-center">
+                                        <i class="ph-duotone ph-moon"></i>
+                                        <span class="m-1">{{ __('Dark Mode') }}</span>
+                                    </span>
+                                    <div class="form-check form-switch form-check-reverse m-0">
+                                        <input class="form-check-input f-18" id="switchDarkMode" type="checkbox" role="switch">
+                                    </div>
+                                </div>
                                 
                                 <hr class="border-secondary border-opacity-50" />
 
                                 @if($modules->api)
                                     <a href="{{ route('api.manage') }}" class="dropdown-item">
-                                        <span>
-                                            <i class="fa-solid fa-webhook"></i>
+                                        <span class="d-flex align-items-center">
+                                            <i class="ph-duotone ph-key"></i>
                                             <span>{{__('API Settings')}}</span>
                                         </span>
                                     </a>
@@ -140,27 +146,18 @@
 
                                 @if($helpers::isAdmin())
                                     <a href="/admin" class="dropdown-item">
-                                        <span>
-                                            <i class="fa-solid fa-gear"></i>
+                                        <span class="d-flex align-items-center">
+                                            <i class="ph-duotone ph-gear"></i>
                                             <span>{{__('Admin Settings')}}</span>
                                         </span>
                                     </a>
                                 @endif
 
-                                <!--a href="javascript:void(0)" class="dropdown-item">
-                                    <span>
-                                        <i class="ti ti-headset"></i>
-                                        <span>{{__('support')}}</span>
-                                    </span>
-                                </a-->
-
                                 <hr class="border-secondary border-opacity-50" />
                                 <div class="d-grid mb-3">
-                                    <a href='/auth/logout' class="btn btn-primary">
-                                        <svg class="pc-icon me-2">
-                                            <use xlink:href="#custom-logout-1-outline"></use>
-                                        </svg>
-                                        Logout
+                                    <a href='{{ route('logout') }}' class="btn btn-primary">
+                                        <i class="ph-duotone ph-door-enter"></i>
+                                        {{__('Logout')}}
                                     </a>
                                 </div>
                             </div>
