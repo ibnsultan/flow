@@ -84,7 +84,7 @@ class BlogController extends Controller
     public function writeArticle(){
 
         # validate user permission
-        if(!Handler::can('blog', 'add')->status) exit(render('errors.403'));
+        if(!Handler::can('blog', 'create')->status) exit(render('errors.403'));
         
         # data allocation
         $this->data->title = 'Write Article';
@@ -100,7 +100,7 @@ class BlogController extends Controller
      */
     public function createArticle(){
 
-        if(!Handler::can('blog', 'add')->status)
+        if(!Handler::can('blog', 'create')->status)
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         $fileUploaded = null;
