@@ -12,7 +12,8 @@
 		<link rel="stylesheet" href="/assets/fonts/inter/inter.css" id="main-font-link" />
 		<link rel="stylesheet" href="/assets/fonts/tabler-icons.min.css" />
 		<link rel="stylesheet" href="/assets/fonts/feather.css" />
-		<link rel="stylesheet" href="/assets/fonts/fontawesome.css" />
+		<link rel="stylesheet" href="/assets/fonts/fontawesome.css" />		
+		<link rel="stylesheet" href="/assets/fonts/phosphor/duotone/style.css" />
 		<link rel="stylesheet" href="/assets/fonts/material.css" />
 		
 		<link rel="stylesheet" href="/assets/css/plugins/toastr.min.css" />
@@ -58,6 +59,7 @@
 		<script src="/assets/js/plugins/select2.min.js"></script>
 		<script src="/assets/js/app.js"></script>
 		<script src="/admin/script"></script>
+		<script>localStorage.setItem('layout', 'vertical');</script>
 
 		@yield('scripts')
 

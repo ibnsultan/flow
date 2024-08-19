@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="/assets/fonts/tabler-icons.min.css" />
 		<link rel="stylesheet" href="/assets/fonts/feather.css" />
 		<link rel="stylesheet" href="/assets/fonts/fontawesome.css" />
+		<link rel="stylesheet" href="/assets/fonts/phosphor/duotone/style.css" />
 		<link rel="stylesheet" href="/assets/fonts/material.css" />
 		<link rel="stylesheet" href="/assets/css/plugins/toastr.min.css" />
 		<link rel="stylesheet" href="/assets/css/plugins/select2.min.css">
