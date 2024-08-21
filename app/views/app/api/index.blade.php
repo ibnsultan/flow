@@ -4,58 +4,34 @@
 		<div class="pc-content">
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-xl-10 col-md-8 col-sm-7">
                     <div class="card">
-                        <div class="card-header position-relative">
-                            <h5>Api Keys Management</h5>
-                            <!-- generate api key and send response to function apiKey_created(response) -->
-                            <button class="btn btn-primary position-absolute" 
-                                style="top:0.8rem;right:2rem;" 
-                                 data-bs-toggle="modal" data-bs-target="#createApiKey">
-                                Create Key
-                            </button>
-                        </div>
+                        <input class="form-control w-100" id="searchApi" placeholder="Search API Key"/>
                     </div>
                 </div>
+                <div class="col-xl-2 col-md-4 col-sm-5">
+                    <button class="btn btn-primary w-100 mt-1" data-bs-toggle="modal" data-bs-target="#createApiKey">
+                        {{ __('Create API Key') }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="alert alert-success text-truncate d-none p-3" role="alert">
+                <span id="holderApiToken"></span>
+                <span id="copyApiToken" class="btn bg-light text-truncate position-absolute m-2 top-0 end-10">
+                    <i class="fa fa-copy"></i>
+                </span>
             </div>
 
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="table table-responsive">
-                                <table id="apiTable" class="table table-hover" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Key</th>
-                                            <th>Created At</th>
-                                            <th>Last Used</th>
-                                            <th class="text-center">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($apiKeys as $key)
-                                            <tr>
-                                                <td>{{ $key->name }}</td>
-                                                <td>{{ \App\Helpers\Helpers::previewKey($key->token) }}</td>
-                                                <td>{{ $key->created_at->diffForHumans() }}</td>
-                                                <td>{{ $key->updated_at->diffForHumans() }}</td>
-                                                <td class="text-center">
-                                                    <a href="/app/api/activity/{{ \App\Helpers\Helpers::encode($key->id)}}" class="btn-primary btn btn-sm rounded-1">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a> &nbsp;
-
-                                                    <a href="javascript:void(0)" class="btn-danger btn btn-sm rounded-1" 
-                                                        onclick="deleteApiKey('{{ \App\Helpers\Helpers::encode($key->id)}}')">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            @if($apiKeys->count())
+                                @include('app.api.tables.list')
+                            @else
+                                @include('layouts.app.empty')
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -63,58 +39,41 @@
         </div>
     </div>
 
-    <!-- create model -->
-    <div class="modal fade" id="createApiKey" tabindex="-1" role="dialog" aria-labelledby="createApiKeyLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createApiKeyLabel">Create API Key</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form name="createApiKey" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="api_name" placeholder="Enter name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="secret">Secret Key</label>
-                            <input type="password" class="form-control" name="api_secret" placeholder="Enter a passkey" required>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary w-50">Create</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('app.api.forms.issue')
 
 @endsection
 @push('scripts')
     <script>
 
-        $("form[name='createApiKey']").submit(function(event) {
+        $("#formCreateApiKey").submit(function(event) {
 
             event.preventDefault();
+            buttonState('#btnCreateApiKey', 'loading');
 
             $.ajax({
-				url: '/app/api/create',
+				url: "{{ route('api.create') }}",
 				type: 'POST',
 				data: $(this).serialize(),
 				success: function(response) {
 					if(response.status == 'success') {
-						Swal.fire({ icon: 'success', title: 'Your token is', text: response.message }).then(() => {
-							location.reload();
-						});
+
+                        $('#createApiKey').modal('hide');
+                        $('#formCreateApiKey').trigger('reset');
+
+                        $('#holderApiToken').text(response.message);
+                        $('.alert').removeClass('d-none');
+                        $('#copyApiToken').click();
+
 					} else {
-						Swal.fire({ icon: 'error', title: 'Oops...', text: response.message })
+                        toast.error({ message: response.message, position: 'bottomCenter' });
 					}
 				},
 				error: function() {
-					Swal.fire({ icon: 'error', title: 'Oops...', text: 'An error occurred. Please try again later.' });
-				}
+                    toast.error({ message: "{{ __('An error occurred. Please try again later.') }}", position: 'bottomCenter' });
+				},
+                complete: function() {
+                    buttonState('#btnCreateApiKey', 'reset', "{{ __('Issue Key') }}");
+                }
 			});
 
         })
@@ -149,6 +108,18 @@
                 }
             })
         }
+
+        $('#searchApi').on('keyup', function() {
+            let value = $(this).val().toLowerCase();
+            $('#apiTable tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        $('#copyApiToken').click(function() {
+            copyToClipboard($('#holderApiToken').text());
+            toast.success({ message: "{{ __('API Copied to clipboard.') }}", position: 'bottomCenter' });
+        });
 
     </script>
 @endpush
