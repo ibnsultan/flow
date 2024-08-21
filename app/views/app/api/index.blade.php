@@ -90,7 +90,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/app/api/manage/' + id,
+                        url: ("{{ route('api.delete', ':id') }}").replace(':id', id) + '?_token={{ csrf_token() }}',
                         type: 'DELETE',
                         success: function(response) {
                             if(response.status == 'success') {
