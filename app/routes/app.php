@@ -22,7 +22,7 @@ app()->group('app', ['namespace' => '\App\Controllers\App', function(){
         app()->post('copy', ['name'=>'api.fetch', 'ApiController@copy']);
         app()->post('create', ['name'=>'api.create', 'ApiController@issueKey']);  
 
-        app()->delete('manage/{id}', ['name'=>'api.view', 'ApiController@revokeKey']);    
+        app()->delete('manage/{id}', ['name'=>'api.delete', 'ApiController@revokeKey']);    
     });
 
 }]);
