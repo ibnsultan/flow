@@ -1,5 +1,9 @@
 # Flow
 
+Check out the [wiki](https://github.com/ibnsultan/flow/wiki)
+
+**NOTE:** Flow is under active development so in the meantime there will be alot of updated involving breaking changes
+
 Flow is a comprehensive web application development starter kit designed to accelerate the process of building modern and feature-rich web applications. With a focus on simplicity, flexibility, and efficiency, Flow provides developers with a robust set of tools and features to kickstart their projects. From secure authentication and seamless API integration to beautifully designed UI/UX components and powerful admin tools.
 
 Flow's purpose is empower developers to create high-quality web applications with ease. Whether you're a seasoned developer or just starting out, Flow streamlines the development process, allowing you to focus on creating exceptional user experiences and delivering value to your users.
@@ -47,6 +51,14 @@ The default login credentials are:
 - Email: `admin@flow.app`
 - Password: `password`
 
-**NOTE:** Flow is under active development so in the meantime there will be alot of updated involving breaking changes
+## Credits
 
-Check out the [wiki](https://github.com/ibnsultan/flow/wiki)
+Without the following projects flow would never have been elegant as it is
+
+- Leaf Framework - [https://leafphp.dev/](https://leafphp.dev/)
+- AblePro Dashboard - [https://github.com/phoenixcoded/able-pro-free-admin-dashboard-template](https://github.com/phoenixcoded/able-pro-free-admin-dashboard-template)
+- Bootstrap 5 - [https://getbootstrap.com/](https://getbootstrap.com/)
+- Icons
+  - Font Awesome
+  - Phosphor
+  - Feather Icon
