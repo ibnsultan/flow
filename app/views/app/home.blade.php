@@ -44,7 +44,7 @@
                         ]
                     ] as $feature)
 
-                        <div class="col-xl-3 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-md-6 col-sm-12 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
                                 
