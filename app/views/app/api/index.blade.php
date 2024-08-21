@@ -60,9 +60,13 @@
                         $('#createApiKey').modal('hide');
                         $('#formCreateApiKey').trigger('reset');
 
-                        $('#holderApiToken').text(response.message);
+                        $('#holderApiToken').text(response.token);
                         $('.alert').removeClass('d-none');
                         $('#copyApiToken').click();
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, 3000);
 
 					} else {
                         toast.error({ message: response.message, position: 'bottomCenter' });
@@ -97,6 +101,42 @@
                                 Swal.fire({ icon: 'success', title: 'Deleted!', text: response.message }).then(() => {
                                     location.reload();
                                 });
+                            } else {
+                                Swal.fire({ icon: 'error', title: 'Oops...', text: response.message })
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({ icon: 'error', title: 'Oops...', text: 'An error occurred. Please try again later.' });
+                        }
+                    });
+                }
+            })
+        }
+
+        function refreshApiKey(id){
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You are about to refresh the API Key. This will invalidate the current key and generate a new one.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, refresh it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('api.refresh') }}",
+                        type: 'POST',
+                        data: {
+                            apiId : id,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if(response.status == 'success') {
+                                $('#holderApiToken').text(response.token);
+                                $('.alert').removeClass('d-none');
+                                $('#copyApiToken').click();
                             } else {
                                 Swal.fire({ icon: 'error', title: 'Oops...', text: response.message })
                             }

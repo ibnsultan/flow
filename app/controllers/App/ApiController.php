@@ -27,7 +27,7 @@ class ApiController extends Controller
     public function index(){
 
         if(!$this->data->modules->api)
-            exit(response()->page(getcwd()."/app/views/errors/404.html"));
+            exit(response()->page("app/views/errors/404.html", 404));
 
         $this->data->title = 'API Key Management';
         $this->data->apiKeys = ApiKey::user(auth()->id());
@@ -41,7 +41,7 @@ class ApiController extends Controller
      *
      * @return \Leaf\Core\Response
      */
-    public function issueKey(){
+    public function issue(){
 
         if(!$this->data->modules->api)
             exit(response()->json(['status' => 'error', 'message' => 'API module is disabled']));
@@ -68,7 +68,7 @@ class ApiController extends Controller
                 'secret' => $secretKey
             ]);
 
-            response()->json(['status' => 'success', 'message'=> $token]);
+            response()->json(['status' => 'success', 'message'=> __('API key generated successfully'), 'token' => $token]);
 
         } catch (\Exception $e) {
 
@@ -80,11 +80,41 @@ class ApiController extends Controller
     }
 
     /**
+     * Refresh API Token
+     * 
+     * @return \Leaf\Core\Response
+     */
+    public function refresh(){
+        $apiId = Helpers::decode(request()->get('apiId'));
+        if($apiId == '')
+            exit(response()->json(['status' => 'error', 'message' => __('Invalid request')]));
+
+        $api = ApiKey::find($apiId);
+        if(!$api)
+            exit(response()->json(['status' => 'error', 'message' => __('API key not found')]));
+
+        $api->token = Authentication::generateToken(
+            [
+                'iat' => time(),
+                'exp' => strtotime('+1 year'),
+                'iss' => 'localhost',
+                'user_id' => auth()->id()
+            ],
+            $api->secret
+        );
+
+        $api->save();
+
+        response()->json(['status' => 'success', 'message' => __('API key refreshed'), 'token' => $api->token]);
+
+    }
+
+    /**
      * Delete an API key
      *
      * @return \Leaf\Core\Response
      */
-    public function revokeKey($id){
+    public function revoke($id){
 
         $apiID = Helpers::decode($id);
 
