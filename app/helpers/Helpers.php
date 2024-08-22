@@ -2,26 +2,34 @@
 
 namespace App\Helpers;
 
+use Hashids\Hashids;
+use App\Models\Role;
+
 class Helpers{
 
-    protected static $Admins = ['admin'];
-    protected static $users = ['admin', 'subscriber'];
+    protected static $admins;
+    protected static $users;
+    protected static $userRoles;
 
-    protected static $user_roles = [
-        'admin' => 'Administrator',
-        'subscriber' => 'Subscriber'
-    ];
+    public static function __initialize(){
+        self::$admins = Role::admins();
+        self::$users = Role::nonAdmins();
+        self::$userRoles = Role::all()->pluck('Description', 'name')->toArray();
+    }
 
     public static function isAdmin(){
-        return in_array(auth()->user()['role'], self::$Admins);
+        self::__initialize();
+        return in_array(auth()->user()['role'], self::$admins);
     }
 
     public static function isUser(){
+        self::__initialize();
         return in_array(auth()->user()['role'], self::$users);
     }
 
     public static function role($role){
-        return self::$user_roles[$role];   
+        self::__initialize();
+        return self::$userRoles[$role];   
     }
 
     public static function upload(string $fileInput, ?string $storeDir=null, ?array $fileTypes = null, $virtualPath = true ) :array
@@ -72,11 +80,11 @@ class Helpers{
     public static function encode($data){
 
         $data = bin2hex($data.'.'.date('d'));
-        return (new \Hashids\Hashids)->encodeHex( $data);
+        return (new Hashids)->encodeHex( $data);
     }
 
     public static function decode($data){
-        $data = (new \Hashids\Hashids)->decodeHex( $data );
+        $data = (new Hashids)->decodeHex( $data );
 
         $data = explode('.', hex2bin($data));
         return $data[0];
