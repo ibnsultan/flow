@@ -18,6 +18,10 @@ class Role extends Model{
         return self::where('is_admin', 1)->get()->pluck('name')->toArray();
     }
 
+    public static function nonAdmins() :array {
+        return self::where('is_admin', 0)->get()->pluck('name')->toArray();
+    }
+
     public static function withUsers() {
         return self::select('roles.*', Model::raw('count(users.id) as users_count'))
             ->leftJoin('users', 'roles.name', '=', 'users.role')
