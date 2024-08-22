@@ -1,4 +1,8 @@
 <?php
+
+use App\Models\Role;
+$adminRoles = Role::admins();
+
 /*
  |----------------------------------------------------------------------------------
  | The URI Access file
@@ -12,25 +16,17 @@
  */
 return [
 
-    'auth/login' => 
-        [ 'session' => false, 'access' => 'guest'],
-    'auth/register' => 
-        [ 'session' => false, 'access' => 'guest'],
-
+    'auth/login' => [ 'session' => false, 'access' => 'guest'],
+    'auth/register' => [ 'session' => false, 'access' => 'guest'],
     
-    'hook/{wild}' =>
-        [ 'session' => false, 'access' => 'all' ],
-
-    'app/{wild}' => 
-        [ 'session' => true, 'access' => 'all' ],
-
-    'admin/{wild}' => 
-        [ 'session' => true, 'access' => ['admin', 'moderator'] ],
+    'app' => [ 'session' => true, 'access' => 'all' ],
+    'app/{wild}' => [ 'session' => true, 'access' => 'all' ],
+    
+    'admin' => [ 'session' => true, 'access' => $adminRoles ],
+    'admin/{wild}' => [ 'session' => true, 'access' => $adminRoles ],
         
-    'api/auth/{wild}' =>
-        [ 'session' => false, 'access' => 'guest' ],
-    
-    'api/{wild}' =>
-        [ 'session' =>true, 'access' => 'all' ],
+    'api/auth/{wild}' => [ 'session' => false, 'access' => 'guest' ],
+    'api/{wild}' => [ 'session' =>true, 'access' => 'all' ],
 
+    'hook{wild}' => [ 'session' => false, 'access' => 'all' ]
 ];
