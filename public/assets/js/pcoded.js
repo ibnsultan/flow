@@ -228,11 +228,16 @@ function layout_rtl_change(e) {
     document.querySelector(".theme-direction .btn[data-value='false']").classList.add("active")))
 }
 function layout_change(e) {
-    
-    var theme_color = document.cookie.split('; ').
-        find(row => row.startsWith('theme_color=')).replace('theme_color=', '');
+
+    // check if theme_color cookie exists
+    var theme_color = document.cookie.split('; ').find(row => row.startsWith('theme_color='));
+    if (theme_color) {
+        theme_color = theme_color.split('=')[1];
+        } else { theme_color = 'light';
+    }
 
     e = theme_color ?? 'light';
+    
 
     document.querySelector(".pct-offcanvas");
     document.getElementsByTagName("body")[0].setAttribute("data-pc-theme", e);
