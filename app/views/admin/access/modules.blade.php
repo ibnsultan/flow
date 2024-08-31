@@ -154,18 +154,26 @@
             // module switch
             @if($editModulePermission->status)
                 $('.module-switch').on('change', function() {
-                    var module = $(this).data('module');
+                    var module_id = $(this).data('module');
                     var status = $(this).prop('checked') ? 1 : 0;
                     var url = "/admin/access/modules/status";
-                    var data = {
-                        module: module,
-                        status: status
-                    };
-                    $.post(url, data, function(response) {
-                        if(response.status === 'success') {
-                            toast.success({ message: response.message, position: 'bottomCenter' });
-                        } else {
-                            toast.error({ message: response.message, position: 'bottomCenter' });
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            module: module_id,
+                            status: status
+                        },
+                        success: function(response) {
+                            if(response.status === 'success') {
+                                toast.success({ message: response.message, position: 'bottomCenter' });
+                            } else {
+                                toast.error({ message: response.message, position: 'bottomCenter' });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            toast.error({ message: '{{__('An Unkown error Occured')}}', position: 'bottomCenter' });
                         }
                     });
                 });
