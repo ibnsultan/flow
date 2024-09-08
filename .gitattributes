@@ -3,3 +3,9 @@
 *.js linguist-detectable=false
 *.html linguist-detectable=false
 *.blade.php linguist-detectable=false
+
+# listing exceptions
+!public/js/pcoded.js linguist-vendored=false
+!public/js/app.js linguist-vendored=false
+!public/css/app.css linguist-vendored=false
+!public/css/custom.css linguist-vendored=false
