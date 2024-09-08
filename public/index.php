@@ -66,7 +66,7 @@ if (php_sapi_name() === 'cli-server') {
 | as you've always used it.
 |
 */
-Leaf\View::attach(\Leaf\Blade::class);
+Leaf\Config::attachView(\Leaf\Blade::class);
 
 /*
 |--------------------------------------------------------------------------
