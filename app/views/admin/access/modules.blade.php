@@ -37,18 +37,16 @@
                             <div class="row">
                                 
                                 @foreach($appModules as $module)
-                                    <div class="col-md-4 col-sm-12">
-                                        <div class="card mb-3">
-                                            <div class="card-body position-relative">
-                                                <h5 class="card-title"> {{ ucfirst($module->name) }} </h5>
-                                                <p class="card-text"> {{ $module->description }} </p>
+                                    <div class="col-md-4 col-sm-12 card mb-3 border-0">
+                                        <div class="card-body position-relative border rounded">
+                                            <h5 class="card-title"> {{ ucfirst($module->name) }} </h5>
+                                            <p class="card-text"> {{ $module->description }} </p>
 
-                                                <!-- switch: 'active'|'inactive' -->
-                                                <div class="form-check form-switch position-absolute" style="top:1.6rem; right: 1rem;">
-                                                    <input class="form-check form-switch module-switch" type="checkbox"
-                                                        {{ (!$module->is_core and $editModulePermission->status) ? 'data-module='.$helpers::encode($module->id) : 'disabled' }}
-                                                        {{ $module->status  ? 'checked' : '' }}>
-                                                </div>
+                                            <!-- switch: 'active'|'inactive' -->
+                                            <div class="form-check form-switch position-absolute" style="top:1.6rem; right: 1rem;">
+                                                <input class="form-check form-switch module-switch" type="checkbox"
+                                                    {{ (!$module->is_core and $editModulePermission->status) ? 'data-module='.$helpers::encode($module->id) : 'disabled' }}
+                                                    {{ $module->status  ? 'checked' : '' }}>
                                             </div>
                                         </div>
                                     </div>
