@@ -4,36 +4,25 @@
 		<div class="pc-content">
 
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header border-0 position-relative">
-                            <h5>
-                                {{ __($title) }}
-                            </h5>
-                            @if($addModulePermission->status)
-                                <a class="btn btn-primary rounded position-absolute" style="top:0.8rem;right:2rem;"
-                                    data-bs-toggle="modal" data-bs-target="#addNewModule">
-                                    {{__('Add New')}}
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
+                <div class="col-12 position-relative">
                     <!-- filter search -->
                     <div class="form-group">
                         <input type="text" class="form-control" id="searchModules" placeholder="{{__('Search Modules')}}">
                     </div>
+                    @if($addModulePermission->status)
+                        <a class="btn btn-primary rounded position-absolute" style="top:0.25rem;right:1rem;"
+                            data-bs-toggle="modal" data-bs-target="#addNewModule">
+                            <i class="fa fa-plus d-sm-none"></i>
+                            <span class="d-none d-md-block p-0 m-0"> {{__('Add Module')}} </span>
+                        </a>
+                    @endif
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12">
-                    <div class="card card-body">
-                        @if($appModules->count() > 0)
+                    <div class="card card-body
+                        @if($appModules->count()) p-0 border-0">
                             <div class="row">
                                 
                                 @foreach($appModules as $module)
@@ -53,13 +42,8 @@
                                 @endforeach
 
                             </div>
-                        @else
-                            <div class="d-grid align-items-center w-100">
-                                <div class="text-center">
-                                    <p><i class="bi bi-exclamation-triangle text-warning alert-icon"></i></p>
-                                    <p> {{__('No Records Found')}} </p>
-                                </div>
-                            </div>
+                        @else ">
+                            @include('layouts.app.empty')
                         @endif
                     </div>
                 </div>
@@ -68,7 +52,7 @@
         </div>
     </div>
 
-    <!-- modal: new user role -->
+    <!-- modal: new module -->
     @if($addModulePermission->status)
         <div class="modal fade" id="addNewModule" tabindex="-1" aria-labelledby="addNewModuleLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
