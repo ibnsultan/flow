@@ -19,7 +19,7 @@ var flg = "0";
                     }
                     , 200);
                 else {
-                    /*for (var o = document.querySelectorAll("li.pc-trigger"), r = 0; r < o.length; r++) {
+                    for (var o = document.querySelectorAll("li.pc-trigger"), r = 0; r < o.length; r++) {
                         var a = o[r];
                         a.classList.remove("pc-trigger"),
                         slideUp(a.children[1], 200),
@@ -28,7 +28,7 @@ var flg = "0";
                             a.children[1].style.display = "none"
                         }
                         , 200)
-                    }*/
+                    }
                     t.parentNode.classList.add("pc-trigger"),
                     t.children[1] && slideDown(t.parentNode.children[1], 200)
                 }
