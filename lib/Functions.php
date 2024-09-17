@@ -122,7 +122,7 @@ function extract_images_from_html($html_content, $output_dir, $encoded = true)
         $image_filename = uniqid() . '.' . $image_format;
 
         file_put_contents($output_dir . $image_filename, $image_data);
-        $public_dir = str_replace('storage/app', '/storage', $output_dir);
+        $public_dir = str_replace('storage/app/public', '/storage', $output_dir);
         $html_content = str_replace($match[0], '<img src="' . $public_dir  . $image_filename . '">', $html_content);
 
     }
@@ -181,3 +181,14 @@ if(!function_exists('csrf_token')){
 
 }
 
+/*
+|--------------------------------------------------------------------------
+|  Public Storage Path
+|--------------------------------------------------------------------------
+|
+| This function is used to get the public storage path.
+|
+*/
+function urlPath($file){
+    return '/storage/' . trim($file, '/');
+}
