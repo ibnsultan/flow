@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Helpers\Helpers;
 use Leaf\Helpers\Password;
 use App\Helpers\MailSender;
+use App\Middleware\Handler;
 
 use App\Controllers\Controller;
 
@@ -23,11 +24,17 @@ class UserController extends Controller
      * @param string $role
      * @return void
      */
-    public function index($role){
+    public function index($role) 
+    {        
+        # validate user access
+        $viewUsers = Handler::can('user', 'read');
+        if(!$viewUsers->status)
+            return response()->markup(view('errors.403'), 403);
 
         if(!in_array($role, ['all', 'moderator']))
-            exit(response()->page(getcwd()."/app/views/errors/404.html"));
+            return response()->page(ViewsPath('errors/404.html'), 404);
 
+        # data allocation
         ($role == 'all') ? 
             $users = User::non_admins() : 
             $users = User::admins() ;
@@ -35,7 +42,13 @@ class UserController extends Controller
         $this->data->title = 'Users';
         $this->data->users = $users;
 
-        render('admin.users.index', (array) $this->data);
+        # permissions allocation
+        $this->data->canCreateUser = Handler::can('user', 'create');
+        $this->data->canUpdateUser = Handler::can('user', 'update');
+        $this->data->canDeleteUser = Handler::can('user', 'delete');
+        $this->data->canModifyRole = Handler::can('user', 'modify_user_role');
+
+        return render('admin.users.index', (array) $this->data);
     }
 
 
@@ -46,13 +59,18 @@ class UserController extends Controller
      */
     public function createUser(){
 
-        // check if user exists
+        # validate user access
+        $canCreateUser = Handler::can('user', 'create');
+        if(!$canCreateUser->status)
+            return response()->markup(view('errors.403'), 403);
+
+        # check if user exists
         if(User::where('email', request()->get('email'))->first())
             exit(response()->json(['status'=>'error', 'message'=>'User already exists']));
 
         try {
 
-            // insert user records
+            # insert user records
             User::create([
                 'fullname' => request()->get('fullname'),
                 'email' => request()->get('email'),
@@ -61,7 +79,7 @@ class UserController extends Controller
                 'status' => 'active'
             ]);
 
-            // send onboarding email
+            # send onboarding email
             $mail = new MailSender();
             $mail->sendHtml(
                 'Welcome to '.getenv('app_name'),
@@ -79,9 +97,12 @@ class UserController extends Controller
 
         } catch (\Throwable $e) {
             
-            (getenv('app_debug') == 'true') ?
-                response()->json(['status'=>'error', 'message'=>$e->getMessage()]) :
-                response()->json(['status'=>'error', 'message'=>'An error occurred']);
+            $message = ['status'=>'error', 'message'=> __('An Unkown error occurred')];
+            (getenv('app_debug') == 'false') ?: $message['debug'] = [
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ];
         }
     }
 
@@ -93,12 +114,23 @@ class UserController extends Controller
      */
     public function viewUser($id){
 
+        # validate user access
+        $canViewUser = Handler::can('user', 'read');
+        if(!$canViewUser->status)
+            return response()->markup(view('errors.403'), 403);
+
+        # decode user id
         $user_id = Helpers::decode($id);
         if($user_id == '')
-            exit(response()->page(getcwd()."/app/views/errors/404.html"));
+            exit(response()->page(ViewsPath('errors/404.html'), 404));
 
+        # data allocation
         $this->data->title = "Manage: " . User::find($user_id)->fullname;
         $this->data->user = User::find($user_id);
+
+        # permissions allocation
+        $this->data->canUpdateUser = Handler::can('user', 'update');
+        $this->data->canModifyRole = Handler::can('user', 'modify_user_role');
 
         render('admin.users.view', (array) $this->data);
 
@@ -111,6 +143,11 @@ class UserController extends Controller
      * @return void
      */
     public function deleteUser($id){
+
+        # validate user access
+        $canDeleteUser = Handler::can('user', 'delete');
+        if(!$canDeleteUser->status)
+            return response()->markup(view('errors.403'), 403);
 
         $user_id = Helpers::decode($id);
         if($user_id == '')
@@ -134,21 +171,32 @@ class UserController extends Controller
 
     public function updateUser(){
 
+        # validate user access
+        $canUpdateUser = Handler::can('user', 'update');
+        if(!$canUpdateUser->status)
+            return response()->markup(view('errors.403'), 403);
+
+        # decode user id
         $user_id = Helpers::decode(request()->get('user_id'));
         if($user_id == '')
             exit(response()->page(getcwd()."/app/views/errors/404.html"));
 
         $user = User::find($user_id);
 
-        // check if user exists
+        # check if user exists
         if(!$user)
             exit(response()->json(['status'=>'error', 'message'=>'User not found']));
 
+        $canModifyRole = Handler::can('user', 'modify_user_roles');
+        if(!$canModifyRole->status and request()->get('user_role') != $user->role)
+            exit(response()->json(['status'=>'error', 'message'=> __('You do not have permission to modify user role')]));
+
         try {
 
-            (request()->get('phone') == '') ? $phone = null : $phone = request()->get('phone');
+            (request()->get('phone') == '') ? 
+                $phone = null : $phone = request()->get('phone');
 
-            // update user records
+            # update user records
             $user->update([
                 'fullname' => request()->get('fullname'),
                 'email' => request()->get('email'),
@@ -158,13 +206,17 @@ class UserController extends Controller
                 'about' => request()->get('bio')
             ]);
 
-            response()->json(['status'=>'success', 'message'=>'User updated successfully']);
+            response()->json(['status'=>'success', 'message'=> __('User updated successfully')]);
 
         } catch (\Throwable $e) {
+
+            $message = ['status'=>'error', 'message'=> __('An Unkown error occurred')];
+            (getenv('app_debug') == 'false') ?: $message['debug'] = [
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ];
             
-            (getenv('app_debug') == 'true') ?
-                response()->json(['status'=>'error', 'message'=>$e->getMessage()]) :
-                response()->json(['status'=>'error', 'message'=>'An error occurred']);
         }
     }
 }
