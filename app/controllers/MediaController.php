@@ -35,7 +35,7 @@ class MediaController extends Controller
             $fileName = uniqid() . '.' . $fileType;
 
             // pass the default directory
-            if (!$storeDir) $storeDir = getcwd() . '/storage/app/uploads/';
+            if (!$storeDir) $storeDir = getcwd() . '/storage/app/public/';
 
             if(!is_dir($storeDir)) mkdir($storeDir, 0777, true);
             
