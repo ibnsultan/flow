@@ -49,10 +49,11 @@
                                 </div>
 
                                 <div class="form-group user-upload rounded w-100">
-                                    <img src="{{$article->cover ?? '/assets/images/placeholder.jpg'}}" alt="Image Placeholder" id="imagePreview" class="w-100">
+                                    <img src="{{ $article->cover != '' ? urlPath($article->cover) : '/assets/images/placeholder.jpg' }}"
+                                        alt="Image Placeholder" id="imagePreview" class="w-100">
                                     <label for="cover" id="coverUpload" class="img-avtar-upload" >
                                         <i class="ti ti-camera f-24 mb-1"></i>
-                                        <span>Upload</span>
+                                        <span>{{ __('Upload') }}</span>
                                     </label>
                                     <input type="file" id="cover" name="cover" class="d-none" accept="image/*" onchange="document.getElementById('imagePreview').src = window.URL.createObjectURL(this.files[0])">
                                 </div>
