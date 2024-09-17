@@ -44,7 +44,7 @@ class AnnouncementController extends Controller
             /*if(request()->get('cover')['size']){
                 $file = Helpers::upload(
                     'cover',
-                    'storage/app/uploads/announcements/',
+                    'storage/app/public/announcements/',
                     ['jpg', 'jpeg', 'png', 'gif']
                 );
 
