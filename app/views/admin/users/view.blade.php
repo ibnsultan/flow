@@ -56,25 +56,27 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">{{__('User Role')}}</label>
-                                                <select name="user_role" class="form-select">
-                                                    <option value="{{ $user->user_role->name }}" hidden>{{ $user->user_role->description }}</option>
-                                                    @foreach (\App\Models\Role::all() as $role)
-                                                        <option value="{{ $role->name }}">{{ $role->name }}</option>                                                        
-                                                    @endforeach
-                                                </select>
+                                        @if($canModifyRole->status)
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">{{__('User Role')}}</label>
+                                                    <select name="user_role" class="form-select">
+                                                        <option value="{{ $user->user_role->name }}" hidden>{{ $user->user_role->description }}</option>
+                                                        @foreach (\App\Models\Role::all() as $role)
+                                                            <option value="{{ $role->name }}">{{ $role->name }}</option>                                                        
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
 
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="{{ $canModifyRole->status ? 'col-md-6' : 'col-md-12' }} col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">{{__('User Status')}}</label>
                                                 <select name="user_status" class="form-select">
                                                     <option value="{{ $user->status ?? null }}" hidden>{{ $user->status ?? 'Unverified' }}</option>
-                                                    <option value="active">Active</option>
-                                                    <option value="inactive">Suspended</option>
+                                                    <option value="active">{{ __('Active') }}</option>
+                                                    <option value="inactive">{{ __('Suspended') }}</option>
                                                 </select>
                                             </div>
                                         </div>
