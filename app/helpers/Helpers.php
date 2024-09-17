@@ -39,7 +39,7 @@ class Helpers{
 
         // pass the default directory
         if (!$storeDir)
-            $storeDir = getcwd() . '/storage/app/uploads/';
+            $storeDir = StoragePath('app/public/');
 
         if(!is_dir($storeDir))
             mkdir($storeDir, 0777, true);
@@ -58,8 +58,8 @@ class Helpers{
 
             if($virtualPath)
                 $filePath = str_replace(
-                    [getcwd(), 'storage/app'],
-                    ['', 'storage'],
+                    [getcwd(), 'storage/app/public'],
+                    ['', ''],
                     "/$storeDir$fileName"
                 );
 
