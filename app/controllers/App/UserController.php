@@ -35,7 +35,7 @@ class UserController extends Controller
             if(request()->get('avatar')['size']){
                 $file = Helpers::upload(
                     'avatar',
-                    'storage/app/uploads/avatars/',
+                    'storage/app/public/avatars/',
                     ['jpg', 'jpeg', 'png', 'gif']
                 );
                 
