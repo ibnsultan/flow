@@ -9,7 +9,7 @@ Flow is a comprehensive web application development starter kit designed to acce
 Flow's purpose is empower developers to create high-quality web applications with ease. Whether you're a seasoned developer or just starting out, Flow streamlines the development process, allowing you to focus on creating exceptional user experiences and delivering value to your users.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ibnsultan/flow/8bbb403b537ca99ff7a602e1dc6eab5802c8d6a1/storage/uploads/brand/banner.svg" width="500">
+  <img src="https://raw.githubusercontent.com/ibnsultan/flow/8bbb403b537ca99ff7a602e1dc6eab5802c8d6a1/storage/public/brand/banner.svg" width="500">
 <p>
 
 ## Features
