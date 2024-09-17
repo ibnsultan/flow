@@ -33,7 +33,7 @@ class SettingController extends Controller
             // upload files
             foreach(['favicon','logo_light','logo_dark'] as $key){
                 if(request()->get($key)['size']){
-                    $$key = Helpers::upload($key, 'storage/app/uploads/brand/', ['jpg', 'jpeg', 'png']);
+                    $$key = Helpers::upload($key, 'storage/app/public/brand/', ['jpg', 'jpeg', 'png']);
 
                     if($$key['error']) 
                         exit(response()->json(['status' => 'error', 'message' => $$key['message']]));
@@ -87,7 +87,7 @@ class SettingController extends Controller
         try{
 
             if(request()->get('meta_image')['size']){
-                $meta_image = Helpers::upload('meta_image', 'storage/app/uploads/seo/', ['jpg', 'jpeg', 'png', 'webp']);
+                $meta_image = Helpers::upload('meta_image', 'storage/app/public/seo/', ['jpg', 'jpeg', 'png', 'webp']);
 
                 if($meta_image['error']) 
                     exit(response()->json(['status' => 'error', 'message' => $meta_image['message']]));
