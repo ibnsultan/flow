@@ -106,17 +106,18 @@ class BlogController extends Controller
         $fileUploaded = null;
         $coverImage = request()->get('cover');
         
-        // TODO: Use files from the Media Storage
         if(!is_null($coverImage) and $coverImage['name'] != '' ){
 
-            $fileUploaded = $this->filestorage->upload(
-                'cover', 'storage/app/uploads/blog/',
-                ['jpg', 'jpeg', 'png', 'gif', 'webp']
+            $fileUploaded = request()->uploadAs('cover', 'storage/app/public/blog/', uniqid(),
+                ['extensions' => ['jpg', 'jpeg', 'png']]
             );
 
-            if($fileUploaded['error']):
-                exit( response()->json(['status' => 'error', 'message' => $fileUploaded['message']]) );
-            endif;   
+            if(!$fileUploaded):
+                return response()->json(['status' => 'error', 'message' => __('Error uploading file')]);
+            endif;
+
+            // replace storage/app/public with an empty string
+            $fileUploaded['path'] = str_replace('storage/app/public', '', $fileUploaded['path']);
 
         }
 
@@ -126,7 +127,7 @@ class BlogController extends Controller
             $tags = null;
 
         // extract images from the content
-        $content = extract_images_from_html(request()->get('content'),'storage/app/uploads/blog/');
+        $content = extract_images_from_html(request()->get('content'),'storage/app/public/blog/');
         $content = htmlentities($content);
 
         try {
@@ -168,11 +169,7 @@ class BlogController extends Controller
             exit(response()->json( ['status' => 'error', 'message'=> __('You\'re not authorised')]));
 
         # fetch the article
-        $article_id = Helpers::decode(request()->get('article_id'));
-        if($article_id == '')
-            exit(response()->json(['status' => 'error', 'message' => __('Invalid request')]));
-
-        $article = BlogArticle::find($article_id);
+        $article = BlogArticle::find(request()->get('article_id'));
 
         # if user does not own the article
         if($permission->scope !== 'all'){
@@ -186,14 +183,16 @@ class BlogController extends Controller
 
         if(!is_null($coverImage) and $coverImage['name'] != '' ){
 
-            $fileUploaded = $this->filestorage->upload(
-                'cover', 'storage/app/uploads/blog/',
-                ['jpg', 'jpeg', 'png', 'gif', 'webp']
+            $fileUploaded = request()->uploadAs('cover', 'storage/app/public/blog/', uniqid(),
+                ['extensions' => ['jpg', 'jpeg', 'png']]
             );
 
-            if($fileUploaded['error']):
-                exit( response()->json(['status' => 'error', 'message' => $fileUploaded['message']]) );
-            endif;   
+            if(!$fileUploaded):
+                return response()->json(['status' => 'error', 'message' => __('Error uploading file')]);
+            endif;
+
+            // replace storage/app/public with an empty string
+            $fileUploaded['path'] = str_replace('storage/app/public', '', $fileUploaded['path']);
 
         }
 
@@ -203,7 +202,7 @@ class BlogController extends Controller
             $tags = null;
 
         // extract images from the content
-        $content = extract_images_from_html(request()->get('content'),'storage/app/uploads/blog/');
+        $content = extract_images_from_html(request()->get('content'),'storage/app/public/blog/');
         $content = htmlentities($content);
 
         try {
