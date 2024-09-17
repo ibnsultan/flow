@@ -21,10 +21,10 @@
 
             <div class="row">
                 <div class="col-12">
-                    <div class="card card-body
-                        @if($appModules->count()) p-0 border-0">
+                    <div class="card card-body"> 
+                        @if($appModules->count())
                             <div class="row">
-                                
+
                                 @foreach($appModules as $module)
                                     <div class="col-md-4 col-sm-12 card mb-3 border-0">
                                         <div class="card-body position-relative border rounded">
@@ -42,7 +42,7 @@
                                 @endforeach
 
                             </div>
-                        @else ">
+                        @else
                             @include('layouts.app.empty')
                         @endif
                     </div>
