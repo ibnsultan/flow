@@ -60,7 +60,7 @@ class Helpers{
                 $filePath = str_replace(
                     [getcwd(), 'storage/app/public'],
                     ['', ''],
-                    "/$storeDir$fileName"
+                    "$storeDir$fileName"
                 );
 
             return [
