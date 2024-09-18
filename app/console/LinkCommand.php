@@ -21,7 +21,7 @@ class LinkCommand extends Command
         $this->info('Creating symbolic link for storage directory...');
         
         $publicPath = getcwd() . '/public';
-        $storagePath = getcwd() . '/storage/app/public';
+        $storagePath = StoragePath('app/public');
 
         if (!file_exists($storagePath)) {
             $this->error('Storage directory does not exist');
