@@ -18,7 +18,7 @@
                         <h5 class="mb-3">{{ $announcement->title }}</h5>
 
                         @if($announcement->image != '')
-                            <img src="{{ $announcement->image }}" alt="img" class="img-fluid mb-3" />
+                            <img src="{{ urlPath($announcement->image) }}" alt="img" class="img-fluid mb-3" />
                         @endif
 
                         <p class="text-muted">{{ $announcement->description }}</p>

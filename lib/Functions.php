@@ -190,5 +190,10 @@ if(!function_exists('csrf_token')){
 |
 */
 function urlPath($file){
+
+    if(strpos($file, '/assets/') === 0) return $file;
+    if(strpos($file, '/storage/') === 0) return $file;
+
     return '/storage/' . trim($file, '/');
+    
 }

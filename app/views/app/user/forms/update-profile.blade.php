@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center mb-3">
                             <div class="user-upload wid-75">
-                                <img src="{{ auth()->user()['avatar'] }}" alt="img" id="imagePreview" class="img-fluid">
+                                <img src="{{ urlPath(auth()->user()['avatar']) }}" alt="img" id="imagePreview" class="img-fluid">
                                 <label for="avatar" id="avatarUpload" class="img-avtar-upload">
                                     <i class="ti ti-camera f-24 mb-1"></i>
                                     <span>Upload</span>

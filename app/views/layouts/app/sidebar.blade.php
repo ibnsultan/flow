@@ -4,7 +4,7 @@
 
         <div class="m-header">
             <a href="javascript:void(0)" class="b-brand text-primary">
-                <img src="{{ $settings->logo_dark }}" class="w-75"/>
+                <img src="{{ urlPath($settings->logo_dark) }}" class="w-75"/>
                 <span class="badge bg-light-success rounded-pill ms-2 theme-version">{{ $settings->system_version }}</span>
             </a>
         </div>

@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="text-center mt-3">
                                                 <div class="chat-avtar d-inline-flex mx-auto">
-                                                    <img class="rounded-circle img-fluid w-100" src="{{ auth()->user()['avatar'] }}" alt="User image">
+                                                    <img class="rounded-circle img-fluid w-100" src="{{ urlPath(auth()->user()['avatar']) }}" alt="User image">
                                                 </div>
 
                                                 <hr class="my-3 border border-secondary-subtle">

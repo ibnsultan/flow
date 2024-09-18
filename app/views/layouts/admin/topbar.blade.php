@@ -40,7 +40,7 @@
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img src="{{ $notification->avatar }}" alt="user-image" class="user-avtar wid-35" style="aspect-ration:1/1"/>
+                                                    <img src="{{ urlPath($notification->avatar) }}" alt="user-image" class="user-avtar wid-35" style="aspect-ration:1/1"/>
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <span class="float-end text-sm text-muted">{{ $notification->created_at->diffForHumans() }}</span>
@@ -62,14 +62,14 @@
                 <li class="dropdown pc-h-item header-user-profile">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
                         href="javascript:void(0)" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false" >
-                        <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar" style="aspect-ration:1/1"/>
+                        <img src="{{ urlPath(auth()->user()['avatar']) }}" alt="user-image" class="user-avtar" style="aspect-ration:1/1"/>
                     </a>
                     <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2">
                         <div class="dropdown-body">
                             <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
                                 <div class="d-flex mb-1">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ auth()->user()['avatar'] }}" alt="user-image" class="user-avtar wid-35" style="aspect-ration:1/1"/>
+                                        <img src="{{ urlPath(auth()->user()['avatar']) }}" alt="user-image" class="user-avtar wid-35" style="aspect-ration:1/1"/>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-1">{{ auth()->user()['fullname'] }} 🖖</h6>

@@ -8,7 +8,7 @@
 
 						<div class="text-center">
 							<a href="/">
-								<img src="{{ settings->logo_dark }}" class="w-25" alt="img">
+								<img src="{{ urlPath(settings->logo_dark) }}" class="w-25" alt="img">
 							</a>
 							<div class="d-grid my-3"> </div>
 						</div>
