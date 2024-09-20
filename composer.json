@@ -78,7 +78,8 @@
             "@php -r \"unlink('README.MD'); rename('README2.MD', 'README.MD');\""
         ],
         "post-create-project-cmd": [
-            "@php leaf key:generate"
+            "@php leaf key:generate",
+            "@php leaf link"
         ]
     },
     "minimum-stability": "dev",
