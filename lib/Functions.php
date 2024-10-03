@@ -148,6 +148,21 @@ function substring($string, $length, $end = '...'){
 
 }
 
+/*
+|--------------------------------------------------------------------------
+|  CSRF Token
+|--------------------------------------------------------------------------
+|
+| This function is used to get the CSRF token.
+|
+*/
+if(!function_exists('csrf_token')){
+
+    function csrf_token(){
+        return \Leaf\Anchor\CSRF::token();
+    }
+
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -160,23 +175,7 @@ function substring($string, $length, $end = '...'){
 if(!function_exists('csrf_field')){
 
     function csrf_field(){
-        return \Leaf\Anchor\CSRF::form();
-    }
-
-}
-
-/*
-|--------------------------------------------------------------------------
-|  CSRF Token
-|--------------------------------------------------------------------------
-|
-| This function is used to get the CSRF token.
-|
-*/
-if(!function_exists('csrf_token')){
-
-    function csrf_token(){
-        return \Leaf\Anchor\CSRF::token()['_token'];
+        return '<input type="hidden" name="_token" value="'.csrf_token().'">';
     }
 
 }
@@ -195,5 +194,5 @@ function urlPath($file){
     if(strpos($file, '/storage/') === 0) return $file;
 
     return '/storage/' . trim($file, '/');
-    
+
 }
