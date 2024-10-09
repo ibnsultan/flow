@@ -180,6 +180,77 @@ if(!function_exists('csrf_field')){
 
 }
 
+
+/*
+|--------------------------------------------------------------------------
+|  CSRF Document Meta
+|--------------------------------------------------------------------------
+|
+| This function is used to generate a CSRF token meta tag.
+|
+*/
+if(!function_exists('csrf_meta')){
+
+    function csrf_meta(){
+        return '<meta name="csrf-token" content="'.csrf_token().'">';
+    }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+|  Carbon
+|--------------------------------------------------------------------------
+|
+| This function is used to get the Carbon instance.
+|
+*/
+if(!function_exists('carbon')){
+
+    function carbon(){
+        return \Carbon\Carbon::class;
+    }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+|  Carbon Now
+|--------------------------------------------------------------------------
+|
+| This function is used to get the current time in Carbon format.
+|
+*/
+if(!function_exists('now')){
+
+    function now(){
+        return \Carbon\Carbon::now();
+    }
+
+}
+
+function active($key, $value){
+    return $key == $value ? 'active' : '';
+}
+
+/*
+|--------------------------------------------------------------------------
+|  Slugify
+|--------------------------------------------------------------------------
+|
+| This function is used to slugify a string.
+|
+*/
+if(!function_exists('slugify')){
+
+    function slugify($string){
+        
+        $string = preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+        return strtolower(trim($string, '-'));
+
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 |  Public Storage Path
@@ -194,5 +265,31 @@ function urlPath($file){
     if(strpos($file, '/storage/') === 0) return $file;
 
     return '/storage/' . trim($file, '/');
+    
+}
+
+/*
+|--------------------------------------------------------------------------
+| Data (array|object) to XML (xml_encode)
+|--------------------------------------------------------------------------
+|
+| This function is used to convert an array or object to XML.
+|
+*/
+if(!function_exists('xml_encode')){
+
+    function xml_encode($data, $rootNodeName = 'data', $xml = null) {
+        if ($xml === null) {
+            $xml = new SimpleXMLElement("<?xml version='1.0' encoding='utf-8'?><$rootNodeName></$rootNodeName>");
+        }
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                xml_encode($value, $key, $xml->addChild($key));
+            } else {
+                $xml->addChild($key, $value);
+            }
+        }
+        return $xml->asXML();
+    }
 
 }
