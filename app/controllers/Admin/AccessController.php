@@ -296,7 +296,8 @@ class AccessController extends Controller
 
             # fetch permission and types
             $scopeId = PermissionType::where('name', $data['value'])->first()->id;
-            $permissionId = Permission::where('name', $data['permission'])->first()->id;
+            $moduleId = Module::where('name', $data['module'])->first()->id;
+            $permissionId = Permission::where('name', $data['permission'])->where('module_id', $moduleId)->first()->id;
 
             # validate permission
             if(!$permissionId)
